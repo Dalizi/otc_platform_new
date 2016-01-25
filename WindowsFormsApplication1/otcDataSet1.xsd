@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="otcDataSet1" targetNamespace="http://tempuri.org/otcDataSet1.xsd" xmlns:mstns="http://tempuri.org/otcDataSet1.xsd" xmlns="http://tempuri.org/otcDataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="otcConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="otcConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WindowsFormsApplication1.Properties.Settings.GlobalReference.Default.otcConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="client_balanceTableAdapter" GeneratorDataComponentClassName="client_balanceTableAdapter" Name="client_balance" UserDataComponentName="client_balanceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.client_balance" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `client_id`, `balance`, `options_value`, `available_balance`, `withdrawable_balance` FROM `client_balance`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="client_cashflowTableAdapter" GeneratorDataComponentClassName="client_cashflowTableAdapter" Name="client_cashflow" UserDataComponentName="client_cashflowTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.client_cashflow" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `cashflow_id`, `client_id`, `cashflow_value`, `cashflow_type`, `transaction_id`, `time_stamp` FROM `client_cashflow`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="client_cashflow_typeTableAdapter" GeneratorDataComponentClassName="client_cashflow_typeTableAdapter" Name="client_cashflow_type" UserDataComponentName="client_cashflow_typeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.client_cashflow_type" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `type_id`, `type_name` FROM `client_cashflow_type`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="client_infoTableAdapter" GeneratorDataComponentClassName="client_infoTableAdapter" Name="client_info" UserDataComponentName="client_infoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.client_info" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `client_id`, `client_name`, `account_no` FROM `client_info`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="commodity_categoryTableAdapter" GeneratorDataComponentClassName="commodity_categoryTableAdapter" Name="commodity_category" UserDataComponentName="commodity_categoryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.commodity_category" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `category_code`, `category_name` FROM `commodity_category`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_account_balanceTableAdapter" GeneratorDataComponentClassName="futures_account_balanceTableAdapter" Name="futures_account_balance" UserDataComponentName="futures_account_balanceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_account_balance" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `account_no`, `init_balance`, `current_balance`, `init_margin`, `current_margin` FROM `futures_account_balance`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_account_infoTableAdapter" GeneratorDataComponentClassName="futures_account_infoTableAdapter" Name="futures_account_info" UserDataComponentName="futures_account_infoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_account_info" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `account_no` FROM `futures_account_info`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_cashflowTableAdapter" GeneratorDataComponentClassName="futures_cashflowTableAdapter" Name="futures_cashflow" UserDataComponentName="futures_cashflowTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_cashflow" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `cashflow_id`, `account_no`, `cashflow_value`, `cashflow_type`, `transaction_id`, `time_stamp` FROM `futures_cashflow`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_cashflow_typeTableAdapter" GeneratorDataComponentClassName="futures_cashflow_typeTableAdapter" Name="futures_cashflow_type" UserDataComponentName="futures_cashflow_typeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_cashflow_type" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `type_id`, `type_name` FROM `futures_cashflow_type`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_contractsTableAdapter" GeneratorDataComponentClassName="futures_contractsTableAdapter" Name="futures_contracts" UserDataComponentName="futures_contractsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_contracts" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `contract_code`, `underlying_code`, `commission`, `margin_rate`, `settle_price`, `multiplier` FROM `futures_contracts`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_transactionsTableAdapter" GeneratorDataComponentClassName="futures_transactionsTableAdapter" Name="futures_transactions" UserDataComponentName="futures_transactionsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_transactions" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `transaction_id`, `account_no`, `contract_code`, `quantity`, `price`, `open_close`, `long_short`, `transaction_time`, `close_pnl`, `target_client_id` FROM `futures_transactions`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="futures_verbose_positionsTableAdapter" GeneratorDataComponentClassName="futures_verbose_positionsTableAdapter" Name="futures_verbose_positions" UserDataComponentName="futures_verbose_positionsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.futures_verbose_positions" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `transaction_id`, `account_no`, `contract_code`, `quantity`, `open_price`, `long_short`, `target_client_id` FROM `futures_verbose_positions`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="options_contractsTableAdapter" GeneratorDataComponentClassName="options_contractsTableAdapter" Name="options_contracts" UserDataComponentName="options_contractsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.options_contracts" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `contract_code`, `type_code`, `type_direction`, `strike_price`, `maturity_date`, `margin_rate`, `underlying_code`, `settle_price`, `multiplier`, `commission` FROM `options_contracts`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="options_transactionsTableAdapter" GeneratorDataComponentClassName="options_transactionsTableAdapter" Name="options_transactions" UserDataComponentName="options_transactionsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.options_transactions" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `transaction_id`, `client_id`, `contract_code`, `quantity`, `price`, `open_close`, `long_short`, `transaction_time`, `close_pnl`, `close_target_id` FROM `options_transactions`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="options_typesTableAdapter" GeneratorDataComponentClassName="options_typesTableAdapter" Name="options_types" UserDataComponentName="options_typesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.options_types" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `options_type_code`, `options_type_name`, `options_type_direction` FROM `options_types`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="options_verbose_positionsTableAdapter" GeneratorDataComponentClassName="options_verbose_positionsTableAdapter" Name="options_verbose_positions" UserDataComponentName="options_verbose_positionsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="otcConnectionString (Settings)" DbObjectName="otc.options_verbose_positions" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `transaction_id`, `client_id`, `contract_code`, `quantity`, `open_price`, `long_short` FROM `options_verbose_positions`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="otcDataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="otcDataSet1" msprop:Generator_UserDSName="otcDataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="client_balance" msprop:Generator_TableClassName="client_balanceDataTable" msprop:Generator_TableVarName="tableclient_balance" msprop:Generator_TablePropName="client_balance" msprop:Generator_RowDeletingName="client_balanceRowDeleting" msprop:Generator_RowChangingName="client_balanceRowChanging" msprop:Generator_RowEvHandlerName="client_balanceRowChangeEventHandler" msprop:Generator_RowDeletedName="client_balanceRowDeleted" msprop:Generator_UserTableName="client_balance" msprop:Generator_RowChangedName="client_balanceRowChanged" msprop:Generator_RowEvArgName="client_balanceRowChangeEvent" msprop:Generator_RowClassName="client_balanceRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="client_cashflow" msprop:Generator_TableClassName="client_cashflowDataTable" msprop:Generator_TableVarName="tableclient_cashflow" msprop:Generator_TablePropName="client_cashflow" msprop:Generator_RowDeletingName="client_cashflowRowDeleting" msprop:Generator_RowChangingName="client_cashflowRowChanging" msprop:Generator_RowEvHandlerName="client_cashflowRowChangeEventHandler" msprop:Generator_RowDeletedName="client_cashflowRowDeleted" msprop:Generator_UserTableName="client_cashflow" msprop:Generator_RowChangedName="client_cashflowRowChanged" msprop:Generator_RowEvArgName="client_cashflowRowChangeEvent" msprop:Generator_RowClassName="client_cashflowRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="client_cashflow_type" msprop:Generator_TableClassName="client_cashflow_typeDataTable" msprop:Generator_TableVarName="tableclient_cashflow_type" msprop:Generator_TablePropName="client_cashflow_type" msprop:Generator_RowDeletingName="client_cashflow_typeRowDeleting" msprop:Generator_RowChangingName="client_cashflow_typeRowChanging" msprop:Generator_RowEvHandlerName="client_cashflow_typeRowChangeEventHandler" msprop:Generator_RowDeletedName="client_cashflow_typeRowDeleted" msprop:Generator_UserTableName="client_cashflow_type" msprop:Generator_RowChangedName="client_cashflow_typeRowChanged" msprop:Generator_RowEvArgName="client_cashflow_typeRowChangeEvent" msprop:Generator_RowClassName="client_cashflow_typeRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="client_info" msprop:Generator_TableClassName="client_infoDataTable" msprop:Generator_TableVarName="tableclient_info" msprop:Generator_TablePropName="client_info" msprop:Generator_RowDeletingName="client_infoRowDeleting" msprop:Generator_RowChangingName="client_infoRowChanging" msprop:Generator_RowEvHandlerName="client_infoRowChangeEventHandler" msprop:Generator_RowDeletedName="client_infoRowDeleted" msprop:Generator_UserTableName="client_info" msprop:Generator_RowChangedName="client_infoRowChanged" msprop:Generator_RowEvArgName="client_infoRowChangeEvent" msprop:Generator_RowClassName="client_infoRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="commodity_category" msprop:Generator_TableClassName="commodity_categoryDataTable" msprop:Generator_TableVarName="tablecommodity_category" msprop:Generator_TablePropName="commodity_category" msprop:Generator_RowDeletingName="commodity_categoryRowDeleting" msprop:Generator_RowChangingName="commodity_categoryRowChanging" msprop:Generator_RowEvHandlerName="commodity_categoryRowChangeEventHandler" msprop:Generator_RowDeletedName="commodity_categoryRowDeleted" msprop:Generator_UserTableName="commodity_category" msprop:Generator_RowChangedName="commodity_categoryRowChanged" msprop:Generator_RowEvArgName="commodity_categoryRowChangeEvent" msprop:Generator_RowClassName="commodity_categoryRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_account_balance" msprop:Generator_TableClassName="futures_account_balanceDataTable" msprop:Generator_TableVarName="tablefutures_account_balance" msprop:Generator_TablePropName="futures_account_balance" msprop:Generator_RowDeletingName="futures_account_balanceRowDeleting" msprop:Generator_RowChangingName="futures_account_balanceRowChanging" msprop:Generator_RowEvHandlerName="futures_account_balanceRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_account_balanceRowDeleted" msprop:Generator_UserTableName="futures_account_balance" msprop:Generator_RowChangedName="futures_account_balanceRowChanged" msprop:Generator_RowEvArgName="futures_account_balanceRowChangeEvent" msprop:Generator_RowClassName="futures_account_balanceRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_account_info" msprop:Generator_TableClassName="futures_account_infoDataTable" msprop:Generator_TableVarName="tablefutures_account_info" msprop:Generator_TablePropName="futures_account_info" msprop:Generator_RowDeletingName="futures_account_infoRowDeleting" msprop:Generator_RowChangingName="futures_account_infoRowChanging" msprop:Generator_RowEvHandlerName="futures_account_infoRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_account_infoRowDeleted" msprop:Generator_UserTableName="futures_account_info" msprop:Generator_RowChangedName="futures_account_infoRowChanged" msprop:Generator_RowEvArgName="futures_account_infoRowChangeEvent" msprop:Generator_RowClassName="futures_account_infoRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_cashflow" msprop:Generator_TableClassName="futures_cashflowDataTable" msprop:Generator_TableVarName="tablefutures_cashflow" msprop:Generator_TablePropName="futures_cashflow" msprop:Generator_RowDeletingName="futures_cashflowRowDeleting" msprop:Generator_RowChangingName="futures_cashflowRowChanging" msprop:Generator_RowEvHandlerName="futures_cashflowRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_cashflowRowDeleted" msprop:Generator_UserTableName="futures_cashflow" msprop:Generator_RowChangedName="futures_cashflowRowChanged" msprop:Generator_RowEvArgName="futures_cashflowRowChangeEvent" msprop:Generator_RowClassName="futures_cashflowRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_cashflow_type" msprop:Generator_TableClassName="futures_cashflow_typeDataTable" msprop:Generator_TableVarName="tablefutures_cashflow_type" msprop:Generator_TablePropName="futures_cashflow_type" msprop:Generator_RowDeletingName="futures_cashflow_typeRowDeleting" msprop:Generator_RowChangingName="futures_cashflow_typeRowChanging" msprop:Generator_RowEvHandlerName="futures_cashflow_typeRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_cashflow_typeRowDeleted" msprop:Generator_UserTableName="futures_cashflow_type" msprop:Generator_RowChangedName="futures_cashflow_typeRowChanged" msprop:Generator_RowEvArgName="futures_cashflow_typeRowChangeEvent" msprop:Generator_RowClassName="futures_cashflow_typeRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_contracts" msprop:Generator_TableClassName="futures_contractsDataTable" msprop:Generator_TableVarName="tablefutures_contracts" msprop:Generator_TablePropName="futures_contracts" msprop:Generator_RowDeletingName="futures_contractsRowDeleting" msprop:Generator_RowChangingName="futures_contractsRowChanging" msprop:Generator_RowEvHandlerName="futures_contractsRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_contractsRowDeleted" msprop:Generator_UserTableName="futures_contracts" msprop:Generator_RowChangedName="futures_contractsRowChanged" msprop:Generator_RowEvArgName="futures_contractsRowChangeEvent" msprop:Generator_RowClassName="futures_contractsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_transactions" msprop:Generator_TableClassName="futures_transactionsDataTable" msprop:Generator_TableVarName="tablefutures_transactions" msprop:Generator_TablePropName="futures_transactions" msprop:Generator_RowDeletingName="futures_transactionsRowDeleting" msprop:Generator_RowChangingName="futures_transactionsRowChanging" msprop:Generator_RowEvHandlerName="futures_transactionsRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_transactionsRowDeleted" msprop:Generator_UserTableName="futures_transactions" msprop:Generator_RowChangedName="futures_transactionsRowChanged" msprop:Generator_RowEvArgName="futures_transactionsRowChangeEvent" msprop:Generator_RowClassName="futures_transactionsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="futures_verbose_positions" msprop:Generator_TableClassName="futures_verbose_positionsDataTable" msprop:Generator_TableVarName="tablefutures_verbose_positions" msprop:Generator_TablePropName="futures_verbose_positions" msprop:Generator_RowDeletingName="futures_verbose_positionsRowDeleting" msprop:Generator_RowChangingName="futures_verbose_positionsRowChanging" msprop:Generator_RowEvHandlerName="futures_verbose_positionsRowChangeEventHandler" msprop:Generator_RowDeletedName="futures_verbose_positionsRowDeleted" msprop:Generator_UserTableName="futures_verbose_positions" msprop:Generator_RowChangedName="futures_verbose_positionsRowChanged" msprop:Generator_RowEvArgName="futures_verbose_positionsRowChangeEvent" msprop:Generator_RowClassName="futures_verbose_positionsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="options_contracts" msprop:Generator_TableClassName="options_contractsDataTable" msprop:Generator_TableVarName="tableoptions_contracts" msprop:Generator_TablePropName="options_contracts" msprop:Generator_RowDeletingName="options_contractsRowDeleting" msprop:Generator_RowChangingName="options_contractsRowChanging" msprop:Generator_RowEvHandlerName="options_contractsRowChangeEventHandler" msprop:Generator_RowDeletedName="options_contractsRowDeleted" msprop:Generator_UserTableName="options_contracts" msprop:Generator_RowChangedName="options_contractsRowChanged" msprop:Generator_RowEvArgName="options_contractsRowChangeEvent" msprop:Generator_RowClassName="options_contractsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="options_transactions" msprop:Generator_TableClassName="options_transactionsDataTable" msprop:Generator_TableVarName="tableoptions_transactions" msprop:Generator_TablePropName="options_transactions" msprop:Generator_RowDeletingName="options_transactionsRowDeleting" msprop:Generator_RowChangingName="options_transactionsRowChanging" msprop:Generator_RowEvHandlerName="options_transactionsRowChangeEventHandler" msprop:Generator_RowDeletedName="options_transactionsRowDeleted" msprop:Generator_UserTableName="options_transactions" msprop:Generator_RowChangedName="options_transactionsRowChanged" msprop:Generator_RowEvArgName="options_transactionsRowChangeEvent" msprop:Generator_RowClassName="options_transactionsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="options_types" msprop:Generator_TableClassName="options_typesDataTable" msprop:Generator_TableVarName="tableoptions_types" msprop:Generator_TablePropName="options_types" msprop:Generator_RowDeletingName="options_typesRowDeleting" msprop:Generator_RowChangingName="options_typesRowChanging" msprop:Generator_RowEvHandlerName="options_typesRowChangeEventHandler" msprop:Generator_RowDeletedName="options_typesRowDeleted" msprop:Generator_UserTableName="options_types" msprop:Generator_RowChangedName="options_typesRowChanged" msprop:Generator_RowEvArgName="options_typesRowChangeEvent" msprop:Generator_RowClassName="options_typesRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="options_verbose_positions" msprop:Generator_TableClassName="options_verbose_positionsDataTable" msprop:Generator_TableVarName="tableoptions_verbose_positions" msprop:Generator_TablePropName="options_verbose_positions" msprop:Generator_RowDeletingName="options_verbose_positionsRowDeleting" msprop:Generator_RowChangingName="options_verbose_positionsRowChanging" msprop:Generator_RowEvHandlerName="options_verbose_positionsRowChangeEventHandler" msprop:Generator_RowDeletedName="options_verbose_positionsRowDeleted" msprop:Generator_UserTableName="options_verbose_positions" msprop:Generator_RowChangedName="options_verbose_positionsRowChanged" msprop:Generator_RowEvArgName="options_verbose_positionsRowChangeEvent" msprop:Generator_RowClassName="options_verbose_positionsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

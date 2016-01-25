@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99950C56-EDEC-4CD8-8AA0-CEE11CED6484}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WindowsFormsApplication1</RootNamespace>
+    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.0.488\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormAddClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddClient.Designer.cs">
+      <DependentUpon>FormAddClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModifyOptionsContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifyOptionsContract.Designer.cs">
+      <DependentUpon>FormModifyOptionsContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModifyFuturesContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifyFuturesContract.Designer.cs">
+      <DependentUpon>FormModifyFuturesContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModifyOptionsType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifyOptionsType.Designer.cs">
+      <DependentUpon>FormModifyOptionsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddOptionsType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddOptionsType.Designer.cs">
+      <DependentUpon>FormAddOptionsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddCommodity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddCommodity.Designer.cs">
+      <DependentUpon>FormAddCommodity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddFuturesAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddFuturesAccount.Designer.cs">
+      <DependentUpon>FormAddFuturesAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddOptionsContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddOptionsContract.Designer.cs">
+      <DependentUpon>FormAddOptionsContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddFuturesContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddFuturesContract.Designer.cs">
+      <DependentUpon>FormAddFuturesContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormClientCashFlow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormClientCashFlow.Designer.cs">
+      <DependentUpon>FormClientCashFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFuturesAccountCashflow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFuturesAccountCashflow.Designer.cs">
+      <DependentUpon>FormFuturesAccountCashflow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLoginConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLoginConfig.Designer.cs">
+      <DependentUpon>FormLoginConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModifyClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifyClient.Designer.cs">
+      <DependentUpon>FormModifyClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModifyCommodity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifyCommodity.Designer.cs">
+      <DependentUpon>FormModifyCommodity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPlaceOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPlaceOrder.Designer.cs">
+      <DependentUpon>FormPlaceOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OTCDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAddClient.resx">
+      <DependentUpon>FormAddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifyOptionsContract.resx">
+      <DependentUpon>FormModifyOptionsContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifyFuturesContract.resx">
+      <DependentUpon>FormModifyFuturesContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifyOptionsType.resx">
+      <DependentUpon>FormModifyOptionsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddOptionsType.resx">
+      <DependentUpon>FormAddOptionsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddCommodity.resx">
+      <DependentUpon>FormAddCommodity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddFuturesAccount.resx">
+      <DependentUpon>FormAddFuturesAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddOptionsContract.resx">
+      <DependentUpon>FormAddOptionsContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddFuturesContract.resx">
+      <DependentUpon>FormAddFuturesContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormClientCashFlow.resx">
+      <DependentUpon>FormClientCashFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFuturesAccountCashflow.resx">
+      <DependentUpon>FormFuturesAccountCashflow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLoginConfig.resx">
+      <DependentUpon>FormLoginConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifyClient.resx">
+      <DependentUpon>FormModifyClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifyCommodity.resx">
+      <DependentUpon>FormModifyCommodity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPlaceOrder.resx">
+      <DependentUpon>FormPlaceOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTCDataSet.resx">
+      <DependentUpon>OTCDataSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\OTC.OTCDataSet.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TextFileColNameMapping.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
