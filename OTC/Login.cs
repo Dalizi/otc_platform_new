@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Microsoft.VisualStudio.Data;
 
 namespace OTC
 {
@@ -17,24 +18,43 @@ namespace OTC
         {
             InitializeComponent();
             this.conn = conn;
-            host = "10.2.7.210";
-            port = "3306";
-            database = "otc";
+            String s = Properties.Settings.Default.Password;
+            this.textBoxUserName.Text = Properties.Settings.Default.UserName;
+            if (String.IsNullOrEmpty(Properties.Settings.Default.Password))
+            {
+                this.textBoxPassword.Text = "";
+            }
+            else
+            {
+                this.textBoxPassword.Text = DataProtection.DecryptString(Properties.Settings.Default.Password);
+            }
+            this.checkBoxRememberLoginInfo.Checked = Properties.Settings.Default.isRememberPasswordChecked;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             MySqlConnectionStringBuilder connStringBuilder = new MySqlConnectionStringBuilder();
-            connStringBuilder.Server = host;
+            connStringBuilder.Server = Properties.Settings.Default.HostName;
             connStringBuilder.UserID = textBoxUserName.Text;
             connStringBuilder.Password = textBoxPassword.Text;
-            connStringBuilder.Database = database;
-            connStringBuilder.Port = Convert.ToUInt32(port);
+            connStringBuilder.Database = Properties.Settings.Default.Database;
+            connStringBuilder.Port = uint.Parse(Properties.Settings.Default.Port);
             String otcConnectionString = connStringBuilder.ConnectionString;
             try
             {
                 conn.ConnectionString = otcConnectionString;
                 conn.Open();
+                if (this.checkBoxRememberLoginInfo.Checked)
+                {
+                    Properties.Settings.Default.UserName = this.textBoxUserName.Text;
+                    Properties.Settings.Default.Password = DataProtection.EncryptString(this.textBoxPassword.Text);
+                } else
+                {
+                    Properties.Settings.Default.UserName = "";
+                    Properties.Settings.Default.Password = DataProtection.EncryptString("");
+                }
+                Properties.Settings.Default.isRememberPasswordChecked = this.checkBoxRememberLoginInfo.Checked;
+                Properties.Settings.Default.Save();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -52,14 +72,9 @@ namespace OTC
 
         private void buttonConfig_Click(object sender, EventArgs e)
         {
-            FormLoginConfig loginConfig = new FormLoginConfig(this);
+            FormLoginConfig loginConfig = new FormLoginConfig();
             loginConfig.Show();
         }
-        public String host { get; set; }
-        public String port { get; set; }
-        public String database { get; set; }
-        public String username { get; set; }
-        public String password { get; set; }
         MySqlConnection conn;
     }
 }

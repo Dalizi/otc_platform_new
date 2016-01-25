@@ -36,6 +36,7 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonConfig = new System.Windows.Forms.Button();
+            this.checkBoxRememberLoginInfo = new System.Windows.Forms.CheckBox();
             this.loginInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,20 +79,22 @@
             // 
             // loginInfoGroupBox
             // 
+            this.loginInfoGroupBox.Controls.Add(this.checkBoxRememberLoginInfo);
             this.loginInfoGroupBox.Controls.Add(this.labelUserName);
             this.loginInfoGroupBox.Controls.Add(this.textBoxPassword);
             this.loginInfoGroupBox.Controls.Add(this.textBoxUserName);
             this.loginInfoGroupBox.Controls.Add(this.labelPassword);
             this.loginInfoGroupBox.Location = new System.Drawing.Point(12, 12);
             this.loginInfoGroupBox.Name = "loginInfoGroupBox";
-            this.loginInfoGroupBox.Size = new System.Drawing.Size(301, 79);
+            this.loginInfoGroupBox.Size = new System.Drawing.Size(301, 100);
             this.loginInfoGroupBox.TabIndex = 4;
             this.loginInfoGroupBox.TabStop = false;
             this.loginInfoGroupBox.Text = "登录信息";
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(140, 107);
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(146, 130);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 23);
             this.buttonLogin.TabIndex = 4;
@@ -101,8 +104,9 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(221, 107);
+            this.buttonCancel.Location = new System.Drawing.Point(227, 130);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -112,7 +116,8 @@
             // 
             // buttonConfig
             // 
-            this.buttonConfig.Location = new System.Drawing.Point(12, 107);
+            this.buttonConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonConfig.Location = new System.Drawing.Point(12, 130);
             this.buttonConfig.Name = "buttonConfig";
             this.buttonConfig.Size = new System.Drawing.Size(75, 23);
             this.buttonConfig.TabIndex = 3;
@@ -120,13 +125,23 @@
             this.buttonConfig.UseVisualStyleBackColor = true;
             this.buttonConfig.Click += new System.EventHandler(this.buttonConfig_Click);
             // 
+            // checkBoxRememberLoginInfo
+            // 
+            this.checkBoxRememberLoginInfo.AutoSize = true;
+            this.checkBoxRememberLoginInfo.Location = new System.Drawing.Point(197, 78);
+            this.checkBoxRememberLoginInfo.Name = "checkBoxRememberLoginInfo";
+            this.checkBoxRememberLoginInfo.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxRememberLoginInfo.TabIndex = 3;
+            this.checkBoxRememberLoginInfo.Text = "记住登录信息";
+            this.checkBoxRememberLoginInfo.UseVisualStyleBackColor = true;
+            // 
             // Login
             // 
             this.AcceptButton = this.buttonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(325, 143);
+            this.ClientSize = new System.Drawing.Size(331, 164);
             this.Controls.Add(this.buttonConfig);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonLogin);
@@ -152,5 +167,6 @@
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonConfig;
+        private System.Windows.Forms.CheckBox checkBoxRememberLoginInfo;
     }
 }

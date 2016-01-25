@@ -12,20 +12,20 @@ namespace OTC
 {
     public partial class FormLoginConfig : Form
     {
-        public FormLoginConfig(Login loginForm)
+        public FormLoginConfig()
         {
             InitializeComponent();
-            this.loginForm = loginForm;
-            this.textBoxHost.Text = loginForm.host;
-            this.textBoxPort.Text = loginForm.port;
-            this.textBoxDatabase.Text = loginForm.database;
+            this.textBoxHost.Text = Properties.Settings.Default.HostName;
+            this.textBoxPort.Text = Properties.Settings.Default.Port;
+            this.textBoxDatabase.Text = Properties.Settings.Default.Database;
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
-            loginForm.host = textBoxHost.Text;
-            loginForm.port = textBoxPort.Text;
-            loginForm.database = textBoxDatabase.Text;
+            Properties.Settings.Default.HostName = textBoxHost.Text;
+            Properties.Settings.Default.Port = textBoxPort.Text;
+            Properties.Settings.Default.Database = textBoxDatabase.Text;
+            Properties.Settings.Default.Save();
             this.Close();
         }
 
@@ -33,7 +33,5 @@ namespace OTC
         {
             this.Close();
         }
-
-        Login loginForm;
     }
 }
