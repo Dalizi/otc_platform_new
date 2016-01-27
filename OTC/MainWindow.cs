@@ -173,8 +173,11 @@ namespace OTC
                                  MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                this.dataset.Tables["client_balance"].Rows.Find(client_id).Delete();
                 this.dataset.Tables["client_info"].Rows.Find(client_id).Delete();
+                this.dataset.Commit("client_balance");
                 this.dataset.Commit("client_info");
+                this.dataset.Tables["client_balance_join"].Clear();
                 this.dataset.Update();
             }
         }
@@ -207,8 +210,11 @@ namespace OTC
                                  MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                this.dataset.Tables["futures_account_balance"].Rows.Find(account_no).Delete();
                 this.dataset.Tables["futures_account_info"].Rows.Find(account_no).Delete();
+                this.dataset.Commit("futures_account_balance");
                 this.dataset.Commit("futures_account_info");
+                this.dataset.Tables["futures_account_balance_view"].Clear();
                 this.dataset.Update();
             }
         }
@@ -238,6 +244,7 @@ namespace OTC
             {
                 this.dataset.Tables["commodity_category"].Rows.Find(commodity_code).Delete();
                 this.dataset.Commit("commodity_category");
+                this.dataset.Tables["commodity_category_view"].Clear();
                 this.dataset.Update();
             }
         }
@@ -267,6 +274,7 @@ namespace OTC
             {
                 this.dataset.Tables["options_types"].Rows.Find(options_code).Delete();
                 this.dataset.Commit("options_types");
+                this.dataset.Tables["options_types_view"].Clear();
                 this.dataset.Update();
             }
         }
@@ -294,6 +302,7 @@ namespace OTC
             {
                 this.dataset.Tables["futures_contracts"].Rows.Find(contract_code).Delete();
                 this.dataset.Commit("futures_contracts");
+                this.dataset.Tables["futures_contracts_view"].Clear();
                 this.dataset.Update();
             }
         }
