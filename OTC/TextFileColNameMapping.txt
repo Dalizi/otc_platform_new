@@ -45,3 +45,4 @@ average_open_price=平均开仓价格
 average_holding_price=平均持仓价格
 holding_price=持仓价格
 underlying=标的
+volatility=波动率

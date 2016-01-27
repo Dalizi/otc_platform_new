@@ -322,6 +322,7 @@ namespace OTC
             {
                 this.dataset.Tables["options_contracts"].Rows.Find(contract_code).Delete();
                 this.dataset.Commit("options_contracts");
+                this.dataset.Tables["options_contracts_view"].Clear();
                 this.dataset.Update();
             }
         }
