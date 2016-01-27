@@ -92,8 +92,8 @@ namespace OTC
             {
                 DataTable table = this.dataset.Tables["futures_transactions"];
                 int account_no = 0;
-                double quantity = 0;
-                double price = 0;
+                decimal quantity = 0;
+                decimal price = 0;
                 int target_client_id = 0;
 
                 if (!int.TryParse(this.comboBoxEntityCode.Text, out account_no))
@@ -104,11 +104,11 @@ namespace OTC
                 {
                     MessageBox.Show("目标客户编号格式错误。", "错误");
                 }
-                else if (!double.TryParse(this.numericUpDownPrice.Text, out price))
+                else if (!decimal.TryParse(this.numericUpDownPrice.Text, out price))
                 {
                     MessageBox.Show("价格格式错误。", "错误");
                 }
-                else if (!double.TryParse(this.numericUpDownQuantity.Text, out quantity))
+                else if (!decimal.TryParse(this.numericUpDownQuantity.Text, out quantity))
                 {
                     MessageBox.Show("数量格式错误。", "错误");
                 }
@@ -153,8 +153,8 @@ namespace OTC
             {
                 DataTable table = this.dataset.Tables["options_transactions"];
                 int client_id = 0;
-                double quantity = 0;
-                double price = 0;
+                decimal quantity = 0;
+                decimal price = 0;
                 int target_transaction_id = -1;
 
                 if (!int.TryParse(this.comboBoxEntityCode.Text, out client_id))
@@ -165,11 +165,11 @@ namespace OTC
                 {
                     MessageBox.Show("平仓目标编号格式错误。", "错误");
                 }
-                else if (!double.TryParse(this.numericUpDownPrice.Text, out price))
+                else if (!decimal.TryParse(this.numericUpDownPrice.Text, out price))
                 {
                     MessageBox.Show("价格格式错误。", "错误");
                 }
-                else if (!double.TryParse(this.numericUpDownQuantity.Text, out quantity))
+                else if (!decimal.TryParse(this.numericUpDownQuantity.Text, out quantity))
                 {
                     MessageBox.Show("数量格式错误。", "错误");
                 }
@@ -307,7 +307,7 @@ namespace OTC
                     {
                         this.comboBoxTargetID.SelectedIndex = 0;
                     }
-                    this.textBoxBalance.Text = ((double)this.dataset.Tables["futures_account_balance"].Rows.Find(account_no)["当前余额"]).ToString("N2");
+                    this.textBoxBalance.Text = ((decimal)this.dataset.Tables["futures_account_balance"].Rows.Find(account_no)["当前余额"]).ToString("N2");
                 }
             }
             else
@@ -320,7 +320,7 @@ namespace OTC
                 else
                 {
                     this.textBoxClientName.Text = this.dataset.Tables["client_info"].Rows.Find(client_id)["客户名称"].ToString();
-                    this.textBoxBalance.Text = ((double)this.dataset.Tables["client_balance"].Rows.Find(client_id)["余额"]).ToString("N2");
+                    this.textBoxBalance.Text = ((decimal)this.dataset.Tables["client_balance"].Rows.Find(client_id)["余额"]).ToString("N2");
 
                 }
                 SetCloseTargetIDs(sender, e);
@@ -392,8 +392,8 @@ namespace OTC
                             contract_code,
                             long_short);
                     }
-                    int maximum = 0;
-                    if (int.TryParse(table.Compute("sum(数量)", filterText).ToString(), out maximum))
+                    decimal maximum = 0;
+                    if (decimal.TryParse(table.Compute("sum(数量)", filterText).ToString(), out maximum))
                         {
                         this.numericUpDownQuantity.Maximum = maximum;
                     }
@@ -420,7 +420,7 @@ namespace OTC
                     decimal marginRate = Convert.ToDecimal(rowContract["保证金率"]);
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
-                    this.numericUpDownQuantity.Maximum = (int)(Convert.ToDecimal(rowBalance["余额"])/(price*multiplier + commission));
+                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price*multiplier + commission), MidpointRounding.AwayFromZero);
                 }
             }
             else
@@ -441,8 +441,8 @@ namespace OTC
                             account_no,
                             contract_code,
                             long_short);
-                    int maximum = 0;
-                    if (int.TryParse(table.Compute("sum(数量)", filterText).ToString(), out maximum))
+                    decimal maximum = 0;
+                    if (decimal.TryParse(table.Compute("sum(数量)", filterText).ToString(), out maximum))
                     {
                         this.numericUpDownQuantity.Maximum = maximum;
                     }
@@ -470,7 +470,7 @@ namespace OTC
                         this.numericUpDownQuantity.Maximum = 0;
                         return;
                     }
-                    this.numericUpDownQuantity.Maximum = (int)(Convert.ToDecimal(rowBalance["当前余额"]) / (settlePrice* marginRate*multiplier+commission));
+                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (settlePrice* marginRate*multiplier+commission), MidpointRounding.AwayFromZero);
                 }
             }
         }

@@ -43,8 +43,8 @@ namespace OTC
             decimal commision = 0;
             decimal margin = 0;
             decimal multiplier = 0;
-            double strike = 0;
-            double volatility = 0;
+            decimal strike = 0;
+            decimal volatility = 0;
             if (String.IsNullOrEmpty(this.textBoxOptionsContractCode.Text))
             {
                 MessageBox.Show("合约代码不能为空。", "错误");
@@ -73,11 +73,11 @@ namespace OTC
             {
                 MessageBox.Show("期权方向不能为空。", "错误");
             }
-            else if (!double.TryParse(this.textBoxStrikePrice.Text, out strike))
+            else if (!decimal.TryParse(this.textBoxStrikePrice.Text, out strike))
             {
                 MessageBox.Show("执行价格式错误。", "错误");
             }
-            else if (!double.TryParse(this.textBoxVolatility.Text, out volatility))
+            else if (!decimal.TryParse(this.textBoxVolatility.Text, out volatility))
             {
                 MessageBox.Show("波动率格式错误。", "错误");
             }

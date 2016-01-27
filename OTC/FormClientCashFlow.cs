@@ -35,8 +35,8 @@ namespace OTC
         {
             int maxID = 0;
             int.TryParse(this.table.Compute("max(资金流水编号)", "").ToString(), out maxID);
-            double value = 0;
-            if (double.TryParse(maskedTextBoxValue.Text, out value))
+            decimal value = 0;
+            if (decimal.TryParse(maskedTextBoxValue.Text, out value))
             {
                 String cashFlowType = this.comboBoxCashFlowType.Text == "入金" ? "dp" : "wd";
                 this.table.Rows.Add(DBNull.Value, Convert.ToInt32(this.comboBoxClientInfo.Text.Split('-')[0]), value, cashFlowType, DBNull.Value, DBNull.Value, this.richTextBoxMemo.Text);

@@ -29,9 +29,9 @@ namespace OTC
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            double commision = 0;
-            double margin = 0;
-            double multiplier = 0;
+            decimal commision = 0;
+            decimal margin = 0;
+            decimal multiplier = 0;
             if (String.IsNullOrEmpty(this.textBoxFuturesContractCode.Text))
             {
                 MessageBox.Show("期货合约代码不能为空。", "错误");
@@ -40,15 +40,15 @@ namespace OTC
             {
                 MessageBox.Show("标的不能为空。", "错误");
             }
-            else if (!double.TryParse(this.textBoxCommission.Text, out commision))
+            else if (!decimal.TryParse(this.textBoxCommission.Text, out commision))
             {
                 MessageBox.Show("手续费格式错误。", "错误");
             }
-            else if (!double.TryParse(this.textBoxMarginRate.Text, out margin))
+            else if (!decimal.TryParse(this.textBoxMarginRate.Text, out margin))
             {
                 MessageBox.Show("保证金格式错误。", "错误");
             }
-            else if (!double.TryParse(this.textBoxMultiplier.Text, out multiplier))
+            else if (!decimal.TryParse(this.textBoxMultiplier.Text, out multiplier))
             {
                 MessageBox.Show("合约乘数格式错误。", "错误");
             }
