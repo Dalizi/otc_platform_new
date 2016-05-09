@@ -121,8 +121,8 @@ namespace OTC
                             this.comboBoxContractCode.Text,
                             quantity,
                             price,
-                            this.comboBoxOpenClose.Text == "开仓" ? "open" : "close",
-                            this.comboBoxLongShort.Text == "买入" ? "long" : "short",
+                            this.comboBoxOpenClose.Text,
+                            this.comboBoxLongShort.Text,
                             DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
                             DBNull.Value,
                             DBNull.Value,
@@ -307,7 +307,7 @@ namespace OTC
                     {
                         this.comboBoxTargetID.SelectedIndex = 0;
                     }
-                    this.textBoxBalance.Text = ((decimal)this.dataset.Tables["futures_account_balance"].Rows.Find(account_no)["当前余额"]).ToString("N2");
+                    this.textBoxBalance.Text = ((decimal)(double)this.dataset.Tables["futures_account_balance"].Rows.Find(account_no)["当前余额"]).ToString("N2");
                 }
             }
             else
@@ -320,7 +320,7 @@ namespace OTC
                 else
                 {
                     this.textBoxClientName.Text = this.dataset.Tables["client_info"].Rows.Find(client_id)["客户名称"].ToString();
-                    this.textBoxBalance.Text = ((decimal)this.dataset.Tables["client_balance"].Rows.Find(client_id)["余额"]).ToString("N2");
+                    this.textBoxBalance.Text = ((double)this.dataset.Tables["client_balance"].Rows.Find(client_id)["余额"]).ToString("N2");
 
                 }
                 SetCloseTargetIDs(sender, e);
@@ -533,19 +533,32 @@ namespace OTC
         private void ComputeValue(object sender, EventArgs e)
         {
             String contractCode = this.comboBoxContractCode.Text;
-            if (contractCode != null)
+            if (String.IsNullOrEmpty(contractCode))
             {
                 this.textBoxValue.Text = "0";
+                return;
             }
             decimal commission = 0;
             decimal multiplier = 0;
             decimal margin_rate = 0;
             String table_name = this.comboBoxOrderType.Text == "期货" ? "futures_contracts" : "options_contracts";
-            DataRow row = this.dataset.Tables["futures_contracts"].Rows.Find(contractCode);
-            commission = (decimal)row["手续费"];
-            multiplier = (decimal)row["乘数"];
-            margin_rate = (decimal)row["保证金率"];
-            this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value).ToString("N2");
+            DataRow row = this.dataset.Tables[table_name].Rows.Find(contractCode);
+            commission = (decimal)(double)row["手续费"];
+            multiplier = (int)row["合约乘数"];
+            margin_rate = (decimal)(double)row["保证金率"];
+            decimal pre_settle = this.comboBoxOrderType.Text == "期货" ? (decimal)(double)row["结算价"] : 0;
+            if (this.comboBoxLongShort.Text == "买入" && this.comboBoxOrderType.Text == "期权")
+            {
+                this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value * multiplier).ToString("N2");
+            }
+            else if (this.comboBoxLongShort.Text == "卖出" && this.comboBoxOrderType.Text == "期权")
+            {
+                this.textBoxValue.Text = "0.00";
+            }
+            else if (this.comboBoxOrderType.Text == "期货")
+            {
+                this.textBoxValue.Text = (pre_settle * this.numericUpDownQuantity.Value * multiplier*margin_rate).ToString("N2");
+            }
         }
 
         OTCDataSet dataset;

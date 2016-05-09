@@ -56,7 +56,6 @@ namespace OTC
             this.Close();
         }
         OTCDataSet dataset;
-        DataTable table;
 
         private void comboBoxClientID_SelectedIndexChanged(object sender, EventArgs e)
         {

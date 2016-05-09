@@ -80,10 +80,14 @@
             this.dataGridViewFuturesAccountCashflow = new System.Windows.Forms.DataGridView();
             this.tabPageTransactions = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelTransactions = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonRollbackOptionsTransaction = new System.Windows.Forms.Button();
             this.groupBoxOptionsTrasactions = new System.Windows.Forms.GroupBox();
             this.dataGridViewOptionsTransactions = new System.Windows.Forms.DataGridView();
             this.groupBoxFuturesTransactions = new System.Windows.Forms.GroupBox();
             this.dataGridViewFuturesTransactions = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonRollBackFuturesTransaction = new System.Windows.Forms.Button();
             this.buttonPlaceOrder = new System.Windows.Forms.Button();
             this.tabPagePositions = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelPositions = new System.Windows.Forms.TableLayoutPanel();
@@ -125,6 +129,10 @@
             this.buttonRemoveCommodity = new System.Windows.Forms.Button();
             this.buttonModifyCommodity = new System.Windows.Forms.Button();
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuTradingParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonTradingDatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageRiskMonitor = new System.Windows.Forms.TabPage();
             this.tabControlMainWindow.SuspendLayout();
             this.tabPageBalance.SuspendLayout();
             this.tableLayoutPanelBalance.SuspendLayout();
@@ -142,10 +150,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFuturesAccountCashflow)).BeginInit();
             this.tabPageTransactions.SuspendLayout();
             this.tableLayoutPanelTransactions.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.groupBoxOptionsTrasactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOptionsTransactions)).BeginInit();
             this.groupBoxFuturesTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFuturesTransactions)).BeginInit();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tabPagePositions.SuspendLayout();
             this.tableLayoutPanelPositions.SuspendLayout();
             this.groupBoxOpitionsPositionSum.SuspendLayout();
@@ -173,6 +183,7 @@
             this.groupBoxCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommodity)).BeginInit();
             this.tableLayoutPanel14.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMainWindow
@@ -183,11 +194,12 @@
             this.tabControlMainWindow.Controls.Add(this.tabPagePositions);
             this.tabControlMainWindow.Controls.Add(this.tabPageVerbosePositions);
             this.tabControlMainWindow.Controls.Add(this.tabPageContracts);
+            this.tabControlMainWindow.Controls.Add(this.tabPageRiskMonitor);
             this.tabControlMainWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMainWindow.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMainWindow.Location = new System.Drawing.Point(0, 25);
             this.tabControlMainWindow.Name = "tabControlMainWindow";
             this.tabControlMainWindow.SelectedIndex = 0;
-            this.tabControlMainWindow.Size = new System.Drawing.Size(1198, 621);
+            this.tabControlMainWindow.Size = new System.Drawing.Size(1198, 596);
             this.tabControlMainWindow.TabIndex = 3;
             // 
             // tabPageBalance
@@ -195,7 +207,7 @@
             this.tabPageBalance.Controls.Add(this.tableLayoutPanelBalance);
             this.tabPageBalance.Location = new System.Drawing.Point(4, 22);
             this.tabPageBalance.Name = "tabPageBalance";
-            this.tabPageBalance.Size = new System.Drawing.Size(1190, 595);
+            this.tabPageBalance.Size = new System.Drawing.Size(1190, 570);
             this.tabPageBalance.TabIndex = 4;
             this.tabPageBalance.Text = "资金余额";
             this.tabPageBalance.UseVisualStyleBackColor = true;
@@ -217,7 +229,7 @@
             this.tableLayoutPanelBalance.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelBalance.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanelBalance.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelBalance.Size = new System.Drawing.Size(1190, 595);
+            this.tableLayoutPanelBalance.Size = new System.Drawing.Size(1190, 570);
             this.tableLayoutPanelBalance.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -233,7 +245,7 @@
             this.tableLayoutPanel2.Controls.Add(this.buttonAddFuturesAccount, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonRemoveFuturesAccount, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonFuturesCashflow, 3, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 542);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 518);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -281,7 +293,7 @@
             this.groupBoxClient.Controls.Add(this.dataGridViewClientBalance);
             this.groupBoxClient.Location = new System.Drawing.Point(3, 3);
             this.groupBoxClient.Name = "groupBoxClient";
-            this.groupBoxClient.Size = new System.Drawing.Size(1184, 246);
+            this.groupBoxClient.Size = new System.Drawing.Size(1184, 234);
             this.groupBoxClient.TabIndex = 0;
             this.groupBoxClient.TabStop = false;
             this.groupBoxClient.Text = "客户资金";
@@ -294,7 +306,7 @@
             this.dataGridViewClientBalance.BackgroundColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -303,7 +315,7 @@
             this.dataGridViewClientBalance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.NullValue = "无";
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -317,7 +329,7 @@
             this.dataGridViewClientBalance.ReadOnly = true;
             this.dataGridViewClientBalance.RowTemplate.Height = 23;
             this.dataGridViewClientBalance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewClientBalance.Size = new System.Drawing.Size(1178, 226);
+            this.dataGridViewClientBalance.Size = new System.Drawing.Size(1178, 214);
             this.dataGridViewClientBalance.TabIndex = 0;
             // 
             // groupBoxFutures
@@ -326,9 +338,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxFutures.Controls.Add(this.dataGridViewFuturesBlance);
-            this.groupBoxFutures.Location = new System.Drawing.Point(3, 290);
+            this.groupBoxFutures.Location = new System.Drawing.Point(3, 278);
             this.groupBoxFutures.Name = "groupBoxFutures";
-            this.groupBoxFutures.Size = new System.Drawing.Size(1184, 246);
+            this.groupBoxFutures.Size = new System.Drawing.Size(1184, 234);
             this.groupBoxFutures.TabIndex = 1;
             this.groupBoxFutures.TabStop = false;
             this.groupBoxFutures.Text = "期货账户资金";
@@ -343,7 +355,7 @@
             this.dataGridViewFuturesBlance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -352,7 +364,7 @@
             this.dataGridViewFuturesBlance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.NullValue = "无";
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -364,7 +376,7 @@
             this.dataGridViewFuturesBlance.Name = "dataGridViewFuturesBlance";
             this.dataGridViewFuturesBlance.RowTemplate.Height = 23;
             this.dataGridViewFuturesBlance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFuturesBlance.Size = new System.Drawing.Size(1173, 220);
+            this.dataGridViewFuturesBlance.Size = new System.Drawing.Size(1173, 208);
             this.dataGridViewFuturesBlance.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -382,7 +394,7 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonRemoveClient, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonModifyClient, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonClientCashflow, 4, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 255);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 243);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -435,7 +447,7 @@
             this.tabPageCashFlow.Location = new System.Drawing.Point(4, 22);
             this.tabPageCashFlow.Name = "tabPageCashFlow";
             this.tabPageCashFlow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCashFlow.Size = new System.Drawing.Size(1190, 595);
+            this.tabPageCashFlow.Size = new System.Drawing.Size(1190, 570);
             this.tabPageCashFlow.TabIndex = 5;
             this.tabPageCashFlow.Text = "资金流水";
             this.tabPageCashFlow.UseVisualStyleBackColor = true;
@@ -452,7 +464,7 @@
             this.tableLayoutPanelCashflow.RowCount = 2;
             this.tableLayoutPanelCashflow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelCashflow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelCashflow.Size = new System.Drawing.Size(1184, 589);
+            this.tableLayoutPanelCashflow.Size = new System.Drawing.Size(1184, 564);
             this.tableLayoutPanelCashflow.TabIndex = 0;
             // 
             // groupBoxClientCashflow
@@ -461,7 +473,7 @@
             this.groupBoxClientCashflow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxClientCashflow.Location = new System.Drawing.Point(3, 3);
             this.groupBoxClientCashflow.Name = "groupBoxClientCashflow";
-            this.groupBoxClientCashflow.Size = new System.Drawing.Size(1178, 288);
+            this.groupBoxClientCashflow.Size = new System.Drawing.Size(1178, 276);
             this.groupBoxClientCashflow.TabIndex = 0;
             this.groupBoxClientCashflow.TabStop = false;
             this.groupBoxClientCashflow.Text = "客户资金流水";
@@ -473,7 +485,7 @@
             this.dataGridViewClientCashflow.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -482,7 +494,7 @@
             this.dataGridViewClientCashflow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle6.NullValue = "无";
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -495,16 +507,16 @@
             this.dataGridViewClientCashflow.Name = "dataGridViewClientCashflow";
             this.dataGridViewClientCashflow.ReadOnly = true;
             this.dataGridViewClientCashflow.RowTemplate.Height = 23;
-            this.dataGridViewClientCashflow.Size = new System.Drawing.Size(1172, 268);
+            this.dataGridViewClientCashflow.Size = new System.Drawing.Size(1172, 256);
             this.dataGridViewClientCashflow.TabIndex = 0;
             // 
             // groupBoxFuturesAccountCashflow
             // 
             this.groupBoxFuturesAccountCashflow.Controls.Add(this.dataGridViewFuturesAccountCashflow);
             this.groupBoxFuturesAccountCashflow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFuturesAccountCashflow.Location = new System.Drawing.Point(3, 297);
+            this.groupBoxFuturesAccountCashflow.Location = new System.Drawing.Point(3, 285);
             this.groupBoxFuturesAccountCashflow.Name = "groupBoxFuturesAccountCashflow";
-            this.groupBoxFuturesAccountCashflow.Size = new System.Drawing.Size(1178, 289);
+            this.groupBoxFuturesAccountCashflow.Size = new System.Drawing.Size(1178, 276);
             this.groupBoxFuturesAccountCashflow.TabIndex = 1;
             this.groupBoxFuturesAccountCashflow.TabStop = false;
             this.groupBoxFuturesAccountCashflow.Text = "期货账户资金流水";
@@ -516,7 +528,7 @@
             this.dataGridViewFuturesAccountCashflow.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle7.NullValue = "无";
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -530,7 +542,7 @@
             this.dataGridViewFuturesAccountCashflow.Name = "dataGridViewFuturesAccountCashflow";
             this.dataGridViewFuturesAccountCashflow.ReadOnly = true;
             this.dataGridViewFuturesAccountCashflow.RowTemplate.Height = 23;
-            this.dataGridViewFuturesAccountCashflow.Size = new System.Drawing.Size(1172, 269);
+            this.dataGridViewFuturesAccountCashflow.Size = new System.Drawing.Size(1172, 256);
             this.dataGridViewFuturesAccountCashflow.TabIndex = 0;
             // 
             // tabPageTransactions
@@ -539,7 +551,7 @@
             this.tabPageTransactions.Location = new System.Drawing.Point(4, 22);
             this.tabPageTransactions.Name = "tabPageTransactions";
             this.tabPageTransactions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTransactions.Size = new System.Drawing.Size(1190, 595);
+            this.tabPageTransactions.Size = new System.Drawing.Size(1190, 570);
             this.tabPageTransactions.TabIndex = 1;
             this.tabPageTransactions.Text = "成交信息";
             this.tabPageTransactions.UseVisualStyleBackColor = true;
@@ -548,18 +560,45 @@
             // 
             this.tableLayoutPanelTransactions.ColumnCount = 1;
             this.tableLayoutPanelTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelTransactions.Controls.Add(this.tableLayoutPanel7, 0, 1);
             this.tableLayoutPanelTransactions.Controls.Add(this.groupBoxOptionsTrasactions, 0, 0);
-            this.tableLayoutPanelTransactions.Controls.Add(this.groupBoxFuturesTransactions, 0, 1);
-            this.tableLayoutPanelTransactions.Controls.Add(this.buttonPlaceOrder, 0, 2);
+            this.tableLayoutPanelTransactions.Controls.Add(this.groupBoxFuturesTransactions, 0, 2);
+            this.tableLayoutPanelTransactions.Controls.Add(this.tableLayoutPanel6, 0, 3);
             this.tableLayoutPanelTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTransactions.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanelTransactions.Name = "tableLayoutPanelTransactions";
-            this.tableLayoutPanelTransactions.RowCount = 3;
+            this.tableLayoutPanelTransactions.RowCount = 4;
             this.tableLayoutPanelTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanelTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanelTransactions.Size = new System.Drawing.Size(1184, 589);
+            this.tableLayoutPanelTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelTransactions.Size = new System.Drawing.Size(1184, 564);
             this.tableLayoutPanelTransactions.TabIndex = 1;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.buttonRollbackOptionsTransaction, 0, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 250);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1178, 29);
+            this.tableLayoutPanel7.TabIndex = 1;
+            // 
+            // buttonRollbackOptionsTransaction
+            // 
+            this.buttonRollbackOptionsTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonRollbackOptionsTransaction.Location = new System.Drawing.Point(3, 3);
+            this.buttonRollbackOptionsTransaction.Name = "buttonRollbackOptionsTransaction";
+            this.buttonRollbackOptionsTransaction.Size = new System.Drawing.Size(91, 23);
+            this.buttonRollbackOptionsTransaction.TabIndex = 0;
+            this.buttonRollbackOptionsTransaction.Text = "回滚期权成交";
+            this.buttonRollbackOptionsTransaction.UseVisualStyleBackColor = true;
+            this.buttonRollbackOptionsTransaction.Click += new System.EventHandler(this.buttonRollbackOptionsTransaction_Click);
             // 
             // groupBoxOptionsTrasactions
             // 
@@ -567,7 +606,7 @@
             this.groupBoxOptionsTrasactions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOptionsTrasactions.Location = new System.Drawing.Point(3, 3);
             this.groupBoxOptionsTrasactions.Name = "groupBoxOptionsTrasactions";
-            this.groupBoxOptionsTrasactions.Size = new System.Drawing.Size(1178, 273);
+            this.groupBoxOptionsTrasactions.Size = new System.Drawing.Size(1178, 241);
             this.groupBoxOptionsTrasactions.TabIndex = 0;
             this.groupBoxOptionsTrasactions.TabStop = false;
             this.groupBoxOptionsTrasactions.Text = "期权成交记录";
@@ -576,13 +615,10 @@
             // 
             this.dataGridViewOptionsTransactions.AllowUserToAddRows = false;
             this.dataGridViewOptionsTransactions.AllowUserToDeleteRows = false;
-            this.dataGridViewOptionsTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewOptionsTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -591,27 +627,28 @@
             this.dataGridViewOptionsTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle9.NullValue = "无";
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewOptionsTransactions.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewOptionsTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewOptionsTransactions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewOptionsTransactions.Location = new System.Drawing.Point(3, 17);
             this.dataGridViewOptionsTransactions.Name = "dataGridViewOptionsTransactions";
             this.dataGridViewOptionsTransactions.RowTemplate.Height = 23;
-            this.dataGridViewOptionsTransactions.Size = new System.Drawing.Size(1172, 250);
+            this.dataGridViewOptionsTransactions.Size = new System.Drawing.Size(1172, 221);
             this.dataGridViewOptionsTransactions.TabIndex = 0;
             // 
             // groupBoxFuturesTransactions
             // 
             this.groupBoxFuturesTransactions.Controls.Add(this.dataGridViewFuturesTransactions);
             this.groupBoxFuturesTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFuturesTransactions.Location = new System.Drawing.Point(3, 282);
+            this.groupBoxFuturesTransactions.Location = new System.Drawing.Point(3, 285);
             this.groupBoxFuturesTransactions.Name = "groupBoxFuturesTransactions";
-            this.groupBoxFuturesTransactions.Size = new System.Drawing.Size(1178, 273);
+            this.groupBoxFuturesTransactions.Size = new System.Drawing.Size(1178, 241);
             this.groupBoxFuturesTransactions.TabIndex = 1;
             this.groupBoxFuturesTransactions.TabStop = false;
             this.groupBoxFuturesTransactions.Text = "期货成交记录";
@@ -626,7 +663,7 @@
             this.dataGridViewFuturesTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -635,7 +672,7 @@
             this.dataGridViewFuturesTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle11.NullValue = "无";
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -647,15 +684,42 @@
             this.dataGridViewFuturesTransactions.Name = "dataGridViewFuturesTransactions";
             this.dataGridViewFuturesTransactions.ReadOnly = true;
             this.dataGridViewFuturesTransactions.RowTemplate.Height = 23;
-            this.dataGridViewFuturesTransactions.Size = new System.Drawing.Size(1172, 250);
+            this.dataGridViewFuturesTransactions.Size = new System.Drawing.Size(1172, 218);
             this.dataGridViewFuturesTransactions.TabIndex = 0;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel6.Controls.Add(this.buttonRollBackFuturesTransaction, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonPlaceOrder, 2, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 532);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1178, 29);
+            this.tableLayoutPanel6.TabIndex = 2;
+            // 
+            // buttonRollBackFuturesTransaction
+            // 
+            this.buttonRollBackFuturesTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonRollBackFuturesTransaction.Location = new System.Drawing.Point(3, 3);
+            this.buttonRollBackFuturesTransaction.Name = "buttonRollBackFuturesTransaction";
+            this.buttonRollBackFuturesTransaction.Size = new System.Drawing.Size(91, 23);
+            this.buttonRollBackFuturesTransaction.TabIndex = 1;
+            this.buttonRollBackFuturesTransaction.Text = "回滚期货成交";
+            this.buttonRollBackFuturesTransaction.UseVisualStyleBackColor = true;
+            this.buttonRollBackFuturesTransaction.Click += new System.EventHandler(this.buttonRollBackFuturesTransaction_Click);
             // 
             // buttonPlaceOrder
             // 
-            this.buttonPlaceOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlaceOrder.Location = new System.Drawing.Point(1106, 563);
+            this.buttonPlaceOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonPlaceOrder.Location = new System.Drawing.Point(1101, 3);
             this.buttonPlaceOrder.Name = "buttonPlaceOrder";
-            this.buttonPlaceOrder.Size = new System.Drawing.Size(75, 23);
+            this.buttonPlaceOrder.Size = new System.Drawing.Size(74, 23);
             this.buttonPlaceOrder.TabIndex = 2;
             this.buttonPlaceOrder.Text = "下单";
             this.buttonPlaceOrder.UseVisualStyleBackColor = true;
@@ -666,7 +730,7 @@
             this.tabPagePositions.Controls.Add(this.tableLayoutPanelPositions);
             this.tabPagePositions.Location = new System.Drawing.Point(4, 22);
             this.tabPagePositions.Name = "tabPagePositions";
-            this.tabPagePositions.Size = new System.Drawing.Size(1190, 595);
+            this.tabPagePositions.Size = new System.Drawing.Size(1190, 570);
             this.tabPagePositions.TabIndex = 2;
             this.tabPagePositions.Text = "持仓汇总";
             this.tabPagePositions.UseVisualStyleBackColor = true;
@@ -683,7 +747,7 @@
             this.tableLayoutPanelPositions.RowCount = 2;
             this.tableLayoutPanelPositions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelPositions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelPositions.Size = new System.Drawing.Size(1190, 595);
+            this.tableLayoutPanelPositions.Size = new System.Drawing.Size(1190, 570);
             this.tableLayoutPanelPositions.TabIndex = 1;
             // 
             // groupBoxOpitionsPositionSum
@@ -692,7 +756,7 @@
             this.groupBoxOpitionsPositionSum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOpitionsPositionSum.Location = new System.Drawing.Point(3, 3);
             this.groupBoxOpitionsPositionSum.Name = "groupBoxOpitionsPositionSum";
-            this.groupBoxOpitionsPositionSum.Size = new System.Drawing.Size(1184, 291);
+            this.groupBoxOpitionsPositionSum.Size = new System.Drawing.Size(1184, 279);
             this.groupBoxOpitionsPositionSum.TabIndex = 0;
             this.groupBoxOpitionsPositionSum.TabStop = false;
             this.groupBoxOpitionsPositionSum.Text = "期权持仓";
@@ -704,7 +768,7 @@
             this.dataGridViewOptionsPositionsSum.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -713,7 +777,7 @@
             this.dataGridViewOptionsPositionsSum.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle13.NullValue = "无";
             dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -726,16 +790,16 @@
             this.dataGridViewOptionsPositionsSum.Name = "dataGridViewOptionsPositionsSum";
             this.dataGridViewOptionsPositionsSum.RowTemplate.Height = 23;
             this.dataGridViewOptionsPositionsSum.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOptionsPositionsSum.Size = new System.Drawing.Size(1178, 271);
+            this.dataGridViewOptionsPositionsSum.Size = new System.Drawing.Size(1178, 259);
             this.dataGridViewOptionsPositionsSum.TabIndex = 0;
             // 
             // groupBoxFuturesPositionSum
             // 
             this.groupBoxFuturesPositionSum.Controls.Add(this.dataGridViewFuturesPositionsSum);
             this.groupBoxFuturesPositionSum.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFuturesPositionSum.Location = new System.Drawing.Point(3, 300);
+            this.groupBoxFuturesPositionSum.Location = new System.Drawing.Point(3, 288);
             this.groupBoxFuturesPositionSum.Name = "groupBoxFuturesPositionSum";
-            this.groupBoxFuturesPositionSum.Size = new System.Drawing.Size(1184, 292);
+            this.groupBoxFuturesPositionSum.Size = new System.Drawing.Size(1184, 279);
             this.groupBoxFuturesPositionSum.TabIndex = 1;
             this.groupBoxFuturesPositionSum.TabStop = false;
             this.groupBoxFuturesPositionSum.Text = "期货持仓";
@@ -747,7 +811,7 @@
             this.dataGridViewFuturesPositionsSum.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -756,7 +820,7 @@
             this.dataGridViewFuturesPositionsSum.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle15.NullValue = "无";
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -769,7 +833,7 @@
             this.dataGridViewFuturesPositionsSum.Name = "dataGridViewFuturesPositionsSum";
             this.dataGridViewFuturesPositionsSum.RowTemplate.Height = 23;
             this.dataGridViewFuturesPositionsSum.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFuturesPositionsSum.Size = new System.Drawing.Size(1178, 272);
+            this.dataGridViewFuturesPositionsSum.Size = new System.Drawing.Size(1178, 259);
             this.dataGridViewFuturesPositionsSum.TabIndex = 0;
             // 
             // tabPageVerbosePositions
@@ -777,7 +841,7 @@
             this.tabPageVerbosePositions.Controls.Add(this.tableLayoutPanelVerbosePositions);
             this.tabPageVerbosePositions.Location = new System.Drawing.Point(4, 22);
             this.tabPageVerbosePositions.Name = "tabPageVerbosePositions";
-            this.tabPageVerbosePositions.Size = new System.Drawing.Size(1190, 595);
+            this.tabPageVerbosePositions.Size = new System.Drawing.Size(1190, 570);
             this.tabPageVerbosePositions.TabIndex = 6;
             this.tabPageVerbosePositions.Text = "持仓明细";
             this.tabPageVerbosePositions.UseVisualStyleBackColor = true;
@@ -794,7 +858,7 @@
             this.tableLayoutPanelVerbosePositions.RowCount = 2;
             this.tableLayoutPanelVerbosePositions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelVerbosePositions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelVerbosePositions.Size = new System.Drawing.Size(1190, 595);
+            this.tableLayoutPanelVerbosePositions.Size = new System.Drawing.Size(1190, 570);
             this.tableLayoutPanelVerbosePositions.TabIndex = 2;
             // 
             // groupBoxOptionsVerbosePositions
@@ -803,7 +867,7 @@
             this.groupBoxOptionsVerbosePositions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOptionsVerbosePositions.Location = new System.Drawing.Point(3, 3);
             this.groupBoxOptionsVerbosePositions.Name = "groupBoxOptionsVerbosePositions";
-            this.groupBoxOptionsVerbosePositions.Size = new System.Drawing.Size(1184, 291);
+            this.groupBoxOptionsVerbosePositions.Size = new System.Drawing.Size(1184, 279);
             this.groupBoxOptionsVerbosePositions.TabIndex = 0;
             this.groupBoxOptionsVerbosePositions.TabStop = false;
             this.groupBoxOptionsVerbosePositions.Text = "期权持仓明细";
@@ -815,7 +879,7 @@
             this.dataGridViewOptionsVerbosePositions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -824,7 +888,7 @@
             this.dataGridViewOptionsVerbosePositions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle17.NullValue = "无";
             dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -837,16 +901,16 @@
             this.dataGridViewOptionsVerbosePositions.Name = "dataGridViewOptionsVerbosePositions";
             this.dataGridViewOptionsVerbosePositions.RowTemplate.Height = 23;
             this.dataGridViewOptionsVerbosePositions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOptionsVerbosePositions.Size = new System.Drawing.Size(1178, 271);
+            this.dataGridViewOptionsVerbosePositions.Size = new System.Drawing.Size(1178, 259);
             this.dataGridViewOptionsVerbosePositions.TabIndex = 0;
             // 
             // groupBoxFuturesVerbosePositions
             // 
             this.groupBoxFuturesVerbosePositions.Controls.Add(this.dataGridViewFuturesVerbosePositions);
             this.groupBoxFuturesVerbosePositions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFuturesVerbosePositions.Location = new System.Drawing.Point(3, 300);
+            this.groupBoxFuturesVerbosePositions.Location = new System.Drawing.Point(3, 288);
             this.groupBoxFuturesVerbosePositions.Name = "groupBoxFuturesVerbosePositions";
-            this.groupBoxFuturesVerbosePositions.Size = new System.Drawing.Size(1184, 292);
+            this.groupBoxFuturesVerbosePositions.Size = new System.Drawing.Size(1184, 279);
             this.groupBoxFuturesVerbosePositions.TabIndex = 1;
             this.groupBoxFuturesVerbosePositions.TabStop = false;
             this.groupBoxFuturesVerbosePositions.Text = "期货持仓明细";
@@ -858,7 +922,7 @@
             this.dataGridViewFuturesVerbosePositions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -867,7 +931,7 @@
             this.dataGridViewFuturesVerbosePositions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle19.NullValue = "无";
             dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -880,7 +944,7 @@
             this.dataGridViewFuturesVerbosePositions.Name = "dataGridViewFuturesVerbosePositions";
             this.dataGridViewFuturesVerbosePositions.RowTemplate.Height = 23;
             this.dataGridViewFuturesVerbosePositions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFuturesVerbosePositions.Size = new System.Drawing.Size(1178, 272);
+            this.dataGridViewFuturesVerbosePositions.Size = new System.Drawing.Size(1178, 259);
             this.dataGridViewFuturesVerbosePositions.TabIndex = 0;
             // 
             // tabPageContracts
@@ -888,7 +952,7 @@
             this.tabPageContracts.Controls.Add(this.tableLayoutPanelContractInfo);
             this.tabPageContracts.Location = new System.Drawing.Point(4, 22);
             this.tabPageContracts.Name = "tabPageContracts";
-            this.tabPageContracts.Size = new System.Drawing.Size(1190, 595);
+            this.tabPageContracts.Size = new System.Drawing.Size(1190, 570);
             this.tabPageContracts.TabIndex = 3;
             this.tabPageContracts.Text = "合约信息";
             this.tabPageContracts.UseVisualStyleBackColor = true;
@@ -912,7 +976,7 @@
             this.tableLayoutPanelContractInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelContractInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanelContractInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelContractInfo.Size = new System.Drawing.Size(1190, 595);
+            this.tableLayoutPanelContractInfo.Size = new System.Drawing.Size(1190, 570);
             this.tableLayoutPanelContractInfo.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -929,11 +993,11 @@
             this.tableLayoutPanel5.Controls.Add(this.buttonAddOptionsContract, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonRemoveOptionsContract, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonModifyOptionsContract, 3, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 563);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 536);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1184, 29);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1184, 31);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
             // buttonAddOptionsContract
@@ -941,7 +1005,7 @@
             this.buttonAddOptionsContract.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonAddOptionsContract.Location = new System.Drawing.Point(888, 3);
             this.buttonAddOptionsContract.Name = "buttonAddOptionsContract";
-            this.buttonAddOptionsContract.Size = new System.Drawing.Size(91, 23);
+            this.buttonAddOptionsContract.Size = new System.Drawing.Size(91, 25);
             this.buttonAddOptionsContract.TabIndex = 0;
             this.buttonAddOptionsContract.Text = "添加期权合约";
             this.buttonAddOptionsContract.UseVisualStyleBackColor = true;
@@ -952,7 +1016,7 @@
             this.buttonRemoveOptionsContract.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonRemoveOptionsContract.Location = new System.Drawing.Point(985, 3);
             this.buttonRemoveOptionsContract.Name = "buttonRemoveOptionsContract";
-            this.buttonRemoveOptionsContract.Size = new System.Drawing.Size(97, 23);
+            this.buttonRemoveOptionsContract.Size = new System.Drawing.Size(97, 25);
             this.buttonRemoveOptionsContract.TabIndex = 1;
             this.buttonRemoveOptionsContract.Text = "删除期权合约";
             this.buttonRemoveOptionsContract.UseVisualStyleBackColor = true;
@@ -963,7 +1027,7 @@
             this.buttonModifyOptionsContract.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonModifyOptionsContract.Location = new System.Drawing.Point(1088, 3);
             this.buttonModifyOptionsContract.Name = "buttonModifyOptionsContract";
-            this.buttonModifyOptionsContract.Size = new System.Drawing.Size(93, 23);
+            this.buttonModifyOptionsContract.Size = new System.Drawing.Size(93, 25);
             this.buttonModifyOptionsContract.TabIndex = 2;
             this.buttonModifyOptionsContract.Text = "修改期权合约";
             this.buttonModifyOptionsContract.UseVisualStyleBackColor = true;
@@ -983,7 +1047,7 @@
             this.tableLayoutPanel4.Controls.Add(this.buttonAddFuturesContract, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.buttonRemoveFuturesContract, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.buttonModifyFuturesContract, 3, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 353);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 335);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1027,9 +1091,9 @@
             // 
             this.groupBoxFuturesContracts.Controls.Add(this.dataGridViewFuturesContract);
             this.groupBoxFuturesContracts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFuturesContracts.Location = new System.Drawing.Point(3, 178);
+            this.groupBoxFuturesContracts.Location = new System.Drawing.Point(3, 169);
             this.groupBoxFuturesContracts.Name = "groupBoxFuturesContracts";
-            this.groupBoxFuturesContracts.Size = new System.Drawing.Size(1184, 169);
+            this.groupBoxFuturesContracts.Size = new System.Drawing.Size(1184, 160);
             this.groupBoxFuturesContracts.TabIndex = 7;
             this.groupBoxFuturesContracts.TabStop = false;
             this.groupBoxFuturesContracts.Text = "期货合约";
@@ -1042,7 +1106,7 @@
             this.dataGridViewFuturesContract.BackgroundColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1051,7 +1115,7 @@
             this.dataGridViewFuturesContract.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle21.NullValue = "无";
             dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -1065,16 +1129,16 @@
             this.dataGridViewFuturesContract.ReadOnly = true;
             this.dataGridViewFuturesContract.RowTemplate.Height = 23;
             this.dataGridViewFuturesContract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFuturesContract.Size = new System.Drawing.Size(1178, 149);
+            this.dataGridViewFuturesContract.Size = new System.Drawing.Size(1178, 140);
             this.dataGridViewFuturesContract.TabIndex = 1;
             // 
             // groupBoxOptionsContracts
             // 
             this.groupBoxOptionsContracts.Controls.Add(this.dataGridViewOptionsContract);
             this.groupBoxOptionsContracts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxOptionsContracts.Location = new System.Drawing.Point(3, 388);
+            this.groupBoxOptionsContracts.Location = new System.Drawing.Point(3, 370);
             this.groupBoxOptionsContracts.Name = "groupBoxOptionsContracts";
-            this.groupBoxOptionsContracts.Size = new System.Drawing.Size(1184, 169);
+            this.groupBoxOptionsContracts.Size = new System.Drawing.Size(1184, 160);
             this.groupBoxOptionsContracts.TabIndex = 8;
             this.groupBoxOptionsContracts.TabStop = false;
             this.groupBoxOptionsContracts.Text = "期权合约";
@@ -1087,7 +1151,7 @@
             this.dataGridViewOptionsContract.BackgroundColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1096,7 +1160,7 @@
             this.dataGridViewOptionsContract.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle23.NullValue = "无";
             dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -1110,7 +1174,7 @@
             this.dataGridViewOptionsContract.ReadOnly = true;
             this.dataGridViewOptionsContract.RowTemplate.Height = 23;
             this.dataGridViewOptionsContract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOptionsContract.Size = new System.Drawing.Size(1178, 149);
+            this.dataGridViewOptionsContract.Size = new System.Drawing.Size(1178, 140);
             this.dataGridViewOptionsContract.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -1125,7 +1189,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1184, 169);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1184, 160);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
             // groupBoxOptionsType
@@ -1135,7 +1199,7 @@
             this.groupBoxOptionsType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOptionsType.Location = new System.Drawing.Point(595, 3);
             this.groupBoxOptionsType.Name = "groupBoxOptionsType";
-            this.groupBoxOptionsType.Size = new System.Drawing.Size(586, 163);
+            this.groupBoxOptionsType.Size = new System.Drawing.Size(586, 154);
             this.groupBoxOptionsType.TabIndex = 8;
             this.groupBoxOptionsType.TabStop = false;
             this.groupBoxOptionsType.Text = "期权类型";
@@ -1151,7 +1215,7 @@
             this.dataGridViewOptionsType.BackgroundColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1160,7 +1224,7 @@
             this.dataGridViewOptionsType.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle25.NullValue = "无";
             dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -1173,7 +1237,7 @@
             this.dataGridViewOptionsType.ReadOnly = true;
             this.dataGridViewOptionsType.RowTemplate.Height = 23;
             this.dataGridViewOptionsType.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOptionsType.Size = new System.Drawing.Size(580, 108);
+            this.dataGridViewOptionsType.Size = new System.Drawing.Size(580, 99);
             this.dataGridViewOptionsType.TabIndex = 1;
             // 
             // tableLayoutPanel15
@@ -1187,7 +1251,7 @@
             this.tableLayoutPanel15.Controls.Add(this.buttonRemoveOptionsType, 2, 0);
             this.tableLayoutPanel15.Controls.Add(this.buttonModifyOptionsType, 3, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 131);
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 122);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
             this.tableLayoutPanel15.RowCount = 1;
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1234,7 +1298,7 @@
             this.groupBoxCommodity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxCommodity.Location = new System.Drawing.Point(3, 3);
             this.groupBoxCommodity.Name = "groupBoxCommodity";
-            this.groupBoxCommodity.Size = new System.Drawing.Size(586, 163);
+            this.groupBoxCommodity.Size = new System.Drawing.Size(586, 154);
             this.groupBoxCommodity.TabIndex = 7;
             this.groupBoxCommodity.TabStop = false;
             this.groupBoxCommodity.Text = "商品种类";
@@ -1250,7 +1314,7 @@
             this.dataGridViewCommodity.BackgroundColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1259,7 +1323,7 @@
             this.dataGridViewCommodity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle27.NullValue = "无";
             dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -1272,7 +1336,7 @@
             this.dataGridViewCommodity.ReadOnly = true;
             this.dataGridViewCommodity.RowTemplate.Height = 23;
             this.dataGridViewCommodity.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewCommodity.Size = new System.Drawing.Size(580, 108);
+            this.dataGridViewCommodity.Size = new System.Drawing.Size(580, 99);
             this.dataGridViewCommodity.TabIndex = 1;
             // 
             // tableLayoutPanel14
@@ -1286,7 +1350,7 @@
             this.tableLayoutPanel14.Controls.Add(this.buttonRemoveCommodity, 2, 0);
             this.tableLayoutPanel14.Controls.Add(this.buttonModifyCommodity, 3, 0);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(3, 131);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(3, 122);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1330,12 +1394,49 @@
             this.timerUpdate.Interval = 5000;
             this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuTradingParamsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1198, 25);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuTradingParamsToolStripMenuItem
+            // 
+            this.menuTradingParamsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonTradingDatesToolStripMenuItem});
+            this.menuTradingParamsToolStripMenuItem.Name = "menuTradingParamsToolStripMenuItem";
+            this.menuTradingParamsToolStripMenuItem.Size = new System.Drawing.Size(92, 21);
+            this.menuTradingParamsToolStripMenuItem.Text = "交易参数设置";
+            // 
+            // buttonTradingDatesToolStripMenuItem
+            // 
+            this.buttonTradingDatesToolStripMenuItem.Name = "buttonTradingDatesToolStripMenuItem";
+            this.buttonTradingDatesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.buttonTradingDatesToolStripMenuItem.Text = "交易日设定";
+            this.buttonTradingDatesToolStripMenuItem.Click += new System.EventHandler(this.buttonTradingDatesToolStripMenuItem_Click);
+            // 
+            // tabPageRiskMonitor
+            // 
+            this.tabPageRiskMonitor.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRiskMonitor.Name = "tabPageRiskMonitor";
+            this.tabPageRiskMonitor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageRiskMonitor.Size = new System.Drawing.Size(1190, 570);
+            this.tabPageRiskMonitor.TabIndex = 7;
+            this.tabPageRiskMonitor.Text = "风险监控";
+            this.tabPageRiskMonitor.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 621);
             this.Controls.Add(this.tabControlMainWindow);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
             this.Text = "场外期权管理平台";
             this.tabControlMainWindow.ResumeLayout(false);
@@ -1356,10 +1457,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFuturesAccountCashflow)).EndInit();
             this.tabPageTransactions.ResumeLayout(false);
             this.tableLayoutPanelTransactions.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
             this.groupBoxOptionsTrasactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOptionsTransactions)).EndInit();
             this.groupBoxFuturesTransactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFuturesTransactions)).EndInit();
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.tabPagePositions.ResumeLayout(false);
             this.tableLayoutPanelPositions.ResumeLayout(false);
             this.groupBoxOpitionsPositionSum.ResumeLayout(false);
@@ -1387,7 +1490,10 @@
             this.groupBoxCommodity.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommodity)).EndInit();
             this.tableLayoutPanel14.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1462,5 +1568,13 @@
         private System.Windows.Forms.GroupBox groupBoxFuturesVerbosePositions;
         private System.Windows.Forms.DataGridView dataGridViewFuturesVerbosePositions;
         private System.Windows.Forms.Timer timerUpdate;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.Button buttonRollbackOptionsTransaction;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Button buttonRollBackFuturesTransaction;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuTradingParamsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buttonTradingDatesToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPageRiskMonitor;
     }
 }

@@ -17,13 +17,12 @@ namespace OTC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MySqlConnection conn = new MySqlConnection();
-            if (new Login(conn).ShowDialog() == DialogResult.OK)
+            DatabaseManager dbManager = new DatabaseManager();
+            if (new Login(dbManager).ShowDialog() == DialogResult.OK)
             {
-                OTCDataSet dataset = new OTCDataSet("otc", conn);
+                OTCDataSet dataset = new OTCDataSet("otc", dbManager);
                 Application.Run(new MainWindow(dataset));
             }
-            conn.Close();
         }
 
     }

@@ -14,10 +14,10 @@ namespace OTC
 {
     public partial class Login : Form
     {
-        public Login(MySqlConnection conn)
+        public Login(DatabaseManager dm)
         {
             InitializeComponent();
-            this.conn = conn;
+            this.dbManager = dm;
             String s = Properties.Settings.Default.Password;
             this.textBoxUserName.Text = Properties.Settings.Default.UserName;
             if (String.IsNullOrEmpty(Properties.Settings.Default.Password))
@@ -38,11 +38,12 @@ namespace OTC
             connStringBuilder.UserID = textBoxUserName.Text;
             connStringBuilder.Password = textBoxPassword.Text;
             connStringBuilder.Database = Properties.Settings.Default.Database;
+            connStringBuilder.CharacterSet = "utf8";
             connStringBuilder.Port = uint.Parse(Properties.Settings.Default.Port);
-            String otcConnectionString = connStringBuilder.ConnectionString;
+            dbManager.SetConnString(DataProtection.EncryptString(connStringBuilder.ConnectionString));
             try
             {
-                conn.ConnectionString = otcConnectionString;
+                MySqlConnection conn = dbManager.GetSQLConnection();
                 conn.Open();
                 if (this.checkBoxRememberLoginInfo.Checked)
                 {
@@ -75,6 +76,7 @@ namespace OTC
             FormLoginConfig loginConfig = new FormLoginConfig();
             loginConfig.Show();
         }
-        MySqlConnection conn;
+
+        DatabaseManager dbManager;
     }
 }
