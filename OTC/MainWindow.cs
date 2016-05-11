@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace OTC
 {
     public partial class MainWindow : Form
     {
+        public OTCDataSet dataset;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -353,7 +356,49 @@ namespace OTC
             this.dataset.Update();
         }
 
-        public OTCDataSet dataset;
+        private void buttonRollbackOptionsTransaction_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(String.Format("你确定要回滚上一笔期权成交吗？"), "回滚期权成交",
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                MySqlConnection conn = this.dataset.CreateSQLConnection();
+                
+                conn.Open();
+                MySqlCommand command = new MySqlCommand("DELETE FROM futures_transactions ORDER BY transaction_time DESC LIMIT 1", conn);
+                command.ExecuteNonQuery();
+                conn.Close();
+                this.dataset.Tables["options_transactions_view"].Clear();
+                this.dataset.Tables["futures_transactions_view"].Clear();
+                this.dataset.Update();
+            }
+
+        }
+
+        private void buttonRollBackFuturesTransaction_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(String.Format("你确定要回滚上一笔期货成交吗？"), "回滚期货成交",
+                     MessageBoxButtons.YesNo,
+                     MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                MySqlConnection conn = this.dataset.CreateSQLConnection();
+                conn.Open();
+                MySqlCommand command = new MySqlCommand("DELETE FROM futures_transactions ORDER BY transaction_time DESC LIMIT 1", conn);
+                command.ExecuteNonQuery();
+                conn.Close();
+                this.dataset.Tables["futures_transactions_view"].Clear();
+                this.dataset.Tables["futures_cashflow_view"].Clear();
+                this.dataset.Update();
+            }
+        }
+
+        private void buttonTradingDatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTradingDatesSetting form = new FormTradingDatesSetting(dataset);
+            form.ShowDialog();
+        }
     }
         
 }

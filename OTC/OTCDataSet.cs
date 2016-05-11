@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace OTC
 {
-    public class OTCDataSet : System.Data.DataSet
+    public class OTCDataSet : DataSet
     {
         public OTCDataSet() { InitializeComponent(); }
 
-        public OTCDataSet(MySqlConnection conn)
+        public OTCDataSet(DatabaseManager dm)
         {
             InitializeComponent();
-            this.connection = conn;
+            this.dbManager = dm;
+            this.connection = dm.GetSQLConnection();
             GetData();
         }
 
@@ -23,10 +25,11 @@ namespace OTC
             InitializeComponent();
         }
 
-        public OTCDataSet(String name, MySqlConnection conn) : base(name)
+        public OTCDataSet(String name, DatabaseManager dm) : base(name)
         {
             InitializeComponent();
-            this.connection = conn;
+            this.dbManager = dm;
+            this.connection = dm.GetSQLConnection();
             GetData();
         }
 
@@ -228,10 +231,57 @@ namespace OTC
             }
         }
 
+        private void UpdateGreeks()
+        {
+           
+        }
+
+        public MySqlConnection CreateSQLConnection()
+        {
+            return dbManager.GetSQLConnection();
+        }
+
+
+        private DatabaseManager dbManager;
         MySqlConnection connection;
         Dictionary<String, MySqlDataAdapter> adapterDict;
         Dictionary<String, String> colNameDict;
-        String[] table_names;
-        String[] view_names;
+        string[] table_names;
+        string[] view_names;
+    }
+
+    public class PositionRiskInfo
+    {
+        public PositionRiskInfo()
+        {
+
+        }
+
+        public PositionRiskInfo(double S0, double K, double r, double T, double sigma, char type)
+        {
+            this.S0 = S0;
+            this.K = K;
+            this.r = r;
+            this.T = T;
+            this.sigma = sigma;
+            this.delta = OptionsCalculator.GetBlsDelta(S0, K, r, T, sigma, type);
+        }
+
+        public PositionRiskInfo(double S0, decimal size, DataRow contract_info)
+        {
+            K = double.Parse(contract_info["执行价"].ToString());
+            sigma = double.Parse(contract_info["波动率"].ToString());
+            DateTime date = DateTime.Parse(contract_info["到期日"].ToString());
+        }
+
+        double delta = 0;
+        double gamma = 0;
+        double theta = 0;
+        double vega = 0;
+        double S0 = 0;
+        double K = 0;
+        double r = 0;
+        double T = 0;
+        double sigma = 0;
     }
 }

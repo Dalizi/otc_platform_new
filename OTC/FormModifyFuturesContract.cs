@@ -37,6 +37,7 @@ namespace OTC
             decimal commision = 0;
             decimal margin = 0;
             decimal multiplier = 0;
+            decimal pre_settle = 0;
             if (String.IsNullOrEmpty(this.comboBoxFuturesContractCode.Text))
             {
                 MessageBox.Show("期货合约代码不能为空。", "错误");
@@ -57,13 +58,17 @@ namespace OTC
             {
                 MessageBox.Show("合约乘数格式错误。", "错误");
             }
+            else if (!decimal.TryParse(this.textBoxPreSettle.Text, out pre_settle))
+            {
+                MessageBox.Show("前结算价格式错误。", "错误");
+            }
             else
             {
                 DataRow row = table.Rows.Find(this.comboBoxFuturesContractCode.Text);
                 row[1] = this.comboBoxUnderlyingCode.Text.Split('-')[0];
                 row[2] = commision;
                 row[3] = margin;
-                row[4] = 0;
+                row[4] = pre_settle;
                 row[5] = multiplier;
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
