@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.Data;
 using MySql.Data.MySqlClient;
+using StackExchange.Redis;
 
 namespace OTC
 {
@@ -18,11 +19,17 @@ namespace OTC
         public void SetConnString(String s)
         {
             this.connString = s;
+            
         }
 
         public MySqlConnection GetSQLConnection()
         {
             return new MySqlConnection(DataProtection.DecryptString(connString));
+        }
+
+        public ConnectionMultiplexer GetRedisConnection()
+        {
+            return ConnectionMultiplexer.Connect("10.2.7.210:6379,password=Finders6");
         }
 
         private String connString { get; set; }

@@ -62,6 +62,30 @@ namespace OTC
 
         }
 
+        static public double GetBlsGamma(double S, double K, double T, double sigma, double r)
+        {
+            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+            return normDist.ProbabilityDensityFunction(D1(S, K, T, sigma, r))/(S*sigma*Math.Sqrt(T));
+        }
+
+        static public double GetBlsTheta(double S, double K, double T, double sigma, double r, char type)
+        {
+            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+            return -normDist.ProbabilityDensityFunction(D1(S, K, T, sigma, r))*S*sigma / (2 * Math.Sqrt(T))-r*K*Math.Exp(-r*T)*normDist.DistributionFunction(D2(S, K, T, sigma, r))*(type=='c'?1:-1);
+        }
+
+        static public double GetBlsVega(double S, double K, double T, double sigma, double r)
+        {
+            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+            return S * Math.Sqrt(T) * normDist.ProbabilityDensityFunction(D1(S, K, T, sigma, r));
+        }
+
+        static public double GetBlsRho(double S, double K, double T, double sigma, double r, char type)
+        {
+            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+            return type=='c'?K * T * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r)):-K*T*Math.Exp(-r* T)* normDist.DistributionFunction(-D2(S, K, T, sigma, r));
+        }
+
         private double D1(double S, double K, double T)
         {
             return (Ln(S / K) + ( sigma * sigma / 2)*T)/(sigma* Math.Sqrt(T));
