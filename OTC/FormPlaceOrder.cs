@@ -457,7 +457,7 @@ namespace OTC
                 else
                 {
                     DataRow rowBalance = this.dataset.Tables["futures_account_balance"].Rows.Find(account_no);
-
+                    decimal price = this.numericUpDownPrice.Value;
                     DataRow rowContract = this.dataset.Tables["futures_contracts"].Rows.Find(contract_code);
                     if (rowContract == null || rowBalance == null)
                     {
@@ -468,12 +468,12 @@ namespace OTC
                     decimal marginRate = Convert.ToDecimal(rowContract["保证金率"]);
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
-                    if (settlePrice == 0 || marginRate==0||multiplier==0)
+                    if (price == 0 || marginRate==0||multiplier==0)
                     {
                         this.numericUpDownQuantity.Maximum = 0;
                         return;
                     }
-                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (settlePrice* marginRate*multiplier+commission), MidpointRounding.AwayFromZero);
+                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price* marginRate*multiplier+commission), MidpointRounding.AwayFromZero);
                 }
             }
         }
@@ -547,6 +547,7 @@ namespace OTC
             String table_name = this.comboBoxOrderType.Text == "期货" ? "futures_contracts" : "options_contracts";
             DataRow row = this.dataset.Tables[table_name].Rows.Find(contractCode);
             commission = (decimal)(double)row["手续费"];
+            string commission_mode = row.Field<string>("手续费模式");
             multiplier = (int)row["合约乘数"];
             margin_rate = (decimal)(double)row["保证金率"];
             decimal pre_settle = this.comboBoxOrderType.Text == "期货" ? (decimal)(double)row["结算价"] : 0;
@@ -560,7 +561,7 @@ namespace OTC
             }
             else if (this.comboBoxOrderType.Text == "期货")
             {
-                this.textBoxValue.Text = (pre_settle * this.numericUpDownQuantity.Value * multiplier*margin_rate).ToString("N2");
+                this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value * multiplier*margin_rate).ToString("N2");
             }
         }
 

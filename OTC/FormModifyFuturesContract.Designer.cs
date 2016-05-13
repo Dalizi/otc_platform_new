@@ -235,7 +235,7 @@
             this.labelCommissionMode.Name = "labelCommissionMode";
             this.labelCommissionMode.Size = new System.Drawing.Size(77, 12);
             this.labelCommissionMode.TabIndex = 15;
-            this.labelCommissionMode.Text = "保证金模式：";
+            this.labelCommissionMode.Text = "手续费模式：";
             // 
             // radioButtonAbsCommission
             // 
