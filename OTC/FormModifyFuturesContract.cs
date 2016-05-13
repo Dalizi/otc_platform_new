@@ -17,6 +17,7 @@ namespace OTC
             InitializeComponent();
             this.dataset= ds;
             table = this.dataset.Tables["futures_contracts"];
+            this.radioButtonAbsCommission.Select();
             foreach (DataRow row in this.dataset.Tables["commodity_category"].Rows)
             {
                 this.comboBoxUnderlyingCode.Items.Add(row[0].ToString()+'-'+row[1].ToString());
