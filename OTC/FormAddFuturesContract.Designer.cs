@@ -31,6 +31,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.groupBoxAddFuturesContract = new System.Windows.Forms.GroupBox();
+            this.labelCommissionMode = new System.Windows.Forms.Label();
             this.textBoxMultiplier = new System.Windows.Forms.TextBox();
             this.labelMultiplier = new System.Windows.Forms.Label();
             this.textBoxMarginRate = new System.Windows.Forms.TextBox();
@@ -41,14 +42,18 @@
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonAbsCommission = new System.Windows.Forms.RadioButton();
+            this.radioButtonPctCommission = new System.Windows.Forms.RadioButton();
             this.groupBoxAddFuturesContract.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(237, 219);
+            this.buttonCancel.Location = new System.Drawing.Point(237, 247);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(80, 23);
             this.buttonCancel.TabIndex = 6;
@@ -59,7 +64,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(156, 219);
+            this.buttonOK.Location = new System.Drawing.Point(156, 247);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -69,9 +74,11 @@
             // 
             // groupBoxAddFuturesContract
             // 
-            this.groupBoxAddFuturesContract.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBoxAddFuturesContract.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAddFuturesContract.Controls.Add(this.panel1);
+            this.groupBoxAddFuturesContract.Controls.Add(this.labelCommissionMode);
             this.groupBoxAddFuturesContract.Controls.Add(this.textBoxMultiplier);
             this.groupBoxAddFuturesContract.Controls.Add(this.labelMultiplier);
             this.groupBoxAddFuturesContract.Controls.Add(this.textBoxMarginRate);
@@ -84,17 +91,26 @@
             this.groupBoxAddFuturesContract.Controls.Add(this.labelCommission);
             this.groupBoxAddFuturesContract.Location = new System.Drawing.Point(12, 12);
             this.groupBoxAddFuturesContract.Name = "groupBoxAddFuturesContract";
-            this.groupBoxAddFuturesContract.Size = new System.Drawing.Size(316, 186);
+            this.groupBoxAddFuturesContract.Size = new System.Drawing.Size(316, 193);
             this.groupBoxAddFuturesContract.TabIndex = 9;
             this.groupBoxAddFuturesContract.TabStop = false;
             this.groupBoxAddFuturesContract.Text = "客户信息";
             // 
+            // labelCommissionMode
+            // 
+            this.labelCommissionMode.AutoSize = true;
+            this.labelCommissionMode.Location = new System.Drawing.Point(19, 80);
+            this.labelCommissionMode.Name = "labelCommissionMode";
+            this.labelCommissionMode.Size = new System.Drawing.Size(77, 12);
+            this.labelCommissionMode.TabIndex = 11;
+            this.labelCommissionMode.Text = "手续费模式：";
+            // 
             // textBoxMultiplier
             // 
-            this.textBoxMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMultiplier.Location = new System.Drawing.Point(114, 151);
+            this.textBoxMultiplier.Location = new System.Drawing.Point(114, 166);
             this.textBoxMultiplier.Name = "textBoxMultiplier";
             this.textBoxMultiplier.Size = new System.Drawing.Size(191, 21);
             this.textBoxMultiplier.TabIndex = 4;
@@ -103,7 +119,7 @@
             // labelMultiplier
             // 
             this.labelMultiplier.AutoSize = true;
-            this.labelMultiplier.Location = new System.Drawing.Point(19, 154);
+            this.labelMultiplier.Location = new System.Drawing.Point(19, 169);
             this.labelMultiplier.Name = "labelMultiplier";
             this.labelMultiplier.Size = new System.Drawing.Size(65, 12);
             this.labelMultiplier.TabIndex = 10;
@@ -111,10 +127,10 @@
             // 
             // textBoxMarginRate
             // 
-            this.textBoxMarginRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxMarginRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMarginRate.Location = new System.Drawing.Point(114, 120);
+            this.textBoxMarginRate.Location = new System.Drawing.Point(114, 139);
             this.textBoxMarginRate.Name = "textBoxMarginRate";
             this.textBoxMarginRate.Size = new System.Drawing.Size(191, 21);
             this.textBoxMarginRate.TabIndex = 3;
@@ -123,7 +139,7 @@
             // labelMarginRate
             // 
             this.labelMarginRate.AutoSize = true;
-            this.labelMarginRate.Location = new System.Drawing.Point(19, 123);
+            this.labelMarginRate.Location = new System.Drawing.Point(19, 142);
             this.labelMarginRate.Name = "labelMarginRate";
             this.labelMarginRate.Size = new System.Drawing.Size(65, 12);
             this.labelMarginRate.TabIndex = 6;
@@ -140,19 +156,19 @@
             // 
             // comboBoxUnderlyingCode
             // 
-            this.comboBoxUnderlyingCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.comboBoxUnderlyingCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxUnderlyingCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxUnderlyingCode.Location = new System.Drawing.Point(114, 54);
+            this.comboBoxUnderlyingCode.Location = new System.Drawing.Point(114, 47);
             this.comboBoxUnderlyingCode.Name = "comboBoxUnderlyingCode";
             this.comboBoxUnderlyingCode.Size = new System.Drawing.Size(191, 20);
             this.comboBoxUnderlyingCode.TabIndex = 1;
             // 
             // textBoxFuturesContractCode
             // 
-            this.textBoxFuturesContractCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxFuturesContractCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFuturesContractCode.Location = new System.Drawing.Point(114, 20);
             this.textBoxFuturesContractCode.Name = "textBoxFuturesContractCode";
@@ -162,7 +178,7 @@
             // labelUnderlyingCode
             // 
             this.labelUnderlyingCode.AutoSize = true;
-            this.labelUnderlyingCode.Location = new System.Drawing.Point(19, 57);
+            this.labelUnderlyingCode.Location = new System.Drawing.Point(19, 50);
             this.labelUnderlyingCode.Name = "labelUnderlyingCode";
             this.labelUnderlyingCode.Size = new System.Drawing.Size(65, 12);
             this.labelUnderlyingCode.TabIndex = 2;
@@ -170,10 +186,10 @@
             // 
             // textBoxCommission
             // 
-            this.textBoxCommission.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxCommission.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCommission.Location = new System.Drawing.Point(114, 87);
+            this.textBoxCommission.Location = new System.Drawing.Point(114, 112);
             this.textBoxCommission.Name = "textBoxCommission";
             this.textBoxCommission.Size = new System.Drawing.Size(191, 21);
             this.textBoxCommission.TabIndex = 2;
@@ -182,17 +198,48 @@
             // labelCommission
             // 
             this.labelCommission.AutoSize = true;
-            this.labelCommission.Location = new System.Drawing.Point(19, 90);
+            this.labelCommission.Location = new System.Drawing.Point(19, 115);
             this.labelCommission.Name = "labelCommission";
             this.labelCommission.Size = new System.Drawing.Size(65, 12);
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonPctCommission);
+            this.panel1.Controls.Add(this.radioButtonAbsCommission);
+            this.panel1.Location = new System.Drawing.Point(114, 76);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(191, 30);
+            this.panel1.TabIndex = 12;
+            // 
+            // radioButtonAbsCommission
+            // 
+            this.radioButtonAbsCommission.AutoSize = true;
+            this.radioButtonAbsCommission.Location = new System.Drawing.Point(3, 2);
+            this.radioButtonAbsCommission.Name = "radioButtonAbsCommission";
+            this.radioButtonAbsCommission.Size = new System.Drawing.Size(59, 16);
+            this.radioButtonAbsCommission.TabIndex = 0;
+            this.radioButtonAbsCommission.TabStop = true;
+            this.radioButtonAbsCommission.Text = "固定值";
+            this.radioButtonAbsCommission.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonPctCommission
+            // 
+            this.radioButtonPctCommission.AutoSize = true;
+            this.radioButtonPctCommission.Location = new System.Drawing.Point(96, 2);
+            this.radioButtonPctCommission.Name = "radioButtonPctCommission";
+            this.radioButtonPctCommission.Size = new System.Drawing.Size(59, 16);
+            this.radioButtonPctCommission.TabIndex = 1;
+            this.radioButtonPctCommission.TabStop = true;
+            this.radioButtonPctCommission.Text = "相对值";
+            this.radioButtonPctCommission.UseVisualStyleBackColor = true;
+            // 
             // FormAddFuturesContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 267);
+            this.ClientSize = new System.Drawing.Size(340, 295);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBoxAddFuturesContract);
@@ -203,6 +250,8 @@
             this.Text = "添加期货合约";
             this.groupBoxAddFuturesContract.ResumeLayout(false);
             this.groupBoxAddFuturesContract.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -222,5 +271,9 @@
         private System.Windows.Forms.Label labelMultiplier;
         private System.Windows.Forms.TextBox textBoxMarginRate;
         private System.Windows.Forms.Label labelMarginRate;
+        private System.Windows.Forms.Label labelCommissionMode;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton radioButtonPctCommission;
+        private System.Windows.Forms.RadioButton radioButtonAbsCommission;
     }
 }

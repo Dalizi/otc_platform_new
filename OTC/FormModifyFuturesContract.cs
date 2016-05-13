@@ -66,10 +66,11 @@ namespace OTC
             {
                 DataRow row = table.Rows.Find(this.comboBoxFuturesContractCode.Text);
                 row[1] = this.comboBoxUnderlyingCode.Text.Split('-')[0];
-                row[2] = commision;
-                row[3] = margin;
-                row[4] = pre_settle;
-                row[5] = multiplier;
+                row[2] = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
+                row[3] = commision;
+                row[4] = margin;
+                row[5] = pre_settle;
+                row[6] = multiplier;
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
                 this.dataset.Update("futures_contracts_view");

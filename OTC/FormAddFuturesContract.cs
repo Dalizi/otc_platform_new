@@ -54,7 +54,8 @@ namespace OTC
             }
             else
             {
-                table.Rows.Add(this.textBoxFuturesContractCode.Text.ToUpper(), this.comboBoxUnderlyingCode.Text.Split('-')[1], commision, margin, 0, multiplier);
+                string commission_mode = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
+                table.Rows.Add(this.textBoxFuturesContractCode.Text.ToUpper(), this.comboBoxUnderlyingCode.Text.Split('-')[1], commission_mode, commision, margin, 0, multiplier);
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
                 this.dataset.Update("futures_contracts_view");
@@ -69,5 +70,7 @@ namespace OTC
         {
             this.Close();
         }
+
+
     }
 }

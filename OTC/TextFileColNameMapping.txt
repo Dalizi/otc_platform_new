@@ -47,3 +47,4 @@ holding_price=持仓价格
 underlying=标的
 volatility=波动率
 margin=保证金
+commission_mode=保证金模式
