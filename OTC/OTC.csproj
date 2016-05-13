@@ -290,6 +290,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="otc_split.mwb" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OTC.OTCDataSet.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
