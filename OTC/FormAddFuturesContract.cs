@@ -54,12 +54,22 @@ namespace OTC
             }
             else
             {
-                string commission_mode = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
-                table.Rows.Add(this.textBoxFuturesContractCode.Text.ToUpper(), this.comboBoxUnderlyingCode.Text.Split('-')[1], commission_mode, commision, margin, 0, multiplier);
-                this.dataset.Commit("futures_contracts");
-                this.dataset.Update("futures_contracts");
-                this.dataset.Update("futures_contracts_view");
-                this.Close();
+                DatabaseManager dm = new DatabaseManager();
+                var conn = dm.GetRedisConnection();
+                var db = conn.GetDatabase();
+                if (db.KeyExists(this.textBoxFuturesContractCode.Text))
+                {
+                    string commission_mode = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
+                    table.Rows.Add(this.textBoxFuturesContractCode.Text, this.comboBoxUnderlyingCode.Text.Split('-')[1], commission_mode, commision, margin, 0, multiplier);
+                    this.dataset.Commit("futures_contracts");
+                    this.dataset.Update("futures_contracts");
+                    this.dataset.Update("futures_contracts_view");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("期货合约不存在。", "错误");
+                }
             }
         }
 
