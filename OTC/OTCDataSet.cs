@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using StackExchange.Redis;
 using System.Data;
 
 namespace OTC
@@ -12,11 +13,11 @@ namespace OTC
     {
         public OTCDataSet() { InitializeComponent(); }
 
-        public OTCDataSet(DatabaseManager dm)
+        public OTCDataSet(DatabaseManager dm): this()
         {
-            InitializeComponent();
             this.dbManager = dm;
-            this.connection = dm.GetSQLConnection();
+            this.sql_connection = dm.GetSQLConnection();
+            this.redis_connection = dm.GetRedisConnection();
             GetData();
         }
 
@@ -25,19 +26,16 @@ namespace OTC
             InitializeComponent();
         }
 
-        public OTCDataSet(String name, DatabaseManager dm) : base(name)
+        public OTCDataSet(String name, DatabaseManager dm) : this(dm)
         {
-            InitializeComponent();
-            this.dbManager = dm;
-            this.connection = dm.GetSQLConnection();
-            GetData();
+            base.DataSetName = name;
         }
 
         private void InitializeComponent()
         {
 
             this.colNameDict = new Dictionary<string, string>();
-            this.connection = new MySqlConnection();
+            this.sql_connection = new MySqlConnection();
             this.adapterDict = new Dictionary<string, MySqlDataAdapter>();
             GetColNameMapping();
 
@@ -57,6 +55,7 @@ namespace OTC
 
         private void GetData()
         {
+            holidays = new List<DateTime> (){ new DateTime(2016, 6, 9), new DateTime(2016, 6, 10)};
             table_names = new String[] {
                 "client_balance",
                 "client_cashflow",
@@ -101,7 +100,7 @@ namespace OTC
             foreach (String t in table_names)
             {
                 selectString = String.Format("select * from {0};", t);
-                MySqlCommand command = new MySqlCommand(selectString, this.connection);
+                MySqlCommand command = new MySqlCommand(selectString, this.sql_connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
                 adapter.SelectCommand = command;
@@ -116,7 +115,7 @@ namespace OTC
             foreach (String t in view_names)
             {
                 selectString = String.Format("select * from {0};", t);
-                MySqlCommand command = new MySqlCommand(selectString, this.connection);
+                MySqlCommand command = new MySqlCommand(selectString, this.sql_connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
                 adapter.SelectCommand = command;
@@ -179,6 +178,41 @@ namespace OTC
                         col.ColumnName = mappedName;
                 }
             }
+
+            this.Tables.Add("risk_info");
+            using (DataTable table = this.Tables["risk_info"])
+            {
+                table.Columns.Add("客户编号", Type.GetType("System.UInt32"));
+                table.Columns.Add("合约代码", Type.GetType("System.String"));
+                table.Columns.Add("标的代码", Type.GetType("System.String"));
+                table.Columns.Add("买卖方向", Type.GetType("System.String"));
+                table.Columns.Add("标的现价", Type.GetType("System.Decimal"));
+                table.Columns.Add("数量", Type.GetType("System.Double"));
+                table.Columns.Add("到期天数", Type.GetType("System.UInt32"));
+                table.Columns.Add("波动率", Type.GetType("System.Double"));
+                table.Columns.Add("Delta", Type.GetType("System.Double"));
+                table.Columns.Add("Gamma", Type.GetType("System.Double"));
+                table.Columns.Add("Theta", Type.GetType("System.Double"));
+                table.Columns.Add("Vega", Type.GetType("System.Double"));
+                table.Columns.Add("Rho", Type.GetType("System.Double"));
+                table.PrimaryKey = new DataColumn[] { table.Columns["合约代码"],table.Columns["客户编号"],table.Columns["买卖方向"] };
+
+            }
+
+            this.Tables.Add("risk_info_gross");
+            using (DataTable table = this.Tables["risk_info_gross"])
+            {
+                table.Columns.Add("标的代码", Type.GetType("System.String"));
+                table.Columns.Add("标的现价", Type.GetType("System.Decimal"));
+                table.Columns.Add("Delta", Type.GetType("System.Double"));
+                table.Columns.Add("Gamma", Type.GetType("System.Double"));
+                table.Columns.Add("Theta", Type.GetType("System.Double"));
+                table.Columns.Add("Vega", Type.GetType("System.Double"));
+                table.Columns.Add("Rho", Type.GetType("System.Double"));
+                table.PrimaryKey = new DataColumn[] { table.Columns["标的代码"] };
+
+            }
+            UpdateGreeks();
         }
 
         //private void AddAdapter(String sqlCommand, String table_name)
@@ -229,11 +263,116 @@ namespace OTC
             {
                 Update(table_name);
             }
+            UpdateGreeks();
         }
 
         private void UpdateGreeks()
         {
-           
+            var db = this.redis_connection.GetDatabase();
+            DataTable table = Tables["risk_info"];
+            foreach (var row in Tables["options_positions_summary"].AsEnumerable())
+            {
+                String contract_code = row["合约代码"].ToString();
+                int client_id = int.Parse(row["客户编号"].ToString());
+                string position_direction = row["买卖方向"].ToString();
+                double quantity = double.Parse(row["数量"].ToString());
+                DataRow contract_row = Tables["options_contracts"].Rows.Find(contract_code);
+                String underlying = contract_row["标的代码"].ToString();
+                double S0 = double.Parse(db.HashGet(underlying, "LastPrice"));
+                double K = double.Parse(contract_row["执行价"].ToString());
+                double sigma = double.Parse(contract_row["波动率"].ToString());
+                DateTime date = DateTime.Parse(contract_row["到期日"].ToString());
+                double dtm = (date - DateTime.Today).TotalDays;
+                if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
+                {
+                    dtm += 1;
+                }
+                DateTime d = DateTime.Today;
+                int n_weekends = 0;
+                while (d <= date)
+                {
+                    if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(d))
+                    {
+                        n_weekends += 1;
+                    }
+                    d = d.AddDays(1);
+                }
+                dtm = dtm - n_weekends;
+                dtm = dtm > 0 ? dtm : 0;
+                char type = char.Parse(contract_row["认购认沽"].ToString());
+                double rate = 0.015;
+                int direction_multiplier = position_direction == "买入" ? -1 : 1;
+                double delta = OptionsCalculator.GetBlsDelta(S0, K, dtm/256d, sigma, rate, type) * quantity * direction_multiplier;
+                double gamma = OptionsCalculator.GetBlsGamma(S0, K, dtm / 256d, sigma, rate) * quantity * direction_multiplier;
+                double theta = OptionsCalculator.GetBlsTheta(S0, K, dtm / 256d, sigma, rate, type) * quantity/256 * direction_multiplier;
+                double vega = OptionsCalculator.GetBlsVega(S0, K, dtm / 256d, sigma, rate) * quantity / 100 * direction_multiplier;
+                double rho = OptionsCalculator.GetBlsRho(S0, K, dtm / 256d, sigma, rate, type) * quantity / 100 * direction_multiplier;
+                if (table.Rows.Contains(new object[] {contract_code, client_id, position_direction }))
+                {
+                    DataRow row_risk = table.Rows.Find(new object[] { contract_code, client_id, position_direction });
+                    row_risk["数量"] = quantity;
+                    row_risk["波动率"] = sigma;
+                    row_risk["标的现价"] = S0;
+                    row_risk["到期天数"] = dtm;
+                    row_risk["Delta"] = delta;
+                    row_risk["Gamma"] = gamma;
+                    row_risk["Theta"] = theta;
+                    row_risk["Vega"] = vega;
+                    row_risk["Rho"] = rho;
+                }
+                else
+                {
+                    table.Rows.Add(client_id, contract_code, underlying, position_direction, S0, quantity, dtm, sigma, delta, gamma, theta, vega, rho);
+                }
+               
+            }
+            foreach (var row in table.AsEnumerable())
+            {
+                if (!Tables["options_positions_summary"].Rows.Contains(new object[] {row["客户编号"], row["合约代码"], row["买卖方向"] }))
+                {
+                    table.Rows.Remove(row);
+                }
+            }
+            var risk_info_gross = from row in table.AsEnumerable()
+                                  group row by row.Field<String>("标的代码")
+                                  into grp
+                                  select
+                                  new
+                                  {
+                                      code = grp.Key,
+                                      price = grp.First().Field<decimal>("标的现价"),
+                                      Delta = grp.Sum(r => r.Field<double>("Delta")),
+                                      Gamma = grp.Sum(r => r.Field<double>("Gamma")),
+                                      Theta = grp.Sum(r => r.Field<double>("Theta")),
+                                      Vega = grp.Sum(r => r.Field<double>("Vega")),
+                                      Rho = grp.Sum(r => r.Field<double>("Rho")),
+                                  };
+            List<String> contracts = new List<string>();
+            foreach (var a in risk_info_gross)
+            {
+                contracts.Add(a.code);
+                if(!Tables["risk_info_gross"].Rows.Contains(a.code))
+                {
+                    Tables["risk_info_gross"].Rows.Add(a.code, a.price, a.Delta, a.Gamma, a.Theta, a.Vega, a.Rho);
+                }
+                else
+                {
+                    var row = Tables["risk_info_gross"].Rows.Find(a.code);
+                    row["标的现价"] = a.price;
+                    row["Delta"] = a.Delta;
+                    row["Gamma"] = a.Gamma;
+                    row["Theta"] = a.Theta;
+                    row["Vega"] = a.Vega;
+                    row["Rho"] = a.Rho;
+                }
+            }
+            foreach (var row in Tables["risk_info_gross"].AsEnumerable())
+            {
+                if (!contracts.Contains(row.Field<string>("标的代码")))
+                {
+                    Tables["risk_info_gross"].Rows.Remove(row);
+                }
+            }
         }
 
         public MySqlConnection CreateSQLConnection()
@@ -242,46 +381,13 @@ namespace OTC
         }
 
 
-        private DatabaseManager dbManager;
-        MySqlConnection connection;
+        DatabaseManager dbManager;
+        MySqlConnection sql_connection;
+        ConnectionMultiplexer redis_connection;
         Dictionary<String, MySqlDataAdapter> adapterDict;
         Dictionary<String, String> colNameDict;
         string[] table_names;
         string[] view_names;
-    }
-
-    public class PositionRiskInfo
-    {
-        public PositionRiskInfo()
-        {
-
-        }
-
-        public PositionRiskInfo(double S0, double K, double r, double T, double sigma, char type)
-        {
-            this.S0 = S0;
-            this.K = K;
-            this.r = r;
-            this.T = T;
-            this.sigma = sigma;
-            this.delta = OptionsCalculator.GetBlsDelta(S0, K, r, T, sigma, type);
-        }
-
-        public PositionRiskInfo(double S0, decimal size, DataRow contract_info)
-        {
-            K = double.Parse(contract_info["执行价"].ToString());
-            sigma = double.Parse(contract_info["波动率"].ToString());
-            DateTime date = DateTime.Parse(contract_info["到期日"].ToString());
-        }
-
-        double delta = 0;
-        double gamma = 0;
-        double theta = 0;
-        double vega = 0;
-        double S0 = 0;
-        double K = 0;
-        double r = 0;
-        double T = 0;
-        double sigma = 0;
+        List<DateTime> holidays;
     }
 }

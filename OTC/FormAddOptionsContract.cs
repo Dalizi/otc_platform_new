@@ -124,7 +124,7 @@ namespace OTC
                 MessageBox.Show("合约乘数格式错误。", "错误");
             }
             contract_code += '-';
-            contract_code += Math.Round(Math.Round(strike) * multiplier).ToString().PadLeft(6,'0');
+            contract_code += Math.Round(strike * multiplier).ToString().PadLeft(6,'0');
             contract_code = contract_code.ToUpper();
             this.textBoxOptionsContractCode.Text = contract_code;
         }

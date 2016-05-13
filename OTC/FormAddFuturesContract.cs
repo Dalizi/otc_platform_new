@@ -54,7 +54,7 @@ namespace OTC
             }
             else
             {
-                table.Rows.Add(this.textBoxFuturesContractCode.Text, this.comboBoxUnderlyingCode.Text.Split('-')[1], commision, margin, 0, multiplier);
+                table.Rows.Add(this.textBoxFuturesContractCode.Text.ToUpper(), this.comboBoxUnderlyingCode.Text.Split('-')[1], commision, margin, 0, multiplier);
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
                 this.dataset.Update("futures_contracts_view");

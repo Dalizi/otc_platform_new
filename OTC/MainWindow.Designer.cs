@@ -128,11 +128,20 @@
             this.buttonAddCommodity = new System.Windows.Forms.Button();
             this.buttonRemoveCommodity = new System.Windows.Forms.Button();
             this.buttonModifyCommodity = new System.Windows.Forms.Button();
+            this.tabPageRiskMonitor = new System.Windows.Forms.TabPage();
+            this.splitContainerRiskInfo = new System.Windows.Forms.SplitContainer();
+            this.groupBoxRiskSummary = new System.Windows.Forms.GroupBox();
+            this.dataGridViewRiskGross = new System.Windows.Forms.DataGridView();
+            this.groupBoxRiskDetail = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelDetailedRiskInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewRiskInfoDetailed = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelChooseClassify = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuTradingParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonTradingDatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPageRiskMonitor = new System.Windows.Forms.TabPage();
             this.tabControlMainWindow.SuspendLayout();
             this.tabPageBalance.SuspendLayout();
             this.tableLayoutPanelBalance.SuspendLayout();
@@ -183,6 +192,17 @@
             this.groupBoxCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommodity)).BeginInit();
             this.tableLayoutPanel14.SuspendLayout();
+            this.tabPageRiskMonitor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerRiskInfo)).BeginInit();
+            this.splitContainerRiskInfo.Panel1.SuspendLayout();
+            this.splitContainerRiskInfo.Panel2.SuspendLayout();
+            this.splitContainerRiskInfo.SuspendLayout();
+            this.groupBoxRiskSummary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRiskGross)).BeginInit();
+            this.groupBoxRiskDetail.SuspendLayout();
+            this.tableLayoutPanelDetailedRiskInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRiskInfoDetailed)).BeginInit();
+            this.tableLayoutPanel8.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1389,6 +1409,136 @@
             this.buttonModifyCommodity.UseVisualStyleBackColor = true;
             this.buttonModifyCommodity.Click += new System.EventHandler(this.buttonModifyCommodity_Click);
             // 
+            // tabPageRiskMonitor
+            // 
+            this.tabPageRiskMonitor.Controls.Add(this.splitContainerRiskInfo);
+            this.tabPageRiskMonitor.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRiskMonitor.Name = "tabPageRiskMonitor";
+            this.tabPageRiskMonitor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageRiskMonitor.Size = new System.Drawing.Size(1190, 570);
+            this.tabPageRiskMonitor.TabIndex = 7;
+            this.tabPageRiskMonitor.Text = "风险监控";
+            this.tabPageRiskMonitor.UseVisualStyleBackColor = true;
+            // 
+            // splitContainerRiskInfo
+            // 
+            this.splitContainerRiskInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerRiskInfo.Location = new System.Drawing.Point(3, 3);
+            this.splitContainerRiskInfo.Name = "splitContainerRiskInfo";
+            this.splitContainerRiskInfo.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerRiskInfo.Panel1
+            // 
+            this.splitContainerRiskInfo.Panel1.Controls.Add(this.groupBoxRiskSummary);
+            // 
+            // splitContainerRiskInfo.Panel2
+            // 
+            this.splitContainerRiskInfo.Panel2.Controls.Add(this.groupBoxRiskDetail);
+            this.splitContainerRiskInfo.Size = new System.Drawing.Size(1184, 564);
+            this.splitContainerRiskInfo.SplitterDistance = 279;
+            this.splitContainerRiskInfo.TabIndex = 2;
+            // 
+            // groupBoxRiskSummary
+            // 
+            this.groupBoxRiskSummary.Controls.Add(this.dataGridViewRiskGross);
+            this.groupBoxRiskSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxRiskSummary.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxRiskSummary.Name = "groupBoxRiskSummary";
+            this.groupBoxRiskSummary.Size = new System.Drawing.Size(1184, 279);
+            this.groupBoxRiskSummary.TabIndex = 0;
+            this.groupBoxRiskSummary.TabStop = false;
+            this.groupBoxRiskSummary.Text = "总风险监控";
+            // 
+            // dataGridViewRiskGross
+            // 
+            this.dataGridViewRiskGross.AllowUserToAddRows = false;
+            this.dataGridViewRiskGross.AllowUserToDeleteRows = false;
+            this.dataGridViewRiskGross.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewRiskGross.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRiskGross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewRiskGross.Location = new System.Drawing.Point(3, 17);
+            this.dataGridViewRiskGross.Name = "dataGridViewRiskGross";
+            this.dataGridViewRiskGross.ReadOnly = true;
+            this.dataGridViewRiskGross.RowTemplate.Height = 23;
+            this.dataGridViewRiskGross.Size = new System.Drawing.Size(1178, 259);
+            this.dataGridViewRiskGross.TabIndex = 1;
+            // 
+            // groupBoxRiskDetail
+            // 
+            this.groupBoxRiskDetail.Controls.Add(this.tableLayoutPanelDetailedRiskInfo);
+            this.groupBoxRiskDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxRiskDetail.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxRiskDetail.Name = "groupBoxRiskDetail";
+            this.groupBoxRiskDetail.Size = new System.Drawing.Size(1184, 281);
+            this.groupBoxRiskDetail.TabIndex = 1;
+            this.groupBoxRiskDetail.TabStop = false;
+            this.groupBoxRiskDetail.Text = "分类风险监控";
+            // 
+            // tableLayoutPanelDetailedRiskInfo
+            // 
+            this.tableLayoutPanelDetailedRiskInfo.ColumnCount = 1;
+            this.tableLayoutPanelDetailedRiskInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelDetailedRiskInfo.Controls.Add(this.dataGridViewRiskInfoDetailed, 0, 1);
+            this.tableLayoutPanelDetailedRiskInfo.Controls.Add(this.tableLayoutPanel8, 0, 0);
+            this.tableLayoutPanelDetailedRiskInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelDetailedRiskInfo.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanelDetailedRiskInfo.Name = "tableLayoutPanelDetailedRiskInfo";
+            this.tableLayoutPanelDetailedRiskInfo.RowCount = 2;
+            this.tableLayoutPanelDetailedRiskInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanelDetailedRiskInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelDetailedRiskInfo.Size = new System.Drawing.Size(1178, 261);
+            this.tableLayoutPanelDetailedRiskInfo.TabIndex = 0;
+            // 
+            // dataGridViewRiskInfoDetailed
+            // 
+            this.dataGridViewRiskInfoDetailed.AllowUserToAddRows = false;
+            this.dataGridViewRiskInfoDetailed.AllowUserToDeleteRows = false;
+            this.dataGridViewRiskInfoDetailed.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewRiskInfoDetailed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRiskInfoDetailed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewRiskInfoDetailed.Location = new System.Drawing.Point(3, 33);
+            this.dataGridViewRiskInfoDetailed.Name = "dataGridViewRiskInfoDetailed";
+            this.dataGridViewRiskInfoDetailed.ReadOnly = true;
+            this.dataGridViewRiskInfoDetailed.RowTemplate.Height = 23;
+            this.dataGridViewRiskInfoDetailed.Size = new System.Drawing.Size(1172, 225);
+            this.dataGridViewRiskInfoDetailed.TabIndex = 0;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 3;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.labelChooseClassify, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.comboBox1, 1, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1172, 24);
+            this.tableLayoutPanel8.TabIndex = 1;
+            // 
+            // labelChooseClassify
+            // 
+            this.labelChooseClassify.AutoSize = true;
+            this.labelChooseClassify.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelChooseClassify.Location = new System.Drawing.Point(3, 0);
+            this.labelChooseClassify.Name = "labelChooseClassify";
+            this.labelChooseClassify.Size = new System.Drawing.Size(94, 24);
+            this.labelChooseClassify.TabIndex = 0;
+            this.labelChooseClassify.Text = "选择分类方式：";
+            this.labelChooseClassify.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(103, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(94, 20);
+            this.comboBox1.TabIndex = 1;
+            // 
             // timerUpdate
             // 
             this.timerUpdate.Interval = 5000;
@@ -1418,16 +1568,6 @@
             this.buttonTradingDatesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.buttonTradingDatesToolStripMenuItem.Text = "交易日设定";
             this.buttonTradingDatesToolStripMenuItem.Click += new System.EventHandler(this.buttonTradingDatesToolStripMenuItem_Click);
-            // 
-            // tabPageRiskMonitor
-            // 
-            this.tabPageRiskMonitor.Location = new System.Drawing.Point(4, 22);
-            this.tabPageRiskMonitor.Name = "tabPageRiskMonitor";
-            this.tabPageRiskMonitor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRiskMonitor.Size = new System.Drawing.Size(1190, 570);
-            this.tabPageRiskMonitor.TabIndex = 7;
-            this.tabPageRiskMonitor.Text = "风险监控";
-            this.tabPageRiskMonitor.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -1490,6 +1630,18 @@
             this.groupBoxCommodity.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommodity)).EndInit();
             this.tableLayoutPanel14.ResumeLayout(false);
+            this.tabPageRiskMonitor.ResumeLayout(false);
+            this.splitContainerRiskInfo.Panel1.ResumeLayout(false);
+            this.splitContainerRiskInfo.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerRiskInfo)).EndInit();
+            this.splitContainerRiskInfo.ResumeLayout(false);
+            this.groupBoxRiskSummary.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRiskGross)).EndInit();
+            this.groupBoxRiskDetail.ResumeLayout(false);
+            this.tableLayoutPanelDetailedRiskInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRiskInfoDetailed)).EndInit();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1576,5 +1728,14 @@
         private System.Windows.Forms.ToolStripMenuItem menuTradingParamsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buttonTradingDatesToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPageRiskMonitor;
+        private System.Windows.Forms.DataGridView dataGridViewRiskInfoDetailed;
+        private System.Windows.Forms.SplitContainer splitContainerRiskInfo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelDetailedRiskInfo;
+        private System.Windows.Forms.GroupBox groupBoxRiskSummary;
+        private System.Windows.Forms.DataGridView dataGridViewRiskGross;
+        private System.Windows.Forms.GroupBox groupBoxRiskDetail;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Label labelChooseClassify;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

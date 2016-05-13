@@ -204,6 +204,9 @@ namespace OTC
                             null);
                     }
                     this.dataset.Commit("options_transactions");
+                    this.dataset.Tables["options_positions_summary"].Clear();
+                    this.dataset.Tables["options_verbose_positions_view"].Clear();
+                    this.dataset.Tables["risk_info"].Clear();
                     this.dataset.Update();
                     this.Close();
                 }
@@ -320,7 +323,7 @@ namespace OTC
                 else
                 {
                     this.textBoxClientName.Text = this.dataset.Tables["client_info"].Rows.Find(client_id)["客户名称"].ToString();
-                    this.textBoxBalance.Text = ((double)this.dataset.Tables["client_balance"].Rows.Find(client_id)["余额"]).ToString("N2");
+                    this.textBoxBalance.Text = (this.dataset.Tables["client_balance"].Rows.Find(client_id).Field<double>("余额")).ToString("N2");
 
                 }
                 SetCloseTargetIDs(sender, e);

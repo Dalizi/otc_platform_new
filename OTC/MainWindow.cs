@@ -74,6 +74,12 @@ namespace OTC
 
             this.dataGridViewFuturesPositionsSum.DataSource = this.dataset;
             this.dataGridViewFuturesPositionsSum.DataMember = "futures_positions_summary";
+
+            this.dataGridViewRiskInfoDetailed.DataSource = this.dataset;
+            this.dataGridViewRiskInfoDetailed.DataMember = "risk_info";
+
+            this.dataGridViewRiskGross.DataSource = this.dataset;
+            this.dataGridViewRiskGross.DataMember = "risk_info_gross";
         }
 
         private void FormatTable()
@@ -138,6 +144,24 @@ namespace OTC
             
             this.dataGridViewFuturesContract.Columns["手续费"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesContract.Columns["结算价"].DefaultCellStyle.Format = "N2";
+
+            this.dataGridViewRiskInfoDetailed.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
+            this.dataGridViewRiskInfoDetailed.Columns["合约代码"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewRiskInfoDetailed.Columns["标的现价"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewRiskInfoDetailed.Columns["波动率"].DefaultCellStyle.Format = "00.00%";
+            this.dataGridViewRiskInfoDetailed.Columns["Delta"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskInfoDetailed.Columns["Gamma"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskInfoDetailed.Columns["Theta"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskInfoDetailed.Columns["Vega"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskInfoDetailed.Columns["Rho"].DefaultCellStyle.Format = "N4";
+
+            this.dataGridViewRiskGross.Columns["标的代码"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewRiskGross.Columns["标的现价"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewRiskGross.Columns["Delta"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskGross.Columns["Gamma"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskGross.Columns["Theta"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskGross.Columns["Vega"].DefaultCellStyle.Format = "N4";
+            this.dataGridViewRiskGross.Columns["Rho"].DefaultCellStyle.Format = "N4";
         }
 
         private void LinkEventsHandlers()
