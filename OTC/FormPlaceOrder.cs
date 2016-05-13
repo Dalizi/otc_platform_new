@@ -206,6 +206,8 @@ namespace OTC
                     this.dataset.Commit("options_transactions");
                     this.dataset.Tables["options_positions_summary"].Clear();
                     this.dataset.Tables["options_verbose_positions_view"].Clear();
+                    this.dataset.Tables["futures_positions_summary"].Clear();
+                    this.dataset.Tables["futures_verbose_positions_view"].Clear();
                     this.dataset.Tables["risk_info"].Clear();
                     this.dataset.Update();
                     this.Close();
