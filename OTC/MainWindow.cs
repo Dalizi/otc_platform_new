@@ -211,8 +211,8 @@ namespace OTC
 
         private void buttonModifyClient_Click(object sender, EventArgs e)
         {
-            string selected_client = ((uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value).ToString("00000000");
-            FormModifyClient fmc = new FormModifyClient(this.dataset, selected_client);
+            uint client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
+            FormModifyClient fmc = new FormModifyClient(this.dataset, client_id);
             fmc.ShowDialog();
         }
 

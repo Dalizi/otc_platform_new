@@ -12,7 +12,7 @@ namespace OTC
 {
     public partial class FormModifyClient : Form
     {
-        public FormModifyClient(OTCDataSet ds, string client_id)
+        public FormModifyClient(OTCDataSet ds, uint client_id)
         {
             InitializeComponent();
             this.dataset = ds;
@@ -27,7 +27,7 @@ namespace OTC
             }
             if (this.comboBoxClientID.Items.Count > 0)
             {
-                this.comboBoxClientID.SelectedIndex = this.comboBoxClientID.FindStringExact(client_id);
+                this.comboBoxClientID.SelectedIndex = this.comboBoxClientID.FindStringExact(client_id.ToString("00000000"));
             }
         }
         private void buttonOK_Click(object sender, EventArgs e)
