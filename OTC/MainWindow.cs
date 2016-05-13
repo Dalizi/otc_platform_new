@@ -218,7 +218,8 @@ namespace OTC
 
         private void buttonClientCashflow_Click(object sender, EventArgs e)
         {
-            FormClientCashFlow fccf = new FormClientCashFlow(this.dataset);
+            uint client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
+            FormClientCashFlow fccf = new FormClientCashFlow(this.dataset, client_id);
             fccf.ShowDialog();
         }
 

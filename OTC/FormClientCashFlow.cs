@@ -12,7 +12,7 @@ namespace OTC
 {
     public partial class FormClientCashFlow : Form
     {
-        public FormClientCashFlow(OTCDataSet ds)
+        public FormClientCashFlow(OTCDataSet ds, uint client_id)
         {
             InitializeComponent();
             this.dataset = ds;
@@ -20,11 +20,11 @@ namespace OTC
             this.comboBoxCashFlowType.SelectedIndex = 0;
             foreach (DataRow row in this.dataset.Tables["client_info"].Rows)
             {
-                this.comboBoxClientInfo.Items.Add(row["客户编号"].ToString() + '-' + row["客户名称"].ToString());
+                this.comboBoxClientInfo.Items.Add(row.Field<uint>("客户编号").ToString("00000000") + '-' + row["客户名称"].ToString());
             }
             if (this.comboBoxClientInfo.Items.Count > 0)
             {
-                this.comboBoxClientInfo.SelectedIndex = 0;
+                this.comboBoxClientInfo.SelectedIndex = this.comboBoxClientInfo.FindString(client_id.ToString("00000000"));
             }
             
         }
