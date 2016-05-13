@@ -12,7 +12,7 @@ namespace OTC
 {
     public partial class FormModifyClient : Form
     {
-        public FormModifyClient(OTCDataSet ds)
+        public FormModifyClient(OTCDataSet ds, string client_id)
         {
             InitializeComponent();
             this.dataset = ds;
@@ -23,11 +23,11 @@ namespace OTC
             }
             foreach (DataRow row in table.Rows)
             {
-                this.comboBoxClientID.Items.Add(row["客户编号"]);
+                this.comboBoxClientID.Items.Add(row.Field<uint>("客户编号").ToString("00000000"));
             }
             if (this.comboBoxClientID.Items.Count > 0)
             {
-                this.comboBoxClientID.SelectedIndex = 0;
+                this.comboBoxClientID.SelectedIndex = this.comboBoxClientID.FindStringExact(client_id);
             }
         }
         private void buttonOK_Click(object sender, EventArgs e)
