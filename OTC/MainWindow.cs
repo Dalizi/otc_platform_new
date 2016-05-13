@@ -249,8 +249,9 @@ namespace OTC
 
         private void buttonFuturesCashflow_Click(object sender, EventArgs e)
         {
-            FormFuturesAccountCashflow ffacf = new FormFuturesAccountCashflow(this.dataset);
-            ffacf.Show();
+            uint futures_account_no = (uint)this.dataGridViewFuturesBlance.CurrentRow.Cells["期货账号"].Value;
+            FormFuturesAccountCashflow form = new FormFuturesAccountCashflow(this.dataset, futures_account_no);
+            form.Show();
         }
 
         //商品种类表

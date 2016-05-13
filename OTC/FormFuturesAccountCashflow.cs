@@ -12,7 +12,7 @@ namespace OTC
 {
     public partial class FormFuturesAccountCashflow : Form
     {
-        public FormFuturesAccountCashflow(OTCDataSet ds)
+        public FormFuturesAccountCashflow(OTCDataSet ds, uint future_account_no)
         {
             InitializeComponent();
             this.dataset = ds;
@@ -24,7 +24,7 @@ namespace OTC
             }
             if (this.comboBoxFuturesAccount.Items.Count>0)
             {
-                this.comboBoxFuturesAccount.SelectedIndex = 0;
+                this.comboBoxFuturesAccount.SelectedIndex = this.comboBoxFuturesAccount.FindString(future_account_no.ToString("00000000"));
             }
         }
 
