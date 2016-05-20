@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelEntityInfo = new System.Windows.Forms.Label();
             this.comboBoxEntityCode = new System.Windows.Forms.ComboBox();
             this.groupBoxMainInfo = new System.Windows.Forms.GroupBox();
+            this.textBoxBalance = new System.Windows.Forms.TextBox();
+            this.labelBalance = new System.Windows.Forms.Label();
             this.comboBoxTargetID = new System.Windows.Forms.ComboBox();
             this.labelTargetID = new System.Windows.Forms.Label();
             this.textBoxClientName = new System.Windows.Forms.TextBox();
             this.labelClientName = new System.Windows.Forms.Label();
             this.groupBoxContractInfo = new System.Windows.Forms.GroupBox();
+            this.textBoxValue = new System.Windows.Forms.TextBox();
+            this.labelValue = new System.Windows.Forms.Label();
             this.numericUpDownPrice = new System.Windows.Forms.NumericUpDown();
             this.buttonMaxQuantity = new System.Windows.Forms.Button();
             this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
@@ -51,10 +56,9 @@
             this.comboBoxOrderType = new System.Windows.Forms.ComboBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.labelBalance = new System.Windows.Forms.Label();
-            this.textBoxBalance = new System.Windows.Forms.TextBox();
-            this.labelValue = new System.Windows.Forms.Label();
-            this.textBoxValue = new System.Windows.Forms.TextBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.textBoxUnderlyingPrice = new System.Windows.Forms.TextBox();
+            this.labelUnderlyingPrice = new System.Windows.Forms.Label();
             this.groupBoxMainInfo.SuspendLayout();
             this.groupBoxContractInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
@@ -97,10 +101,28 @@
             this.groupBoxMainInfo.Controls.Add(this.comboBoxEntityCode);
             this.groupBoxMainInfo.Location = new System.Drawing.Point(12, 40);
             this.groupBoxMainInfo.Name = "groupBoxMainInfo";
-            this.groupBoxMainInfo.Size = new System.Drawing.Size(250, 192);
+            this.groupBoxMainInfo.Size = new System.Drawing.Size(250, 219);
             this.groupBoxMainInfo.TabIndex = 2;
             this.groupBoxMainInfo.TabStop = false;
             this.groupBoxMainInfo.Text = "账号信息";
+            // 
+            // textBoxBalance
+            // 
+            this.textBoxBalance.Location = new System.Drawing.Point(77, 107);
+            this.textBoxBalance.Name = "textBoxBalance";
+            this.textBoxBalance.ReadOnly = true;
+            this.textBoxBalance.Size = new System.Drawing.Size(155, 21);
+            this.textBoxBalance.TabIndex = 8;
+            this.textBoxBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelBalance
+            // 
+            this.labelBalance.AutoSize = true;
+            this.labelBalance.Location = new System.Drawing.Point(6, 111);
+            this.labelBalance.Name = "labelBalance";
+            this.labelBalance.Size = new System.Drawing.Size(65, 12);
+            this.labelBalance.TabIndex = 7;
+            this.labelBalance.Text = "资金余额：";
             // 
             // comboBoxTargetID
             // 
@@ -143,6 +165,8 @@
             // 
             this.groupBoxContractInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContractInfo.Controls.Add(this.textBoxUnderlyingPrice);
+            this.groupBoxContractInfo.Controls.Add(this.labelUnderlyingPrice);
             this.groupBoxContractInfo.Controls.Add(this.textBoxValue);
             this.groupBoxContractInfo.Controls.Add(this.labelValue);
             this.groupBoxContractInfo.Controls.Add(this.numericUpDownPrice);
@@ -158,10 +182,28 @@
             this.groupBoxContractInfo.Controls.Add(this.comboBoxContractCode);
             this.groupBoxContractInfo.Location = new System.Drawing.Point(302, 40);
             this.groupBoxContractInfo.Name = "groupBoxContractInfo";
-            this.groupBoxContractInfo.Size = new System.Drawing.Size(284, 193);
+            this.groupBoxContractInfo.Size = new System.Drawing.Size(284, 220);
             this.groupBoxContractInfo.TabIndex = 3;
             this.groupBoxContractInfo.TabStop = false;
             this.groupBoxContractInfo.Text = "合约信息";
+            // 
+            // textBoxValue
+            // 
+            this.textBoxValue.Location = new System.Drawing.Point(77, 193);
+            this.textBoxValue.Name = "textBoxValue";
+            this.textBoxValue.ReadOnly = true;
+            this.textBoxValue.Size = new System.Drawing.Size(85, 21);
+            this.textBoxValue.TabIndex = 13;
+            this.textBoxValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelValue
+            // 
+            this.labelValue.AutoSize = true;
+            this.labelValue.Location = new System.Drawing.Point(6, 196);
+            this.labelValue.Name = "labelValue";
+            this.labelValue.Size = new System.Drawing.Size(65, 12);
+            this.labelValue.TabIndex = 12;
+            this.labelValue.Text = "所需资金：";
             // 
             // numericUpDownPrice
             // 
@@ -327,7 +369,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(524, 248);
+            this.buttonCancel.Location = new System.Drawing.Point(524, 275);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(78, 23);
             this.buttonCancel.TabIndex = 11;
@@ -338,7 +380,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(431, 248);
+            this.buttonOK.Location = new System.Drawing.Point(431, 275);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 10;
@@ -346,41 +388,23 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // labelBalance
+            // textBoxUnderlyingPrice
             // 
-            this.labelBalance.AutoSize = true;
-            this.labelBalance.Location = new System.Drawing.Point(6, 111);
-            this.labelBalance.Name = "labelBalance";
-            this.labelBalance.Size = new System.Drawing.Size(65, 12);
-            this.labelBalance.TabIndex = 7;
-            this.labelBalance.Text = "资金余额：";
+            this.textBoxUnderlyingPrice.Location = new System.Drawing.Point(77, 164);
+            this.textBoxUnderlyingPrice.Name = "textBoxUnderlyingPrice";
+            this.textBoxUnderlyingPrice.ReadOnly = true;
+            this.textBoxUnderlyingPrice.Size = new System.Drawing.Size(85, 21);
+            this.textBoxUnderlyingPrice.TabIndex = 15;
+            this.textBoxUnderlyingPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBoxBalance
+            // labelUnderlyingPrice
             // 
-            this.textBoxBalance.Location = new System.Drawing.Point(77, 107);
-            this.textBoxBalance.Name = "textBoxBalance";
-            this.textBoxBalance.ReadOnly = true;
-            this.textBoxBalance.Size = new System.Drawing.Size(155, 21);
-            this.textBoxBalance.TabIndex = 8;
-            this.textBoxBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // labelValue
-            // 
-            this.labelValue.AutoSize = true;
-            this.labelValue.Location = new System.Drawing.Point(6, 165);
-            this.labelValue.Name = "labelValue";
-            this.labelValue.Size = new System.Drawing.Size(65, 12);
-            this.labelValue.TabIndex = 12;
-            this.labelValue.Text = "所需资金：";
-            // 
-            // textBoxValue
-            // 
-            this.textBoxValue.Location = new System.Drawing.Point(77, 162);
-            this.textBoxValue.Name = "textBoxValue";
-            this.textBoxValue.ReadOnly = true;
-            this.textBoxValue.Size = new System.Drawing.Size(85, 21);
-            this.textBoxValue.TabIndex = 13;
-            this.textBoxValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.labelUnderlyingPrice.AutoSize = true;
+            this.labelUnderlyingPrice.Location = new System.Drawing.Point(6, 167);
+            this.labelUnderlyingPrice.Name = "labelUnderlyingPrice";
+            this.labelUnderlyingPrice.Size = new System.Drawing.Size(65, 12);
+            this.labelUnderlyingPrice.TabIndex = 14;
+            this.labelUnderlyingPrice.Text = "标的价格：";
             // 
             // FormPlaceOrder
             // 
@@ -388,7 +412,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(619, 283);
+            this.ClientSize = new System.Drawing.Size(619, 310);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelOrderType);
             this.Controls.Add(this.buttonOK);
@@ -440,5 +464,7 @@
         private System.Windows.Forms.Label labelBalance;
         private System.Windows.Forms.TextBox textBoxValue;
         private System.Windows.Forms.Label labelValue;
+        private System.Windows.Forms.TextBox textBoxUnderlyingPrice;
+        private System.Windows.Forms.Label labelUnderlyingPrice;
     }
 }

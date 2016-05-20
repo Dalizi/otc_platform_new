@@ -36,24 +36,24 @@ namespace OTC
             return (Ln(S / K) + (r - sigma * sigma / 2) * T) / (sigma * Math.Sqrt(T));
         }
 
-       static private decimal GetBlsCallPrice(double S, double K, double T, double sigma, double r)
-        {
-            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
-            return decimal.Ceiling((decimal)(S * normDist.DistributionFunction(D1(S, K, T, sigma, r)) - K * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r)))*100m)/100m;
-            //return S * normDist.DistributionFunction(D1(S, K, T, sigma, r)) - K * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r));
-        }
+       //static private decimal GetBlsCallPrice(double S, double K, double T, double sigma, double r)
+       // {
+       //     Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+       //     return decimal.Ceiling((decimal)(S * normDist.DistributionFunction(D1(S, K, T, sigma, r)) - K * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r)))*100m)/100m;
+       //     //return S * normDist.DistributionFunction(D1(S, K, T, sigma, r)) - K * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r));
+       // }
 
-        static private decimal GetBlsPutPrice(double S, double K, double T, double sigma, double r)
-        {
-            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
-            return decimal.Ceiling((decimal)(-S * normDist.DistributionFunction(-D1(S, K, T, sigma, r)) + K * Math.Exp(-r * T) * normDist.DistributionFunction(-D2(S, K, T, sigma, r)))*100m)/100m;
-            //return -S * normDist.DistributionFunction(-D1(S, K, T, sigma, r)) + K * Math.Exp(-r * T) * normDist.DistributionFunction(-D2(S, K, T, sigma, r));
-        }
+       // static private decimal GetBlsPutPrice(double S, double K, double T, double sigma, double r)
+       // {
+       //     Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+       //     return decimal.Ceiling((decimal)(-S * normDist.DistributionFunction(-D1(S, K, T, sigma, r)) + K * Math.Exp(-r * T) * normDist.DistributionFunction(-D2(S, K, T, sigma, r)))*100m)/100m;
+       //     //return -S * normDist.DistributionFunction(-D1(S, K, T, sigma, r)) + K * Math.Exp(-r * T) * normDist.DistributionFunction(-D2(S, K, T, sigma, r));
+       // }
 
-        static public decimal GetBlsPrice(double S, double K, double T, double sigma, double r, char type)
-        {
-            return type == 'c' ? GetBlsCallPrice(S, K, T, sigma, r) : GetBlsPutPrice(S, K, T, sigma, r);
-        }
+       // static public decimal GetBlsPrice(double S, double K, double T, double sigma, double r, char type)
+       // {
+       //     return type == 'c' ? GetBlsCallPrice(S, K, T, sigma, r) : GetBlsPutPrice(S, K, T, sigma, r);
+       // }
 
         static public double GetBlsDelta(double S, double K, double T, double sigma, double r, char type)
         {
@@ -84,6 +84,23 @@ namespace OTC
         {
             Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
             return type=='c'?K * T * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r)):-K*T*Math.Exp(-r* T)* normDist.DistributionFunction(-D2(S, K, T, sigma, r));
+        }
+
+        static public double GetBlsCallPrice(double S, double K, double T, double sigma, double r)
+        {
+            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+            return S * normDist.DistributionFunction(D1(S, K, T, sigma, r)) - K * Math.Exp(-r * T) * normDist.DistributionFunction(D2(S, K, T, sigma, r));
+        }
+
+        static public double GetBlsPutPrice(double S, double K, double T, double sigma, double r)
+        {
+            Accord.Statistics.Distributions.Univariate.NormalDistribution normDist = new Accord.Statistics.Distributions.Univariate.NormalDistribution();
+            return -S * normDist.DistributionFunction(-D1(S, K, T, sigma, r)) + K * Math.Exp(-r * T) * normDist.DistributionFunction(-D2(S, K, T, sigma, r));
+        }
+
+        static public double GetBlsPrice(double S, double K, double T, double sigma, double r, char type)
+        {
+            return type == 'c' ? GetBlsCallPrice(S, K, T, sigma, r) : GetBlsPutPrice(S, K, T, sigma, r);
         }
 
         private double D1(double S, double K, double T)

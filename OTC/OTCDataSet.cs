@@ -282,23 +282,7 @@ namespace OTC
                 double K = double.Parse(contract_row["执行价"].ToString());
                 double sigma = double.Parse(contract_row["波动率"].ToString());
                 DateTime date = DateTime.Parse(contract_row["到期日"].ToString());
-                double dtm = (date - DateTime.Today).TotalDays;
-                if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
-                {
-                    dtm += 1;
-                }
-                DateTime d = DateTime.Today;
-                int n_weekends = 0;
-                while (d <= date)
-                {
-                    if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(d))
-                    {
-                        n_weekends += 1;
-                    }
-                    d = d.AddDays(1);
-                }
-                dtm = dtm - n_weekends;
-                dtm = dtm > 0 ? dtm : 0;
+                double dtm = GetDTM(date);
                 char type = char.Parse(contract_row["认购认沽"].ToString());
                 double rate = 0.015;
                 int direction_multiplier = position_direction == "买入" ? -1 : 1;
@@ -380,6 +364,33 @@ namespace OTC
             return dbManager.GetSQLConnection();
         }
 
+        public IDatabase CreateRedisConnection()
+        {
+            var conn = dbManager.GetRedisConnection();
+            return conn.GetDatabase();
+        }
+
+        public double GetDTM(DateTime exp_date)
+        {
+            double dtm = (exp_date - DateTime.Today).TotalDays;
+            if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
+            {
+                dtm += 1;
+            }
+            DateTime d = DateTime.Today;
+            int n_weekends = 0;
+            while (d <= exp_date)
+            {
+                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(d))
+                {
+                    n_weekends += 1;
+                }
+                d = d.AddDays(1);
+            }
+            dtm = dtm - n_weekends;
+            dtm = dtm > 0 ? dtm : 0;
+            return dtm;
+        }
 
         DatabaseManager dbManager;
         MySqlConnection sql_connection;

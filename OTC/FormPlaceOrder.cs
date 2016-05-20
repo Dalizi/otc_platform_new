@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StackExchange.Redis;
 
 namespace OTC
 {
@@ -15,12 +16,15 @@ namespace OTC
         public FormPlaceOrder(OTCDataSet ds)
         {
             InitializeComponent();
+            this.timer.Interval = 500;
+            this.timer.Tick += new EventHandler(updatePrice);
             this.comboBoxEntityCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxOrderType.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxTargetID.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
 
             this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(SetCloseTargetIDs);
+            this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(updateContractInfo);
 
             this.comboBoxLongShort.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxLongShort.SelectedIndexChanged += new EventHandler(SetCloseTargetIDs);
@@ -39,6 +43,8 @@ namespace OTC
             this.comboBoxOpenClose.Items.AddRange(new String[] { "开仓", "平仓" });
             this.comboBoxOpenClose.Text = "开仓";
             this.comboBoxOrderType.SelectedIndex = 0;
+            this.redis_db = ds.CreateRedisConnection();
+            timer.Start();
         }
 
         public FormPlaceOrder(OTCDataSet ds, String instrType, DataGridViewRow row)
@@ -79,6 +85,35 @@ namespace OTC
                 MessageBox.Show("未知的产品种类。", "错误");
                 this.Close();
             }
+        }
+
+        private void updatePrice(object sender, EventArgs e)
+        {
+            if (this.comboBoxOrderType.Text == "期权" && this.underlying_code != "")
+            {
+                var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
+                this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
+                var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
+                this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
+            }
+
+
+        }
+
+        private void updateContractInfo(object sender, EventArgs e)
+        {
+            if (this.comboBoxOrderType.Text == "期权")
+            {
+                var cur_contract = this.dataset.Tables["options_contracts"].Rows.Find(this.comboBoxContractCode.Text);
+                underlying_code = cur_contract.Field<string>("标的代码");
+                strike = cur_contract.Field<double>("执行价");
+                var exp_date = cur_contract.Field<DateTime>("到期日");
+                var dtm = this.dataset.GetDTM(exp_date);
+                T = dtm/ 256d;
+                vol = cur_contract.Field<double>("波动率");
+                option_type = cur_contract.Field<string>("认购认沽")[0];
+            }
+
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -549,7 +584,9 @@ namespace OTC
             String table_name = this.comboBoxOrderType.Text == "期货" ? "futures_contracts" : "options_contracts";
             DataRow row = this.dataset.Tables[table_name].Rows.Find(contractCode);
             commission = (decimal)(double)row["手续费"];
-            string commission_mode = row.Field<string>("手续费模式");
+            string commission_mode = "";
+            if (this.comboBoxOrderType.Text == "期货")
+                commission_mode = row.Field<string>("手续费模式");
             multiplier = (int)row["合约乘数"];
             margin_rate = (decimal)(double)row["保证金率"];
             decimal pre_settle = this.comboBoxOrderType.Text == "期货" ? (decimal)(double)row["结算价"] : 0;
@@ -568,5 +605,14 @@ namespace OTC
         }
 
         OTCDataSet dataset;
+        Timer timer;
+        IDatabase redis_db;
+        string underlying_code;
+        double strike = 0;
+        double T = 0;
+        double vol = 0;
+        double r = 0.015;
+        char option_type;
+        
     }
 }
