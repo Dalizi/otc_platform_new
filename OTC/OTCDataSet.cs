@@ -350,10 +350,16 @@ namespace OTC
                     row["Rho"] = a.Rho;
                 }
             }
+            List<string> position_codes = new List<string>();
             foreach (var row in Tables["risk_info_gross"].AsEnumerable())
             {
-                if (!contracts.Contains(row.Field<string>("标的代码")))
+                position_codes.Add(row.Field<string>("标的代码"));
+            }
+                foreach (var code in position_codes)
+            {
+                if (!contracts.Contains(code))
                 {
+                    var row = Tables["risk_info_gross"].Rows.Find(code);
                     Tables["risk_info_gross"].Rows.Remove(row);
                 }
             }

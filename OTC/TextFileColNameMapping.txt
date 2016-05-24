@@ -1,6 +1,6 @@
 ﻿client_id=客户编号
 balance=余额
-options_value=期权价值
+position_market_value=持仓市值
 available_balance=可用余额
 withdrawable_balance=可取余额
 cashflow_id=资金流水编号
