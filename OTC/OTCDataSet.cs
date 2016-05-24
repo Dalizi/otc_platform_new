@@ -334,16 +334,21 @@ namespace OTC
             List<String> contracts = new List<string>();
             foreach (var a in risk_info_gross)
             {
+                double long_underlying_position = 0;
+                double short_underlying_position = 0;
+                double.TryParse(this.Tables["futures_positions_summary"].Compute("sum(数量)", string.Format("合约代码='{0}' AND 买卖方向='{1}'", a.code, "买入")).ToString(), out long_underlying_position);
+                double.TryParse(this.Tables["futures_positions_summary"].Compute("sum(数量)", string.Format("合约代码='{0}' AND 买卖方向='{1}'", a.code, "卖出")).ToString(), out short_underlying_position);
+
                 contracts.Add(a.code);
                 if(!Tables["risk_info_gross"].Rows.Contains(a.code))
                 {
-                    Tables["risk_info_gross"].Rows.Add(a.code, a.price, a.Delta, a.Gamma, a.Theta, a.Vega, a.Rho);
+                    Tables["risk_info_gross"].Rows.Add(a.code, a.price, a.Delta + long_underlying_position - short_underlying_position, a.Gamma, a.Theta, a.Vega, a.Rho);
                 }
                 else
                 {
-                    var row = Tables["risk_info_gross"].Rows.Find(a.code);
+                     var row = Tables["risk_info_gross"].Rows.Find(a.code);
                     row["标的现价"] = a.price;
-                    row["Delta"] = a.Delta;
+                    row["Delta"] = a.Delta + long_underlying_position - short_underlying_position;
                     row["Gamma"] = a.Gamma;
                     row["Theta"] = a.Theta;
                     row["Vega"] = a.Vega;
