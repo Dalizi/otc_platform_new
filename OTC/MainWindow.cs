@@ -87,7 +87,7 @@ namespace OTC
             this.dataGridViewClientBalance.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["余额"].DefaultCellStyle.Format = "N2";
-            this.dataGridViewClientBalance.Columns["期权价值"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewClientBalance.Columns["持仓市值"].DefaultCellStyle.Format = "N2";
 
             this.dataGridViewFuturesBlance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewFuturesBlance.Columns["当前余额"].DefaultCellStyle.Format = "N2";
@@ -211,14 +211,18 @@ namespace OTC
 
         private void buttonModifyClient_Click(object sender, EventArgs e)
         {
-            uint client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
+            uint client_id;
+            if (this.dataGridViewClientBalance.CurrentRow == null) client_id = 0;
+            else client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
             FormModifyClient fmc = new FormModifyClient(this.dataset, client_id);
             fmc.ShowDialog();
         }
 
         private void buttonClientCashflow_Click(object sender, EventArgs e)
         {
-            uint client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
+            uint client_id;
+            if (this.dataGridViewClientBalance.CurrentRow == null) client_id = 0;    
+            else client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
             FormClientCashFlow fccf = new FormClientCashFlow(this.dataset, client_id);
             fccf.ShowDialog();
         }
@@ -249,7 +253,9 @@ namespace OTC
 
         private void buttonFuturesCashflow_Click(object sender, EventArgs e)
         {
-            uint futures_account_no = (uint)this.dataGridViewFuturesBlance.CurrentRow.Cells["期货账号"].Value;
+            uint futures_account_no;
+            if (this.dataGridViewFuturesBlance.CurrentRow == null) futures_account_no = 0;
+            else futures_account_no = (uint)this.dataGridViewFuturesBlance.CurrentRow.Cells["期货账号"].Value;
             FormFuturesAccountCashflow form = new FormFuturesAccountCashflow(this.dataset, futures_account_no);
             form.Show();
         }
