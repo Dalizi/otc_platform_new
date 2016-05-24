@@ -59,6 +59,8 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.textBoxUnderlyingPrice = new System.Windows.Forms.TextBox();
             this.labelUnderlyingPrice = new System.Windows.Forms.Label();
+            this.checkBoxMarketPriceOption = new System.Windows.Forms.CheckBox();
+            this.checkBoxMarketPriceFuture = new System.Windows.Forms.CheckBox();
             this.groupBoxMainInfo.SuspendLayout();
             this.groupBoxContractInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
@@ -165,6 +167,8 @@
             // 
             this.groupBoxContractInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContractInfo.Controls.Add(this.checkBoxMarketPriceFuture);
+            this.groupBoxContractInfo.Controls.Add(this.checkBoxMarketPriceOption);
             this.groupBoxContractInfo.Controls.Add(this.textBoxUnderlyingPrice);
             this.groupBoxContractInfo.Controls.Add(this.labelUnderlyingPrice);
             this.groupBoxContractInfo.Controls.Add(this.textBoxValue);
@@ -392,7 +396,6 @@
             // 
             this.textBoxUnderlyingPrice.Location = new System.Drawing.Point(77, 164);
             this.textBoxUnderlyingPrice.Name = "textBoxUnderlyingPrice";
-            this.textBoxUnderlyingPrice.ReadOnly = true;
             this.textBoxUnderlyingPrice.Size = new System.Drawing.Size(85, 21);
             this.textBoxUnderlyingPrice.TabIndex = 15;
             this.textBoxUnderlyingPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -405,6 +408,28 @@
             this.labelUnderlyingPrice.Size = new System.Drawing.Size(65, 12);
             this.labelUnderlyingPrice.TabIndex = 14;
             this.labelUnderlyingPrice.Text = "标的价格：";
+            // 
+            // checkBoxMarketPriceOption
+            // 
+            this.checkBoxMarketPriceOption.AutoSize = true;
+            this.checkBoxMarketPriceOption.Location = new System.Drawing.Point(196, 113);
+            this.checkBoxMarketPriceOption.Name = "checkBoxMarketPriceOption";
+            this.checkBoxMarketPriceOption.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxMarketPriceOption.TabIndex = 16;
+            this.checkBoxMarketPriceOption.Text = "实时价格";
+            this.checkBoxMarketPriceOption.UseVisualStyleBackColor = true;
+            this.checkBoxMarketPriceOption.CheckedChanged += new System.EventHandler(this.checkBoxMarketPriceOption_CheckedChanged);
+            // 
+            // checkBoxMarketPriceFuture
+            // 
+            this.checkBoxMarketPriceFuture.AutoSize = true;
+            this.checkBoxMarketPriceFuture.Location = new System.Drawing.Point(196, 168);
+            this.checkBoxMarketPriceFuture.Name = "checkBoxMarketPriceFuture";
+            this.checkBoxMarketPriceFuture.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxMarketPriceFuture.TabIndex = 17;
+            this.checkBoxMarketPriceFuture.Text = "实时价格";
+            this.checkBoxMarketPriceFuture.UseVisualStyleBackColor = true;
+            this.checkBoxMarketPriceFuture.CheckedChanged += new System.EventHandler(this.checkBoxMarketPriceFuture_CheckedChanged);
             // 
             // FormPlaceOrder
             // 
@@ -466,5 +491,7 @@
         private System.Windows.Forms.Label labelValue;
         private System.Windows.Forms.TextBox textBoxUnderlyingPrice;
         private System.Windows.Forms.Label labelUnderlyingPrice;
+        private System.Windows.Forms.CheckBox checkBoxMarketPriceFuture;
+        private System.Windows.Forms.CheckBox checkBoxMarketPriceOption;
     }
 }

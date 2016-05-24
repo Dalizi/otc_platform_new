@@ -15,9 +15,11 @@ namespace OTC
     {
         public FormPlaceOrder(OTCDataSet ds)
         {
+
+            this.redis_db = ds.CreateRedisConnection();
             InitializeComponent();
             this.timer.Interval = 500;
-            this.timer.Tick += new EventHandler(updatePrice);
+            this.timer.Tick += new EventHandler(timer_Update);
             this.comboBoxEntityCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxOrderType.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxTargetID.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
@@ -43,33 +45,17 @@ namespace OTC
             this.comboBoxOpenClose.Items.AddRange(new String[] { "开仓", "平仓" });
             this.comboBoxOpenClose.Text = "开仓";
             this.comboBoxOrderType.SelectedIndex = 0;
-            this.redis_db = ds.CreateRedisConnection();
             timer.Start();
         }
 
-        public FormPlaceOrder(OTCDataSet ds, String instrType, DataGridViewRow row)
+        public FormPlaceOrder(OTCDataSet ds, String instrType, DataGridViewRow row):this(ds)
         {
-            InitializeComponent();
 
             this.textBoxClientName.Enabled = false;
 
-            this.comboBoxEntityCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-            this.comboBoxOrderType.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-            this.comboBoxTargetID.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-
-            this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-            this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(SetCloseTargetIDs);
-
-            this.comboBoxLongShort.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-            this.comboBoxLongShort.SelectedIndexChanged += new EventHandler(SetCloseTargetIDs);
-
-            this.comboBoxOpenClose.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-            this.numericUpDownPrice.ValueChanged += new EventHandler(SetMaxQuantity);
+            this.numericUpDownPrice.ValueChanged -= new EventHandler(ComputeValue);
 
             this.dataset = ds;
-            this.comboBoxOrderType.Items.AddRange(new String[] { "期权", "期货" });
-            this.comboBoxLongShort.Items.AddRange(new String[] { "买入", "卖出" });
-            this.comboBoxOpenClose.Items.AddRange(new String[] { "开仓", "平仓" });
             this.comboBoxOpenClose.Text = "平仓";
             this.comboBoxOrderType.SelectedIndex = 0;
             if (instrType == "期货")
@@ -87,14 +73,18 @@ namespace OTC
             }
         }
 
-        private void updatePrice(object sender, EventArgs e)
+        private void timer_Update(object sender, EventArgs e)
+        {
+            updatePrice();
+        }
+        private void updatePrice()
         {
             if (this.comboBoxOrderType.Text == "期权" && this.underlying_code != "")
             {
                 var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
-                this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
+                if (this.checkBoxMarketPriceFuture.Checked) this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
                 var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
-                this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
+                if (this.checkBoxMarketPriceOption.Checked) this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
             }
 
 
@@ -112,6 +102,11 @@ namespace OTC
                 T = dtm/ 256d;
                 vol = cur_contract.Field<double>("波动率");
                 option_type = cur_contract.Field<string>("认购认沽")[0];
+                var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
+                this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
+                var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
+                this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
+
             }
 
         }
@@ -613,6 +608,29 @@ namespace OTC
         double vol = 0;
         double r = 0.015;
         char option_type;
-        
+
+        private void checkBoxMarketPriceOption_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                this.numericUpDownPrice.ReadOnly = true;
+            }
+            else
+            {
+                this.numericUpDownPrice.ReadOnly = false;
+            }
+        }
+
+        private void checkBoxMarketPriceFuture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                this.textBoxUnderlyingPrice.ReadOnly = true;
+            }
+            else
+            {
+                this.textBoxUnderlyingPrice.ReadOnly = false;
+            }
+        }
     }
 }
