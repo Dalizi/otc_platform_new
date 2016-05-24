@@ -455,7 +455,7 @@ namespace OTC
                     decimal marginRate = Convert.ToDecimal(rowContract["保证金率"]);
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
-                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price*multiplier + commission), MidpointRounding.AwayFromZero);
+                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price*multiplier + commission), MidpointRounding.AwayFromZero)-1;
                 }
             }
             else
@@ -595,7 +595,10 @@ namespace OTC
             }
             else if (this.comboBoxOrderType.Text == "期货")
             {
-                this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value * multiplier*margin_rate).ToString("N2");
+                if (commission_mode == "abs")
+                    this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value * multiplier*margin_rate+ this.numericUpDownQuantity.Value*commission).ToString("N2");
+                else
+                    this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value * multiplier * (margin_rate+commission)).ToString("N2");
             }
         }
 
