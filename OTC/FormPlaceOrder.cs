@@ -86,6 +86,11 @@ namespace OTC
                 var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
                 if (this.checkBoxMarketPriceOption.Checked) this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
             }
+            else if (this.comboBoxOrderType.Text == "期货" && this.underlying_code != "")
+            {
+                var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
+                if (this.checkBoxMarketPriceOption.Checked) this.numericUpDownPrice.Value = new decimal(spot_price);
+            }
 
 
         }
@@ -107,6 +112,11 @@ namespace OTC
                 var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
                 this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
 
+            }
+            else if(this.comboBoxOrderType.Text == "期货")
+            {
+                var spot_price = double.Parse(this.redis_db.HashGet(this.comboBoxContractCode.Text, "LastPrice").ToString());
+                this.numericUpDownPrice.Value = new decimal(spot_price);
             }
 
         }
@@ -173,9 +183,11 @@ namespace OTC
                             DBNull.Value,
                             DBNull.Value);
                     }
-                        this.dataset.Commit("futures_transactions");
-                        this.dataset.Update();
-                        this.Close();
+                    this.dataset.Commit("futures_transactions");
+                    this.dataset.Tables["futures_positions_summary"].Clear();
+                    this.dataset.Tables["futures_verbose_positions_view"].Clear();
+                    this.dataset.Update();
+                    this.Close();
                     
                 }
             }
@@ -185,6 +197,7 @@ namespace OTC
                 int client_id = 0;
                 decimal quantity = 0;
                 decimal price = 0;
+                decimal underlying_price = 0;
                 int target_transaction_id = -1;
 
                 if (!int.TryParse(this.comboBoxEntityCode.Text, out client_id))
@@ -203,6 +216,10 @@ namespace OTC
                 {
                     MessageBox.Show("数量格式错误。", "错误");
                 }
+                else if (!decimal.TryParse(this.textBoxUnderlyingPrice.Text, out underlying_price))
+                {
+                    MessageBox.Show("标的价格格式错误。", "错误");
+                }
                 else
                 {
                     if (this.comboBoxTargetID.Text != "无")
@@ -212,6 +229,7 @@ namespace OTC
                             this.comboBoxContractCode.Text,
                             quantity,
                             price,
+                            underlying_price,
                             this.comboBoxOpenClose.Text,
                             this.comboBoxLongShort.Text,
                             DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
@@ -226,6 +244,7 @@ namespace OTC
                             this.comboBoxContractCode.Text,
                             quantity,
                             price,
+                            underlying_price,
                             this.comboBoxOpenClose.Text,
                             this.comboBoxLongShort.Text,
                             DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
@@ -236,8 +255,6 @@ namespace OTC
                     this.dataset.Commit("options_transactions");
                     this.dataset.Tables["options_positions_summary"].Clear();
                     this.dataset.Tables["options_verbose_positions_view"].Clear();
-                    this.dataset.Tables["futures_positions_summary"].Clear();
-                    this.dataset.Tables["futures_verbose_positions_view"].Clear();
                     this.dataset.Tables["risk_info"].Clear();
                     this.dataset.Update();
                     this.Close();
@@ -255,6 +272,8 @@ namespace OTC
                 this.comboBoxEntityCode.Items.Clear();
                 this.labelTargetID.Show();
                 this.comboBoxTargetID.Show();
+                this.textBoxUnderlyingPrice.Hide();
+                this.checkBoxMarketPriceFuture.Hide();
                 foreach (DataRow row in this.dataset.Tables["futures_account_info"].Rows)
                 {
                     this.comboBoxEntityCode.Items.Add(row["期货账号"].ToString());
@@ -278,6 +297,8 @@ namespace OTC
             }
             else
             {
+                this.textBoxUnderlyingPrice.Show();
+                this.checkBoxMarketPriceFuture.Show();
                 if (this.comboBoxOpenClose.Text == "开仓")
                 {
                     this.labelTargetID.Hide();
