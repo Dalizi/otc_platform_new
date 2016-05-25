@@ -66,12 +66,12 @@ namespace OTC
             else
             {
                 DataRow row = table.Rows.Find(this.comboBoxFuturesContractCode.Text);
-                row[1] = this.comboBoxUnderlyingCode.Text.Split('-')[0];
-                row[2] = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
-                row[3] = commision;
-                row[4] = margin;
-                row[5] = pre_settle;
-                row[6] = multiplier;
+                row["标的代码"] = this.comboBoxUnderlyingCode.Text.Split('-')[0];
+                row["手续费模式"] = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
+                row["手续费"] = commision;
+                row["保证金"] = margin;
+                row["前结算价"] = pre_settle;
+                row["合约乘数"] = multiplier;
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
                 this.dataset.Update("futures_contracts_view");
@@ -91,9 +91,11 @@ namespace OTC
         {
             DataRow row = table.Rows.Find(this.comboBoxFuturesContractCode.Text);
             this.comboBoxUnderlyingCode.SelectedIndex = this.comboBoxUnderlyingCode.FindString(row[1].ToString()+'-');
-            this.textBoxCommission.Text = row[2].ToString();
-            this.textBoxMarginRate.Text = row[3].ToString();
-            this.textBoxMultiplier.Text = row[5].ToString();
+            if (row["手续费模式"].ToString() == "abs") this.radioButtonAbsCommission.Checked = true;
+            else this.radioButtonPctCommission.Checked = true;
+            this.textBoxCommission.Text = row["手续费"].ToString();
+            this.textBoxMarginRate.Text = row["保证金率"].ToString();
+            this.textBoxMultiplier.Text = row["合约乘数"].ToString();
         }
     }
 }
