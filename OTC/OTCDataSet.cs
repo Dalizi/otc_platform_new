@@ -288,9 +288,9 @@ namespace OTC
                 int direction_multiplier = position_direction == "买入" ? -1 : 1;
                 double delta = OptionsCalculator.GetBlsDelta(S0, K, dtm/256d, sigma, rate, type) * quantity * direction_multiplier;
                 double gamma = OptionsCalculator.GetBlsGamma(S0, K, dtm / 256d, sigma, rate) * quantity * direction_multiplier;
-                double theta = OptionsCalculator.GetBlsTheta(S0, K, dtm / 256d, sigma, rate, type) * quantity/256 * direction_multiplier;
-                double vega = OptionsCalculator.GetBlsVega(S0, K, dtm / 256d, sigma, rate) * quantity / 100 * direction_multiplier;
-                double rho = OptionsCalculator.GetBlsRho(S0, K, dtm / 256d, sigma, rate, type) * quantity / 100 * direction_multiplier;
+                double theta = OptionsCalculator.GetBlsTheta(S0, K, dtm / 256d, sigma, rate, type) * quantity / 256 * direction_multiplier * 10;
+                double vega = OptionsCalculator.GetBlsVega(S0, K, dtm / 256d, sigma, rate) * quantity / 100 * direction_multiplier * 10;
+                double rho = OptionsCalculator.GetBlsRho(S0, K, dtm / 256d, sigma, rate, type) * quantity / 100 * direction_multiplier * 10;
                 if (table.Rows.Contains(new object[] {contract_code, client_id, position_direction }))
                 {
                     DataRow row_risk = table.Rows.Find(new object[] { contract_code, client_id, position_direction });

@@ -51,3 +51,4 @@ underlying=标的
 volatility=波动率
 margin=保证金
 commission_mode=手续费模式
+occupied_margin=占用保证金
