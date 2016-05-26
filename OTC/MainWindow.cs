@@ -142,13 +142,14 @@ namespace OTC
             this.dataGridViewOptionsContract.Columns["结算价"].DefaultCellStyle.Format = "N2";
             this.dataGridViewOptionsContract.Columns["执行价"].DefaultCellStyle.Format = "N2";
             
-            this.dataGridViewFuturesContract.Columns["手续费"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewFuturesContract.Columns["手续费"].DefaultCellStyle.Format = "N5";
+            this.dataGridViewFuturesContract.Columns["保证金率"].DefaultCellStyle.Format = "0.00%";
             this.dataGridViewFuturesContract.Columns["结算价"].DefaultCellStyle.Format = "N2";
 
             this.dataGridViewRiskInfoDetailed.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewRiskInfoDetailed.Columns["合约代码"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewRiskInfoDetailed.Columns["标的现价"].DefaultCellStyle.Format = "N2";
-            this.dataGridViewRiskInfoDetailed.Columns["波动率"].DefaultCellStyle.Format = "00.00%";
+            this.dataGridViewRiskInfoDetailed.Columns["波动率"].DefaultCellStyle.Format = "0.00%";
             this.dataGridViewRiskInfoDetailed.Columns["Delta"].DefaultCellStyle.Format = "N4";
             this.dataGridViewRiskInfoDetailed.Columns["Gamma"].DefaultCellStyle.Format = "N4";
             this.dataGridViewRiskInfoDetailed.Columns["Theta"].DefaultCellStyle.Format = "N4";

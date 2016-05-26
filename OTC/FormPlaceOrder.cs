@@ -79,14 +79,14 @@ namespace OTC
         }
         private void updatePrice()
         {
-            if (this.comboBoxOrderType.Text == "期权" && this.underlying_code != "")
+            if (this.comboBoxOrderType.Text == "期权" && this.underlying_code != null && this.underlying_code != "")
             {
                 var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
                 if (this.checkBoxMarketPriceFuture.Checked) this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
                 var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
                 if (this.checkBoxMarketPriceOption.Checked) this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
             }
-            else if (this.comboBoxOrderType.Text == "期货" && this.underlying_code != "")
+            else if (this.comboBoxOrderType.Text == "期货" && this.underlying_code != null && this.underlying_code != "")
             {
                 var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
                 if (this.checkBoxMarketPriceOption.Checked) this.numericUpDownPrice.Value = new decimal(spot_price);
@@ -476,7 +476,9 @@ namespace OTC
                     decimal marginRate = Convert.ToDecimal(rowContract["保证金率"]);
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
-                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price*multiplier + commission), MidpointRounding.AwayFromZero)-1;
+                    
+                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price * multiplier + commission), MidpointRounding.AwayFromZero)-1;
+
                 }
             }
             else
@@ -526,7 +528,11 @@ namespace OTC
                         this.numericUpDownQuantity.Maximum = 0;
                         return;
                     }
-                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price* marginRate*multiplier+commission), MidpointRounding.AwayFromZero);
+                    string commission_mode = rowContract["手续费模式"].ToString();
+                    if (commission_mode == "abs")
+                        this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price* marginRate*multiplier+commission), MidpointRounding.AwayFromZero);
+                    else if (commission_mode == "pct")
+                        this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price * (marginRate + commission) * multiplier), MidpointRounding.AwayFromZero) - 1;
                 }
             }
         }

@@ -83,6 +83,9 @@ namespace OTC
             this.Close();
         }
 
+        private void textBoxMarginRate_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

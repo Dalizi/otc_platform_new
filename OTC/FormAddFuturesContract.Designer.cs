@@ -31,6 +31,9 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.groupBoxAddFuturesContract = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonPctCommission = new System.Windows.Forms.RadioButton();
+            this.radioButtonAbsCommission = new System.Windows.Forms.RadioButton();
             this.labelCommissionMode = new System.Windows.Forms.Label();
             this.textBoxMultiplier = new System.Windows.Forms.TextBox();
             this.labelMultiplier = new System.Windows.Forms.Label();
@@ -42,9 +45,6 @@
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButtonAbsCommission = new System.Windows.Forms.RadioButton();
-            this.radioButtonPctCommission = new System.Windows.Forms.RadioButton();
             this.groupBoxAddFuturesContract.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +96,37 @@
             this.groupBoxAddFuturesContract.TabStop = false;
             this.groupBoxAddFuturesContract.Text = "客户信息";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonPctCommission);
+            this.panel1.Controls.Add(this.radioButtonAbsCommission);
+            this.panel1.Location = new System.Drawing.Point(114, 76);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(191, 30);
+            this.panel1.TabIndex = 12;
+            // 
+            // radioButtonPctCommission
+            // 
+            this.radioButtonPctCommission.AutoSize = true;
+            this.radioButtonPctCommission.Location = new System.Drawing.Point(96, 2);
+            this.radioButtonPctCommission.Name = "radioButtonPctCommission";
+            this.radioButtonPctCommission.Size = new System.Drawing.Size(59, 16);
+            this.radioButtonPctCommission.TabIndex = 1;
+            this.radioButtonPctCommission.TabStop = true;
+            this.radioButtonPctCommission.Text = "相对值";
+            this.radioButtonPctCommission.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAbsCommission
+            // 
+            this.radioButtonAbsCommission.AutoSize = true;
+            this.radioButtonAbsCommission.Location = new System.Drawing.Point(3, 2);
+            this.radioButtonAbsCommission.Name = "radioButtonAbsCommission";
+            this.radioButtonAbsCommission.Size = new System.Drawing.Size(59, 16);
+            this.radioButtonAbsCommission.TabIndex = 0;
+            this.radioButtonAbsCommission.TabStop = true;
+            this.radioButtonAbsCommission.Text = "固定值";
+            this.radioButtonAbsCommission.UseVisualStyleBackColor = true;
+            // 
             // labelCommissionMode
             // 
             this.labelCommissionMode.AutoSize = true;
@@ -135,6 +166,7 @@
             this.textBoxMarginRate.Size = new System.Drawing.Size(191, 21);
             this.textBoxMarginRate.TabIndex = 3;
             this.textBoxMarginRate.Text = "0.00";
+            this.textBoxMarginRate.TextChanged += new System.EventHandler(this.textBoxMarginRate_TextChanged);
             // 
             // labelMarginRate
             // 
@@ -203,37 +235,6 @@
             this.labelCommission.Size = new System.Drawing.Size(65, 12);
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radioButtonPctCommission);
-            this.panel1.Controls.Add(this.radioButtonAbsCommission);
-            this.panel1.Location = new System.Drawing.Point(114, 76);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(191, 30);
-            this.panel1.TabIndex = 12;
-            // 
-            // radioButtonAbsCommission
-            // 
-            this.radioButtonAbsCommission.AutoSize = true;
-            this.radioButtonAbsCommission.Location = new System.Drawing.Point(3, 2);
-            this.radioButtonAbsCommission.Name = "radioButtonAbsCommission";
-            this.radioButtonAbsCommission.Size = new System.Drawing.Size(59, 16);
-            this.radioButtonAbsCommission.TabIndex = 0;
-            this.radioButtonAbsCommission.TabStop = true;
-            this.radioButtonAbsCommission.Text = "固定值";
-            this.radioButtonAbsCommission.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonPctCommission
-            // 
-            this.radioButtonPctCommission.AutoSize = true;
-            this.radioButtonPctCommission.Location = new System.Drawing.Point(96, 2);
-            this.radioButtonPctCommission.Name = "radioButtonPctCommission";
-            this.radioButtonPctCommission.Size = new System.Drawing.Size(59, 16);
-            this.radioButtonPctCommission.TabIndex = 1;
-            this.radioButtonPctCommission.TabStop = true;
-            this.radioButtonPctCommission.Text = "相对值";
-            this.radioButtonPctCommission.UseVisualStyleBackColor = true;
             // 
             // FormAddFuturesContract
             // 
