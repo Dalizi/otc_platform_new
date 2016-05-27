@@ -116,7 +116,7 @@ namespace OTC
             {
                 selectString = String.Format("select * from {0};", t);
                 if (t == "client_balance_join")
-                    selectString = "SELECT ci.client_id,client_name, account_no, balance, sum(ovp.holding_price * ovp.quantity * oc.multiplier) as position_market_value FROM client_balance cb JOIN options_verbose_positions ovp JOIN options_contracts oc JOIN client_info ci ON cb.client_id = ci.client_id AND ovp.client_id = ci.client_id AND oc.contract_code = ovp.contract_code;";
+                    selectString = "SELECT ci.client_id,ci.client_name, ci.account_no, cb.balance, IFNULL(SUM(ovp.holding_price * ovp.quantity * oc.multiplier),0) as position_market_value FROM (((client_info ci LEFT JOIN client_balance cb ON ci.client_id=cb.client_id) LEFT JOIN options_verbose_positions ovp ON ci.client_id = ovp.client_id) LEFT JOIN options_contracts oc ON ovp.contract_code=oc.contract_code) GROUP by client_id;";
                 MySqlCommand command = new MySqlCommand(selectString, this.sql_connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
