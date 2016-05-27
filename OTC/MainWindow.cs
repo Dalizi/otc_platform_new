@@ -201,6 +201,13 @@ namespace OTC
                                  MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                var tmp = this.dataset.Tables["options_transactions"].Compute("count(成交编号)", String.Format("客户编号={0}", client_id));
+                int n_transactions = int.Parse(tmp.ToString());
+                if (n_transactions != 0)
+                {
+                    MessageBox.Show("无法删除客户：客户已有成交。", "删除客户错误");
+                    return;
+                }
                 this.dataset.Tables["client_balance"].Rows.Find(client_id).Delete();
                 this.dataset.Tables["client_info"].Rows.Find(client_id).Delete();
                 this.dataset.Commit("client_balance");
@@ -222,7 +229,7 @@ namespace OTC
         private void buttonClientCashflow_Click(object sender, EventArgs e)
         {
             uint client_id;
-            if (this.dataGridViewClientBalance.CurrentRow == null) client_id = 0;    
+            if (this.dataGridViewClientBalance.CurrentRow == null) client_id = 0;
             else client_id = (uint)this.dataGridViewClientBalance.CurrentRow.Cells["客户编号"].Value;
             FormClientCashFlow fccf = new FormClientCashFlow(this.dataset, client_id);
             fccf.ShowDialog();
@@ -399,11 +406,12 @@ namespace OTC
                 MySqlConnection conn = this.dataset.CreateSQLConnection();
                 
                 conn.Open();
-                MySqlCommand command = new MySqlCommand("DELETE FROM futures_transactions ORDER BY transaction_time DESC LIMIT 1", conn);
+                MySqlCommand command = new MySqlCommand("DELETE FROM options_transactions ORDER BY transaction_time DESC LIMIT 1", conn);
                 command.ExecuteNonQuery();
                 conn.Close();
                 this.dataset.Tables["options_transactions_view"].Clear();
-                this.dataset.Tables["futures_transactions_view"].Clear();
+                this.dataset.Tables["client_cashflow_view"].Clear();
+                this.dataset.Tables["options_verbose_positions_view"].Clear();
                 this.dataset.Update();
             }
 
