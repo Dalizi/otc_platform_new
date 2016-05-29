@@ -96,6 +96,7 @@ namespace OTC
             this.textBoxCommission.Text = row["手续费"].ToString();
             this.textBoxMarginRate.Text = row["保证金率"].ToString();
             this.textBoxMultiplier.Text = row["合约乘数"].ToString();
+            this.textBoxPreSettle.Text = row["结算价"].ToString();
         }
     }
 }
