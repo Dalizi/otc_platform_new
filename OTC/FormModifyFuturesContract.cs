@@ -69,8 +69,8 @@ namespace OTC
                 row["标的代码"] = this.comboBoxUnderlyingCode.Text.Split('-')[0];
                 row["手续费模式"] = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
                 row["手续费"] = commision;
-                row["保证金"] = margin;
-                row["前结算价"] = pre_settle;
+                row["保证金率"] = margin;
+                row["结算价"] = pre_settle;
                 row["合约乘数"] = multiplier;
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
