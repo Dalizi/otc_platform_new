@@ -29,7 +29,7 @@ namespace OTC
 
         public ConnectionMultiplexer GetRedisConnection()
         {
-            return ConnectionMultiplexer.Connect("10.2.7.210:6379,password=Finders6");
+            return ConnectionMultiplexer.Connect("localhost:6379");
         }
 
         private String connString { get; set; }
