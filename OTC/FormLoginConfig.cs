@@ -18,6 +18,10 @@ namespace OTC
             this.textBoxHost.Text = Properties.Settings.Default.HostName;
             this.textBoxPort.Text = Properties.Settings.Default.Port;
             this.textBoxDatabase.Text = Properties.Settings.Default.Database;
+            this.textBoxRedisHost.Text = Properties.Settings.Default.RedisHost;
+            this.textBoxRedisPort.Text = Properties.Settings.Default.RedisPort;
+            this.textBoxRedisPassword.Text = Properties.Settings.Default.RedisPassword;
+
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)
@@ -25,6 +29,9 @@ namespace OTC
             Properties.Settings.Default.HostName = textBoxHost.Text;
             Properties.Settings.Default.Port = textBoxPort.Text;
             Properties.Settings.Default.Database = textBoxDatabase.Text;
+            Properties.Settings.Default.RedisHost = textBoxRedisHost.Text;
+            Properties.Settings.Default.RedisPort = textBoxRedisPort.Text;
+            Properties.Settings.Default.RedisPassword = textBoxRedisPassword.Text;
             Properties.Settings.Default.Save();
             this.Close();
         }

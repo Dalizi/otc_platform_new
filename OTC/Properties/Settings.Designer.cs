@@ -94,5 +94,41 @@ namespace OTC.Properties {
                 this["isRememberPasswordChecked"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.2.7.210")]
+        public string RedisHost {
+            get {
+                return ((string)(this["RedisHost"]));
+            }
+            set {
+                this["RedisHost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6379")]
+        public string RedisPort {
+            get {
+                return ((string)(this["RedisPort"]));
+            }
+            set {
+                this["RedisPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RedisPassword {
+            get {
+                return ((string)(this["RedisPassword"]));
+            }
+            set {
+                this["RedisPassword"] = value;
+            }
+        }
     }
 }

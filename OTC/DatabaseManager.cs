@@ -29,7 +29,10 @@ namespace OTC
 
         public ConnectionMultiplexer GetRedisConnection()
         {
-            return ConnectionMultiplexer.Connect("localhost:6379");
+            string host = Properties.Settings.Default.RedisHost;
+            string port = Properties.Settings.Default.RedisPort;
+            string passwd = Properties.Settings.Default.RedisPassword;
+            return ConnectionMultiplexer.Connect(string.Format("{0}:{1},password={2}", host, port, passwd));
         }
 
         private String connString { get; set; }
