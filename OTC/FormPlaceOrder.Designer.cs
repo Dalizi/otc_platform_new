@@ -34,7 +34,7 @@
             this.groupBoxMainInfo = new System.Windows.Forms.GroupBox();
             this.textBoxBalance = new System.Windows.Forms.TextBox();
             this.labelBalance = new System.Windows.Forms.Label();
-            this.comboBoxTargetID = new System.Windows.Forms.ComboBox();
+            this.comboBoxTargetClientID = new System.Windows.Forms.ComboBox();
             this.labelTargetID = new System.Windows.Forms.Label();
             this.textBoxClientName = new System.Windows.Forms.TextBox();
             this.labelClientName = new System.Windows.Forms.Label();
@@ -95,7 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxMainInfo.Controls.Add(this.textBoxBalance);
             this.groupBoxMainInfo.Controls.Add(this.labelBalance);
-            this.groupBoxMainInfo.Controls.Add(this.comboBoxTargetID);
+            this.groupBoxMainInfo.Controls.Add(this.comboBoxTargetClientID);
             this.groupBoxMainInfo.Controls.Add(this.labelTargetID);
             this.groupBoxMainInfo.Controls.Add(this.textBoxClientName);
             this.groupBoxMainInfo.Controls.Add(this.labelClientName);
@@ -126,16 +126,16 @@
             this.labelBalance.TabIndex = 7;
             this.labelBalance.Text = "资金余额：";
             // 
-            // comboBoxTargetID
+            // comboBoxTargetClientID
             // 
-            this.comboBoxTargetID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBoxTargetClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxTargetID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTargetID.FormattingEnabled = true;
-            this.comboBoxTargetID.Location = new System.Drawing.Point(101, 74);
-            this.comboBoxTargetID.Name = "comboBoxTargetID";
-            this.comboBoxTargetID.Size = new System.Drawing.Size(131, 20);
-            this.comboBoxTargetID.TabIndex = 4;
+            this.comboBoxTargetClientID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTargetClientID.FormattingEnabled = true;
+            this.comboBoxTargetClientID.Location = new System.Drawing.Point(101, 74);
+            this.comboBoxTargetClientID.Name = "comboBoxTargetClientID";
+            this.comboBoxTargetClientID.Size = new System.Drawing.Size(131, 20);
+            this.comboBoxTargetClientID.TabIndex = 4;
             // 
             // labelTargetID
             // 
@@ -465,7 +465,7 @@
         private System.Windows.Forms.Label labelEntityInfo;
         private System.Windows.Forms.ComboBox comboBoxEntityCode;
         private System.Windows.Forms.GroupBox groupBoxMainInfo;
-        private System.Windows.Forms.ComboBox comboBoxTargetID;
+        private System.Windows.Forms.ComboBox comboBoxTargetClientID;
         private System.Windows.Forms.Label labelTargetID;
         private System.Windows.Forms.TextBox textBoxClientName;
         private System.Windows.Forms.Label labelClientName;

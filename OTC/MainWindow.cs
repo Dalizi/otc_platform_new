@@ -94,7 +94,8 @@ namespace OTC
             this.dataGridViewFuturesBlance.Columns["当前保证金"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesBlance.Columns["期初保证金"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesBlance.Columns["期初余额"].DefaultCellStyle.Format = "N2";
-            this.dataGridViewFuturesBlance.Columns["当前保证金"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewFuturesBlance.Columns["当前权益"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewFuturesBlance.Columns["期初权益"].DefaultCellStyle.Format = "N2";
 
             this.dataGridViewClientCashflow.Columns["资金流水编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientCashflow.Columns["客户编号"].DefaultCellStyle.Format = "00000000";

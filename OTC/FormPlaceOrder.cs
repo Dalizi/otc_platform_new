@@ -22,7 +22,7 @@ namespace OTC
             this.timer.Tick += new EventHandler(timer_Update);
             this.comboBoxEntityCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxOrderType.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
-            this.comboBoxTargetID.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
+            this.comboBoxTargetClientID.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
 
             this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(SetMaxQuantity);
             this.comboBoxContractCode.SelectedIndexChanged += new EventHandler(SetCloseTargetIDs);
@@ -140,7 +140,7 @@ namespace OTC
                 {
                     MessageBox.Show("期货账号格式错误。", "错误");
                 }
-                else if (!int.TryParse(this.comboBoxTargetID.Text, out target_client_id) && this.comboBoxTargetID.Text != "无")
+                else if (!int.TryParse(this.comboBoxTargetClientID.Text, out target_client_id) && this.comboBoxTargetClientID.Text != "无")
                 {
                     MessageBox.Show("目标客户编号格式错误。", "错误");
                 }
@@ -154,7 +154,7 @@ namespace OTC
                 }
                 else
                 {
-                    if (this.comboBoxTargetID.Text != "无")
+                    if (this.comboBoxTargetClientID.Text != "无")
                     {
                         table.Rows.Add(DBNull.Value,
                             account_no,
@@ -204,7 +204,7 @@ namespace OTC
                 {
                     MessageBox.Show("客户编号格式错误。", "错误");
                 }
-                else if (!int.TryParse(this.comboBoxTargetID.Text, out target_transaction_id) && this.comboBoxTargetID.Text != "无")
+                else if (!int.TryParse(this.comboBoxTargetClientID.Text, out target_transaction_id) && this.comboBoxTargetClientID.Text != "无")
                 {
                     MessageBox.Show("平仓目标编号格式错误。", "错误");
                 }
@@ -222,7 +222,7 @@ namespace OTC
                 }
                 else
                 {
-                    if (this.comboBoxTargetID.Text != "无")
+                    if (this.comboBoxTargetClientID.Text != "无")
                     {
                         table.Rows.Add(DBNull.Value,
                             client_id,
@@ -271,7 +271,7 @@ namespace OTC
                 this.labelEntityInfo.Text = "期货账号：";
                 this.comboBoxEntityCode.Items.Clear();
                 this.labelTargetID.Show();
-                this.comboBoxTargetID.Show();
+                this.comboBoxTargetClientID.Show();
                 this.textBoxUnderlyingPrice.Hide();
                 this.checkBoxMarketPriceFuture.Hide();
                 foreach (DataRow row in this.dataset.Tables["futures_account_info"].Rows)
@@ -302,12 +302,12 @@ namespace OTC
                 if (this.comboBoxOpenClose.Text == "开仓")
                 {
                     this.labelTargetID.Hide();
-                    this.comboBoxTargetID.Hide();
+                    this.comboBoxTargetClientID.Hide();
                 }
                 else
                 {
                     this.labelTargetID.Show();
-                    this.comboBoxTargetID.Show();
+                    this.comboBoxTargetClientID.Show();
                 }
                 this.labelEntityInfo.Text = "客户编号：";
                 this.comboBoxEntityCode.Items.Clear();
@@ -341,8 +341,8 @@ namespace OTC
 
         private void comboBoxEntityCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.comboBoxTargetID.Items.Clear();
-            this.comboBoxTargetID.Items.Add("无");
+            this.comboBoxTargetClientID.Items.Clear();
+            this.comboBoxTargetClientID.Items.Add("无");
             if (this.comboBoxOrderType.Text == "期货")
             {
                 int account_no = 0;
@@ -356,12 +356,12 @@ namespace OTC
                     {
                         if (Convert.ToInt32(row["期货账号"]) == account_no)
                         {
-                            this.comboBoxTargetID.Items.Add(row["客户编号"].ToString().PadLeft(8, '0'));
+                            this.comboBoxTargetClientID.Items.Add(row["客户编号"].ToString().PadLeft(8, '0'));
                         }
                     }
-                    if (this.comboBoxTargetID.Items.Count > 0)
+                    if (this.comboBoxTargetClientID.Items.Count > 0)
                     {
-                        this.comboBoxTargetID.SelectedIndex = 0;
+                        this.comboBoxTargetClientID.SelectedIndex = 0;
                     }
                     this.textBoxBalance.Text = ((decimal)(double)this.dataset.Tables["futures_account_balance"].Rows.Find(account_no)["当前余额"]).ToString("N2");
                 }
@@ -389,12 +389,12 @@ namespace OTC
         {
             if ((this.comboBoxOrderType.Text == "期权" && this.comboBoxOpenClose.Text == "平仓")|| this.comboBoxOrderType.Text == "期货")
             {
-                this.comboBoxTargetID.Show();
+                this.comboBoxTargetClientID.Show();
                 this.labelTargetID.Show();
             }
             else
             {
-                this.comboBoxTargetID.Hide();
+                this.comboBoxTargetClientID.Hide();
                 this.labelTargetID.Hide();
             }
         }
@@ -424,7 +424,7 @@ namespace OTC
                 if (this.comboBoxOpenClose.Text == "平仓")
                 {
                     int target_id;
-                    if (!int.TryParse(this.comboBoxTargetID.Text, out target_id) && this.comboBoxTargetID.Text != "无")
+                    if (!int.TryParse(this.comboBoxTargetClientID.Text, out target_id) && this.comboBoxTargetClientID.Text != "无")
                     {
                         this.numericUpDownQuantity.Maximum = 0;
                         return;
@@ -433,7 +433,7 @@ namespace OTC
                     String long_short = this.comboBoxLongShort.Text == "买入" ? "卖出" : "买入";
                     DataTable table = this.dataset.Tables["options_verbose_positions"];
                     String filterText = "";
-                    if (this.comboBoxTargetID.Text != "无")
+                    if (this.comboBoxTargetClientID.Text != "无")
                     {
                         filterText = String.Format("(客户编号={0}) AND (合约代码='{1}') AND (买卖方向='{2}') AND (成交编号={3})",
                             client_id,
@@ -554,11 +554,11 @@ namespace OTC
                 foreach (DataRow row in this.dataset.Tables["options_verbose_positions"].Select(String.Format("(客户编号={0}) AND (合约代码='{1}') AND 买卖方向='{2}'", client_id, contractCode, this.comboBoxLongShort.Text == "买入" ? "卖出" : "买入")))
                 {
 
-                    this.comboBoxTargetID.Items.Add(row["成交编号"].ToString().PadLeft(8, '0'));
+                    this.comboBoxTargetClientID.Items.Add(row["成交编号"].ToString().PadLeft(8, '0'));
                 }
-                if (this.comboBoxTargetID.Items.Count > 0)
+                if (this.comboBoxTargetClientID.Items.Count > 0)
                 {
-                    this.comboBoxTargetID.SelectedIndex = 0;
+                    this.comboBoxTargetClientID.SelectedIndex = 0;
                 }
             }
         }
@@ -570,8 +570,8 @@ namespace OTC
             this.comboBoxLongShort.Enabled = false;
             this.comboBoxContractCode.Text = row.Cells["合约代码"].Value.ToString();
             this.comboBoxContractCode.Enabled = false;
-            this.comboBoxTargetID.Text = row.Cells["成交编号"].Value.ToString().PadLeft(8, '0');
-            this.comboBoxTargetID.Enabled = false;
+            this.comboBoxTargetClientID.Text = row.Cells["成交编号"].Value.ToString().PadLeft(8, '0');
+            this.comboBoxTargetClientID.Enabled = false;
         }
 
         private void SetAsOptionsCloseOrderForm(DataGridViewRow row)
