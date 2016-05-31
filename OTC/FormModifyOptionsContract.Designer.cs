@@ -31,6 +31,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.groupBoxAddFuturesContract = new System.Windows.Forms.GroupBox();
+            this.textBoxVolatility = new System.Windows.Forms.TextBox();
+            this.labelVolatility = new System.Windows.Forms.Label();
             this.textBoxSettle = new System.Windows.Forms.TextBox();
             this.labelSettle = new System.Windows.Forms.Label();
             this.comboBoxOptionsContractCode = new System.Windows.Forms.ComboBox();
@@ -51,8 +53,6 @@
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
-            this.textBoxVolatility = new System.Windows.Forms.TextBox();
-            this.labelVolatility = new System.Windows.Forms.Label();
             this.groupBoxAddFuturesContract.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +60,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(237, 404);
+            this.buttonCancel.Location = new System.Drawing.Point(245, 404);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(80, 23);
             this.buttonCancel.TabIndex = 6;
@@ -71,7 +71,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(156, 404);
+            this.buttonOK.Location = new System.Drawing.Point(164, 404);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -108,10 +108,31 @@
             this.groupBoxAddFuturesContract.Controls.Add(this.labelCommission);
             this.groupBoxAddFuturesContract.Location = new System.Drawing.Point(12, 12);
             this.groupBoxAddFuturesContract.Name = "groupBoxAddFuturesContract";
-            this.groupBoxAddFuturesContract.Size = new System.Drawing.Size(316, 371);
+            this.groupBoxAddFuturesContract.Size = new System.Drawing.Size(324, 371);
             this.groupBoxAddFuturesContract.TabIndex = 9;
             this.groupBoxAddFuturesContract.TabStop = false;
             this.groupBoxAddFuturesContract.Text = "客户信息";
+            // 
+            // textBoxVolatility
+            // 
+            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxVolatility.Location = new System.Drawing.Point(114, 334);
+            this.textBoxVolatility.Name = "textBoxVolatility";
+            this.textBoxVolatility.Size = new System.Drawing.Size(66, 21);
+            this.textBoxVolatility.TabIndex = 24;
+            this.textBoxVolatility.Text = "0.00";
+            this.textBoxVolatility.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelVolatility
+            // 
+            this.labelVolatility.AutoSize = true;
+            this.labelVolatility.Location = new System.Drawing.Point(19, 337);
+            this.labelVolatility.Name = "labelVolatility";
+            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
+            this.labelVolatility.TabIndex = 25;
+            this.labelVolatility.Text = "波动率：";
             // 
             // textBoxSettle
             // 
@@ -120,9 +141,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSettle.Location = new System.Drawing.Point(114, 236);
             this.textBoxSettle.Name = "textBoxSettle";
-            this.textBoxSettle.Size = new System.Drawing.Size(191, 21);
+            this.textBoxSettle.Size = new System.Drawing.Size(66, 21);
             this.textBoxSettle.TabIndex = 23;
             this.textBoxSettle.Text = "0.00";
+            this.textBoxSettle.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelSettle
             // 
@@ -135,11 +157,13 @@
             // 
             // comboBoxOptionsContractCode
             // 
+            this.comboBoxOptionsContractCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxOptionsContractCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOptionsContractCode.FormattingEnabled = true;
             this.comboBoxOptionsContractCode.Location = new System.Drawing.Point(114, 20);
             this.comboBoxOptionsContractCode.Name = "comboBoxOptionsContractCode";
-            this.comboBoxOptionsContractCode.Size = new System.Drawing.Size(191, 20);
+            this.comboBoxOptionsContractCode.Size = new System.Drawing.Size(199, 20);
             this.comboBoxOptionsContractCode.TabIndex = 21;
             this.comboBoxOptionsContractCode.SelectedIndexChanged += new System.EventHandler(this.comboBoxOptionsContractCode_SelectedIndexChanged);
             // 
@@ -151,9 +175,10 @@
             this.textBoxStrikePrice.Enabled = false;
             this.textBoxStrikePrice.Location = new System.Drawing.Point(114, 206);
             this.textBoxStrikePrice.Name = "textBoxStrikePrice";
-            this.textBoxStrikePrice.Size = new System.Drawing.Size(191, 21);
+            this.textBoxStrikePrice.Size = new System.Drawing.Size(66, 21);
             this.textBoxStrikePrice.TabIndex = 20;
             this.textBoxStrikePrice.Text = "0.00";
+            this.textBoxStrikePrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dateTimePickerMaturityDate
             // 
@@ -163,7 +188,7 @@
             this.dateTimePickerMaturityDate.Enabled = false;
             this.dateTimePickerMaturityDate.Location = new System.Drawing.Point(114, 176);
             this.dateTimePickerMaturityDate.Name = "dateTimePickerMaturityDate";
-            this.dateTimePickerMaturityDate.Size = new System.Drawing.Size(191, 21);
+            this.dateTimePickerMaturityDate.Size = new System.Drawing.Size(199, 21);
             this.dateTimePickerMaturityDate.TabIndex = 19;
             this.dateTimePickerMaturityDate.Value = new System.DateTime(2016, 1, 21, 16, 26, 51, 0);
             // 
@@ -194,7 +219,7 @@
             this.comboBoxOptionsDirection.Enabled = false;
             this.comboBoxOptionsDirection.Location = new System.Drawing.Point(114, 144);
             this.comboBoxOptionsDirection.Name = "comboBoxOptionsDirection";
-            this.comboBoxOptionsDirection.Size = new System.Drawing.Size(191, 20);
+            this.comboBoxOptionsDirection.Size = new System.Drawing.Size(199, 20);
             this.comboBoxOptionsDirection.TabIndex = 13;
             // 
             // labelOptionDirect
@@ -215,7 +240,7 @@
             this.comboBoxOptionsType.Enabled = false;
             this.comboBoxOptionsType.Location = new System.Drawing.Point(114, 115);
             this.comboBoxOptionsType.Name = "comboBoxOptionsType";
-            this.comboBoxOptionsType.Size = new System.Drawing.Size(191, 20);
+            this.comboBoxOptionsType.Size = new System.Drawing.Size(199, 20);
             this.comboBoxOptionsType.TabIndex = 11;
             // 
             // labelOptionsType
@@ -235,7 +260,7 @@
             this.textBoxMultiplier.Enabled = false;
             this.textBoxMultiplier.Location = new System.Drawing.Point(114, 84);
             this.textBoxMultiplier.Name = "textBoxMultiplier";
-            this.textBoxMultiplier.Size = new System.Drawing.Size(191, 21);
+            this.textBoxMultiplier.Size = new System.Drawing.Size(199, 21);
             this.textBoxMultiplier.TabIndex = 4;
             this.textBoxMultiplier.Text = "1";
             // 
@@ -255,9 +280,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMarginRate.Location = new System.Drawing.Point(114, 303);
             this.textBoxMarginRate.Name = "textBoxMarginRate";
-            this.textBoxMarginRate.Size = new System.Drawing.Size(191, 21);
+            this.textBoxMarginRate.Size = new System.Drawing.Size(66, 21);
             this.textBoxMarginRate.TabIndex = 3;
             this.textBoxMarginRate.Text = "0.00";
+            this.textBoxMarginRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelMarginRate
             // 
@@ -286,7 +312,7 @@
             this.comboBoxUnderlyingCode.Enabled = false;
             this.comboBoxUnderlyingCode.Location = new System.Drawing.Point(114, 54);
             this.comboBoxUnderlyingCode.Name = "comboBoxUnderlyingCode";
-            this.comboBoxUnderlyingCode.Size = new System.Drawing.Size(191, 20);
+            this.comboBoxUnderlyingCode.Size = new System.Drawing.Size(199, 20);
             this.comboBoxUnderlyingCode.TabIndex = 1;
             // 
             // labelUnderlyingCode
@@ -305,9 +331,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCommission.Location = new System.Drawing.Point(114, 270);
             this.textBoxCommission.Name = "textBoxCommission";
-            this.textBoxCommission.Size = new System.Drawing.Size(191, 21);
+            this.textBoxCommission.Size = new System.Drawing.Size(66, 21);
             this.textBoxCommission.TabIndex = 2;
             this.textBoxCommission.Text = "0.00";
+            this.textBoxCommission.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelCommission
             // 
@@ -318,31 +345,11 @@
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
             // 
-            // textBoxVolatility
-            // 
-            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxVolatility.Location = new System.Drawing.Point(114, 334);
-            this.textBoxVolatility.Name = "textBoxVolatility";
-            this.textBoxVolatility.Size = new System.Drawing.Size(191, 21);
-            this.textBoxVolatility.TabIndex = 24;
-            this.textBoxVolatility.Text = "0.00";
-            // 
-            // labelVolatility
-            // 
-            this.labelVolatility.AutoSize = true;
-            this.labelVolatility.Location = new System.Drawing.Point(19, 337);
-            this.labelVolatility.Name = "labelVolatility";
-            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
-            this.labelVolatility.TabIndex = 25;
-            this.labelVolatility.Text = "波动率：";
-            // 
             // FormModifyOptionsContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 452);
+            this.ClientSize = new System.Drawing.Size(348, 452);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBoxAddFuturesContract);

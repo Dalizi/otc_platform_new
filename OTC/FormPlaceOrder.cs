@@ -477,7 +477,7 @@ namespace OTC
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
                     
-                    this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price * multiplier + commission), MidpointRounding.AwayFromZero)-1;
+                    this.numericUpDownQuantity.Maximum = Math.Max(Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price * multiplier + commission), MidpointRounding.AwayFromZero)-1, 0);
 
                 }
             }
@@ -530,9 +530,9 @@ namespace OTC
                     }
                     string commission_mode = rowContract["手续费模式"].ToString();
                     if (commission_mode == "abs")
-                        this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price* marginRate*multiplier+commission), MidpointRounding.AwayFromZero);
+                        this.numericUpDownQuantity.Maximum = Math.Max(Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price* marginRate*multiplier+commission), MidpointRounding.AwayFromZero) - 1, 0);
                     else if (commission_mode == "pct")
-                        this.numericUpDownQuantity.Maximum = Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price * (marginRate + commission) * multiplier), MidpointRounding.AwayFromZero) - 1;
+                        this.numericUpDownQuantity.Maximum = Math.Max(Math.Round(Convert.ToDecimal(rowBalance["当前余额"]) / (price * (marginRate + commission) * multiplier), MidpointRounding.AwayFromZero) - 1, 0);
                 }
             }
         }
@@ -599,6 +599,10 @@ namespace OTC
             {
                 this.textBoxValue.Text = "0";
                 return;
+            }
+            if (this.comboBoxOpenClose.Text == "平仓")
+            {
+                this.textBoxValue.Text = "";
             }
             decimal commission = 0;
             decimal multiplier = 0;

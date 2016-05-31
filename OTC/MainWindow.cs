@@ -92,6 +92,7 @@ namespace OTC
             this.dataGridViewFuturesBlance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewFuturesBlance.Columns["当前余额"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesBlance.Columns["当前保证金"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewFuturesBlance.Columns["期初保证金"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesBlance.Columns["期初余额"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesBlance.Columns["当前保证金"].DefaultCellStyle.Format = "N2";
 
@@ -128,6 +129,7 @@ namespace OTC
             this.dataGridViewFuturesVerbosePositions.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewFuturesVerbosePositions.Columns["开仓价格"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesVerbosePositions.Columns["持仓价格"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewFuturesVerbosePositions.Columns["占用保证金"].DefaultCellStyle.Format = "N2";
 
             this.dataGridViewOptionsPositionsSum.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewOptionsPositionsSum.Columns["平均开仓价格"].DefaultCellStyle.Format = "N2";
@@ -381,7 +383,10 @@ namespace OTC
 
         private void buttonModifyOptionsContract_Click(object sender, EventArgs e)
         {
-            FormModifyOptionsContract form = new FormModifyOptionsContract(this.dataset);
+            string contract_code;
+            if (this.dataGridViewOptionsContract.CurrentRow == null) contract_code = "";
+            else contract_code = this.dataGridViewOptionsContract.CurrentRow.Cells["合约代码"].Value.ToString();
+            FormModifyOptionsContract form = new FormModifyOptionsContract(this.dataset, contract_code);
             form.Show();
         }
 
@@ -431,6 +436,7 @@ namespace OTC
                 conn.Close();
                 this.dataset.Tables["futures_transactions_view"].Clear();
                 this.dataset.Tables["futures_cashflow_view"].Clear();
+                this.dataset.Tables["futures_verbose_positions_view"].Clear();
                 this.dataset.Update();
             }
         }

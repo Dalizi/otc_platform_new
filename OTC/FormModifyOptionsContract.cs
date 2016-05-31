@@ -12,7 +12,7 @@ namespace OTC
 {
     public partial class FormModifyOptionsContract : Form
     {
-        public FormModifyOptionsContract(OTCDataSet ds)
+        public FormModifyOptionsContract(OTCDataSet ds, string contract_code)
         {
             InitializeComponent();
             this.dataset = ds;
@@ -32,7 +32,7 @@ namespace OTC
             }
             if (this.comboBoxOptionsContractCode.Items.Count > 0)
             {
-                this.comboBoxOptionsContractCode.SelectedIndex = 0;
+                this.comboBoxOptionsContractCode.SelectedIndex = this.comboBoxOptionsContractCode.FindStringExact(contract_code);
             }
         }
 
