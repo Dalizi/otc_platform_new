@@ -1,4 +1,5 @@
 ﻿client_id=客户编号
+rights=权益
 balance=余额
 position_market_value=持仓市值
 available_balance=可用余额

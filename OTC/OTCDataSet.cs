@@ -37,6 +37,7 @@ namespace OTC
             this.colNameDict = new Dictionary<string, string>();
             this.sql_connection = new MySqlConnection();
             this.adapterDict = new Dictionary<string, MySqlDataAdapter>();
+            this.tmp_ds = new DataSet();
             GetColNameMapping();
 
         }
@@ -109,6 +110,7 @@ namespace OTC
                 adapter.UpdateCommand = builder.GetUpdateCommand();
                 adapter.DeleteCommand = builder.GetDeleteCommand();
                 adapter.FillSchema(this, System.Data.SchemaType.Source, t);
+                adapter.FillSchema(tmp_ds, SchemaType.Source, t);
                 adapter.Fill(this, t);
                 adapterDict.Add(t, adapter);
             }
@@ -116,14 +118,17 @@ namespace OTC
             {
                 selectString = String.Format("select * from {0};", t);
                 if (t == "client_balance_join")
-                    selectString = "SELECT ci.client_id,ci.client_name, ci.account_no, cb.balance, IFNULL(SUM(ovp.holding_price * ovp.quantity * oc.multiplier),0) as position_market_value FROM (((client_info ci LEFT JOIN client_balance cb ON ci.client_id=cb.client_id) LEFT JOIN options_verbose_positions ovp ON ci.client_id = ovp.client_id) LEFT JOIN options_contracts oc ON ovp.contract_code=oc.contract_code) GROUP by client_id;";
+                    selectString = "SELECT ci.client_id,ci.client_name, ci.account_no, cb.balance +  IFNULL(SUM(ovp.holding_price * ovp.quantity * oc.multiplier),0) as rights, cb.balance, IFNULL(SUM(ovp.holding_price * ovp.quantity * oc.multiplier),0) as position_market_value FROM (((client_info ci LEFT JOIN client_balance cb ON ci.client_id=cb.client_id) LEFT JOIN options_verbose_positions ovp ON ci.client_id = ovp.client_id) LEFT JOIN options_contracts oc ON ovp.contract_code=oc.contract_code) GROUP by client_id;";
                 else if (t == "futures_account_balance_view")
-                    selectString = "SELECT fab.account_no, SUM(init_balance+init_margin) as init_rights, SUM(current_balance+current_margin) as current_rights, init_balance, current_balance, init_margin, current_margin FROM futures_account_balance fab;";
+                    selectString = "SELECT fab.account_no, init_balance+init_margin as init_rights, current_balance+current_margin as current_rights, init_balance, current_balance, init_margin, current_margin FROM futures_account_balance fab;";
+                else if (t == "futures_verbose_positions_view")
+                    selectString = "SELECT * FROM futures_verbose_positions;";
                 MySqlCommand command = new MySqlCommand(selectString, this.sql_connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
                 adapter.SelectCommand = command;
                 adapter.FillSchema(this, System.Data.SchemaType.Source, t);
+                adapter.FillSchema(tmp_ds, SchemaType.Source, t);
                 adapter.Fill(this, t);
                 adapterDict.Add(t, adapter);
             }
@@ -138,11 +143,16 @@ namespace OTC
 
             {
                 System.Data.DataTable sum_table = this.Tables["options_positions_summary"];
+                var tmp_sum_table = this.tmp_ds.Tables["options_positions_summary"];
                 sum_table.PrimaryKey = new System.Data.DataColumn[] { sum_table.Columns["client_id"], sum_table.Columns["contract_code"], sum_table.Columns["long_short"]};
+                tmp_sum_table.PrimaryKey = new System.Data.DataColumn[] { tmp_sum_table.Columns["client_id"], tmp_sum_table.Columns["contract_code"], tmp_sum_table.Columns["long_short"] };
             }
             {
                 System.Data.DataTable sum_table = this.Tables["futures_positions_summary"];
+                var tmp_sum_table = this.tmp_ds.Tables["futures_positions_summary"];
                 sum_table.PrimaryKey = new System.Data.DataColumn[] { sum_table.Columns["account_no"], sum_table.Columns["contract_code"], sum_table.Columns["long_short"] };
+                tmp_sum_table.PrimaryKey = new System.Data.DataColumn[] { tmp_sum_table.Columns["account_no"], tmp_sum_table.Columns["contract_code"], tmp_sum_table.Columns["long_short"] };
+
             }
 
             foreach (String t in table_names)
@@ -183,6 +193,17 @@ namespace OTC
                 }
             }
 
+            foreach (System.Data.DataTable table in tmp_ds.Tables)
+            {
+                foreach (System.Data.DataColumn col in table.Columns)
+                {
+                    String mappedName = "";
+                    col.AllowDBNull = true;
+                    if (colNameDict.TryGetValue(col.ColumnName, out mappedName))
+                        col.ColumnName = mappedName;
+                }
+            }
+
             this.Tables.Add("risk_info");
             using (DataTable table = this.Tables["risk_info"])
             {
@@ -199,7 +220,7 @@ namespace OTC
                 table.Columns.Add("Theta", Type.GetType("System.Double"));
                 table.Columns.Add("Vega", Type.GetType("System.Double"));
                 table.Columns.Add("Rho", Type.GetType("System.Double"));
-                table.PrimaryKey = new DataColumn[] { table.Columns["合约代码"],table.Columns["客户编号"],table.Columns["买卖方向"] };
+                table.PrimaryKey = new DataColumn[] { table.Columns["客户编号"], table.Columns["合约代码"],table.Columns["买卖方向"] };
 
             }
 
@@ -242,7 +263,6 @@ namespace OTC
             //a.Fill(this, table_name);
 
         }
-
         public void Commit()
         {
             foreach (String table_name in table_names)
@@ -250,12 +270,10 @@ namespace OTC
                 Commit(table_name);
             }
         }
-
         public void Update(String table_name)
         {
-            adapterDict[table_name].Fill(this, table_name);
+            FillTable(table_name);
         }
-
         public void Update()
         {
             foreach (String table_name in table_names)
@@ -269,7 +287,36 @@ namespace OTC
             }
             UpdateGreeks();
         }
-
+        public MySqlConnection CreateSQLConnection()
+        {
+            return dbManager.GetSQLConnection();
+        }
+        public IDatabase CreateRedisConnection()
+        {
+            var conn = dbManager.GetRedisConnection();
+            return conn.GetDatabase();
+        }
+        public double GetDTM(DateTime exp_date)
+        {
+            double dtm = (exp_date - DateTime.Today).TotalDays;
+            if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
+            {
+                dtm += 1;
+            }
+            DateTime d = DateTime.Today;
+            int n_weekends = 0;
+            while (d <= exp_date)
+            {
+                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(d))
+                {
+                    n_weekends += 1;
+                }
+                d = d.AddDays(1);
+            }
+            dtm = dtm - n_weekends;
+            dtm = dtm > 0 ? dtm : 0;
+            return dtm;
+        }
         private void UpdateGreeks()
         {
             var db = this.redis_connection.GetDatabase();
@@ -290,14 +337,14 @@ namespace OTC
                 char type = char.Parse(contract_row["认购认沽"].ToString());
                 double rate = 0.015;
                 int direction_multiplier = position_direction == "买入" ? -1 : 1;
-                double delta = OptionsCalculator.GetBlsDelta(S0, K, dtm/256d, sigma, rate, type) * quantity * direction_multiplier;
+                double delta = OptionsCalculator.GetBlsDelta(S0, K, dtm / 256d, sigma, rate, type) * quantity * direction_multiplier;
                 double gamma = OptionsCalculator.GetBlsGamma(S0, K, dtm / 256d, sigma, rate) * quantity * direction_multiplier;
                 double theta = OptionsCalculator.GetBlsTheta(S0, K, dtm / 256d, sigma, rate, type) * quantity / 256 * direction_multiplier * 10;
                 double vega = OptionsCalculator.GetBlsVega(S0, K, dtm / 256d, sigma, rate) * quantity / 100 * direction_multiplier * 10;
                 double rho = OptionsCalculator.GetBlsRho(S0, K, dtm / 256d, sigma, rate, type) * quantity / 100 * direction_multiplier * 10;
-                if (table.Rows.Contains(new object[] {contract_code, client_id, position_direction }))
+                if (table.Rows.Contains(new object[] { client_id, contract_code,  position_direction }))
                 {
-                    DataRow row_risk = table.Rows.Find(new object[] { contract_code, client_id, position_direction });
+                    DataRow row_risk = table.Rows.Find(new object[] { client_id, contract_code, position_direction });
                     row_risk["数量"] = quantity;
                     row_risk["波动率"] = sigma;
                     row_risk["标的现价"] = S0;
@@ -312,13 +359,19 @@ namespace OTC
                 {
                     table.Rows.Add(client_id, contract_code, underlying, position_direction, S0, quantity, dtm, sigma, delta, gamma, theta, vega, rho);
                 }
-               
+
             }
+
+            var position_keys = new List<object[]>();
             foreach (var row in table.AsEnumerable())
             {
-                if (!Tables["options_positions_summary"].Rows.Contains(new object[] {row["客户编号"], row["合约代码"], row["买卖方向"] }))
+                position_keys.Add(new object[] { row["客户编号"], row["合约代码"], row["买卖方向"]});
+            }
+            foreach (var key in position_keys)
+            {
+                if (!Tables["options_positions_summary"].Rows.Contains(key))
                 {
-                    table.Rows.Remove(row);
+                    table.Rows.Remove(table.Rows.Find(key));
                 }
             }
             var risk_info_gross = from row in table.AsEnumerable()
@@ -344,13 +397,13 @@ namespace OTC
                 double.TryParse(this.Tables["futures_positions_summary"].Compute("sum(数量)", string.Format("合约代码='{0}' AND 买卖方向='{1}'", a.code, "卖出")).ToString(), out short_underlying_position);
 
                 contracts.Add(a.code);
-                if(!Tables["risk_info_gross"].Rows.Contains(a.code))
+                if (!Tables["risk_info_gross"].Rows.Contains(a.code))
                 {
                     Tables["risk_info_gross"].Rows.Add(a.code, a.price, a.Delta + long_underlying_position - short_underlying_position, a.Gamma, a.Theta, a.Vega, a.Rho);
                 }
                 else
                 {
-                     var row = Tables["risk_info_gross"].Rows.Find(a.code);
+                    var row = Tables["risk_info_gross"].Rows.Find(a.code);
                     row["标的现价"] = a.price;
                     row["Delta"] = a.Delta + long_underlying_position - short_underlying_position;
                     row["Gamma"] = a.Gamma;
@@ -364,7 +417,7 @@ namespace OTC
             {
                 position_codes.Add(row.Field<string>("标的代码"));
             }
-                foreach (var code in position_codes)
+            foreach (var code in position_codes)
             {
                 if (!contracts.Contains(code))
                 {
@@ -373,38 +426,39 @@ namespace OTC
                 }
             }
         }
-
-        public MySqlConnection CreateSQLConnection()
+        private void FillTable(string table_name)
         {
-            return dbManager.GetSQLConnection();
-        }
-
-        public IDatabase CreateRedisConnection()
-        {
-            var conn = dbManager.GetRedisConnection();
-            return conn.GetDatabase();
-        }
-
-        public double GetDTM(DateTime exp_date)
-        {
-            double dtm = (exp_date - DateTime.Today).TotalDays;
-            if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
+            DataTable temp_table = tmp_ds.Tables[table_name];
+            temp_table.Clear();
+            DataTable target_table = Tables[table_name];
+            var adapter = adapterDict[table_name];
+            adapter.Fill(target_table);
+            adapter.Fill(temp_table);
+            var n_keys = target_table.PrimaryKey.Count();
+            if (n_keys != 0)
             {
-                dtm += 1;
-            }
-            DateTime d = DateTime.Today;
-            int n_weekends = 0;
-            while (d <= exp_date)
-            {
-                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(d))
+                var keys_list = new List<object[]>();
+                foreach (var row in target_table.AsEnumerable())
                 {
-                    n_weekends += 1;
+                    var values = new object[n_keys];
+                    int i = 0;
+                    foreach (var key in target_table.PrimaryKey)
+                    {
+                        values[i] = row[key];
+                        ++i;
+                    }
+                    keys_list.Add(values);
                 }
-                d = d.AddDays(1);
+                foreach (var keys in keys_list)
+                {
+                    if (temp_table.Rows.Find(keys) == null)
+                    {
+                        target_table.Rows.Remove(target_table.Rows.Find(keys));
+                    }
+                }
+
             }
-            dtm = dtm - n_weekends;
-            dtm = dtm > 0 ? dtm : 0;
-            return dtm;
+
         }
 
         DatabaseManager dbManager;
@@ -412,6 +466,7 @@ namespace OTC
         ConnectionMultiplexer redis_connection;
         Dictionary<String, MySqlDataAdapter> adapterDict;
         Dictionary<String, String> colNameDict;
+        DataSet tmp_ds;
         string[] table_names;
         string[] view_names;
         List<DateTime> holidays;
