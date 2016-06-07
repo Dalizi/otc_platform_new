@@ -21,7 +21,7 @@ namespace OTC
         { 
             this.dataset = ds;
             
-            this.listBoxNonTradeDay.DataSource = ds.Tables["trade_dates"];
+            this.listBoxNonTradeDay.DataSource = ds.Tables["non_trade_dates"];
             this.listBoxNonTradeDay.ValueMember = "non_trade_dates";
             this.listBoxNonTradeDay.DisplayMember = "non_trade_dates";
         }
@@ -53,8 +53,8 @@ namespace OTC
 
         private void commitChange()
         {
-            this.dataset.Commit("trade_dates");
-            this.dataset.Tables["trade_dates"].DefaultView.Sort = "[non_trade_dates]";
+            this.dataset.Commit("non_trade_dates");
+            this.dataset.Tables["non_trade_dates"].DefaultView.Sort = "[non_trade_dates]";
         }
     }
 

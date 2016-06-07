@@ -93,7 +93,7 @@ namespace OTC
                 "options_transactions_view",
                 "options_types_view",
                 "options_verbose_positions_view",
-                "trade_dates"
+                "non_trade_dates"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -125,7 +125,7 @@ namespace OTC
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
                 adapter.SelectCommand = command;
-                if (t == "trade_dates")
+                if (t == "non_trade_dates")
                 {
                     MySqlCommandBuilder builder = new MySqlCommandBuilder(adapter);
                     adapter.InsertCommand = builder.GetInsertCommand();
@@ -304,7 +304,7 @@ namespace OTC
         public double GetDTM(DateTime exp_date)
         {
             double dtm = (exp_date - DateTime.Today).TotalDays;
-            var non_trade_days = this.Tables["trade_dates"];
+            var non_trade_days = this.Tables["non_trade_dates"];
             if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
             {
                 dtm += 1;
