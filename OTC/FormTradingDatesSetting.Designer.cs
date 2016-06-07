@@ -28,65 +28,102 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendarTrading = new System.Windows.Forms.MonthCalendar();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.panelTradeDay = new System.Windows.Forms.Panel();
+            this.buttonAddDay = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.listBoxNonTradeDay = new System.Windows.Forms.ListBox();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.panelTradeDay.SuspendLayout();
             this.SuspendLayout();
             // 
-            // monthCalendarTrading
+            // panelTradeDay
             // 
-            this.monthCalendarTrading.CalendarDimensions = new System.Drawing.Size(4, 3);
-            this.monthCalendarTrading.Location = new System.Drawing.Point(18, 18);
-            this.monthCalendarTrading.MaxSelectionCount = 365;
-            this.monthCalendarTrading.MinDate = new System.DateTime(2016, 3, 11, 0, 0, 0, 0);
-            this.monthCalendarTrading.Name = "monthCalendarTrading";
-            this.monthCalendarTrading.TabIndex = 0;
-            this.monthCalendarTrading.MouseDown += new System.Windows.Forms.MouseEventHandler(this.monthCalendar1_MouseDown);
+            this.panelTradeDay.Controls.Add(this.buttonDelete);
+            this.panelTradeDay.Controls.Add(this.listBoxNonTradeDay);
+            this.panelTradeDay.Controls.Add(this.buttonAddDay);
+            this.panelTradeDay.Controls.Add(this.dateTimePicker1);
+            this.panelTradeDay.Controls.Add(this.buttonClose);
+            this.panelTradeDay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTradeDay.Location = new System.Drawing.Point(0, 0);
+            this.panelTradeDay.Name = "panelTradeDay";
+            this.panelTradeDay.Size = new System.Drawing.Size(398, 193);
+            this.panelTradeDay.TabIndex = 0;
             // 
-            // buttonOK
+            // buttonAddDay
             // 
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(756, 575);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 1;
-            this.buttonOK.Text = "确定";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            this.buttonAddDay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddDay.Location = new System.Drawing.Point(292, 13);
+            this.buttonAddDay.Name = "buttonAddDay";
+            this.buttonAddDay.Size = new System.Drawing.Size(91, 23);
+            this.buttonAddDay.TabIndex = 4;
+            this.buttonAddDay.Text = "添加非交易日";
+            this.buttonAddDay.UseVisualStyleBackColor = true;
+            this.buttonAddDay.Click += new System.EventHandler(this.buttonAddDay_Click);
             // 
-            // buttonCancel
+            // dateTimePicker1
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(837, 575);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "取消";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.dateTimePicker1.Location = new System.Drawing.Point(154, 13);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(129, 21);
+            this.dateTimePicker1.TabIndex = 3;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.Location = new System.Drawing.Point(308, 158);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 1;
+            this.buttonClose.Text = "关闭";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // listBoxNonTradeDay
+            // 
+            this.listBoxNonTradeDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxNonTradeDay.FormattingEnabled = true;
+            this.listBoxNonTradeDay.ItemHeight = 12;
+            this.listBoxNonTradeDay.Location = new System.Drawing.Point(13, 13);
+            this.listBoxNonTradeDay.Name = "listBoxNonTradeDay";
+            this.listBoxNonTradeDay.Size = new System.Drawing.Size(119, 148);
+            this.listBoxNonTradeDay.TabIndex = 5;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(154, 54);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(88, 23);
+            this.buttonDelete.TabIndex = 6;
+            this.buttonDelete.Text = "删除非交易日";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // FormTradingDatesSetting
             // 
-            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(923, 610);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.monthCalendarTrading);
+            this.ClientSize = new System.Drawing.Size(398, 193);
+            this.Controls.Add(this.panelTradeDay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormTradingDatesSetting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "交易日设定";
+            this.Text = "非交易日设定";
+            this.panelTradeDay.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MonthCalendar monthCalendarTrading;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Panel panelTradeDay;
+        private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonAddDay;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ListBox listBoxNonTradeDay;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }

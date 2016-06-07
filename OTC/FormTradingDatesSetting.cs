@@ -20,65 +20,41 @@ namespace OTC
         public FormTradingDatesSetting(OTCDataSet ds):this()
         { 
             this.dataset = ds;
-            InitDates();
-        }
-        public void InitDates()
-        {
-            this.monthCalendarTrading.MinDate = DateTime.Today;
-            try
-            {
-                var connection = dataset.CreateSQLConnection();
-                connection.Open();
-                var command = new MySql.Data.MySqlClient.MySqlCommand("select * from trade_dates", connection);
-                var reader = command.ExecuteReader();
-                while (reader.Read()) {
-                    DateTime date = DateTime.Parse(reader[0].ToString());
-                    this.monthCalendarTrading.AddBoldedDate(date);
-                }
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                MessageBox.Show("Error " + ex.Number + " has occurred: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
+            this.listBoxNonTradeDay.DataSource = ds.Tables["trade_dates"];
+            this.listBoxNonTradeDay.ValueMember = "non_trade_dates";
+            this.listBoxNonTradeDay.DisplayMember = "non_trade_dates";
         }
 
-        private void monthCalendar1_MouseDown(object sender, MouseEventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
-            MonthCalendar.HitTestInfo info = this.monthCalendarTrading.HitTest(e.Location);
-            if (info.HitArea == MonthCalendar.HitArea.Date)
-            {
-                if (this.monthCalendarTrading.BoldedDates.Contains(info.Time))
-                    this.monthCalendarTrading.RemoveBoldedDate(info.Time);
-                else
-                    this.monthCalendarTrading.AddBoldedDate(info.Time);
-                this.monthCalendarTrading.UpdateBoldedDates();
-            }
+            this.Close();
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void buttonAddDay_Click(object sender, EventArgs e)
         {
-            try
+            var table = (DataTable)this.listBoxNonTradeDay.DataSource;
+            table.Rows.Add(this.dateTimePicker1.Value);
+            commitChange();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            var s_item = this.listBoxNonTradeDay.SelectedItem;
+            var table = (DataTable)this.listBoxNonTradeDay.DataSource;
+            if (s_item != null)
             {
-                var connection = dataset.CreateSQLConnection();
-                connection.Open();
-                var command = new MySql.Data.MySqlClient.MySqlCommand("delete from trade_dates", connection);
-                command.ExecuteNonQuery();
-                command.CommandText = "insert into trade_dates values";
-                foreach (var date in this.monthCalendarTrading.BoldedDates)
-                {
-                    command.CommandText += "('" + date.ToString("yyyy/MM/dd") + "'),";
-                }
-                command.CommandText = command.CommandText.Trim(',');
-                command.ExecuteNonQuery();
-                connection.Close();
-                this.Close();
+                DataRowView row = (DataRowView)s_item;
+                table.Rows.Find(row[0]).Delete();
+                commitChange();
             }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-{
-                MessageBox.Show("Error " + ex.Number + " has occurred: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+        }
+
+        private void commitChange()
+        {
+            this.dataset.Commit("trade_dates");
+            this.dataset.Tables["trade_dates"].DefaultView.Sort = "[non_trade_dates]";
         }
     }
 

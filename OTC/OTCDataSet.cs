@@ -56,7 +56,6 @@ namespace OTC
 
         private void GetData()
         {
-            holidays = new List<DateTime> (){ new DateTime(2016, 6, 9), new DateTime(2016, 6, 10)};
             table_names = new String[] {
                 "client_balance",
                 "client_cashflow",
@@ -74,7 +73,7 @@ namespace OTC
                 "options_direction_type",
                 "options_transactions",
                 "options_types",
-                "options_verbose_positions",
+                "options_verbose_positions"
             };
 
             view_names = new String[]
@@ -93,9 +92,8 @@ namespace OTC
                 "options_positions_summary",
                 "options_transactions_view",
                 "options_types_view",
-                "options_verbose_positions_view"
-
-
+                "options_verbose_positions_view",
+                "trade_dates"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -127,6 +125,13 @@ namespace OTC
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
                 adapter.SelectCommand = command;
+                if (t == "trade_dates")
+                {
+                    MySqlCommandBuilder builder = new MySqlCommandBuilder(adapter);
+                    adapter.InsertCommand = builder.GetInsertCommand();
+                    adapter.UpdateCommand = builder.GetUpdateCommand();
+                    adapter.DeleteCommand = builder.GetDeleteCommand();
+                }
                 adapter.FillSchema(this, System.Data.SchemaType.Source, t);
                 adapter.FillSchema(tmp_ds, SchemaType.Source, t);
                 adapter.Fill(this, t);
@@ -299,6 +304,7 @@ namespace OTC
         public double GetDTM(DateTime exp_date)
         {
             double dtm = (exp_date - DateTime.Today).TotalDays;
+            var non_trade_days = this.Tables["trade_dates"];
             if (DateTime.Now.TimeOfDay < new DateTime(2016, 1, 1, 12, 0, 0).TimeOfDay)
             {
                 dtm += 1;
@@ -307,7 +313,7 @@ namespace OTC
             int n_weekends = 0;
             while (d <= exp_date)
             {
-                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(d))
+                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || non_trade_days.Rows.Find(d)!=null)
                 {
                     n_weekends += 1;
                 }
@@ -371,7 +377,7 @@ namespace OTC
             {
                 if (!Tables["options_positions_summary"].Rows.Contains(key))
                 {
-                    table.Rows.Remove(table.Rows.Find(key));
+                    table.Rows.Find(key).Delete();
                 }
             }
             var risk_info_gross = from row in table.AsEnumerable()
@@ -421,8 +427,7 @@ namespace OTC
             {
                 if (!contracts.Contains(code))
                 {
-                    var row = Tables["risk_info_gross"].Rows.Find(code);
-                    Tables["risk_info_gross"].Rows.Remove(row);
+                    Tables["risk_info_gross"].Rows.Find(code).Delete();
                 }
             }
         }
@@ -440,20 +445,24 @@ namespace OTC
                 var keys_list = new List<object[]>();
                 foreach (var row in target_table.AsEnumerable())
                 {
-                    var values = new object[n_keys];
-                    int i = 0;
-                    foreach (var key in target_table.PrimaryKey)
+                    if (row == null)
                     {
-                        values[i] = row[key];
-                        ++i;
+                        var values = new object[n_keys];
+                        int i = 0;
+                        foreach (var key in target_table.PrimaryKey)
+                        {
+                            values[i] = row[key];
+                            ++i;
+                        }
+                        keys_list.Add(values);
                     }
-                    keys_list.Add(values);
+                    
                 }
                 foreach (var keys in keys_list)
                 {
                     if (temp_table.Rows.Find(keys) == null)
                     {
-                        target_table.Rows.Remove(target_table.Rows.Find(keys));
+                        target_table.Rows.Find(keys).Delete();
                     }
                 }
 
@@ -469,6 +478,5 @@ namespace OTC
         DataSet tmp_ds;
         string[] table_names;
         string[] view_names;
-        List<DateTime> holidays;
     }
 }

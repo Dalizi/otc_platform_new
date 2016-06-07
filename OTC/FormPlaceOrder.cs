@@ -83,7 +83,7 @@ namespace OTC
             {
                 var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
                 if (this.checkBoxMarketPriceFuture.Checked) this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
-                var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
+                var option_price = OptionsCalculator.GetBlsPrice(spot_price, (double)strike, T, vol, this.r, option_type);
                 if (this.checkBoxMarketPriceOption.Checked) this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
             }
             else if (this.comboBoxOrderType.Text == "期货" && this.underlying_code != null && this.underlying_code != "")
@@ -101,7 +101,7 @@ namespace OTC
             {
                 var cur_contract = this.dataset.Tables["options_contracts"].Rows.Find(this.comboBoxContractCode.Text);
                 underlying_code = cur_contract.Field<string>("标的代码");
-                strike = cur_contract.Field<double>("执行价");
+                strike = cur_contract.Field<decimal>("执行价");
                 var exp_date = cur_contract.Field<DateTime>("到期日");
                 var dtm = this.dataset.GetDTM(exp_date);
                 T = dtm/ 256d;
@@ -109,7 +109,7 @@ namespace OTC
                 option_type = cur_contract.Field<string>("认购认沽")[0];
                 var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
                 this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
-                var option_price = OptionsCalculator.GetBlsPrice(spot_price, strike, T, vol, this.r, option_type);
+                var option_price = OptionsCalculator.GetBlsPrice(spot_price, (double)strike, T, vol, this.r, option_type);
                 this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
 
             }
@@ -376,7 +376,7 @@ namespace OTC
                 else
                 {
                     this.textBoxClientName.Text = this.dataset.Tables["client_info"].Rows.Find(client_id)["客户名称"].ToString();
-                    this.textBoxBalance.Text = (this.dataset.Tables["client_balance"].Rows.Find(client_id).Field<double>("余额")).ToString("N2");
+                    this.textBoxBalance.Text = (this.dataset.Tables["client_balance"].Rows.Find(client_id).Field<decimal>("余额")).ToString("N2");
 
                 }
                 SetCloseTargetIDs(sender, e);
@@ -609,12 +609,12 @@ namespace OTC
             decimal margin_rate = 0;
             String table_name = this.comboBoxOrderType.Text == "期货" ? "futures_contracts" : "options_contracts";
             DataRow row = this.dataset.Tables[table_name].Rows.Find(contractCode);
-            commission = (decimal)(double)row["手续费"];
+            commission = row.Field<decimal>("手续费");
             string commission_mode = "";
             if (this.comboBoxOrderType.Text == "期货")
                 commission_mode = row.Field<string>("手续费模式");
             multiplier = (int)row["合约乘数"];
-            margin_rate = (decimal)(double)row["保证金率"];
+            margin_rate = row.Field<decimal>("保证金率");
             decimal pre_settle = this.comboBoxOrderType.Text == "期货" ? (decimal)(double)row["结算价"] : 0;
             if (this.comboBoxLongShort.Text == "买入" && this.comboBoxOrderType.Text == "期权")
             {
@@ -637,7 +637,7 @@ namespace OTC
         Timer timer;
         IDatabase redis_db;
         string underlying_code;
-        double strike = 0;
+        decimal strike = 0;
         double T = 0;
         double vol = 0;
         double r = 0.015;
