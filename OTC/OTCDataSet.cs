@@ -13,7 +13,7 @@ namespace OTC
     {
         public OTCDataSet() { InitializeComponent(); }
 
-        public OTCDataSet(DatabaseManager dm): this()
+        public OTCDataSet(DatabaseManager dm) : this()
         {
             this.dbManager = dm;
             this.sql_connection = dm.GetSQLConnection();
@@ -115,11 +115,7 @@ namespace OTC
             foreach (String t in view_names)
             {
                 selectString = String.Format("select * from {0};", t);
-                if (t == "client_balance_join")
-                    selectString = "SELECT ci.client_id,ci.client_name, ci.account_no, cb.balance +  IFNULL(SUM(ovp.holding_price * ovp.quantity * oc.multiplier),0) as rights, cb.balance, IFNULL(SUM(ovp.holding_price * ovp.quantity * oc.multiplier),0) as position_market_value FROM (((client_info ci LEFT JOIN client_balance cb ON ci.client_id=cb.client_id) LEFT JOIN options_verbose_positions ovp ON ci.client_id = ovp.client_id) LEFT JOIN options_contracts oc ON ovp.contract_code=oc.contract_code) GROUP by client_id;";
-                else if (t == "futures_account_balance_view")
-                    selectString = "SELECT fab.account_no, init_balance+init_margin as init_rights, current_balance+current_margin as current_rights, init_balance, current_balance, init_margin, current_margin FROM futures_account_balance fab;";
-                else if (t == "futures_verbose_positions_view")
+                if (t == "futures_verbose_positions_view")
                     selectString = "SELECT * FROM futures_verbose_positions;";
                 MySqlCommand command = new MySqlCommand(selectString, this.sql_connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -145,11 +141,17 @@ namespace OTC
                 }
             }
 
+            {
+                System.Data.DataTable client_table = this.Tables["client_balance_join"];
+                var tmp_client_table = this.tmp_ds.Tables["client_balance_join"];
+                client_table.PrimaryKey = new System.Data.DataColumn[] { client_table.Columns["client_id"] };
+                tmp_client_table.PrimaryKey = new System.Data.DataColumn[] { tmp_client_table.Columns["client_id"]};
+            }
 
             {
                 System.Data.DataTable sum_table = this.Tables["options_positions_summary"];
                 var tmp_sum_table = this.tmp_ds.Tables["options_positions_summary"];
-                sum_table.PrimaryKey = new System.Data.DataColumn[] { sum_table.Columns["client_id"], sum_table.Columns["contract_code"], sum_table.Columns["long_short"]};
+                sum_table.PrimaryKey = new System.Data.DataColumn[] { sum_table.Columns["client_id"], sum_table.Columns["contract_code"], sum_table.Columns["long_short"] };
                 tmp_sum_table.PrimaryKey = new System.Data.DataColumn[] { tmp_sum_table.Columns["client_id"], tmp_sum_table.Columns["contract_code"], tmp_sum_table.Columns["long_short"] };
             }
             {
@@ -225,7 +227,7 @@ namespace OTC
                 table.Columns.Add("Theta", Type.GetType("System.Double"));
                 table.Columns.Add("Vega", Type.GetType("System.Double"));
                 table.Columns.Add("Rho", Type.GetType("System.Double"));
-                table.PrimaryKey = new DataColumn[] { table.Columns["客户编号"], table.Columns["合约代码"],table.Columns["买卖方向"] };
+                table.PrimaryKey = new DataColumn[] { table.Columns["客户编号"], table.Columns["合约代码"], table.Columns["买卖方向"] };
 
             }
 
@@ -313,7 +315,7 @@ namespace OTC
             int n_weekends = 0;
             while (d <= exp_date)
             {
-                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || non_trade_days.Rows.Find(d)!=null)
+                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || non_trade_days.Rows.Find(d) != null)
                 {
                     n_weekends += 1;
                 }
@@ -329,49 +331,53 @@ namespace OTC
             DataTable table = Tables["risk_info"];
             foreach (var row in Tables["options_positions_summary"].AsEnumerable())
             {
-                String contract_code = row["合约代码"].ToString();
-                int client_id = int.Parse(row["客户编号"].ToString());
-                string position_direction = row["买卖方向"].ToString();
-                double quantity = double.Parse(row["数量"].ToString());
-                DataRow contract_row = Tables["options_contracts"].Rows.Find(contract_code);
-                String underlying = contract_row["标的代码"].ToString();
-                double S0 = double.Parse(db.HashGet(underlying, "LastPrice"));
-                double K = double.Parse(contract_row["执行价"].ToString());
-                double sigma = double.Parse(contract_row["波动率"].ToString());
-                DateTime date = DateTime.Parse(contract_row["到期日"].ToString());
-                double dtm = GetDTM(date);
-                char type = char.Parse(contract_row["认购认沽"].ToString());
-                double rate = 0.015;
-                int direction_multiplier = position_direction == "买入" ? -1 : 1;
-                double delta = OptionsCalculator.GetBlsDelta(S0, K, dtm / 256d, sigma, rate, type) * quantity * direction_multiplier;
-                double gamma = OptionsCalculator.GetBlsGamma(S0, K, dtm / 256d, sigma, rate) * quantity * direction_multiplier;
-                double theta = OptionsCalculator.GetBlsTheta(S0, K, dtm / 256d, sigma, rate, type) * quantity / 256 * direction_multiplier * 10;
-                double vega = OptionsCalculator.GetBlsVega(S0, K, dtm / 256d, sigma, rate) * quantity / 100 * direction_multiplier * 10;
-                double rho = OptionsCalculator.GetBlsRho(S0, K, dtm / 256d, sigma, rate, type) * quantity / 100 * direction_multiplier * 10;
-                if (table.Rows.Contains(new object[] { client_id, contract_code,  position_direction }))
+                if (row.RowState != DataRowState.Deleted)
                 {
-                    DataRow row_risk = table.Rows.Find(new object[] { client_id, contract_code, position_direction });
-                    row_risk["数量"] = quantity;
-                    row_risk["波动率"] = sigma;
-                    row_risk["标的现价"] = S0;
-                    row_risk["到期天数"] = dtm;
-                    row_risk["Delta"] = delta;
-                    row_risk["Gamma"] = gamma;
-                    row_risk["Theta"] = theta;
-                    row_risk["Vega"] = vega;
-                    row_risk["Rho"] = rho;
+                    String contract_code = row["合约代码"].ToString();
+                    int client_id = int.Parse(row["客户编号"].ToString());
+                    string position_direction = row["买卖方向"].ToString();
+                    double quantity = double.Parse(row["数量"].ToString());
+                    DataRow contract_row = Tables["options_contracts"].Rows.Find(contract_code);
+                    String underlying = contract_row["标的代码"].ToString();
+                    double S0 = double.Parse(db.HashGet(underlying, "LastPrice"));
+                    double K = double.Parse(contract_row["执行价"].ToString());
+                    double sigma = double.Parse(contract_row["波动率"].ToString());
+                    DateTime date = DateTime.Parse(contract_row["到期日"].ToString());
+                    double dtm = GetDTM(date);
+                    char type = char.Parse(contract_row["认购认沽"].ToString());
+                    double rate = 0.015;
+                    int direction_multiplier = position_direction == "买入" ? -1 : 1;
+                    double delta = OptionsCalculator.GetBlsDelta(S0, K, dtm / 256d, sigma, rate, type) * quantity * direction_multiplier;
+                    double gamma = OptionsCalculator.GetBlsGamma(S0, K, dtm / 256d, sigma, rate) * quantity * direction_multiplier;
+                    double theta = OptionsCalculator.GetBlsTheta(S0, K, dtm / 256d, sigma, rate, type) * quantity / 256 * direction_multiplier * 10;
+                    double vega = OptionsCalculator.GetBlsVega(S0, K, dtm / 256d, sigma, rate) * quantity / 100 * direction_multiplier * 10;
+                    double rho = OptionsCalculator.GetBlsRho(S0, K, dtm / 256d, sigma, rate, type) * quantity / 100 * direction_multiplier * 10;
+                    if (table.Rows.Contains(new object[] { client_id, contract_code, position_direction }))
+                    {
+                        DataRow row_risk = table.Rows.Find(new object[] { client_id, contract_code, position_direction });
+                        row_risk["数量"] = quantity;
+                        row_risk["波动率"] = sigma;
+                        row_risk["标的现价"] = S0;
+                        row_risk["到期天数"] = dtm;
+                        row_risk["Delta"] = delta;
+                        row_risk["Gamma"] = gamma;
+                        row_risk["Theta"] = theta;
+                        row_risk["Vega"] = vega;
+                        row_risk["Rho"] = rho;
+                    }
+                    else
+                    {
+                        table.Rows.Add(client_id, contract_code, underlying, position_direction, S0, quantity, dtm, sigma, delta, gamma, theta, vega, rho);
+                    }
                 }
-                else
-                {
-                    table.Rows.Add(client_id, contract_code, underlying, position_direction, S0, quantity, dtm, sigma, delta, gamma, theta, vega, rho);
-                }
+
 
             }
 
             var position_keys = new List<object[]>();
             foreach (var row in table.AsEnumerable())
             {
-                position_keys.Add(new object[] { row["客户编号"], row["合约代码"], row["买卖方向"]});
+                position_keys.Add(new object[] { row["客户编号"], row["合约代码"], row["买卖方向"] });
             }
             foreach (var key in position_keys)
             {
@@ -437,34 +443,53 @@ namespace OTC
             temp_table.Clear();
             DataTable target_table = Tables[table_name];
             var adapter = adapterDict[table_name];
-            adapter.Fill(target_table);
             adapter.Fill(temp_table);
             var n_keys = target_table.PrimaryKey.Count();
             if (n_keys != 0)
             {
-                var keys_list = new List<object[]>();
-                foreach (var row in target_table.AsEnumerable())
+                foreach (var row in temp_table.AsEnumerable())
                 {
-                    if (row == null)
+                    var values = new object[n_keys];
+                    int i = 0;
+                    foreach (var key in temp_table.PrimaryKey)
                     {
-                        var values = new object[n_keys];
-                        int i = 0;
-                        foreach (var key in target_table.PrimaryKey)
+                        var temp_value = row[key];
+                        values[i] = row[key];
+                        ++i;
+                    }
+                    if (target_table.Rows.Find(values) == null)
+                    {
+                        target_table.Rows.Add(row.ItemArray);
+                    }
+
+                }
+                if (target_table.Rows.Count > 0)
+                {
+                    foreach (var row in target_table.AsEnumerable())
+                    {
+                        if (row.RowState != DataRowState.Deleted)
                         {
-                            values[i] = row[key];
-                            ++i;
+                            var values = new object[n_keys];
+                            int i = 0;
+                            foreach (var key in target_table.PrimaryKey)
+                            {
+                                values[i] = row[key];
+                                ++i;
+                            }
+                            if (temp_table.Rows.Find(values) == null)
+                            {
+                                target_table.Rows.Find(values).Delete();
+                            }
+                            else
+                            {
+                                target_table.Rows.Find(values).ItemArray = temp_table.Rows.Find(values).ItemArray;
+                            }
+
                         }
-                        keys_list.Add(values);
-                    }
-                    
-                }
-                foreach (var keys in keys_list)
-                {
-                    if (temp_table.Rows.Find(keys) == null)
-                    {
-                        target_table.Rows.Find(keys).Delete();
+
                     }
                 }
+                
 
             }
 
