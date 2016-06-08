@@ -288,11 +288,10 @@ namespace OTC
         {
             foreach (String table_name in table_names)
             {
-                if (table_name != "non_trade_dates")
-                {
-                    this.Tables[table_name].Clear();
-                    Update(table_name);
-                }
+
+                this.Tables[table_name].Clear();
+                Update(table_name);
+
             }
             foreach (String table_name in view_names)
             {
@@ -450,6 +449,12 @@ namespace OTC
             DataTable target_table = Tables[table_name];
             var adapter = adapterDict[table_name];
             adapter.Fill(temp_table);
+            if (table_name == "non_trade_dates")
+            {
+                target_table.Clear();
+                adapter.Fill(target_table);
+                return;
+            }
             var n_keys = target_table.PrimaryKey.Count();
             if (n_keys != 0)
             {

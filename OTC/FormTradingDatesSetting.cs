@@ -34,6 +34,7 @@ namespace OTC
         {
             var table = (DataTable)this.listBoxNonTradeDay.DataSource;
             table.Rows.Add(this.dateTimePicker1.Value);
+            commitChange();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace OTC
                 DataRowView row = (DataRowView)s_item;
                 table.Rows.Find(row[0]).Delete();
             }
+            commitChange();
 
         }
 
@@ -57,7 +59,6 @@ namespace OTC
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            commitChange();
             this.Close();
         }
     }
