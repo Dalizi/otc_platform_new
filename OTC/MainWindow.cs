@@ -32,6 +32,9 @@ namespace OTC
 
         private void SetDataSource()
         {
+            this.dataGridViewBusinessState.DataSource = this.dataset;
+            this.dataGridViewBusinessState.DataMember = "business_state_view";
+
             this.dataGridViewClientBalance.DataSource = this.dataset;
             this.dataGridViewClientBalance.DataMember = "client_balance_join";
 
@@ -84,6 +87,14 @@ namespace OTC
 
         private void FormatTable()
         {
+            this.dataGridViewBusinessState.Columns["结算日"].DefaultCellStyle.Format = "yyyy/MM/dd";
+            this.dataGridViewBusinessState.Columns["结算日总盈亏"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewBusinessState.Columns["结算日期权盈亏"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewBusinessState.Columns["结算日期货盈亏"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewBusinessState.Columns["累计总盈亏"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewBusinessState.Columns["累计期权盈亏"].DefaultCellStyle.Format = "N2";
+            this.dataGridViewBusinessState.Columns["累计期货盈亏"].DefaultCellStyle.Format = "N2";
+
             this.dataGridViewClientBalance.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["期初权益"].DefaultCellStyle.Format = "N2";

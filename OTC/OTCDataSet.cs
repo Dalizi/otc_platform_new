@@ -93,7 +93,8 @@ namespace OTC
                 "options_transactions_view",
                 "options_types_view",
                 "options_verbose_positions_view",
-                "non_trade_dates"
+                "non_trade_dates",
+                "business_state_view"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -145,7 +146,7 @@ namespace OTC
                 System.Data.DataTable client_table = this.Tables["client_balance_join"];
                 var tmp_client_table = this.tmp_ds.Tables["client_balance_join"];
                 client_table.PrimaryKey = new System.Data.DataColumn[] { client_table.Columns["client_id"] };
-                tmp_client_table.PrimaryKey = new System.Data.DataColumn[] { tmp_client_table.Columns["client_id"]};
+                tmp_client_table.PrimaryKey = new System.Data.DataColumn[] { tmp_client_table.Columns["client_id"] };
             }
 
             {
@@ -329,7 +330,7 @@ namespace OTC
         {
             var db = this.redis_connection.GetDatabase();
             DataTable table = Tables["risk_info"];
-            foreach (var row in Tables["options_positions_summary"].AsEnumerable())
+            foreach (var row in Tables["options_positions_summary"].AsEnumerable().ToArray())
             {
                 if (row.RowState != DataRowState.Deleted)
                 {
@@ -447,7 +448,7 @@ namespace OTC
             var n_keys = target_table.PrimaryKey.Count();
             if (n_keys != 0)
             {
-                foreach (var row in temp_table.AsEnumerable())
+                foreach (var row in temp_table.AsEnumerable().ToArray())
                 {
                     var values = new object[n_keys];
                     int i = 0;
@@ -463,33 +464,31 @@ namespace OTC
                     }
 
                 }
-                if (target_table.Rows.Count > 0)
+                foreach (var row in target_table.AsEnumerable().ToArray())
                 {
-                    foreach (var row in target_table.AsEnumerable())
+                    if (row.RowState != DataRowState.Deleted)
                     {
-                        if (row.RowState != DataRowState.Deleted)
+                        var values = new object[n_keys];
+                        int i = 0;
+                        foreach (var key in target_table.PrimaryKey)
                         {
-                            var values = new object[n_keys];
-                            int i = 0;
-                            foreach (var key in target_table.PrimaryKey)
-                            {
-                                values[i] = row[key];
-                                ++i;
-                            }
-                            if (temp_table.Rows.Find(values) == null)
-                            {
-                                target_table.Rows.Find(values).Delete();
-                            }
-                            else
-                            {
-                                target_table.Rows.Find(values).ItemArray = temp_table.Rows.Find(values).ItemArray;
-                            }
-
+                            values[i] = row[key];
+                            ++i;
+                        }
+                        if (temp_table.Rows.Find(values) == null)
+                        {
+                            target_table.Rows.Find(values).Delete();
+                        }
+                        else
+                        {
+                            target_table.Rows.Find(values).ItemArray = temp_table.Rows.Find(values).ItemArray;
                         }
 
                     }
+
                 }
-                
+
+
 
             }
 
@@ -498,7 +497,7 @@ namespace OTC
         DatabaseManager dbManager;
         MySqlConnection sql_connection;
         ConnectionMultiplexer redis_connection;
-        Dictionary<String, MySqlDataAdapter> adapterDict;
+        Dictionary<string, MySqlDataAdapter> adapterDict;
         Dictionary<String, String> colNameDict;
         DataSet tmp_ds;
         string[] table_names;

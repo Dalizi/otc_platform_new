@@ -110,7 +110,7 @@ namespace OTC
                 var spot_price = double.Parse(this.redis_db.HashGet(underlying_code, "LastPrice").ToString());
                 this.textBoxUnderlyingPrice.Text = spot_price.ToString("N2");
                 var option_price = OptionsCalculator.GetBlsPrice(spot_price, (double)strike, T, vol, this.r, option_type);
-                this.numericUpDownPrice.Value = this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m;
+                this.numericUpDownPrice.Value = Math.Max(this.comboBoxLongShort.Text == "买入" ? decimal.Ceiling(new decimal(option_price) * 100m) / 100m : decimal.Floor(new decimal(option_price) * 100m) / 100m, 0.0001m);
 
             }
             else if(this.comboBoxOrderType.Text == "期货")
@@ -363,7 +363,7 @@ namespace OTC
                     {
                         this.comboBoxTargetClientID.SelectedIndex = 0;
                     }
-                    this.textBoxBalance.Text = ((decimal)(double)this.dataset.Tables["futures_account_balance"].Rows.Find(account_no)["当前余额"]).ToString("N2");
+                    this.textBoxBalance.Text = (this.dataset.Tables["futures_account_balance"].Rows.Find(account_no).Field<decimal>("当前余额")).ToString("N2");
                 }
             }
             else
@@ -376,7 +376,7 @@ namespace OTC
                 else
                 {
                     this.textBoxClientName.Text = this.dataset.Tables["client_info"].Rows.Find(client_id)["客户名称"].ToString();
-                    this.textBoxBalance.Text = (this.dataset.Tables["client_balance"].Rows.Find(client_id).Field<decimal>("余额")).ToString("N2");
+                    this.textBoxBalance.Text = (this.dataset.Tables["client_balance"].Rows.Find(client_id).Field<decimal>("资金余额")).ToString("N2");
 
                 }
                 SetCloseTargetIDs(sender, e);
@@ -477,7 +477,7 @@ namespace OTC
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
                     
-                    this.numericUpDownQuantity.Maximum = Math.Max(Math.Round(Convert.ToDecimal(rowBalance["余额"])/(price * multiplier + commission), MidpointRounding.AwayFromZero)-1, 0);
+                    this.numericUpDownQuantity.Maximum = Math.Max(Math.Round(Convert.ToDecimal(rowBalance["资金余额"])/(price * multiplier + commission), MidpointRounding.AwayFromZero)-1, 0);
 
                 }
             }
@@ -613,9 +613,9 @@ namespace OTC
             string commission_mode = "";
             if (this.comboBoxOrderType.Text == "期货")
                 commission_mode = row.Field<string>("手续费模式");
-            multiplier = (int)row["合约乘数"];
+            multiplier = row.Field<decimal>("合约乘数");
             margin_rate = row.Field<decimal>("保证金率");
-            decimal pre_settle = this.comboBoxOrderType.Text == "期货" ? (decimal)(double)row["结算价"] : 0;
+            decimal pre_settle = this.comboBoxOrderType.Text == "期货" ? row.Field<decimal>("结算价") : 0;
             if (this.comboBoxLongShort.Text == "买入" && this.comboBoxOrderType.Text == "期权")
             {
                 this.textBoxValue.Text = (this.numericUpDownPrice.Value * this.numericUpDownQuantity.Value * multiplier).ToString("N2");
