@@ -20,7 +20,6 @@ namespace OTC
         public FormTradingDatesSetting(OTCDataSet ds):this()
         { 
             this.dataset = ds;
-            
             this.listBoxNonTradeDay.DataSource = ds.Tables["non_trade_dates"];
             this.listBoxNonTradeDay.ValueMember = "non_trade_dates";
             this.listBoxNonTradeDay.DisplayMember = "non_trade_dates";
@@ -35,7 +34,6 @@ namespace OTC
         {
             var table = (DataTable)this.listBoxNonTradeDay.DataSource;
             table.Rows.Add(this.dateTimePicker1.Value);
-            commitChange();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -46,7 +44,6 @@ namespace OTC
             {
                 DataRowView row = (DataRowView)s_item;
                 table.Rows.Find(row[0]).Delete();
-                commitChange();
             }
 
         }
@@ -55,6 +52,13 @@ namespace OTC
         {
             this.dataset.Commit("non_trade_dates");
             this.dataset.Tables["non_trade_dates"].DefaultView.Sort = "[non_trade_dates]";
+            ((DataTable)this.listBoxNonTradeDay.DataSource).AcceptChanges();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            commitChange();
+            this.Close();
         }
     }
 

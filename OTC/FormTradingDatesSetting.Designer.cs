@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.panelTradeDay = new System.Windows.Forms.Panel();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.listBoxNonTradeDay = new System.Windows.Forms.ListBox();
             this.buttonAddDay = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.listBoxNonTradeDay = new System.Windows.Forms.ListBox();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.panelTradeDay.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTradeDay
             // 
+            this.panelTradeDay.Controls.Add(this.buttonSave);
             this.panelTradeDay.Controls.Add(this.buttonDelete);
             this.panelTradeDay.Controls.Add(this.listBoxNonTradeDay);
             this.panelTradeDay.Controls.Add(this.buttonAddDay);
@@ -49,6 +51,27 @@
             this.panelTradeDay.Name = "panelTradeDay";
             this.panelTradeDay.Size = new System.Drawing.Size(398, 193);
             this.panelTradeDay.TabIndex = 0;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(154, 54);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(88, 23);
+            this.buttonDelete.TabIndex = 6;
+            this.buttonDelete.Text = "删除非交易日";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // listBoxNonTradeDay
+            // 
+            this.listBoxNonTradeDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxNonTradeDay.FormattingEnabled = true;
+            this.listBoxNonTradeDay.ItemHeight = 12;
+            this.listBoxNonTradeDay.Location = new System.Drawing.Point(13, 13);
+            this.listBoxNonTradeDay.Name = "listBoxNonTradeDay";
+            this.listBoxNonTradeDay.Size = new System.Drawing.Size(119, 148);
+            this.listBoxNonTradeDay.TabIndex = 5;
             // 
             // buttonAddDay
             // 
@@ -79,26 +102,16 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // listBoxNonTradeDay
+            // buttonSave
             // 
-            this.listBoxNonTradeDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBoxNonTradeDay.FormattingEnabled = true;
-            this.listBoxNonTradeDay.ItemHeight = 12;
-            this.listBoxNonTradeDay.Location = new System.Drawing.Point(13, 13);
-            this.listBoxNonTradeDay.Name = "listBoxNonTradeDay";
-            this.listBoxNonTradeDay.Size = new System.Drawing.Size(119, 148);
-            this.listBoxNonTradeDay.TabIndex = 5;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(154, 54);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(88, 23);
-            this.buttonDelete.TabIndex = 6;
-            this.buttonDelete.Text = "删除非交易日";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Location = new System.Drawing.Point(227, 158);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 7;
+            this.buttonSave.Text = "保存";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // FormTradingDatesSetting
             // 
@@ -125,5 +138,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ListBox listBoxNonTradeDay;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonSave;
     }
 }

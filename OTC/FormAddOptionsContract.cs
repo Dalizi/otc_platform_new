@@ -89,7 +89,7 @@ namespace OTC
                     strike,
                     dateTimePickerMaturityDate.Value.Date,
                     margin,
-                    this.comboBoxUnderlyingCode.Text, 0, multiplier, commision, volatility);
+                    this.comboBoxUnderlyingCode.Text, 0, multiplier, commision, volatility,0, false);
                 this.dataset.Commit("options_contracts");
                 this.dataset.Update("options_contracts");
                 this.dataset.Update("options_contracts_view");

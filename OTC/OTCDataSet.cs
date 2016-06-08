@@ -94,7 +94,9 @@ namespace OTC
                 "options_types_view",
                 "options_verbose_positions_view",
                 "non_trade_dates",
-                "business_state_view"
+                "business_state_view",
+                "option_settle_info_view",
+                "future_settle_info_view"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -286,8 +288,11 @@ namespace OTC
         {
             foreach (String table_name in table_names)
             {
-                this.Tables[table_name].Clear();
-                Update(table_name);
+                if (table_name != "non_trade_dates")
+                {
+                    this.Tables[table_name].Clear();
+                    Update(table_name);
+                }
             }
             foreach (String table_name in view_names)
             {
@@ -460,7 +465,8 @@ namespace OTC
                     }
                     if (target_table.Rows.Find(values) == null)
                     {
-                        target_table.Rows.Add(row.ItemArray);
+                        var new_row = target_table.Rows.Add(row.ItemArray);
+                        new_row.AcceptChanges();
                     }
 
                 }

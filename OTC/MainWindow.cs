@@ -462,6 +462,12 @@ namespace OTC
             FormTradingDatesSetting form = new FormTradingDatesSetting(dataset);
             form.ShowDialog();
         }
+
+        private void settlementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSettlement form = new FormSettlement(dataset);
+            form.ShowDialog();
+        }
     }
         
 }

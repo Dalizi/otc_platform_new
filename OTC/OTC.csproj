@@ -198,6 +198,12 @@
     <Compile Include="FormPlaceOrder.Designer.cs">
       <DependentUpon>FormPlaceOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSettlement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSettlement.Designer.cs">
+      <DependentUpon>FormSettlement.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTradingDatesSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPlaceOrder.resx">
       <DependentUpon>FormPlaceOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSettlement.resx">
+      <DependentUpon>FormSettlement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTradingDatesSetting.resx">
       <DependentUpon>FormTradingDatesSetting.cs</DependentUpon>
