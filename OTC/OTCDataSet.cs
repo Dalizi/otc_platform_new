@@ -288,8 +288,6 @@ namespace OTC
         {
             foreach (String table_name in table_names)
             {
-
-                this.Tables[table_name].Clear();
                 Update(table_name);
 
             }
