@@ -32,50 +32,50 @@ namespace OTC
 
         private void SetDataSource()
         {
-            this.dataGridViewBusinessState.DataSource = this.dataset;
+            this.dataGridViewBusinessState.DataSource = this.dataset.display_ds;
             this.dataGridViewBusinessState.DataMember = "business_state_view";
 
-            this.dataGridViewClientBalance.DataSource = this.dataset;
+            this.dataGridViewClientBalance.DataSource = this.dataset.display_ds;
             this.dataGridViewClientBalance.DataMember = "client_balance_join";
 
-            this.dataGridViewFuturesBlance.DataSource = this.dataset;
+            this.dataGridViewFuturesBlance.DataSource = this.dataset.display_ds;
             this.dataGridViewFuturesBlance.DataMember = "futures_account_balance_view";
 
-            this.dataGridViewCommodity.DataSource = this.dataset;
+            this.dataGridViewCommodity.DataSource = this.dataset.display_ds;
             this.dataGridViewCommodity.DataMember = "commodity_category_view";
 
-            this.dataGridViewOptionsType.DataSource = this.dataset;
+            this.dataGridViewOptionsType.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsType.DataMember = "options_types_view";
 
-            this.dataGridViewFuturesContract.DataSource = this.dataset;
+            this.dataGridViewFuturesContract.DataSource = this.dataset.display_ds;
             this.dataGridViewFuturesContract.DataMember = "futures_contracts_view";
 
-            this.dataGridViewOptionsContract.DataSource = this.dataset;
+            this.dataGridViewOptionsContract.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsContract.DataMember = "options_contracts_view";
 
-            this.dataGridViewClientCashflow.DataSource = this.dataset;
+            this.dataGridViewClientCashflow.DataSource = this.dataset.display_ds;
             this.dataGridViewClientCashflow.DataMember = "client_cashflow_view";
             
 
-            this.dataGridViewFuturesAccountCashflow.DataSource = this.dataset;
+            this.dataGridViewFuturesAccountCashflow.DataSource = this.dataset.display_ds;
             this.dataGridViewFuturesAccountCashflow.DataMember = "futures_cashflow_view";
 
-            this.dataGridViewOptionsTransactions.DataSource = this.dataset;
+            this.dataGridViewOptionsTransactions.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsTransactions.DataMember = "options_transactions_view";
 
-            this.dataGridViewFuturesTransactions.DataSource = this.dataset;
+            this.dataGridViewFuturesTransactions.DataSource = this.dataset.display_ds;
             this.dataGridViewFuturesTransactions.DataMember = "futures_transactions_view";
 
-            this.dataGridViewOptionsVerbosePositions.DataSource = this.dataset;
+            this.dataGridViewOptionsVerbosePositions.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsVerbosePositions.DataMember = "options_verbose_positions_view";
 
-            this.dataGridViewFuturesVerbosePositions.DataSource = this.dataset;
+            this.dataGridViewFuturesVerbosePositions.DataSource = this.dataset.display_ds;
             this.dataGridViewFuturesVerbosePositions.DataMember = "futures_verbose_positions_view";
 
-            this.dataGridViewOptionsPositionsSum.DataSource = this.dataset;
+            this.dataGridViewOptionsPositionsSum.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsPositionsSum.DataMember = "options_positions_summary";
 
-            this.dataGridViewFuturesPositionsSum.DataSource = this.dataset;
+            this.dataGridViewFuturesPositionsSum.DataSource = this.dataset.display_ds;
             this.dataGridViewFuturesPositionsSum.DataMember = "futures_positions_summary";
 
             this.dataGridViewRiskInfoDetailed.DataSource = this.dataset;

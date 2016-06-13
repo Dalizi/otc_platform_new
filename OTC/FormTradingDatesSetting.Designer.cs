@@ -34,13 +34,13 @@
             this.buttonAddDay = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.labelInstruction = new System.Windows.Forms.Label();
             this.panelTradeDay.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTradeDay
             // 
-            this.panelTradeDay.Controls.Add(this.buttonSave);
+            this.panelTradeDay.Controls.Add(this.labelInstruction);
             this.panelTradeDay.Controls.Add(this.buttonDelete);
             this.panelTradeDay.Controls.Add(this.listBoxNonTradeDay);
             this.panelTradeDay.Controls.Add(this.buttonAddDay);
@@ -102,16 +102,14 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // buttonSave
+            // labelInstruction
             // 
-            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(227, 158);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 7;
-            this.buttonSave.Text = "保存";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.labelInstruction.AutoSize = true;
+            this.labelInstruction.Location = new System.Drawing.Point(13, 168);
+            this.labelInstruction.Name = "labelInstruction";
+            this.labelInstruction.Size = new System.Drawing.Size(119, 12);
+            this.labelInstruction.TabIndex = 7;
+            this.labelInstruction.Text = "*除周末外的非交易日";
             // 
             // FormTradingDatesSetting
             // 
@@ -126,6 +124,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "非交易日设定";
             this.panelTradeDay.ResumeLayout(false);
+            this.panelTradeDay.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -138,6 +137,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ListBox listBoxNonTradeDay;
         private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Label labelInstruction;
     }
 }

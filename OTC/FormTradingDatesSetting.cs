@@ -54,12 +54,6 @@ namespace OTC
         {
             this.dataset.Commit("non_trade_dates");
             this.dataset.Tables["non_trade_dates"].DefaultView.Sort = "[non_trade_dates]";
-            ((DataTable)this.listBoxNonTradeDay.DataSource).AcceptChanges();
-        }
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 

@@ -37,7 +37,7 @@ namespace OTC
             this.colNameDict = new Dictionary<string, string>();
             this.sql_connection = new MySqlConnection();
             this.adapterDict = new Dictionary<string, MySqlDataAdapter>();
-            this.tmp_ds = new DataSet();
+            this.display_ds = new DataSet();
             GetColNameMapping();
 
         }
@@ -111,8 +111,9 @@ namespace OTC
                 adapter.UpdateCommand = builder.GetUpdateCommand();
                 adapter.DeleteCommand = builder.GetDeleteCommand();
                 adapter.FillSchema(this, System.Data.SchemaType.Source, t);
-                adapter.FillSchema(tmp_ds, SchemaType.Source, t);
+                adapter.FillSchema(display_ds, SchemaType.Source, t);
                 adapter.Fill(this, t);
+                adapter.Fill(display_ds, t);
                 adapterDict.Add(t, adapter);
             }
             foreach (String t in view_names)
@@ -132,8 +133,9 @@ namespace OTC
                     adapter.DeleteCommand = builder.GetDeleteCommand();
                 }
                 adapter.FillSchema(this, System.Data.SchemaType.Source, t);
-                adapter.FillSchema(tmp_ds, SchemaType.Source, t);
+                adapter.FillSchema(display_ds, SchemaType.Source, t);
                 adapter.Fill(this, t);
+                adapter.Fill(display_ds, t);
                 adapterDict.Add(t, adapter);
             }
             foreach (System.Data.DataTable table in this.Tables)
@@ -143,23 +145,30 @@ namespace OTC
                     col.AllowDBNull = true;
                 }
             }
+            foreach (System.Data.DataTable table in this.display_ds.Tables)
+            {
+                foreach (System.Data.DataColumn col in table.Columns)
+                {
+                    col.AllowDBNull = true;
+                }
+            }
 
             {
                 System.Data.DataTable client_table = this.Tables["client_balance_join"];
-                var tmp_client_table = this.tmp_ds.Tables["client_balance_join"];
+                var tmp_client_table = this.display_ds.Tables["client_balance_join"];
                 client_table.PrimaryKey = new System.Data.DataColumn[] { client_table.Columns["client_id"] };
                 tmp_client_table.PrimaryKey = new System.Data.DataColumn[] { tmp_client_table.Columns["client_id"] };
             }
 
             {
                 System.Data.DataTable sum_table = this.Tables["options_positions_summary"];
-                var tmp_sum_table = this.tmp_ds.Tables["options_positions_summary"];
+                var tmp_sum_table = this.display_ds.Tables["options_positions_summary"];
                 sum_table.PrimaryKey = new System.Data.DataColumn[] { sum_table.Columns["client_id"], sum_table.Columns["contract_code"], sum_table.Columns["long_short"] };
                 tmp_sum_table.PrimaryKey = new System.Data.DataColumn[] { tmp_sum_table.Columns["client_id"], tmp_sum_table.Columns["contract_code"], tmp_sum_table.Columns["long_short"] };
             }
             {
                 System.Data.DataTable sum_table = this.Tables["futures_positions_summary"];
-                var tmp_sum_table = this.tmp_ds.Tables["futures_positions_summary"];
+                var tmp_sum_table = this.display_ds.Tables["futures_positions_summary"];
                 sum_table.PrimaryKey = new System.Data.DataColumn[] { sum_table.Columns["account_no"], sum_table.Columns["contract_code"], sum_table.Columns["long_short"] };
                 tmp_sum_table.PrimaryKey = new System.Data.DataColumn[] { tmp_sum_table.Columns["account_no"], tmp_sum_table.Columns["contract_code"], tmp_sum_table.Columns["long_short"] };
 
@@ -203,7 +212,7 @@ namespace OTC
                 }
             }
 
-            foreach (System.Data.DataTable table in tmp_ds.Tables)
+            foreach (System.Data.DataTable table in display_ds.Tables)
             {
                 foreach (System.Data.DataColumn col in table.Columns)
                 {
@@ -442,55 +451,49 @@ namespace OTC
         }
         private void FillTable(string table_name)
         {
-            DataTable temp_table = tmp_ds.Tables[table_name];
-            temp_table.Clear();
-            DataTable target_table = Tables[table_name];
+            DataTable tunnel_table = Tables[table_name];
+            DataTable display_table = this.display_ds.Tables[table_name];
+            tunnel_table.Clear();
             var adapter = adapterDict[table_name];
-            adapter.Fill(temp_table);
-            if (table_name == "non_trade_dates")
-            {
-                target_table.Clear();
-                adapter.Fill(target_table);
-                return;
-            }
-            var n_keys = target_table.PrimaryKey.Count();
+            adapter.Fill(tunnel_table);
+            var n_keys = display_table.PrimaryKey.Count();
             if (n_keys != 0)
             {
-                foreach (var row in temp_table.AsEnumerable().ToArray())
+                foreach (var row in tunnel_table.AsEnumerable().ToArray())
                 {
                     var values = new object[n_keys];
                     int i = 0;
-                    foreach (var key in temp_table.PrimaryKey)
+                    foreach (var key in tunnel_table.PrimaryKey)
                     {
                         var temp_value = row[key];
                         values[i] = row[key];
                         ++i;
                     }
-                    if (target_table.Rows.Find(values) == null)
+                    if (display_table.Rows.Find(values) == null)
                     {
-                        var new_row = target_table.Rows.Add(row.ItemArray);
+                        var new_row = display_table.Rows.Add(row.ItemArray);
                         new_row.AcceptChanges();
                     }
 
                 }
-                foreach (var row in target_table.AsEnumerable().ToArray())
+                foreach (var row in display_table.AsEnumerable().ToArray())
                 {
                     if (row.RowState != DataRowState.Deleted)
                     {
                         var values = new object[n_keys];
                         int i = 0;
-                        foreach (var key in target_table.PrimaryKey)
+                        foreach (var key in display_table.PrimaryKey)
                         {
                             values[i] = row[key];
                             ++i;
                         }
-                        if (temp_table.Rows.Find(values) == null)
+                        if (tunnel_table.Rows.Find(values) == null)
                         {
-                            target_table.Rows.Find(values).Delete();
+                            display_table.Rows.Find(values).Delete();
                         }
                         else
                         {
-                            target_table.Rows.Find(values).ItemArray = temp_table.Rows.Find(values).ItemArray;
+                            display_table.Rows.Find(values).ItemArray = tunnel_table.Rows.Find(values).ItemArray;
                         }
 
                     }
@@ -508,7 +511,7 @@ namespace OTC
         ConnectionMultiplexer redis_connection;
         Dictionary<string, MySqlDataAdapter> adapterDict;
         Dictionary<String, String> colNameDict;
-        DataSet tmp_ds;
+        public DataSet display_ds;
         string[] table_names;
         string[] view_names;
     }
