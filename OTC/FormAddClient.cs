@@ -40,7 +40,7 @@ namespace OTC
 
             if (!String.IsNullOrEmpty(textBoxClientName.Text) && !String.IsNullOrEmpty(comboBoxFuturesAccount.Text))
             {
-                this.dataset.Tables["client_info"].Rows.Add(int.Parse(textBoxClientId.Text), textBoxClientName.Text, int.Parse(comboBoxFuturesAccount.Text));
+                this.dataset.Tables["client_info"].Rows.Add(int.Parse(textBoxClientId.Text), textBoxClientName.Text, int.Parse(comboBoxFuturesAccount.Text), textBoxValidationCode.Text);
                 this.dataset.Commit("client_info");
                 this.dataset.Update();
                 Close();

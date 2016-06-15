@@ -135,6 +135,7 @@ namespace OTC
         private void comboBoxUnderlyingCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.textBoxMultiplier.Text = dataset.Tables["futures_contracts"].Rows.Find(this.comboBoxUnderlyingCode.Text)["合约乘数"].ToString();
+            this.textBoxVolatility.Text = dataset.Tables["futures_contracts"].Rows.Find(this.comboBoxUnderlyingCode.Text)["波动率"].ToString();
             setContractCode();
         }
 

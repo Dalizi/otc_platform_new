@@ -45,6 +45,10 @@
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
+            this.textBoxVolatility = new System.Windows.Forms.TextBox();
+            this.labelVolatility = new System.Windows.Forms.Label();
+            this.textBoxPreSettle = new System.Windows.Forms.TextBox();
+            this.labelPreSettle = new System.Windows.Forms.Label();
             this.groupBoxAddFuturesContract.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +57,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(237, 247);
+            this.buttonCancel.Location = new System.Drawing.Point(237, 266);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(80, 23);
             this.buttonCancel.TabIndex = 6;
@@ -64,7 +68,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(156, 247);
+            this.buttonOK.Location = new System.Drawing.Point(156, 266);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -77,6 +81,10 @@
             this.groupBoxAddFuturesContract.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAddFuturesContract.Controls.Add(this.textBoxPreSettle);
+            this.groupBoxAddFuturesContract.Controls.Add(this.labelPreSettle);
+            this.groupBoxAddFuturesContract.Controls.Add(this.textBoxVolatility);
+            this.groupBoxAddFuturesContract.Controls.Add(this.labelVolatility);
             this.groupBoxAddFuturesContract.Controls.Add(this.panel1);
             this.groupBoxAddFuturesContract.Controls.Add(this.labelCommissionMode);
             this.groupBoxAddFuturesContract.Controls.Add(this.textBoxMultiplier);
@@ -91,7 +99,7 @@
             this.groupBoxAddFuturesContract.Controls.Add(this.labelCommission);
             this.groupBoxAddFuturesContract.Location = new System.Drawing.Point(12, 12);
             this.groupBoxAddFuturesContract.Name = "groupBoxAddFuturesContract";
-            this.groupBoxAddFuturesContract.Size = new System.Drawing.Size(316, 193);
+            this.groupBoxAddFuturesContract.Size = new System.Drawing.Size(316, 248);
             this.groupBoxAddFuturesContract.TabIndex = 9;
             this.groupBoxAddFuturesContract.TabStop = false;
             this.groupBoxAddFuturesContract.Text = "客户信息";
@@ -145,7 +153,7 @@
             this.textBoxMultiplier.Name = "textBoxMultiplier";
             this.textBoxMultiplier.Size = new System.Drawing.Size(191, 21);
             this.textBoxMultiplier.TabIndex = 4;
-            this.textBoxMultiplier.Text = "1";
+            this.textBoxMultiplier.Text = "10";
             // 
             // labelMultiplier
             // 
@@ -236,11 +244,51 @@
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
             // 
+            // textBoxVolatility
+            // 
+            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxVolatility.Location = new System.Drawing.Point(114, 193);
+            this.textBoxVolatility.Name = "textBoxVolatility";
+            this.textBoxVolatility.Size = new System.Drawing.Size(191, 21);
+            this.textBoxVolatility.TabIndex = 13;
+            this.textBoxVolatility.Text = "0.00";
+            // 
+            // labelVolatility
+            // 
+            this.labelVolatility.AutoSize = true;
+            this.labelVolatility.Location = new System.Drawing.Point(19, 196);
+            this.labelVolatility.Name = "labelVolatility";
+            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
+            this.labelVolatility.TabIndex = 14;
+            this.labelVolatility.Text = "波动率：";
+            // 
+            // textBoxPreSettle
+            // 
+            this.textBoxPreSettle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxPreSettle.Location = new System.Drawing.Point(114, 221);
+            this.textBoxPreSettle.Name = "textBoxPreSettle";
+            this.textBoxPreSettle.Size = new System.Drawing.Size(191, 21);
+            this.textBoxPreSettle.TabIndex = 15;
+            this.textBoxPreSettle.Text = "0";
+            // 
+            // labelPreSettle
+            // 
+            this.labelPreSettle.AutoSize = true;
+            this.labelPreSettle.Location = new System.Drawing.Point(19, 224);
+            this.labelPreSettle.Name = "labelPreSettle";
+            this.labelPreSettle.Size = new System.Drawing.Size(65, 12);
+            this.labelPreSettle.TabIndex = 16;
+            this.labelPreSettle.Text = "前结算价：";
+            // 
             // FormAddFuturesContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 295);
+            this.ClientSize = new System.Drawing.Size(340, 314);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBoxAddFuturesContract);
@@ -276,5 +324,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radioButtonPctCommission;
         private System.Windows.Forms.RadioButton radioButtonAbsCommission;
+        private System.Windows.Forms.TextBox textBoxVolatility;
+        private System.Windows.Forms.Label labelVolatility;
+        private System.Windows.Forms.TextBox textBoxPreSettle;
+        private System.Windows.Forms.Label labelPreSettle;
     }
 }

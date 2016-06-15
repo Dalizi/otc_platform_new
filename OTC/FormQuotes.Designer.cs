@@ -83,11 +83,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButtonITM = new System.Windows.Forms.RadioButton();
             this.radioButtonOOM = new System.Windows.Forms.RadioButton();
+            this.groupBoxClientInfo = new System.Windows.Forms.GroupBox();
+            this.labelClientName = new System.Windows.Forms.Label();
+            this.comboBoxClientName = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxValidationCode = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxBalance = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxRemainBalance = new System.Windows.Forms.TextBox();
             this.groupBoxParam.SuspendLayout();
             this.groupBoxQuotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpreadValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBoxClientInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelUnderlying
@@ -232,7 +242,7 @@
             this.groupBoxParam.Controls.Add(this.dateTimePickerMaturityDate);
             this.groupBoxParam.Location = new System.Drawing.Point(12, 42);
             this.groupBoxParam.Name = "groupBoxParam";
-            this.groupBoxParam.Size = new System.Drawing.Size(367, 323);
+            this.groupBoxParam.Size = new System.Drawing.Size(367, 328);
             this.groupBoxParam.TabIndex = 12;
             this.groupBoxParam.TabStop = false;
             this.groupBoxParam.Text = "合约参数";
@@ -391,8 +401,7 @@
             // 
             // groupBoxQuotes
             // 
-            this.groupBoxQuotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBoxQuotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxQuotes.Controls.Add(this.buttonStop);
             this.groupBoxQuotes.Controls.Add(this.labelTotalDelta);
@@ -406,9 +415,9 @@
             this.groupBoxQuotes.Controls.Add(this.labelPrice);
             this.groupBoxQuotes.Controls.Add(this.textBoxDelta);
             this.groupBoxQuotes.Controls.Add(this.textBoxPrice);
-            this.groupBoxQuotes.Location = new System.Drawing.Point(397, 42);
+            this.groupBoxQuotes.Location = new System.Drawing.Point(397, 183);
             this.groupBoxQuotes.Name = "groupBoxQuotes";
-            this.groupBoxQuotes.Size = new System.Drawing.Size(365, 323);
+            this.groupBoxQuotes.Size = new System.Drawing.Size(365, 187);
             this.groupBoxQuotes.TabIndex = 13;
             this.groupBoxQuotes.TabStop = false;
             this.groupBoxQuotes.Text = "报价";
@@ -471,7 +480,7 @@
             // buttonCalculate
             // 
             this.buttonCalculate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCalculate.Location = new System.Drawing.Point(199, 294);
+            this.buttonCalculate.Location = new System.Drawing.Point(199, 158);
             this.buttonCalculate.Name = "buttonCalculate";
             this.buttonCalculate.Size = new System.Drawing.Size(75, 23);
             this.buttonCalculate.TabIndex = 16;
@@ -657,7 +666,7 @@
             // buttonStop
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(280, 294);
+            this.buttonStop.Location = new System.Drawing.Point(280, 158);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 23;
@@ -697,11 +706,101 @@
             this.radioButtonOOM.Text = "虚值";
             this.radioButtonOOM.UseVisualStyleBackColor = true;
             // 
+            // groupBoxClientInfo
+            // 
+            this.groupBoxClientInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxClientInfo.Controls.Add(this.label7);
+            this.groupBoxClientInfo.Controls.Add(this.textBoxRemainBalance);
+            this.groupBoxClientInfo.Controls.Add(this.label5);
+            this.groupBoxClientInfo.Controls.Add(this.textBoxBalance);
+            this.groupBoxClientInfo.Controls.Add(this.label3);
+            this.groupBoxClientInfo.Controls.Add(this.labelClientName);
+            this.groupBoxClientInfo.Controls.Add(this.textBoxValidationCode);
+            this.groupBoxClientInfo.Controls.Add(this.comboBoxClientName);
+            this.groupBoxClientInfo.Location = new System.Drawing.Point(397, 42);
+            this.groupBoxClientInfo.Name = "groupBoxClientInfo";
+            this.groupBoxClientInfo.Size = new System.Drawing.Size(274, 134);
+            this.groupBoxClientInfo.TabIndex = 24;
+            this.groupBoxClientInfo.TabStop = false;
+            this.groupBoxClientInfo.Text = "客户信息";
+            // 
+            // labelClientName
+            // 
+            this.labelClientName.AutoSize = true;
+            this.labelClientName.Location = new System.Drawing.Point(8, 23);
+            this.labelClientName.Name = "labelClientName";
+            this.labelClientName.Size = new System.Drawing.Size(65, 12);
+            this.labelClientName.TabIndex = 31;
+            this.labelClientName.Text = "选择客户：";
+            // 
+            // comboBoxClientName
+            // 
+            this.comboBoxClientName.FormattingEnabled = true;
+            this.comboBoxClientName.Location = new System.Drawing.Point(78, 20);
+            this.comboBoxClientName.Name = "comboBoxClientName";
+            this.comboBoxClientName.Size = new System.Drawing.Size(154, 20);
+            this.comboBoxClientName.TabIndex = 32;
+            this.comboBoxClientName.SelectedIndexChanged += new System.EventHandler(this.comboBoxClientName_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "下单验证码：";
+            // 
+            // textBoxValidationCode
+            // 
+            this.textBoxValidationCode.Location = new System.Drawing.Point(91, 46);
+            this.textBoxValidationCode.Name = "textBoxValidationCode";
+            this.textBoxValidationCode.ReadOnly = true;
+            this.textBoxValidationCode.Size = new System.Drawing.Size(141, 21);
+            this.textBoxValidationCode.TabIndex = 32;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 76);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "账户余额：";
+            // 
+            // textBoxBalance
+            // 
+            this.textBoxBalance.Location = new System.Drawing.Point(91, 73);
+            this.textBoxBalance.Name = "textBoxBalance";
+            this.textBoxBalance.ReadOnly = true;
+            this.textBoxBalance.Size = new System.Drawing.Size(141, 21);
+            this.textBoxBalance.TabIndex = 34;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 105);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "剩余金额：";
+            // 
+            // textBoxRemainBalance
+            // 
+            this.textBoxRemainBalance.Location = new System.Drawing.Point(91, 102);
+            this.textBoxRemainBalance.Name = "textBoxRemainBalance";
+            this.textBoxRemainBalance.ReadOnly = true;
+            this.textBoxRemainBalance.Size = new System.Drawing.Size(141, 21);
+            this.textBoxRemainBalance.TabIndex = 36;
+            // 
             // FormQuotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 393);
+            this.ClientSize = new System.Drawing.Size(774, 398);
+            this.Controls.Add(this.groupBoxClientInfo);
             this.Controls.Add(this.labelAskVolume);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.labelBidVolume);
@@ -725,6 +824,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBoxClientInfo.ResumeLayout(false);
+            this.groupBoxClientInfo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -787,5 +888,14 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radioButtonOOM;
         private System.Windows.Forms.RadioButton radioButtonITM;
+        private System.Windows.Forms.GroupBox groupBoxClientInfo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxRemainBalance;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxBalance;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelClientName;
+        private System.Windows.Forms.TextBox textBoxValidationCode;
+        private System.Windows.Forms.ComboBox comboBoxClientName;
     }
 }

@@ -63,3 +63,4 @@ accum_option_pnl=累计期权盈亏
 accum_future_pnl=累计期货盈亏
 is_settled=当日已结算
 close_volatility=平仓波动率
+validation_code=下单验证码

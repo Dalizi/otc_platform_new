@@ -37,15 +37,16 @@
             this.labelFuturesAccount = new System.Windows.Forms.Label();
             this.textBoxClientName = new System.Windows.Forms.TextBox();
             this.labelClientName = new System.Windows.Forms.Label();
+            this.textBoxValidationCode = new System.Windows.Forms.TextBox();
+            this.labelValidationCode = new System.Windows.Forms.Label();
             this.groupBoxAddClient.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(224, 160);
+            this.buttonCancel.Location = new System.Drawing.Point(224, 175);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(78, 23);
             this.buttonCancel.TabIndex = 11;
@@ -55,7 +56,8 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(131, 160);
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(131, 175);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 10;
@@ -67,6 +69,8 @@
             // 
             this.groupBoxAddClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAddClient.Controls.Add(this.textBoxValidationCode);
+            this.groupBoxAddClient.Controls.Add(this.labelValidationCode);
             this.groupBoxAddClient.Controls.Add(this.comboBoxClientID);
             this.groupBoxAddClient.Controls.Add(this.labelClientId);
             this.groupBoxAddClient.Controls.Add(this.comboBoxFuturesAccount);
@@ -75,7 +79,7 @@
             this.groupBoxAddClient.Controls.Add(this.labelClientName);
             this.groupBoxAddClient.Location = new System.Drawing.Point(22, 17);
             this.groupBoxAddClient.Name = "groupBoxAddClient";
-            this.groupBoxAddClient.Size = new System.Drawing.Size(280, 120);
+            this.groupBoxAddClient.Size = new System.Drawing.Size(280, 140);
             this.groupBoxAddClient.TabIndex = 9;
             this.groupBoxAddClient.TabStop = false;
             this.groupBoxAddClient.Text = "客户信息";
@@ -132,13 +136,29 @@
             this.labelClientName.TabIndex = 1;
             this.labelClientName.Text = "客户名称：";
             // 
+            // textBoxValidationCode
+            // 
+            this.textBoxValidationCode.Location = new System.Drawing.Point(102, 108);
+            this.textBoxValidationCode.Name = "textBoxValidationCode";
+            this.textBoxValidationCode.Size = new System.Drawing.Size(172, 21);
+            this.textBoxValidationCode.TabIndex = 8;
+            // 
+            // labelValidationCode
+            // 
+            this.labelValidationCode.AutoSize = true;
+            this.labelValidationCode.Location = new System.Drawing.Point(19, 111);
+            this.labelValidationCode.Name = "labelValidationCode";
+            this.labelValidationCode.Size = new System.Drawing.Size(77, 12);
+            this.labelValidationCode.TabIndex = 7;
+            this.labelValidationCode.Text = "下单验证码：";
+            // 
             // FormModifyClient
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(324, 201);
+            this.ClientSize = new System.Drawing.Size(324, 218);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBoxAddClient);
@@ -164,5 +184,7 @@
         private System.Windows.Forms.TextBox textBoxClientName;
         private System.Windows.Forms.Label labelClientName;
         private System.Windows.Forms.ComboBox comboBoxClientID;
+        private System.Windows.Forms.TextBox textBoxValidationCode;
+        private System.Windows.Forms.Label labelValidationCode;
     }
 }

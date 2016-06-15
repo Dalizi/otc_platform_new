@@ -14,9 +14,14 @@ namespace OTC
     {
         public FormQuotes(OTCDataSet ds)
         {
-            dataset = ds;
             InitializeComponent();
+            dataset = ds;
             linkEvents();
+            InitilizeUserComponent();
+        }
+
+        private void InitilizeUserComponent()
+        {
             redis_conn = dataset.CreateRedisConnection();
             comboBoxOptionType.Items.AddRange(new string[] { "认购", "认沽" });
             comboBoxBuySell.Items.AddRange(new string[] { "买入", "卖出" });
@@ -46,6 +51,11 @@ namespace OTC
             timer_underlying.Interval = 500;
             timer_underlying.Start();
 
+            foreach(var row in dataset.Tables["client_info"].AsEnumerable())
+            {
+                comboBoxClientName.Items.Add(row["客户编号"].ToString() + '-' + row["客户名称"].ToString());
+            }
+            comboBoxClientName.SelectedIndex = 0;
         }
 
         private void linkEvents()
@@ -85,6 +95,7 @@ namespace OTC
                 textBoxDelta.Text = OptionsCalculator.GetBlsDelta(underlying_price, strike, T, volatility, r, call_put).ToString("N2");
                 textBoxValue.Text = (decimal.Parse(textBoxPrice.Text) * decimal.Parse(textBoxQuantity.Text)).ToString();
                 textBoxTotalDelta.Text = (decimal.Parse(textBoxDelta.Text) * decimal.Parse(textBoxQuantity.Text)).ToString();
+                textBoxRemainBalance.Text = (decimal.Parse(textBoxBalance.Text) - decimal.Parse(textBoxValue.Text)).ToString();
             }
             else
             {
@@ -139,6 +150,12 @@ namespace OTC
                 underlying_code = textBoxUnderlying.Text;
                 this.labelUnderlyingError.Text = "";
                 underlying_valid = true;
+                var contract_row = dataset.Tables["futures_contracts"].Rows.Find(textBoxUnderlying.Text);
+                if (contract_row != null)
+                {
+                    textBoxVolatility.Text = contract_row["波动率"].ToString();
+                    volatility = double.Parse(textBoxVolatility.Text);
+                }
             }
         }
 
@@ -280,6 +297,7 @@ namespace OTC
             timerTicked(sender, e);
         }
 
+        int client_id;
         string underlying_code;
         double underlying_price;
         double strike;
@@ -314,6 +332,16 @@ namespace OTC
         private void buttonStop_Click(object sender, EventArgs e)
         {
             timer_quote.Stop();
+        }
+
+        private void comboBoxClientName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int client_id = int.Parse(comboBoxClientName.Text.Split('-')[0]);
+            var row_info = dataset.Tables["client_balance_join"].Rows.Find(client_id);
+            textBoxValidationCode.Text = row_info["下单验证码"].ToString();
+            textBoxBalance.Text = row_info["当前余额"].ToString();
+            if(textBoxValue.Text!="")
+                textBoxRemainBalance.Text = (decimal.Parse(textBoxBalance.Text) - decimal.Parse(textBoxValue.Text)).ToString();
         }
 
         bool strike_valid, maturity_valid, rate_valid=true, volatility_valid, underlying_valid, yield_valid=true, buysell_valid, callput_valid, quantity_valid;

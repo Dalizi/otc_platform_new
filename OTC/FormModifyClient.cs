@@ -37,6 +37,7 @@ namespace OTC
                 DataRow dr = this.dataset.Tables["client_info"].Rows.Find(int.Parse(this.comboBoxClientID.Text));
                 dr[1] = this.textBoxClientName.Text;
                 dr[2] = this.comboBoxFuturesAccount.Text;
+                dr[3] = this.textBoxValidationCode.Text;
                 dataset.Commit("client_info");
                 dataset.Update();
                 this.Close();
@@ -62,6 +63,7 @@ namespace OTC
             DataRow dr = this.dataset.Tables["client_info"].Rows.Find(int.Parse(this.comboBoxClientID.Text));
             this.textBoxClientName.Text = dr["客户名称"].ToString();
             this.comboBoxFuturesAccount.SelectedIndex = this.comboBoxFuturesAccount.FindString(dr["期货账号"].ToString());
+            this.textBoxValidationCode.Text = dr["下单验证码"].ToString();
         }
     }
 }

@@ -39,6 +39,7 @@ namespace OTC
             decimal margin = 0;
             decimal multiplier = 0;
             decimal pre_settle = 0;
+            decimal volatility = 0;
             if (String.IsNullOrEmpty(this.comboBoxFuturesContractCode.Text))
             {
                 MessageBox.Show("期货合约代码不能为空。", "错误");
@@ -63,6 +64,10 @@ namespace OTC
             {
                 MessageBox.Show("前结算价格式错误。", "错误");
             }
+            else if (!decimal.TryParse(this.textBoxVolatility.Text, out volatility))
+            {
+                MessageBox.Show("波动率格式错误。", "错误");
+            }
             else
             {
                 DataRow row = table.Rows.Find(this.comboBoxFuturesContractCode.Text);
@@ -72,6 +77,7 @@ namespace OTC
                 row["保证金率"] = margin;
                 row["结算价"] = pre_settle;
                 row["合约乘数"] = multiplier;
+                row["波动率"] = volatility;
                 this.dataset.Commit("futures_contracts");
                 this.dataset.Update("futures_contracts");
                 this.dataset.Update("futures_contracts_view");
