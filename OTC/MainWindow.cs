@@ -468,6 +468,12 @@ namespace OTC
             FormSettlement form = new FormSettlement(dataset);
             form.ShowDialog();
         }
+
+        private void quotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuotes form = new FormQuotes(dataset);
+            form.ShowDialog();
+        }
     }
         
 }

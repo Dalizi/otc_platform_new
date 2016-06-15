@@ -1,16 +1,16 @@
-use otc;
-select * from accum_business_pnl;
+use otc_test;
+select * from futures_contracts;
 select * from futures_account_balance_view;
 #武汉银鹏
 
 #第一笔业务
 insert into futures_account_info values (10480233);
-insert into client_info value (1, '武汉银鹏投资有限公司', 10480233);
+insert into client_info value (1, '武汉银鹏投资有限公司', 10480233, '12233');
 
 insert into futures_cashflow values (null, 10480233, 148000, 'dp', null, '2015-12-22 10:00:00', null);
 insert into client_cashflow values (null, 1, 40000, 'dp', null, '2015-12-22 9:00:00', '');
 call settlement('2015-12-22');
-insert into futures_contracts values ('m1605', 'm', 'abs', 3, 0.05, 2414, 10, false);
+insert into futures_contracts values ('m1605', 'm', 'abs', 3, 0.05, 2414, 10, 0.4, false);
 insert into options_contracts values ('OTC-EUP-0M1605-20160121-023900','eu', 'p', 2390, '2016-01-21', 0, 'm1605', 0, 10, 0, 0.28,0.24, false);
 
 #12.23
@@ -184,12 +184,12 @@ call settlement('2016-01-20');
 #张勇
 #第一笔业务
 insert into futures_account_info values (10182233);
-insert into client_info value (2, '张勇', 10182233);
+insert into client_info value (2, '张勇', 10182233, 811117);
 
 insert into futures_cashflow values (null, 10182233, 633000, 'dp', null, '2016-05-05 00:00:00', null);
 insert into client_cashflow values (null, 2, 200000, 'dp', null, '2016-05-05 00:00:00', '');
 call settlement('2016-05-05');
-insert into futures_contracts values ('rb1610', 'rb', 'pct', 0.00016, 0.08, 1941, 10, false);
+insert into futures_contracts values ('rb1610', 'rb', 'pct', 0.00016, 0.08, 1941, 10, 0.48, false);
 insert into options_contracts values ('OTC-EUC-RB1610-20160708-024066','eu', 'c', 2406.6, '2016-07-08', 0, 'rb1610', 0, 10, 0, 0.52, 0.49, false), ('OTC-EUP-RB1610-20160819-017712','eu', 'p', 1771.2, '2016-08-19', 0, 'rb1610', 0, 10, 0, 0.47, 0.46, false);
 
 #5.6
