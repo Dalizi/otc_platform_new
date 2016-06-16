@@ -155,6 +155,7 @@ namespace OTC
                 {
                     textBoxVolatility.Text = contract_row["波动率"].ToString();
                     volatility = double.Parse(textBoxVolatility.Text);
+                    volatility_valid = true;
                 }
             }
         }
@@ -202,6 +203,7 @@ namespace OTC
                 strike_valid = false;
             }
         }
+
         private void textBoxQuantity_Validated(object sender, EventArgs e)
         {
             if (int.TryParse(this.textBoxQuantity.Text, out quantity))
@@ -297,7 +299,6 @@ namespace OTC
             timerTicked(sender, e);
         }
 
-        int client_id;
         string underlying_code;
         double underlying_price;
         double strike;

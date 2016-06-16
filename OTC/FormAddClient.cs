@@ -25,15 +25,15 @@ namespace OTC
             int maxID = 0;
             int.TryParse(table.Compute("max(客户编号)", "").ToString(), out maxID);
             this.textBoxClientId.Text = (maxID + 1).ToString("00000000");
-          DataTable futuresAccountInfoTable = this.dataset.Tables["futures_account_info"];
+            DataTable futuresAccountInfoTable = this.dataset.Tables["futures_account_info"];
             foreach (DataRow dr in futuresAccountInfoTable.Rows)
             {
                 this.comboBoxFuturesAccount.Items.Add(dr["期货账号"]);
             }
-            if (this.comboBoxFuturesAccount.Items.Count>0)
+            if (this.comboBoxFuturesAccount.Items.Count > 0)
             {
                 this.comboBoxFuturesAccount.SelectedIndex = 0;
-            }  
+            }
         }
         private void buttonOK_Click(object sender, EventArgs e)
         {
