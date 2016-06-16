@@ -82,7 +82,7 @@ call settlement('2016-01-04');
 #1.5
 insert into futures_transactions value (0, 10480233, 'm1605', 1, 2340, '平仓', '买入', '2016-01-05 10:10:00', null, null, 1, null);
 insert into futures_transactions value (0, 10480233, 'm1605', 31, 2339, '平仓', '买入', '2016-01-05 10:20:00', null, null, 1, null);
-insert into futures_cashflow value(0, 10480233, -12, 'cm', null, null, '手续费调整');
+insert into futures_cashflow value(0, 10480233, -12, 'cm', null, '2016-01-05 10:20:00', '手续费调整');
 
 insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160121-023900', 50, 87.64, 2337, '平仓', '卖出', '2016-01-05 11:00:00', null, null, null);
 
@@ -174,8 +174,8 @@ update options_contracts set settle_price=10.29 where contract_code='OTC-EUP-0M1
 call settlement('2016-01-19');
 
 #1.20
-insert into futures_transactions value (0, 10480233, 'm1605', 7, 2450, '平仓', '买入', '2016-01-15 10:10:00', null, null, 1, null);
-insert into futures_cashflow value(0, 10480233, -33, 'cm', null, null, '手续费调整');
+insert into futures_transactions value (0, 10480233, 'm1605', 7, 2450, '平仓', '买入', '2016-01-20 10:10:00', null, null, 1, null);
+insert into futures_cashflow value(0, 10480233, -33, 'cm', null, '2016-01-20 10:10:00', '手续费调整');
 
 insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160204-023320', 50, 10.05, 2332, '平仓', '卖出', '2016-01-20 11:00:00', null, null, null);
 
