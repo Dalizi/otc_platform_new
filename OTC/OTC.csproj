@@ -114,6 +114,12 @@
     <Compile Include="FormAddClient.Designer.cs">
       <DependentUpon>FormAddClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLogging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogging.Designer.cs">
+      <DependentUpon>FormLogging.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormModifyOptionsContract.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +243,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="FormAddClient.resx">
       <DependentUpon>FormAddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogging.resx">
+      <DependentUpon>FormLogging.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormModifyOptionsContract.resx">
       <DependentUpon>FormModifyOptionsContract.cs</DependentUpon>

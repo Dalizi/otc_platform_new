@@ -49,7 +49,8 @@ namespace OTC
                 {
                     Properties.Settings.Default.UserName = this.textBoxUserName.Text;
                     Properties.Settings.Default.Password = DataProtection.EncryptString(this.textBoxPassword.Text);
-                } else
+                }
+                else
                 {
                     Properties.Settings.Default.UserName = "";
                     Properties.Settings.Default.Password = DataProtection.EncryptString("");
@@ -61,8 +62,11 @@ namespace OTC
             }
             catch (MySqlException sqlException)
             {
-                if (sqlException.Number==0)
+                if (sqlException.Number == 0)
                     MessageBox.Show("登录被拒绝：登录信息错误，或者用户没有该数据库的访问权限。", "数据库连接错误");
+                else if (sqlException.Number == 1042)
+                    MessageBox.Show("数据库连接超时", "数据库连接错误");
+
             }
         }
 

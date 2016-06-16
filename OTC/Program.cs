@@ -18,10 +18,32 @@ namespace OTC
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             DatabaseManager dbManager = new DatabaseManager();
-            if (new Login(dbManager).ShowDialog() == DialogResult.OK)
+            try {
+                if (new Login(dbManager).ShowDialog() == DialogResult.OK)
+                {
+                    var logging_form = new FormLogging();
+                    OTCDataSet dataset = new OTCDataSet("otc", dbManager);
+                    logging_form.Close();
+                    Application.Run(new MainWindow(dataset));
+                }
+            }
+            catch (StackExchange.Redis.RedisConnectionException e)
             {
-                OTCDataSet dataset = new OTCDataSet("otc", dbManager);
-                Application.Run(new MainWindow(dataset));
+                MessageBox.Show(string.Format("Redis连接错误:请重新登录。\n错误信息:{0}", e.Message), "错误");
+                if (new Login(dbManager).ShowDialog() == DialogResult.OK)
+                {
+                    OTCDataSet dataset = new OTCDataSet("otc", dbManager);
+                    Application.Run(new MainWindow(dataset));
+                }
+            }
+            catch (MySql.Data.MySqlClient.MySqlException e)
+            {
+                MessageBox.Show(string.Format("Mysql错误。\n错误信息:{0}", e.Message), "错误");
+                if (new Login(dbManager).ShowDialog() == DialogResult.OK)
+                {
+                    OTCDataSet dataset = new OTCDataSet("otc", dbManager);
+                    Application.Run(new MainWindow(dataset));
+                }
             }
         }
 
