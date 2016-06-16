@@ -181,6 +181,14 @@ insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160204-023320', 
 
 call settlement('2016-01-20');
 
+#1.21
+select balance from client_balance;
+insert into futures_cashflow select 0, 10480233, 16810.00, 'wd', null, '2016-01-21 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10480233, 119727.00, 'wd', null, '2016-01-21 10:00:01', '自有资金全部出金';
+insert into client_cashflow select 0, 1, 16810.00,'wd', null, '2016-01-21 10:00:00', '客户全部出金';
+
+call settlement('2016-01-21');
+
 #张勇
 #第一笔业务
 insert into futures_account_info values (10182233);
@@ -337,3 +345,30 @@ insert into futures_transactions value (0, 10182233, 'rb1610', 2, 1996, '平仓'
 insert into options_transactions value (0, 2, 'OTC-EUP-RB1610-20160819-017712', 80, 73.82, 1997, '平仓', '卖出', '2016-05-23 09:40:00', null, null, 3);
 
 call settlement('2016-05-30');
+
+#5.31
+select * from futures_account_balance;
+insert into futures_cashflow select 0, 10182233, 107988.96, 'wd', null, '2016-05-31 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10182233, 436233.39, 'wd', null, '2016-05-31 10:00:00', '自有资金全部出金';
+insert into client_cashflow select 0, 2, 107988.96,'wd', null, '2016-05-31 10:00:00', '客户全部出金';
+
+call settlement('2016-05-31');
+
+#6.13
+
+insert into futures_account_info values (10780233);
+insert into client_info value (3, '刘惠滢', 10780233, '473692');
+insert into futures_cashflow values (null, 10780233, 110000, 'dp', null, '2016-06-13 14:00:00', '客户入金');
+insert into futures_cashflow values (null, 10780233, 140616, 'dp', null, '2016-06-13 15:00:00', '对冲资金入金');
+insert into client_cashflow values (null, 3, 110000, 'dp', null, '2016-06-13 15:00:00', '客户入金');
+call settlement('2016-06-13');
+
+#6.15
+insert into futures_account_info values (10680233);
+insert into client_info value (4, '广西南宁儒航贸易有限公司', 10680233, '657209');
+insert into futures_cashflow values (null, 10680233, 40000, 'dp', null, '2016-06-15 14:00:00', '客户入金');
+insert into futures_cashflow values (null, 10680233, 24255, 'dp', null, '2016-06-15 15:00:00', '对冲资金入金');
+insert into client_cashflow values (null, 4, 40000, 'dp', null, '2016-06-15 15:00:00', '客户入金');
+call settlement('2016-06-15');
+
+select * from business_pnl where settle_day='2016-06-15';
