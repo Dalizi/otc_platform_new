@@ -18,6 +18,7 @@ namespace OTC
             this.dbManager = dm;
             this.sql_connection = dm.GetSQLConnection();
             this.redis_connection = dm.GetRedisConnection();
+            this.redis_db = CreateRedisConnection();
             GetData();
         }
 
@@ -96,7 +97,8 @@ namespace OTC
                 "non_trade_dates",
                 "business_state_view",
                 "option_settle_info_view",
-                "future_settle_info_view"
+                "future_settle_info_view",
+                "business_current_state"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -121,6 +123,8 @@ namespace OTC
                 selectString = String.Format("select * from {0};", t);
                 if (t == "futures_verbose_positions_view")
                     selectString = "SELECT * FROM futures_verbose_positions;";
+                else if (t == "business_current_state")
+                    selectString = "SELECT * FROM accum_business_pnl ORDER BY settle_day DESC LIMIT 1";
                 MySqlCommand command = new MySqlCommand(selectString, this.sql_connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 command.CommandType = System.Data.CommandType.Text;
@@ -256,7 +260,14 @@ namespace OTC
                 table.PrimaryKey = new DataColumn[] { table.Columns["标的代码"] };
 
             }
+
+            using (var table = this.display_ds.Tables["futures_verbose_positions_view"])
+            {
+                table.Columns.Add("盯市盈亏", Type.GetType("System.Decimal"));
+            }
+            //this.display_ds.Tables["business_state_view"].DefaultView.Sort = "结算日 DESC"; //将业务状态表按日期倒序排列
             UpdateGreeks();
+            UpdateMarkToMarketPnl();
         }
 
         //private void AddAdapter(String sqlCommand, String table_name)
@@ -305,6 +316,7 @@ namespace OTC
                 Update(table_name);
             }
             UpdateGreeks();
+            UpdateMarkToMarketPnl();
         }
         public MySqlConnection CreateSQLConnection()
         {
@@ -493,7 +505,12 @@ namespace OTC
                         }
                         else
                         {
-                            display_table.Rows.Find(values).ItemArray = tunnel_table.Rows.Find(values).ItemArray;
+                            var display_row = display_table.Rows.Find(values);
+                            var tunnel_row = tunnel_table.Rows.Find(values);
+                            for (int k = 0; k < tunnel_row.ItemArray.Length; ++k)
+                            {
+                                display_row.ItemArray[k] = tunnel_row.ItemArray[k];
+                            }
                         }
 
                     }
@@ -506,6 +523,21 @@ namespace OTC
 
         }
 
+        private void UpdateMarkToMarketPnl()
+        {
+            foreach(var row in display_ds.Tables["futures_verbose_positions_view"].AsEnumerable().ToArray())
+            {
+                if (row.RowState != DataRowState.Deleted)
+                {
+                    var contract_row = display_ds.Tables["futures_contracts"].Rows.Find(row.Field<string>("合约代码"));
+                    var holding_price = row.Field<decimal>("持仓价格");
+                    var quantity = row.Field<decimal>("数量");
+                    var cur_price = decimal.Parse(redis_db.HashGet(row.Field<string>("合约代码"), "LastPrice"));
+                    row["盯市盈亏"] = (cur_price - holding_price) * quantity * (row.Field<string>("买卖方向") == "买入" ? 1 : -1) * contract_row.Field<decimal>("合约乘数");
+                }
+            }
+        }
+        IDatabase redis_db;
         DatabaseManager dbManager;
         MySqlConnection sql_connection;
         ConnectionMultiplexer redis_connection;

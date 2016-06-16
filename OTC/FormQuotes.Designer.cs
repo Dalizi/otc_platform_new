@@ -815,7 +815,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormQuotes";
-            this.Text = "报价";
+            this.Text = "普通欧式报价";
             this.groupBoxParam.ResumeLayout(false);
             this.groupBoxParam.PerformLayout();
             this.groupBoxQuotes.ResumeLayout(false);

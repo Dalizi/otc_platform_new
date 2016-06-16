@@ -83,6 +83,9 @@ namespace OTC
 
             this.dataGridViewRiskGross.DataSource = this.dataset;
             this.dataGridViewRiskGross.DataMember = "risk_info_gross";
+
+            UpdateCurBusinessState();
+
         }
 
         private void FormatTable()
@@ -181,6 +184,14 @@ namespace OTC
             this.dataGridViewRiskGross.Columns["Theta"].DefaultCellStyle.Format = "N4";
             this.dataGridViewRiskGross.Columns["Vega"].DefaultCellStyle.Format = "N4";
             this.dataGridViewRiskGross.Columns["Rho"].DefaultCellStyle.Format = "N4";
+        }
+
+        private void UpdateCurBusinessState()
+        {
+            var business_state_row = dataset.display_ds.Tables["business_current_state"].Rows[0];
+            this.textBoxBusinessPnl.Text = business_state_row.Field<decimal>(1).ToString("N2");
+            this.textBoxFuturePnl.Text = business_state_row.Field<decimal>(2).ToString("N2");
+            this.textBoxOptionPnl.Text = business_state_row.Field<decimal>(3).ToString("N2");
         }
 
         private void LinkEventsHandlers()
@@ -415,6 +426,7 @@ namespace OTC
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             this.dataset.Update();
+            UpdateCurBusinessState();
         }
 
         private void buttonRollbackOptionsTransaction_Click(object sender, EventArgs e)
@@ -472,7 +484,7 @@ namespace OTC
         private void quotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormQuotes form = new FormQuotes(dataset);
-            form.ShowDialog();
+            form.Show();
         }
     }
         
