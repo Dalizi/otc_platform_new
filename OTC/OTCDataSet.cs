@@ -507,10 +507,11 @@ namespace OTC
                         {
                             var display_row = display_table.Rows.Find(values);
                             var tunnel_row = tunnel_table.Rows.Find(values);
-                            for (int k = 0; k < tunnel_row.ItemArray.Length; ++k)
-                            {
-                                display_row.ItemArray[k] = tunnel_row.ItemArray[k];
-                            }
+                            //for (int k = 0; k < tunnel_row.ItemArray.Length; ++k)
+                            //{
+                            //    display_row.ItemArray[k] = tunnel_row.ItemArray[k];
+                            //}
+                            display_row.ItemArray = tunnel_row.ItemArray;
                         }
 
                     }
