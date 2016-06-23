@@ -188,10 +188,22 @@ namespace OTC
 
         private void UpdateCurBusinessState()
         {
-            var business_state_row = dataset.display_ds.Tables["business_current_state"].Rows[0];
-            this.textBoxBusinessPnl.Text = business_state_row.Field<decimal>(1).ToString("N2");
-            this.textBoxFuturePnl.Text = business_state_row.Field<decimal>(2).ToString("N2");
-            this.textBoxOptionPnl.Text = business_state_row.Field<decimal>(3).ToString("N2");
+            if (dataset.display_ds.Tables["business_current_state"].Rows.Count > 0)
+            {
+                var business_state_row = dataset.display_ds.Tables["business_current_state"].Rows[0];
+                if (business_state_row.RowState != DataRowState.Deleted)
+                {
+                    this.textBoxBusinessPnl.Text = business_state_row.Field<decimal>(1).ToString("N2");
+                    this.textBoxFuturePnl.Text = business_state_row.Field<decimal>(2).ToString("N2");
+                    this.textBoxOptionPnl.Text = business_state_row.Field<decimal>(3).ToString("N2");
+                }
+            }
+            else
+            {
+                this.textBoxBusinessPnl.Text = "0";
+                this.textBoxFuturePnl.Text = "0";
+                this.textBoxOptionPnl.Text = "0";
+            }
         }
 
         private void LinkEventsHandlers()
