@@ -372,3 +372,4 @@ insert into client_cashflow values (null, 4, 40000, 'dp', null, '2016-06-15 15:0
 call settlement('2016-06-15');
 
 select * from business_pnl where settle_day='2016-06-15';
+select * from futures_account_balance;
