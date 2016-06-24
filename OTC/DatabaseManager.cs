@@ -27,12 +27,22 @@ namespace OTC
             return new MySqlConnection(DataProtection.DecryptString(connString));
         }
 
+        public MySqlConnection GetSQLConnection(string conn_string)
+        {
+            return new MySqlConnection(conn_string);
+        }
+
         public ConnectionMultiplexer GetRedisConnection()
         {
             string host = Properties.Settings.Default.RedisHost;
             string port = Properties.Settings.Default.RedisPort;
             string passwd = Properties.Settings.Default.RedisPassword;
             return ConnectionMultiplexer.Connect(string.Format("{0}:{1},password={2}", host, port, passwd));
+        }
+
+        public ConnectionMultiplexer GetRedisConnection(string conn_string)
+        {
+            return ConnectionMultiplexer.Connect(conn_string);
         }
 
         private String connString { get; set; }

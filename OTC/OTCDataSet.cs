@@ -22,6 +22,15 @@ namespace OTC
             GetData();
         }
 
+        public OTCDataSet(string mysql_conn_string, string redis_conn_string):this()
+        {
+            this.dbManager = new DatabaseManager();
+            this.sql_connection = dbManager.GetSQLConnection(mysql_conn_string);
+            this.redis_connection = dbManager.GetRedisConnection(redis_conn_string);
+            this.redis_db = CreateRedisConnection();
+            GetData();
+        }
+
         public OTCDataSet(String name) : base(name)
         {
             InitializeComponent();
@@ -98,7 +107,9 @@ namespace OTC
                 "business_state_view",
                 "option_settle_info_view",
                 "future_settle_info_view",
-                "business_current_state"
+                "business_current_state",
+                "option_position_settle_info",
+                "future_position_settle_info"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -533,8 +544,15 @@ namespace OTC
                     var contract_row = display_ds.Tables["futures_contracts"].Rows.Find(row.Field<string>("合约代码"));
                     var holding_price = row.Field<decimal>("持仓价格");
                     var quantity = row.Field<decimal>("数量");
-                    var cur_price = decimal.Parse(redis_db.HashGet(row.Field<string>("合约代码"), "LastPrice"));
-                    row["盯市盈亏"] = (cur_price - holding_price) * quantity * (row.Field<string>("买卖方向") == "买入" ? 1 : -1) * contract_row.Field<decimal>("合约乘数");
+
+                    if (redis_db.HashExists(row.Field<string>("合约代码"), "LastPrice")) {
+                        var cur_price = decimal.Parse(redis_db.HashGet(row.Field<string>("合约代码"), "LastPrice"));
+                        row["盯市盈亏"] = (cur_price - holding_price) * quantity * (row.Field<string>("买卖方向") == "买入" ? 1 : -1) * contract_row.Field<decimal>("合约乘数");
+                    }
+                    else
+                    {
+                        row["盯市盈亏"] = 0;
+                    }
                 }
             }
         }

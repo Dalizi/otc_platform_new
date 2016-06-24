@@ -13,30 +13,7 @@ namespace OTC
 {
     public class SettlementReports
     {
-        public SettlementReports()
-        {
-            dataset = new DataSet();
-            MySqlConnectionStringBuilder conn_builder = new MySqlConnectionStringBuilder();
-            conn_builder.Server = "10.2.7.210";
-            conn_builder.Port = 3306;
-            conn_builder.Database = "otc_test";
-            conn_builder.UserID = "tanzehuan";
-            conn_builder.Password = "80027111t";
-            MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection(conn_builder.GetConnectionString(true));
-            conn.Open();
-            MySqlCommand select_command = new MySqlCommand("select * from business_state_view", conn);
-            var adapter_business_state = new MySqlDataAdapter(select_command);
-            adapter_business_state.Fill(dataset, "business_state_view");
-            var adapter_future_position = new MySqlDataAdapter(new MySqlCommand("select * from futures_positions_summary"));
-            adapter_future_position.Fill(dataset, "futures_positions_summary");
-            var adapter_option_position = new MySqlDataAdapter(new MySqlCommand("select * from options_positions_summary"));
-            adapter_future_position.Fill(dataset, "options_positions_summary");
-            var adapter_future_transaction = new MySqlDataAdapter(new MySqlCommand("select * from futures_transactions"));
-            adapter_future_transaction.Fill(dataset, "futures_transactions");
-            var adapter_option_transaction = new MySqlDataAdapter(new MySqlCommand("select * from options_transactions"));
-            adapter_option_transaction.Fill(dataset, "options_transactions");
 
-        }
         public SettlementReports(OTCDataSet ds)
         {
             dataset = ds;
@@ -188,21 +165,21 @@ namespace OTC
 
 
             var gross_pnl =
-                from r in dataset.Tables["business_state_view"].AsEnumerable()
-                where r.Field<DateTime>("settle_day") == settle_day
+                from r in dataset.display_ds.Tables["business_state_view"].AsEnumerable()
+                where r.Field<DateTime>("结算日") == settle_day
                 select new
                 {
-                    future_accum_pnl = r.Field<decimal>("accum_future_pnl"),
-                    future_pnl = r.Field<decimal>("future_pnl"),
-                    option_accum_pnl = r.Field<decimal>("accum_option_pnl"),
-                    option_pnl = r.Field<decimal>("option_pnl")
+                    future_accum_pnl = r.Field<decimal>("累计期货盈亏"),
+                    future_pnl = r.Field<decimal>("结算日期货盈亏"),
+                    option_accum_pnl = r.Field<decimal>("累计期权盈亏"),
+                    option_pnl = r.Field<decimal>("结算日期权盈亏")
                 };
             var yearly_pnl =
-                from r in dataset.Tables["business_state_view"].AsEnumerable()
-                where r.Field<DateTime>("settle_day") < settle_day && r.Field<DateTime>("settle_day") >= new DateTime(settle_day.Year, 1, 1)
+                from r in dataset.display_ds.Tables["business_state_view"].AsEnumerable()
+                where r.Field<DateTime>("结算日") < settle_day && r.Field<DateTime>("结算日") >= new DateTime(settle_day.Year, 1, 1)
                 select new {
-                    future_pnl = r.Field<decimal>("future_pnl"),
-                    option_pnl =  r.Field<decimal>("option_pnl")
+                    future_pnl = r.Field<decimal>("结算日期货盈亏"),
+                    option_pnl =  r.Field<decimal>("结算日期权盈亏")
                 };
             var future_line_data_array = new string[] {
                 "金融事业部",
@@ -361,12 +338,11 @@ namespace OTC
             row = sheet.CreateRow(2);
             for (int i = 0; i < header_array.Length; ++i)
             {
-                cell = row.CreateCell(0);
+                cell = row.CreateCell(i);
                 cell.CellStyle = style2;
                 cell.SetCellValue(header_array[i]);
             }
 
-            //第四行
             var style3 = workbook.CreateCellStyle();
             var font3 = workbook.CreateFont();
             font3.FontName = "宋体";
@@ -375,104 +351,45 @@ namespace OTC
             style3.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
-            row = sheet.CreateRow(3);
 
-
-            var gross_pnl =
-                from r in dataset.Tables["business_state_view"].AsEnumerable()
-                where r.Field<DateTime>("settle_day") == settle_day
-                select new
+            var option_table = dataset.display_ds.Tables["option_position_settle_info"];
+            int n = 3;
+            int n_col = option_table.Columns.Count;
+            foreach (var data_row in option_table.AsEnumerable())
+            {
+                row = sheet.CreateRow(n);
+                if ((DateTime)data_row.ItemArray[n_col-1] == settle_day)
                 {
-                    future_accum_pnl = r.Field<decimal>("accum_future_pnl"),
-                    future_pnl = r.Field<decimal>("future_pnl"),
-                    option_accum_pnl = r.Field<decimal>("accum_option_pnl"),
-                    option_pnl = r.Field<decimal>("option_pnl")
-                };
-            var yearly_pnl =
-                from r in dataset.Tables["business_state_view"].AsEnumerable()
-                where r.Field<DateTime>("settle_day") < settle_day && r.Field<DateTime>("settle_day") >= new DateTime(settle_day.Year, 1, 1)
-                select new
-                {
-                    future_pnl = r.Field<decimal>("future_pnl"),
-                    option_pnl = r.Field<decimal>("option_pnl")
-                };
-            var future_line_data_array = new string[] {
-                "金融事业部",
-                "场外期权交易",
-                "期货",
-                "164871.00",
-                gross_pnl.Select(r=>r.future_accum_pnl).First().ToString(),
-                "---",
-                "---",
-                yearly_pnl.Select(r=>r.future_pnl).Sum().ToString(),
-                gross_pnl.Select(r=>r.future_pnl).First().ToString()
-            };
-            for (int i = 0; i < 9; ++i)
-            {
-                cell = row.CreateCell(i);
-                cell.SetCellValue(future_line_data_array[i]);
-                cell.CellStyle = style3;
-                sheet.AutoSizeColumn(i);
-            }
-
-            //第五行    
-            row = sheet.CreateRow(4);
-            var buy_option_line_data_array = new string[] {
-                "金融事业部",
-                "场外期权交易",
-                "期权销售",
-                "0.00",
-                gross_pnl.Select(r=>r.option_accum_pnl).First().ToString(),
-                "---",
-                "---",
-                yearly_pnl.Select(r=>r.option_pnl).Sum().ToString(),
-                gross_pnl.Select(r=>r.option_pnl).First().ToString()
-            };
-            for (int i = 0; i < 9; ++i)
-            {
-                cell = row.CreateCell(i);
-                cell.SetCellValue(buy_option_line_data_array[i]);
-                cell.CellStyle = style3;
-                sheet.AutoSizeColumn(i);
-            }
-
-            row = sheet.CreateRow(5);
-            var sell_option_line_data_array = new string[] {
-                "金融事业部",
-                "场外期权交易",
-                "期权购买",
-                "0.00",
-                "0.00",
-                "---",
-                "---",
-                "0.00",
-                "0.00"
-            };
-            for (int i = 0; i < 9; ++i)
-            {
-                cell = row.CreateCell(i);
-                cell.SetCellValue(sell_option_line_data_array[i]);
-                cell.CellStyle = style3;
-                sheet.AutoSizeColumn(i);
-            }
-
-            for (int i = 6; i < 17; ++i)
-            {
-                row = sheet.CreateRow(i);
-                for (int j = 0; j < 9; ++j)
-                {
-                    cell = row.CreateCell(j);
-                    cell.CellStyle = style3;
+                    for (int j = 0; j < data_row.ItemArray.Count() - 1; ++j)
+                    {
+                        cell = row.CreateCell(j);
+                        cell.CellStyle = style3;
+                        cell.SetCellValue(data_row.ItemArray[j].ToString());
+                    }
+                    n++;
                 }
             }
-
+            var future_table = dataset.display_ds.Tables["future_position_settle_info"];
+            foreach (var data_row in future_table.AsEnumerable())
+            {
+                row = sheet.CreateRow(n);
+                if ((DateTime)data_row.ItemArray[n_col - 1] == settle_day)
+                {
+                    for (int j = 0; j < data_row.ItemArray.Count() - 1; ++j)
+                    {
+                        cell = row.CreateCell(j);
+                        cell.CellStyle = style3;
+                        cell.SetCellValue(data_row.ItemArray[j].ToString());
+                    }
+                    n++;
+                }
+            }
 
             workbook.Write(fs);
             fs.Close();
         }
 
-        DataSet dataset;
-        DateTime settle_day;
+        OTCDataSet dataset;
     }
 }
 
