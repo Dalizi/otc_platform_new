@@ -370,6 +370,3 @@ insert into futures_cashflow values (null, 10680233, 40000, 'dp', null, '2016-06
 insert into futures_cashflow values (null, 10680233, 24255, 'dp', null, '2016-06-15 15:00:00', '对冲资金入金');
 insert into client_cashflow values (null, 4, 40000, 'dp', null, '2016-06-15 15:00:00', '客户入金');
 call settlement('2016-06-15');
-
-select * from business_pnl where settle_day='2016-06-15';
-select * from futures_account_balance;
