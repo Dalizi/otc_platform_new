@@ -389,6 +389,30 @@ namespace OTC
             fs.Close();
         }
 
+        public void GenerateDetailedReport(DateTime settle_day)
+        {
+            FileStream fs = new FileStream(String.Format("产品运行数据日报（报风委会表单）-{0}.xls", settle_day.ToString("yyyyMMdd")), FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
+
+            HSSFFont font1 = (HSSFFont)workbook.CreateFont();
+            font1.FontName = "宋体";
+
+            HSSFCellStyle style1 = (HSSFCellStyle)workbook.CreateCellStyle();
+            style1.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
+            style1.FillPattern = NPOI.SS.UserModel.FillPattern.SolidForeground;
+            style1.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thin;
+            style1.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
+            style1.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
+            style1.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            style1.SetFont(font1);
+
+            sheet.AddMergedRegion(new CellRangeAddress(1, 1, 1, 6));
+
+            workbook.Write(fs);
+            fs.Close();
+        }
+
         OTCDataSet dataset;
     }
 }

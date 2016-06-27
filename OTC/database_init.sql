@@ -1,8 +1,6 @@
 use otc_test;
-select * from futures_contracts;
-select * from futures_account_balance_view;
 #武汉银鹏
-
+insert into business_overview value(5000000, 0, 3000000);
 #第一笔业务
 insert into futures_account_info values (10480233);
 insert into client_info value (1, '武汉银鹏投资有限公司', 10480233, '12233');

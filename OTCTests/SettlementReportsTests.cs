@@ -20,6 +20,7 @@ namespace OTC.Tests
             SettlementReports sr = new SettlementReports(dataset);
             sr.GenerateBusinessReport(new DateTime(2016, 5, 23));
             sr.GenerateOptionReport(new DateTime(2016, 5, 23));
+            sr.GenerateDetailedReport(new DateTime(2016, 5, 23));
         }
     }
 }

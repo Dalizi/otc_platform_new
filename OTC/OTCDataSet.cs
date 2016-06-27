@@ -109,7 +109,8 @@ namespace OTC
                 "future_settle_info_view",
                 "business_current_state",
                 "option_position_settle_info",
-                "future_position_settle_info"
+                "future_position_settle_info",
+                "business_overview"
             };
             String selectString = "";
             foreach (String t in table_names)

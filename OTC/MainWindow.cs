@@ -97,6 +97,8 @@ namespace OTC
             this.dataGridViewBusinessState.Columns["累计总盈亏"].DefaultCellStyle.Format = "N2";
             this.dataGridViewBusinessState.Columns["累计期权盈亏"].DefaultCellStyle.Format = "N2";
             this.dataGridViewBusinessState.Columns["累计期货盈亏"].DefaultCellStyle.Format = "N2";
+            this.dateTimePickerBusinessStart.Value = DateTime.Today.AddDays(-30);
+            this.dateTimePickerBusinessEnd.Value = DateTime.Today;
 
             this.dataGridViewClientBalance.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
@@ -203,6 +205,16 @@ namespace OTC
                 this.textBoxBusinessPnl.Text = "0";
                 this.textBoxFuturePnl.Text = "0";
                 this.textBoxOptionPnl.Text = "0";
+            }
+            if (dataset.display_ds.Tables["business_overview"].Rows.Count > 0)
+            {
+                var business_overview_row = dataset.display_ds.Tables["business_overview"].Rows[0];
+                if (business_overview_row.RowState != DataRowState.Deleted)
+                {
+                    this.textBoxTotalGranted.Text = business_overview_row.Field<decimal>(0).ToString("N2");
+                    this.textBoxUsedGranted.Text = business_overview_row.Field<decimal>(1).ToString("N2");
+                    this.textBoxGrantedLoss.Text = business_overview_row.Field<decimal>(2).ToString("N2");
+                }
             }
         }
 

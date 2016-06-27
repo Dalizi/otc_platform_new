@@ -61,7 +61,22 @@
             this.tabControlMainWindow = new System.Windows.Forms.TabControl();
             this.tabPageBusinessState = new System.Windows.Forms.TabPage();
             this.panelBusinessState = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewBusinessState = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxOptionPnl = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxFuturePnl = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxBusinessPnl = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.tabPageBalance = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelBalance = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -148,28 +163,26 @@
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settlementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTradingParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonTradingDatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxBusinessPnl = new System.Windows.Forms.TextBox();
-            this.textBoxFuturePnl = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxOptionPnl = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxGrantedLoss = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxUsedGranted = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxTotalGranted = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dateTimePickerBusinessStart = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerBusinessEnd = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControlMainWindow.SuspendLayout();
             this.tabPageBusinessState.SuspendLayout();
             this.panelBusinessState.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBusinessState)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabPageBalance.SuspendLayout();
             this.tableLayoutPanelBalance.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -231,8 +244,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRiskInfoDetailed)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMainWindow
@@ -272,6 +283,23 @@
             this.panelBusinessState.Size = new System.Drawing.Size(1184, 564);
             this.panelBusinessState.TabIndex = 0;
             // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 1;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Controls.Add(this.dataGridViewBusinessState, 0, 2);
+            this.tableLayoutPanel9.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.panel2, 0, 1);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 3;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1184, 564);
+            this.tableLayoutPanel9.TabIndex = 2;
+            // 
             // dataGridViewBusinessState
             // 
             this.dataGridViewBusinessState.AllowUserToAddRows = false;
@@ -298,13 +326,159 @@
             this.dataGridViewBusinessState.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewBusinessState.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewBusinessState.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewBusinessState.Location = new System.Drawing.Point(3, 123);
+            this.dataGridViewBusinessState.Location = new System.Drawing.Point(3, 163);
             this.dataGridViewBusinessState.Name = "dataGridViewBusinessState";
             this.dataGridViewBusinessState.ReadOnly = true;
             this.dataGridViewBusinessState.RowTemplate.Height = 23;
             this.dataGridViewBusinessState.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewBusinessState.Size = new System.Drawing.Size(1178, 438);
+            this.dataGridViewBusinessState.Size = new System.Drawing.Size(1178, 398);
             this.dataGridViewBusinessState.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.textBoxGrantedLoss);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.textBoxUsedGranted);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.textBoxTotalGranted);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.textBoxOptionPnl);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBoxFuturePnl);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.textBoxBusinessPnl);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1178, 114);
+            this.panel1.TabIndex = 2;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(574, 82);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(455, 86);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 12);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "当日期权浮动盈亏：";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(338, 82);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(219, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(113, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "当日期货浮动盈亏：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(102, 82);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(7, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "当日浮动盈亏：";
+            // 
+            // textBoxOptionPnl
+            // 
+            this.textBoxOptionPnl.Location = new System.Drawing.Point(574, 48);
+            this.textBoxOptionPnl.Name = "textBoxOptionPnl";
+            this.textBoxOptionPnl.ReadOnly = true;
+            this.textBoxOptionPnl.Size = new System.Drawing.Size(100, 21);
+            this.textBoxOptionPnl.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(455, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "期权总盈亏：";
+            // 
+            // textBoxFuturePnl
+            // 
+            this.textBoxFuturePnl.Location = new System.Drawing.Point(338, 48);
+            this.textBoxFuturePnl.Name = "textBoxFuturePnl";
+            this.textBoxFuturePnl.ReadOnly = true;
+            this.textBoxFuturePnl.Size = new System.Drawing.Size(100, 21);
+            this.textBoxFuturePnl.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(219, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 12);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "期货总盈亏：";
+            // 
+            // textBoxBusinessPnl
+            // 
+            this.textBoxBusinessPnl.Location = new System.Drawing.Point(102, 48);
+            this.textBoxBusinessPnl.Name = "textBoxBusinessPnl";
+            this.textBoxBusinessPnl.ReadOnly = true;
+            this.textBoxBusinessPnl.Size = new System.Drawing.Size(100, 21);
+            this.textBoxBusinessPnl.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(7, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "总盈亏：";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.dateTimePickerBusinessEnd);
+            this.panel2.Controls.Add(this.dateTimePickerBusinessStart);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 123);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1178, 34);
+            this.panel2.TabIndex = 3;
             // 
             // tabPageBalance
             // 
@@ -1658,16 +1832,23 @@
             // placeOrderToolStripMenuItem
             // 
             this.placeOrderToolStripMenuItem.Name = "placeOrderToolStripMenuItem";
-            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.placeOrderToolStripMenuItem.Text = "下单";
             this.placeOrderToolStripMenuItem.Click += new System.EventHandler(this.buttonPlaceOrder_Click);
             // 
             // settlementToolStripMenuItem
             // 
             this.settlementToolStripMenuItem.Name = "settlementToolStripMenuItem";
-            this.settlementToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settlementToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.settlementToolStripMenuItem.Text = "结算";
             this.settlementToolStripMenuItem.Click += new System.EventHandler(this.settlementToolStripMenuItem_Click);
+            // 
+            // quotesToolStripMenuItem
+            // 
+            this.quotesToolStripMenuItem.Name = "quotesToolStripMenuItem";
+            this.quotesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.quotesToolStripMenuItem.Text = "普通欧式报价";
+            this.quotesToolStripMenuItem.Click += new System.EventHandler(this.quotesToolStripMenuItem_Click);
             // 
             // menuTradingParamsToolStripMenuItem
             // 
@@ -1684,165 +1865,91 @@
             this.buttonTradingDatesToolStripMenuItem.Text = "交易日设定";
             this.buttonTradingDatesToolStripMenuItem.Click += new System.EventHandler(this.buttonTradingDatesToolStripMenuItem_Click);
             // 
-            // quotesToolStripMenuItem
+            // textBoxGrantedLoss
             // 
-            this.quotesToolStripMenuItem.Name = "quotesToolStripMenuItem";
-            this.quotesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.quotesToolStripMenuItem.Text = "普通欧式报价";
-            this.quotesToolStripMenuItem.Click += new System.EventHandler(this.quotesToolStripMenuItem_Click);
+            this.textBoxGrantedLoss.Location = new System.Drawing.Point(574, 12);
+            this.textBoxGrantedLoss.Name = "textBoxGrantedLoss";
+            this.textBoxGrantedLoss.ReadOnly = true;
+            this.textBoxGrantedLoss.Size = new System.Drawing.Size(100, 21);
+            this.textBoxGrantedLoss.TabIndex = 17;
             // 
-            // tableLayoutPanel9
+            // label7
             // 
-            this.tableLayoutPanel9.ColumnCount = 1;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Controls.Add(this.dataGridViewBusinessState, 0, 2);
-            this.tableLayoutPanel9.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.panel2, 0, 1);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 3;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(1184, 564);
-            this.tableLayoutPanel9.TabIndex = 2;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(455, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "总授权亏损：";
             // 
-            // panel1
+            // textBoxUsedGranted
             // 
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.textBoxOptionPnl);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.textBoxFuturePnl);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBoxBusinessPnl);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1178, 74);
-            this.panel1.TabIndex = 2;
+            this.textBoxUsedGranted.Location = new System.Drawing.Point(338, 12);
+            this.textBoxUsedGranted.Name = "textBoxUsedGranted";
+            this.textBoxUsedGranted.ReadOnly = true;
+            this.textBoxUsedGranted.Size = new System.Drawing.Size(100, 21);
+            this.textBoxUsedGranted.TabIndex = 15;
             // 
-            // panel2
+            // label8
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 83);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1178, 34);
-            this.panel2.TabIndex = 3;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(219, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 12);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "已使用额度：";
             // 
-            // label1
+            // textBoxTotalGranted
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(3, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "总盈亏：";
+            this.textBoxTotalGranted.Location = new System.Drawing.Point(102, 12);
+            this.textBoxTotalGranted.Name = "textBoxTotalGranted";
+            this.textBoxTotalGranted.ReadOnly = true;
+            this.textBoxTotalGranted.Size = new System.Drawing.Size(100, 21);
+            this.textBoxTotalGranted.TabIndex = 13;
             // 
-            // textBoxBusinessPnl
+            // label9
             // 
-            this.textBoxBusinessPnl.Location = new System.Drawing.Point(98, 5);
-            this.textBoxBusinessPnl.Name = "textBoxBusinessPnl";
-            this.textBoxBusinessPnl.ReadOnly = true;
-            this.textBoxBusinessPnl.Size = new System.Drawing.Size(100, 21);
-            this.textBoxBusinessPnl.TabIndex = 1;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(7, 15);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 12);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "总授权额度：";
             // 
-            // textBoxFuturePnl
+            // dateTimePickerBusinessStart
             // 
-            this.textBoxFuturePnl.Location = new System.Drawing.Point(334, 5);
-            this.textBoxFuturePnl.Name = "textBoxFuturePnl";
-            this.textBoxFuturePnl.ReadOnly = true;
-            this.textBoxFuturePnl.Size = new System.Drawing.Size(100, 21);
-            this.textBoxFuturePnl.TabIndex = 3;
+            this.dateTimePickerBusinessStart.Location = new System.Drawing.Point(96, 10);
+            this.dateTimePickerBusinessStart.Name = "dateTimePickerBusinessStart";
+            this.dateTimePickerBusinessStart.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePickerBusinessStart.TabIndex = 0;
             // 
-            // label2
+            // dateTimePickerBusinessEnd
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(215, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "期货总盈亏：";
+            this.dateTimePickerBusinessEnd.Location = new System.Drawing.Point(383, 10);
+            this.dateTimePickerBusinessEnd.Name = "dateTimePickerBusinessEnd";
+            this.dateTimePickerBusinessEnd.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePickerBusinessEnd.TabIndex = 1;
             // 
-            // textBoxOptionPnl
+            // label10
             // 
-            this.textBoxOptionPnl.Location = new System.Drawing.Point(570, 5);
-            this.textBoxOptionPnl.Name = "textBoxOptionPnl";
-            this.textBoxOptionPnl.ReadOnly = true;
-            this.textBoxOptionPnl.Size = new System.Drawing.Size(100, 21);
-            this.textBoxOptionPnl.TabIndex = 5;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 12);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "起始日期：";
             // 
-            // label3
+            // label11
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(451, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "期权总盈亏：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(98, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(3, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 12);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "当日浮动盈亏：";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(334, 39);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(215, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 12);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "当日期货浮动盈亏：";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(570, 39);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(451, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 12);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "当日期权浮动盈亏：";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(311, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "结束日期：";
             // 
             // MainWindow
             // 
@@ -1857,7 +1964,12 @@
             this.tabControlMainWindow.ResumeLayout(false);
             this.tabPageBusinessState.ResumeLayout(false);
             this.panelBusinessState.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBusinessState)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tabPageBalance.ResumeLayout(false);
             this.tableLayoutPanelBalance.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1922,9 +2034,6 @@
             this.tableLayoutPanel8.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2040,5 +2149,15 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxGrantedLoss;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxUsedGranted;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxTotalGranted;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBusinessEnd;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBusinessStart;
     }
 }
