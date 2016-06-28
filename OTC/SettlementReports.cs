@@ -396,18 +396,237 @@ namespace OTC
             HSSFSheet sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
 
             HSSFFont font1 = (HSSFFont)workbook.CreateFont();
-            font1.FontName = "宋体";
+            font1.FontName = "楷体";
+            font1.FontHeightInPoints = 11;
+
+            int left_border = 1;
 
             HSSFCellStyle style1 = (HSSFCellStyle)workbook.CreateCellStyle();
-            style1.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
-            style1.FillPattern = NPOI.SS.UserModel.FillPattern.SolidForeground;
-            style1.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thin;
-            style1.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
-            style1.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
-            style1.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            style1.BorderLeft = NPOI.SS.UserModel.BorderStyle.Medium;
+            style1.BorderRight = NPOI.SS.UserModel.BorderStyle.Medium;
+            style1.BorderTop = NPOI.SS.UserModel.BorderStyle.Medium;
+            style1.BorderBottom = NPOI.SS.UserModel.BorderStyle.Medium;
+            style1.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
             style1.SetFont(font1);
+            style1.WrapText = true;
 
-            sheet.AddMergedRegion(new CellRangeAddress(1, 1, 1, 6));
+            int nrow = 1;
+
+            //表一：总账户信息
+            //表一第一行
+            var region = new CellRangeAddress(1, 1, left_border, 6);
+            var row = sheet.CreateRow(nrow++);
+            var cell = row.CreateCell(1);
+            sheet.AddMergedRegion(region);
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+            cell.SetCellValue("总账户");
+            cell.CellStyle = style1;
+
+            //表一第二行
+            region = new CellRangeAddress(2, 2, left_border, 2);
+            row = sheet.CreateRow(nrow++);
+            cell = row.CreateCell(1);
+            sheet.AddMergedRegion(region);
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+            cell.SetCellValue("额度（元）");
+            cell.CellStyle = style1;
+
+            region = new CellRangeAddress(2, 2, left_border + 2, 4);
+            cell = row.CreateCell(3);
+            sheet.AddMergedRegion(region);
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+            cell.SetCellValue("权益（元）");
+            cell.CellStyle = style1;
+
+            region = new CellRangeAddress(2, 2, left_border + 4, 6);
+            cell = row.CreateCell(5);
+            sheet.AddMergedRegion(region);
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+            cell.SetCellValue("风险水平");
+            cell.CellStyle = style1;
+
+            //读取数据库表
+            var granted_table = this.dataset.display_ds.Tables["business_overview"];
+            var pnl_table = this.dataset.display_ds.Tables["business_state_view"];
+
+            var last_year_settle_rec = (from s in pnl_table.AsEnumerable()
+                                        where s.Field<DateTime>("结算日").Year < settle_day.Year orderby s.Field<DateTime>("结算日") descending
+                                        select new
+                                        {
+                                            settle_day = s.Field<DateTime>("结算日"),
+                                            accum_gross_pnl = s.Field<decimal>("累计总盈亏")
+                                        }).First();
+
+            //表一第三行
+            string[] row_data = new string[]
+            {
+                "总授权额度",
+                granted_table.Rows[0].Field<decimal>(0).ToString(),
+                "年初总账户权益",
+                (last_year_settle_rec.accum_gross_pnl+ granted_table.Rows[0].Field<decimal>(0)).ToString(),
+                "总delta",
+                "0"
+            };
+            int ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach(var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+
+            //表一第四行
+            var last_settle_rec = (from s in pnl_table.AsEnumerable()
+                                        where s.Field<DateTime>("结算日") < settle_day
+                                        orderby s.Field<DateTime>("结算日") descending
+                                        select new
+                                        {
+                                            settle_day = s.Field<DateTime>("结算日"),
+                                            accum_gross_pnl = s.Field<decimal>("累计总盈亏")
+                                        }).First();
+
+            row_data = new string[]
+            {
+                "已使用额度",
+                granted_table.Rows[0].Field<decimal>(1).ToString(),
+                "期初总账户权益",
+                (last_settle_rec.accum_gross_pnl + granted_table.Rows[0].Field<decimal>(0)).ToString(),
+                "",
+                ""
+            };
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+
+            //表一第五行
+            var cur_settle_rec = (from s in pnl_table.AsEnumerable()
+                                  where s.Field<DateTime>("结算日") == settle_day
+                                  orderby s.Field<DateTime>("结算日") descending
+                                  select new
+                                  {
+                                      settle_day = s.Field<DateTime>("结算日"),
+                                      gross_pnl = s.Field<decimal>("结算日总盈亏"),
+                                       accum_gross_pnl = s.Field<decimal>("累计总盈亏")
+                                   }).First();
+
+            row_data = new string[]
+           {
+                "授权亏损度",
+                granted_table.Rows[0].Field<decimal>(2).ToString(),
+                "当前总账户权益",
+                (cur_settle_rec.accum_gross_pnl + granted_table.Rows[0].Field<decimal>(0)).ToString(),
+                "",
+                ""
+           };
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+
+            //表一第六行
+            row_data = new string[]
+            {
+                "",
+                "",
+                "当日盈亏数",
+                cur_settle_rec.gross_pnl.ToString(),
+                "",
+                ""
+            };
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+
+            //表一第七行
+            row_data = new string[]
+            {
+                "",
+                "",
+                "本年亏损度",
+                (cur_settle_rec.accum_gross_pnl - last_year_settle_rec.accum_gross_pnl<0?cur_settle_rec.accum_gross_pnl - last_year_settle_rec.accum_gross_pnl:0).ToString(),
+                "",
+                ""
+            };
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+
+            //调整表格大小
+            sheet.SetColumnWidth(1, 4096);
+            sheet.SetColumnWidth(2, 4096);
+            sheet.SetColumnWidth(3, 4096);
+            sheet.SetColumnWidth(4, 4096);
+            sheet.SetColumnWidth(5, 3072);
+            sheet.SetColumnWidth(6, 3072);
+
+            //表二：期权信息
+            nrow++;
+            region = new CellRangeAddress(nrow, nrow, 1, 11);
+            sheet.AddMergedRegion(region);
+            row = sheet.CreateRow(nrow++);
+            cell = row.CreateCell(1);
+            cell.CellStyle = style1;
+            cell.SetCellValue("期权账户");
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+
+            row_data = new string[] {
+            "",
+            "当日权利仓开仓量（手）",
+            "当日权利仓平仓量（手）",
+            "当日义务仓开仓量（手）",
+            "当日义务仓平仓量（手）",
+            "权利仓持仓量（手）",
+            "义务仓持仓量（手）",
+            "当日期权持仓损益（元）",
+            "当日期权平仓损益（元）",
+            "当日期权总损益（元）",
+            "本年期权累计损益（元）"
+            };
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            row.Height = 1024;
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+
 
             workbook.Write(fs);
             fs.Close();
