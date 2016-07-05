@@ -477,7 +477,7 @@ namespace OTC
                     decimal commission = Convert.ToDecimal(rowContract["手续费"]);
                     decimal multiplier = Convert.ToDecimal(rowContract["合约乘数"]);
                     
-                    this.numericUpDownQuantity.Maximum = Math.Max(Math.Round(Convert.ToDecimal(rowBalance["资金余额"])/(price * multiplier + commission), MidpointRounding.AwayFromZero)-1, 0);
+                    this.numericUpDownQuantity.Maximum = Math.Max((int)(Convert.ToDecimal(rowBalance["资金余额"])/(price * multiplier + commission)), 0);
 
                 }
             }
