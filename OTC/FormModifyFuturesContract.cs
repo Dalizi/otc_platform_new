@@ -12,7 +12,7 @@ namespace OTC
 {
     public partial class FormModifyFuturesContract : Form
     {
-        public FormModifyFuturesContract(OTCDataSet ds)
+        public FormModifyFuturesContract(OTCDataSet ds, string contract_code)
         {
             InitializeComponent();
             this.dataset= ds;
@@ -30,6 +30,10 @@ namespace OTC
             if (this.comboBoxFuturesContractCode.Items.Count != 0)
             {
                 this.comboBoxFuturesContractCode.SelectedIndex = 0;
+            }
+            if (this.comboBoxFuturesContractCode.Items.Count > 0)
+            {
+                this.comboBoxFuturesContractCode.SelectedIndex = this.comboBoxFuturesContractCode.FindStringExact(contract_code);
             }
         }
 
@@ -103,6 +107,7 @@ namespace OTC
             this.textBoxMarginRate.Text = row["保证金率"].ToString();
             this.textBoxMultiplier.Text = row["合约乘数"].ToString();
             this.textBoxPreSettle.Text = row["结算价"].ToString();
+            this.textBoxVolatility.Text = row["波动率"].ToString();
         }
     }
 }
