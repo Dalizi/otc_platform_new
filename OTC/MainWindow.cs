@@ -510,12 +510,6 @@ namespace OTC
             FormQuotes form = new FormQuotes(dataset);
             form.Show();
         }
-
-        private void buttonModifyGrants_Click(object sender, EventArgs e)
-        {
-            FromModifyGrants form = new FromModifyGrants(dataset);
-            form.Show();
-        }
     }
         
 }

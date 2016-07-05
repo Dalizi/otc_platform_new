@@ -18,10 +18,9 @@ namespace OTC.Tests
             string redis_conn_str = "10.2.7.210:6379, password=Finders6";
             OTCDataSet dataset = new OTCDataSet(sql_conn_str, redis_conn_str);
             SettlementReports sr = new SettlementReports(dataset);
-            var date = new DateTime(2016, 7, 5);
-            sr.GenerateBusinessReport(date);
-            sr.GenerateOptionReport(date);
-            sr.GenerateDetailedReport(date);
+            sr.GenerateBusinessReport(new DateTime(2016, 5, 23));
+            sr.GenerateOptionReport(new DateTime(2016, 5, 23));
+            sr.GenerateDetailedReport(new DateTime(2016, 5, 23));
         }
     }
 }

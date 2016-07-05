@@ -83,8 +83,7 @@ namespace OTC
                 "options_direction_type",
                 "options_transactions",
                 "options_types",
-                "options_verbose_positions",
-                "business_overview"
+                "options_verbose_positions"
             };
 
             view_names = new String[]
@@ -109,11 +108,9 @@ namespace OTC
                 "option_settle_info_view",
                 "future_settle_info_view",
                 "business_current_state",
-                "option_settle_view",
-                "future_settle_view",
-                "option_detailed_settle_view",
-                "future_detailed_settle_view",
-                "option_pnl_settle_view"
+                "option_position_settle_info",
+                "future_position_settle_info",
+                "business_overview"
             };
             String selectString = "";
             foreach (String t in table_names)

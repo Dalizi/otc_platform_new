@@ -242,12 +242,6 @@
     <Compile Include="FormTradingDatesSetting.Designer.cs">
       <DependentUpon>FormTradingDatesSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="FromModifyGrants.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FromModifyGrants.Designer.cs">
-      <DependentUpon>FromModifyGrants.cs</DependentUpon>
-    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,9 +318,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTradingDatesSetting.resx">
       <DependentUpon>FormTradingDatesSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FromModifyGrants.resx">
-      <DependentUpon>FromModifyGrants.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

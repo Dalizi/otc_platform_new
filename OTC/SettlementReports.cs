@@ -31,10 +31,6 @@ namespace OTC
             sheet = (HSSFSheet)workbook.CreateSheet("sheet_index");
             HSSFFont font1 = (HSSFFont)workbook.CreateFont();
             font1.FontName = "宋体";
-            for (int i = 0; i < 22; ++i)
-            {
-                sheet.SetColumnWidth(i, 4296);
-            }
 
             HSSFCellStyle style1 = (HSSFCellStyle)workbook.CreateCellStyle();
             style1.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
@@ -180,31 +176,22 @@ namespace OTC
                 };
             var yearly_pnl =
                 from r in dataset.display_ds.Tables["business_state_view"].AsEnumerable()
-                where r.Field<DateTime>("结算日") <= settle_day && r.Field<DateTime>("结算日") >= new DateTime(settle_day.Year, 1, 1)
+                where r.Field<DateTime>("结算日") < settle_day && r.Field<DateTime>("结算日") >= new DateTime(settle_day.Year, 1, 1)
                 select new {
                     future_pnl = r.Field<decimal>("结算日期货盈亏"),
                     option_pnl =  r.Field<decimal>("结算日期权盈亏")
                 };
-            string[] future_line_data_array = new string[] { };
-            try
-            {
-                future_line_data_array = new string[] {
+            var future_line_data_array = new string[] {
                 "金融事业部",
                 "场外期权交易",
                 "期货",
-                dataset.display_ds.Tables["business_overview"].Rows[0]["granted_balance"].ToString(),
+                "164871.00",
                 gross_pnl.Select(r=>r.future_accum_pnl).First().ToString(),
-                "",
-                "",
+                "---",
+                "---",
                 yearly_pnl.Select(r=>r.future_pnl).Sum().ToString(),
                 gross_pnl.Select(r=>r.future_pnl).First().ToString()
-                };
-            }
-            catch (InvalidOperationException e)
-            {
-                return;
-            }
-
+            };
             for (int i = 0; i < 9; ++i)
             {
                 cell = row.CreateCell(i);
@@ -221,8 +208,8 @@ namespace OTC
                 "期权销售",
                 "0.00",
                 gross_pnl.Select(r=>r.option_accum_pnl).First().ToString(),
-                "",
-                "",
+                "---",
+                "---",
                 yearly_pnl.Select(r=>r.option_pnl).Sum().ToString(),
                 gross_pnl.Select(r=>r.option_pnl).First().ToString()
             };
@@ -241,8 +228,8 @@ namespace OTC
                 "期权购买",
                 "0.00",
                 "0.00",
-                "",
-                "",
+                "---",
+                "---",
                 "0.00",
                 "0.00"
             };
@@ -286,19 +273,6 @@ namespace OTC
             style1.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style1.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
             style1.SetFont(font1);
-
-            for (int i = 0; i < 22; ++i)
-            {
-                if (i == 2)
-                {
-
-                    sheet.SetColumnWidth(i, 15000);
-                }
-                else
-                {
-                    sheet.SetColumnWidth(i, 5000);
-                }
-            }
 
             var row = sheet.CreateRow(0);
             var cell = row.CreateCell(0);
@@ -378,7 +352,7 @@ namespace OTC
             style3.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
 
-            var option_table = dataset.display_ds.Tables["option_settle_view"];
+            var option_table = dataset.display_ds.Tables["option_position_settle_info"];
             int n = 3;
             int n_col = option_table.Columns.Count;
             foreach (var data_row in option_table.AsEnumerable())
@@ -395,8 +369,7 @@ namespace OTC
                     n++;
                 }
             }
-            var future_table = dataset.display_ds.Tables["future_settle_view"];
-            n_col = future_table.Columns.Count;
+            var future_table = dataset.display_ds.Tables["future_position_settle_info"];
             foreach (var data_row in future_table.AsEnumerable())
             {
                 row = sheet.CreateRow(n);
@@ -553,7 +526,7 @@ namespace OTC
                                       gross_pnl = s.Field<decimal>("结算日总盈亏"),
                                        accum_gross_pnl = s.Field<decimal>("累计总盈亏")
                                    }).First();
-            
+
             row_data = new string[]
            {
                 "授权亏损度",
@@ -611,17 +584,12 @@ namespace OTC
             }
 
             //调整表格大小
-            sheet.SetColumnWidth(1, 9000);
-            sheet.SetColumnWidth(2, 4296);
-            sheet.SetColumnWidth(3, 4296);
-            sheet.SetColumnWidth(4, 4296);
-            sheet.SetColumnWidth(5, 4296);
-            sheet.SetColumnWidth(6, 4296);
-            sheet.SetColumnWidth(7, 4296);
-            sheet.SetColumnWidth(8, 4296);
-            sheet.SetColumnWidth(9, 4296);
-            sheet.SetColumnWidth(10, 4296);
-            sheet.SetColumnWidth(11, 4296);
+            sheet.SetColumnWidth(1, 4096);
+            sheet.SetColumnWidth(2, 4096);
+            sheet.SetColumnWidth(3, 4096);
+            sheet.SetColumnWidth(4, 4096);
+            sheet.SetColumnWidth(5, 3072);
+            sheet.SetColumnWidth(6, 3072);
 
             //表二：期权信息
             nrow++;
@@ -651,168 +619,14 @@ namespace OTC
             };
             ncol = left_border;
             row = sheet.CreateRow(nrow++);
+            row.Height = 1024;
             foreach (var data in row_data)
             {
                 cell = row.CreateCell(ncol++);
                 cell.CellStyle = style1;
                 cell.SetCellValue(data);
             }
-            var option_table = this.dataset.display_ds.Tables["option_detailed_settle_view"];
-            int row_count = 0;
-            foreach(var r in option_table.AsEnumerable())
-            {
-                if (r.Field<DateTime>("settle_date") == settle_day)
-                {
-                    row = sheet.CreateRow(nrow++);
-                    ncol = left_border;
-                    for (int i = 0; i < r.ItemArray.Count() - 2; ++i)
-                    {
-                        cell = row.CreateCell(ncol);
-                        cell.CellStyle = style1;
-                        cell.SetCellValue(r.ItemArray[i].ToString());
-                        ncol++;
-                    }
-                    cell = row.CreateCell(ncol);
-                    cell.CellStyle = style1;
-                    if (row_count == 0)
-                    {
-                        cell.SetCellValue(r.ItemArray[r.ItemArray.Count() - 2].ToString());
-                        ncol++;
-                    }
-                    row_count++;
-                }
 
-            }
-            row = sheet.CreateRow(nrow++);
-            ncol = left_border;
-            for (int i = 0; i < option_table.Columns.Count - 1; ++i)
-            {
-                cell = row.CreateCell(ncol);
-                cell.CellStyle = style1;
-                ncol++;
-            }
-
-            //表二：期货信息
-            nrow++;
-            region = new CellRangeAddress(nrow, nrow, 1, 10);
-            sheet.AddMergedRegion(region);
-            row = sheet.CreateRow(nrow++);
-            cell = row.CreateCell(1);
-            cell.CellStyle = style1;
-            cell.SetCellValue("期货账户");
-            RegionUtil.SetBorderTop(2, region, sheet, workbook);
-            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
-            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
-            RegionUtil.SetBorderRight(2, region, sheet, workbook);
-
-            row_data = new string[] {
-            "",
-            "当日多开仓量（手）",
-            "当日多平仓量（手）",
-            "当日空开仓量（手）",
-            "当日空平仓量（手）",
-            "净多持仓量（手）",
-            "净空持仓量（手）",
-            "保证金占用（元）",
-            "当日对冲损益（元）",
-            "本年对冲累计损益（元）"
-
-            };
-            ncol = left_border;
-            row = sheet.CreateRow(nrow++);
-            foreach (var data in row_data)
-            {
-                cell = row.CreateCell(ncol++);
-                cell.CellStyle = style1;
-                cell.SetCellValue(data);
-            }
-            var future_table = this.dataset.display_ds.Tables["future_detailed_settle_view"];
-            row_count=0;
-            foreach (var r in future_table.AsEnumerable())
-            {
-                if (r.Field<DateTime>("settle_date") == settle_day)
-                {
-                    row = sheet.CreateRow(nrow++);
-                    ncol = left_border;
-                    for (int i = 0; i < r.ItemArray.Count() - 2; ++i)
-                    {
-                        cell = row.CreateCell(ncol);
-                        cell.CellStyle = style1;
-                        cell.SetCellValue(r.ItemArray[i].ToString());
-                        ncol++;
-                    }
-                    cell = row.CreateCell(ncol);
-                    cell.CellStyle = style1;
-                    if (row_count == 0)
-                    {
-                        cell.SetCellValue(r.ItemArray[r.ItemArray.Count() - 2].ToString());
-                        ncol++;
-                    }
-                    row_count++;
-                }
-            }
-            row = sheet.CreateRow(nrow++);
-            ncol = left_border;
-            for (int i = 0; i < future_table.Columns.Count - 1; ++i)
-            {
-                cell = row.CreateCell(ncol);
-                cell.CellStyle = style1;
-                ncol++;
-            }
-
-            //表三：期权持仓及对冲损益明细
-            nrow++;
-            region = new CellRangeAddress(nrow, nrow, 1, 6);
-            sheet.AddMergedRegion(region);
-            row = sheet.CreateRow(nrow++);
-            cell = row.CreateCell(1);
-            cell.CellStyle = style1;
-            cell.SetCellValue("期权持仓及对冲损益明细");
-            RegionUtil.SetBorderTop(2, region, sheet, workbook);
-            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
-            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
-            RegionUtil.SetBorderRight(2, region, sheet, workbook);
-
-            row_data = new string[] {
-            "品种",
-            "前日收盘理论价值（元/手）",
-            "当日收盘理论价值（元/手）",
-            "持仓数量（手）",
-            "持仓方向",
-            "期权价值的理论盈亏（元）"
-            };
-            ncol = left_border;
-            row = sheet.CreateRow(nrow++);
-            foreach (var data in row_data)
-            {
-                cell = row.CreateCell(ncol++);
-                cell.CellStyle = style1;
-                cell.SetCellValue(data);
-            }
-            var option_pnl_table = this.dataset.display_ds.Tables["option_pnl_settle_view"];
-            foreach (var r in option_pnl_table.AsEnumerable())
-            {
-                if (r.Field<DateTime>("settle_date") == settle_day)
-                {
-                    row = sheet.CreateRow(nrow++);
-                    ncol = left_border;
-                    for (int i = 0; i < r.ItemArray.Count() - 1; ++i)
-                    {
-                        cell = row.CreateCell(ncol);
-                        cell.CellStyle = style1;
-                        cell.SetCellValue(r.ItemArray[i].ToString());
-                        ncol++;
-                    }
-                }
-            }
-            row = sheet.CreateRow(nrow++);
-            ncol = left_border;
-            for (int i = 0; i < option_pnl_table.Columns.Count - 1; ++i)
-            {
-                cell = row.CreateCell(ncol);
-                cell.CellStyle = style1;
-                ncol++;
-            }
 
             workbook.Write(fs);
             fs.Close();
