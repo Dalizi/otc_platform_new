@@ -24,10 +24,17 @@ namespace OTC
         {
             if (!string.IsNullOrEmpty(textBoxCommodityCode.Text) && !string.IsNullOrEmpty(textBoxCommodityName.Text))
             {
-                table.Rows.Add(this.textBoxCommodityCode.Text, this.textBoxCommodityName.Text);
-                this.mainWind.dataset.Commit("commodity_category");
-                this.mainWind.dataset.Update("commodity_category");
-                this.Close();
+                if (table.Rows.Find(textBoxCommodityCode.Text) != null)
+                {
+                    MessageBox.Show("商品代码已存在", "错误");
+                }
+                else
+                {
+                    table.Rows.Add(this.textBoxCommodityCode.Text, this.textBoxCommodityName.Text);
+                    this.mainWind.dataset.Commit("commodity_category");
+                    this.mainWind.dataset.Update("commodity_category");
+                    this.Close();
+                }
             }
             else if (string.IsNullOrEmpty(textBoxCommodityCode.Text))
             {
