@@ -405,7 +405,10 @@ namespace OTC
 
         private void buttonModifyFuturesContract_Click(object sender, EventArgs e)
         {
-            FormModifyFuturesContract form = new FormModifyFuturesContract(this.dataset);
+            string contract_code;
+            if (this.dataGridViewFuturesContract.CurrentRow == null) contract_code = "";
+            else contract_code = this.dataGridViewFuturesContract.CurrentRow.Cells["合约代码"].Value.ToString();
+            FormModifyFuturesContract form = new FormModifyFuturesContract(this.dataset, contract_code);
             form.Show();
         }
 
