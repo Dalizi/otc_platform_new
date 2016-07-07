@@ -303,7 +303,34 @@ namespace OTC
             style1.WrapText = true;
             style1.SetFont(font1);
 
-            for (int i = 0; i < 22; ++i)
+            var header_array = new string[]
+{
+                "产品",
+                "标的",
+                "品种",
+                "期权类型",
+                "月份",
+                "执行价格",
+                "当日多仓(手)",
+                "当日空仓(手)",
+                "当日净持仓(手)",
+                "当日总盈亏（元）",
+                "当日总delta",
+                "当日总gamma",
+                "当日总theta",
+                "当日总vega",
+                "当日总rho",
+                "平仓价（元/吨）",
+                "当日结算价（元/吨）",
+                "波动率",
+                "期权期初价值（元）",
+                "当日期权市值（元）",
+                "当日手续费（元）",
+                "当日净盈亏（元）",
+                "已支付权利金（元）"
+};
+
+            for (int i = 0; i < header_array.Count(); ++i)
             {
                 if (i == 2)
                 {
@@ -357,31 +384,7 @@ namespace OTC
             style2.WrapText = true;
             style2.SetFont(font2);
 
-            var header_array = new string[]
-            {
-                "产品",
-                "标的",
-                "品种",
-                "期权类型",
-                "月份",
-                "执行价格",
-                "当日多仓(手)",
-                "当日空仓(手)",
-                "当日净持仓(手)",
-                "当日总盈亏（元）",
-                "当日总delta",
-                "当日总gamma",
-                "当日总theta",
-                "当日总vega",
-                "当日总rho",
-                "平仓价（元/吨）",
-                "当日结算价（元/吨）",
-                "波动率",
-                "期权期初价值（元）",
-                "当日期权市值（元）",
-                "当日手续费（元）",
-                "当日净盈亏（元）"
-            };
+
             row = sheet.CreateRow(2);
             for (int i = 0; i < header_array.Length; ++i)
             {
@@ -409,7 +412,7 @@ namespace OTC
                 row = sheet.CreateRow(n);
                 if ((DateTime)data_row.ItemArray[n_col-1] == settle_day)
                 {
-                    for (int j = 0; j < data_row.ItemArray.Count() - 1; ++j)
+                    for (int j = 0; j < header_array.Count() ; ++j)
                     {
                         cell = row.CreateCell(j);
                         cell.CellStyle = style3;
@@ -425,12 +428,14 @@ namespace OTC
                 row = sheet.CreateRow(n);
                 if ((DateTime)data_row.ItemArray[n_col - 1] == settle_day)
                 {
-                    for (int j = 0; j < data_row.ItemArray.Count() - 1; ++j)
+                    for (int j = 0; j < header_array.Count()-1; ++j)
                     {
                         cell = row.CreateCell(j);
                         cell.CellStyle = style3;
                         cell.SetCellValue(data_row.ItemArray[j].ToString());
                     }
+                    cell = row.CreateCell(header_array.Count() - 1);
+                    cell.CellStyle = style3;
                     n++;
                 }
             }
