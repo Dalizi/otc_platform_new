@@ -37,6 +37,8 @@ namespace OTC
             }
 
             HSSFCellStyle style1 = (HSSFCellStyle)workbook.CreateCellStyle();
+            style1.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style1.WrapText = true;
             style1.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
             style1.FillPattern = NPOI.SS.UserModel.FillPattern.SolidForeground;
             style1.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thin;
@@ -80,8 +82,20 @@ namespace OTC
             cell = row.CreateCell(3);
             cell.CellStyle = style1;
             cell.SetCellValue("100054");
+
             //工作簿2
             sheet = (HSSFSheet)workbook.CreateSheet("S_22865_SCFXQH1.5_0_业务日报_中粮期货_");
+            //调整表格大小
+            sheet.SetColumnWidth(0, 6000);
+            sheet.SetColumnWidth(1, 4296);
+            sheet.SetColumnWidth(2, 7000);
+            sheet.SetColumnWidth(3, 7000);
+            sheet.SetColumnWidth(4, 4296);
+            sheet.SetColumnWidth(5, 7000);
+            sheet.SetColumnWidth(6, 7000);
+            sheet.SetColumnWidth(7, 6000);
+            sheet.SetColumnWidth(8, 6000);
+            sheet.SetColumnWidth(9, 6000);
 
             row = sheet.CreateRow(0);
             cell = row.CreateCell(0);
@@ -117,6 +131,7 @@ namespace OTC
             style2.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style2.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
             style2.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style2.WrapText = true;
             style2.SetFont(font2);
 
             row = sheet.CreateRow(2);
@@ -165,6 +180,8 @@ namespace OTC
             style3.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            style3.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style3.WrapText = true;
             row = sheet.CreateRow(3);
 
 
@@ -210,7 +227,6 @@ namespace OTC
                 cell = row.CreateCell(i);
                 cell.SetCellValue(future_line_data_array[i]);
                 cell.CellStyle = style3;
-                sheet.AutoSizeColumn(i);
             }
 
             //第五行    
@@ -231,7 +247,6 @@ namespace OTC
                 cell = row.CreateCell(i);
                 cell.SetCellValue(buy_option_line_data_array[i]);
                 cell.CellStyle = style3;
-                sheet.AutoSizeColumn(i);
             }
 
             row = sheet.CreateRow(5);
@@ -251,7 +266,6 @@ namespace OTC
                 cell = row.CreateCell(i);
                 cell.SetCellValue(sell_option_line_data_array[i]);
                 cell.CellStyle = style3;
-                sheet.AutoSizeColumn(i);
             }
 
             for (int i = 6; i < 17; ++i)
@@ -285,14 +299,19 @@ namespace OTC
             style1.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
             style1.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style1.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            style1.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style1.WrapText = true;
             style1.SetFont(font1);
 
             for (int i = 0; i < 22; ++i)
             {
                 if (i == 2)
                 {
-
-                    sheet.SetColumnWidth(i, 15000);
+                    sheet.SetColumnWidth(i, 12000);
+                }
+                else if (i == 16)
+                {
+                    sheet.SetColumnWidth(i, 9000);
                 }
                 else
                 {
@@ -334,6 +353,8 @@ namespace OTC
             style2.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style2.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
             style2.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style2.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style2.WrapText = true;
             style2.SetFont(font2);
 
             var header_array = new string[]
@@ -377,6 +398,8 @@ namespace OTC
             style3.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             style3.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            style3.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            style3.WrapText = true;
 
             var option_table = dataset.display_ds.Tables["option_settle_view"];
             int n = 3;
