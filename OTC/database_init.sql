@@ -380,6 +380,7 @@ insert into futures_cashflow values (null, 10680233, 24255, 'dp', null, '2016-06
 insert into client_cashflow values (null, 4, 40000, 'dp', null, '2016-06-15 15:00:00', '客户入金');
 call settlement('2016-06-15');
 
+
 call settlement('2016-06-30');
 
 insert into futures_account_info values (10181233);
@@ -402,19 +403,23 @@ update futures_contracts set settle_price=6007 where contract_code='SR609';
 update futures_contracts set settle_price=6281 where contract_code='SR701';
 update options_contracts set settle_price=21 where contract_code='OTC-ASP-0SR701-20160930-052500';
 
+insert into futures_cashflow select 0, 10680233, 40000, 'wd', null, '2016-07-01 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10680233, 24255, 'wd', null, '2016-07-01 10:00:00', '自有资金全部出金';
+insert into client_cashflow values (null, 4, 40000, 'wd', null, '2016-07-01 15:00:00', '客户出金');
+
 call settlement('2016-07-01');
 
 insert into futures_account_info values (10580233);
 insert into client_info value (6, '中国人民财产保险股份有限公司北京分公司', 10580233, '12233');
 insert into futures_cashflow values (null, 10580233, 1659000, 'dp', null, '2016-07-04 10:00:00', null);
-insert into client_cashflow values (null, 5, 1080000, 'dp', null, '2016-07-04 9:00:00', '');
+insert into client_cashflow values (null, 6, 1080000, 'dp', null, '2016-07-04 9:00:00', '');
 
 insert into commodity_category value ('c', '玉米');
 
 insert into futures_contracts values ('c1701', 'c', 'abs', 1.92, 0.07, 1567, 10, 0.22, false);
 insert into options_contracts values ('OTC-ASP-0C1701-20161130-015000','as', 'p', 1500, '2016-11-30', 0, 'c1701', 0, 10, 0, 0.22,0.17, false);
 
-insert into options_transactions value (1, 5, 'OTC-ASP-0C1701-20161130-015000', 1500, 72, 1587, '开仓', '买入', '2016-07-04 09:00:00', null, null, null);
+insert into options_transactions value (1, 6, 'OTC-ASP-0C1701-20161130-015000', 1500, 72, 1587, '开仓', '买入', '2016-07-04 09:00:00', null, null, null);
 
 insert into futures_transactions value (0, 10580233, 'c1701', 100, 1570, '开仓', '卖出', '2016-07-04 10:10:00', null, null, 6, null);
 insert into futures_transactions value (0, 10580233, 'c1701', 100, 1575, '开仓', '卖出', '2016-07-04 10:20:00', null, null, 6, null);
@@ -430,3 +435,30 @@ update options_contracts set settle_price=20.5 where contract_code='OTC-ASP-0SR7
 update options_contracts set settle_price=68 where contract_code='OTC-ASP-0C1701-20161130-015000';
 
 call settlement('2016-07-04');
+
+insert into futures_cashflow values (null, 10680233, 223440, 'dp', null, '2016-07-05 10:00:00', null);
+
+insert into futures_transactions value (0, 10580233, 'c1701', 80, 1536, '开仓', '卖出', '2016-07-05 10:10:00', null, null, 6, null);
+insert into futures_transactions value (0, 10181233, 'SR609', 2, 5969, '开仓', '卖出', '2016-07-05 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 2, 6294, '开仓', '卖出', '2016-07-05 10:25:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR609', 10, 5950, '开仓', '买入', '2016-07-05 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR701', 4, 6277, '开仓', '买入', '2016-07-05 10:25:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR609', 2, 5970, '开仓', '买入', '2016-07-05 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR701', 2, 6294, '开仓', '买入', '2016-07-05 10:25:00', null, null, 5, null);
+
+
+update futures_contracts set settle_price=6005 where contract_code='SR609';
+update futures_contracts set settle_price=6315 where contract_code='SR701';
+update futures_contracts set settle_price=1546 where contract_code='c1701';
+update options_contracts set settle_price=20.2 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=79.5 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settlement('2016-07-05');
+
+update futures_contracts set settle_price=5983 where contract_code='SR609';
+update futures_contracts set settle_price=6318 where contract_code='SR701';
+update futures_contracts set settle_price=1520 where contract_code='c1701';
+update options_contracts set settle_price=21.3 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=84.3 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settlement('2016-07-06');
