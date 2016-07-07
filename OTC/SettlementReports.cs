@@ -814,6 +814,173 @@ namespace OTC
                 ncol++;
             }
 
+            //表四：期权行权明细
+            nrow++;
+            region = new CellRangeAddress(nrow, nrow, 1, 6);
+            sheet.AddMergedRegion(region);
+            row = sheet.CreateRow(nrow++);
+            cell = row.CreateCell(1);
+            cell.CellStyle = style1;
+            cell.SetCellValue("期权行权明细");
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+
+            row_data = new string[] {
+            "行权合约",
+            "执行价格",
+            "行权结算价",
+            "行权数量（手）",
+            "行权方向",
+            "行权收支总额"
+            };
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+            //var exercise_table = this.dataset.display_ds.Tables["option_pnl_settle_view"];
+            /*foreach (var r in option_pnl_table.AsEnumerable())
+            {
+                if (r.Field<DateTime>("settle_date") == settle_day)
+                {
+                    row = sheet.CreateRow(nrow++);
+                    ncol = left_border;
+                    for (int i = 0; i < r.ItemArray.Count() - 1; ++i)
+                    {
+                        cell = row.CreateCell(ncol);
+                        cell.CellStyle = style1;
+                        cell.SetCellValue(r.ItemArray[i].ToString());
+                        ncol++;
+                    }
+                }
+            }*/
+            row = sheet.CreateRow(nrow++);
+            ncol = left_border;
+            for (int i = 0; i < row_data.Count(); ++i)
+            {
+                cell = row.CreateCell(ncol);
+                cell.CellStyle = style1;
+                ncol++;
+            }
+
+            //表五：期权持仓及对冲损益明细（复盘）            
+            row_data = new string[] {
+            "品种",
+            "前日理论对冲持仓（手）",
+            "当日对冲操作",
+            "当日收盘理论对冲持仓",
+            "理论对冲交易盈亏（元）"
+            };
+            nrow++;
+            region = new CellRangeAddress(nrow, nrow, left_border, left_border + row_data.Count() - 1);
+            sheet.AddMergedRegion(region);
+            row = sheet.CreateRow(nrow++);
+            cell = row.CreateCell(1);
+            cell.CellStyle = style1;
+            cell.SetCellValue("期权持仓及对冲损益明细（复盘）");
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+            row = sheet.CreateRow(nrow++);
+            ncol = left_border;
+            for (int i = 0; i < row_data.Count(); ++i)
+            {
+                cell = row.CreateCell(ncol);
+                cell.CellStyle = style1;
+                ncol++;
+            }
+
+            //表六：期权持仓及对冲损益明细（复盘）
+            row_data = new string[] {
+            "品种",
+            "理论头寸净盈亏（元）",
+            "理论头寸累计净盈亏（元）",
+            "初始对冲保证金额度（元）",
+            "当前对冲保证金额度（元）",
+            "存续状态",
+            "是否释放对冲保证金"
+            };
+            nrow++;
+            region = new CellRangeAddress(nrow, nrow, left_border, left_border+row_data.Count()-1);
+            sheet.AddMergedRegion(region);
+            row = sheet.CreateRow(nrow++);
+            cell = row.CreateCell(1);
+            cell.CellStyle = style1;
+            cell.SetCellValue("期权持仓及对冲损益明细（复盘）");
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+            row = sheet.CreateRow(nrow++);
+            ncol = left_border;
+            for (int i = 0; i < row_data.Count(); ++i)
+            {
+                cell = row.CreateCell(ncol);
+                cell.CellStyle = style1;
+                ncol++;
+            }
+
+            //表七：客户风险状况				
+            row_data = new string[] {
+            "客户名称",
+            "客户编号",
+            "客户权益（元）",
+            "应缴保证金（元）",
+            "风险率"
+            };
+            nrow++;
+            region = new CellRangeAddress(nrow, nrow, left_border, left_border + row_data.Count() - 1);
+            sheet.AddMergedRegion(region);
+            row = sheet.CreateRow(nrow++);
+            cell = row.CreateCell(1);
+            cell.CellStyle = style1;
+            cell.SetCellValue("客户风险状况");
+            RegionUtil.SetBorderTop(2, region, sheet, workbook);
+            RegionUtil.SetBorderBottom(2, region, sheet, workbook);
+            RegionUtil.SetBorderLeft(2, region, sheet, workbook);
+            RegionUtil.SetBorderRight(2, region, sheet, workbook);
+
+            ncol = left_border;
+            row = sheet.CreateRow(nrow++);
+            foreach (var data in row_data)
+            {
+                cell = row.CreateCell(ncol++);
+                cell.CellStyle = style1;
+                cell.SetCellValue(data);
+            }
+            row = sheet.CreateRow(nrow++);
+            ncol = left_border;
+            for (int i = 0; i < row_data.Count(); ++i)
+            {
+                cell = row.CreateCell(ncol);
+                cell.CellStyle = style1;
+                ncol++;
+            }
+
             workbook.Write(fs);
             fs.Close();
         }
