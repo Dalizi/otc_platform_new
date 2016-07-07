@@ -114,6 +114,7 @@ namespace OTC
             this.textBoxCommission.Text = row["手续费"].ToString();
             this.textBoxMarginRate.Text = row["保证金率"].ToString();
             this.textBoxMultiplier.Text = row["合约乘数"].ToString();
+            this.dateTimePickerMaturityDate.Value = row.Field<DateTime>("到期日");
             this.comboBoxOptionsType.SelectedIndex = this.comboBoxOptionsType.FindString(row["期权类型"].ToString());
             this.comboBoxOptionsDirection.SelectedIndex = this.comboBoxOptionsDirection.FindStringExact(row["认购认沽"].ToString()=="c"?"认购":"认沽");
             this.textBoxStrikePrice.Text = row["执行价"].ToString();
