@@ -16,44 +16,51 @@ namespace OTC
         {
             InitializeComponent();
             dataset = ds;
-            option_table = new DataTable();
-            option_table.Columns.Add("合约代码", Type.GetType("System.String"));
-            option_table.Columns.Add("波动率", Type.GetType("System.Double"));
-            option_table.Columns.Add("结算价", Type.GetType("System.Decimal"));
-            option_table.Columns.Add("delta", Type.GetType("System.Double"));
-            option_table.Columns.Add("gamma", Type.GetType("System.Double"));
-            option_table.Columns.Add("theta", Type.GetType("System.Double"));
-            option_table.Columns.Add("vega", Type.GetType("System.Double"));
-            option_table.Columns.Add("rho", Type.GetType("System.Double"));
-            var option_info = from o in dataset.display_ds.Tables["options_contracts"].AsEnumerable()
-                              join p in dataset.display_ds.Tables["options_verbose_positions"].AsEnumerable()
-                              on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
-                              select new {
-                                  contract_code = o.Field<string>("合约代码"),
-                                  volatility = o.Field<double>("波动率"),
-                                  settle_price = o.Field<decimal>("结算价"),
-                                  delta = 0,
-                                  gamma = 0,
-                                  theta = 0,
-                                  vega = 0,
-                                  rho = 0
-                              };
-            foreach (var r in option_info)
-            {
-                option_table.Rows.Add(r.contract_code, r.volatility, r.settle_price, r.delta, r.gamma, r.theta, r.vega, r.rho);
-            }
-            this.dateTimePickerSettleDate.Value = DateTime.Today;
-            this.dataGridViewOptionInfo.DataSource = option_table;
-            this.dataGridViewFutureInfo.DataSource = dataset;
-            this.dataGridViewFutureInfo.DataMember = "future_settle_info_view";
+            InitDataTable();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            foreach (var l in option_table.AsEnumerable())
+            {
+                var key = l.Field<string>("合约代码");
+                var c_line = dataset.Tables["options_contracts"].Rows.Find(key);
+                c_line["波动率"] = l.Field<double>("波动率");
+                c_line["结算价"] = l.Field<decimal>("结算价");
+            }
+            dataset.Commit("options_contracts");
+
+            foreach (var l in future_table.AsEnumerable())
+            {
+                var key = l.Field<string>("合约代码");
+                var c_line = dataset.Tables["futures_contracts"].Rows.Find(key);
+                c_line["手续费"] = l.Field<decimal>("手续费");
+                c_line["保证金率"] = l.Field<decimal>("保证金率");
+                c_line["结算价"] = l.Field<decimal>("结算价");
+            }
+            dataset.Commit("futures_contracts");
+
             var conn = this.dataset.CreateSQLConnection();
             conn.Open();
-            var query = new MySql.Data.MySqlClient.MySqlCommand(String.Format("call settlement('{0}')",dateTimePickerSettleDate.Value.ToString("yyyy-MM-dd")), conn);
+            var query = new MySql.Data.MySqlClient.MySqlCommand(String.Format("call settlement('{0}')", dateTimePickerSettleDate.Value.ToString("yyyy-MM-dd")), conn);
             query.ExecuteNonQuery();
+
+            this.dataset.Update("option_position_settle_info");
+            foreach (var l in option_table.AsEnumerable())
+            {
+                var key = l.Field<string>("合约代码");
+                foreach (var c_line in dataset.Tables["option_position_settle_info"].Select(string.Format("settle_date='{0}' and code='{1}'", dateTimePickerSettleDate.Value.ToString("yyyy-MM-dd"), key)))
+                {
+
+                    c_line["delta"] = l.Field<double>("delta");
+                    c_line["gamma"] = l.Field<double>("gamma");
+                    c_line["theta"] = l.Field<double>("theta");
+                    c_line["vega"] = l.Field<double>("vega");
+                    c_line["rho"] = l.Field<double>("rho");
+                }
+            }
+            dataset.Commit("option_position_settle_info");
+
             this.Close();
         }
 
@@ -82,7 +89,7 @@ namespace OTC
                                   vega = 0,
                                   rho = 0
                               };
-            foreach (var r in option_info)
+            foreach (var r in option_info.Distinct())
             {
                 option_table.Rows.Add(r.contract_code, r.volatility, r.settle_price, r.delta, r.gamma, r.theta, r.vega, r.rho);
             }
@@ -90,11 +97,12 @@ namespace OTC
             future_table = new DataTable();
             future_table.Columns.Add("合约代码", Type.GetType("System.String"));
             future_table.Columns.Add("手续费", Type.GetType("System.Decimal"));
-            future_table.Columns.Add("保证金", Type.GetType("System.Decimal"));
+            future_table.Columns.Add("保证金率", Type.GetType("System.Decimal"));
+            future_table.Columns.Add("前结算价", Type.GetType("System.Decimal"));
             future_table.Columns.Add("结算价", Type.GetType("System.Decimal"));
-            var future_info = from o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable()
-                              join p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable()
-                              on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
+            var future_info = from p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable()
+                              join o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable()
+                              on p.Field<string>("合约代码") equals o.Field<string>("合约代码")
                               select new
                               {
                                   contract_code = o.Field<string>("合约代码"),
@@ -102,9 +110,15 @@ namespace OTC
                                   margin_rate = o.Field<decimal>("保证金率"),
                                   settle_price = o.Field<decimal>("结算价")
                               };
-            foreach (var r in future_info)
+            var redis_db = this.dataset.CreateRedisConnection();
+            foreach (var r in future_info.Distinct())
             {
-                future_table.Rows.Add(r.contract_code, r.commission, r.margin_rate, r.settle_price);
+                decimal s_price = r.settle_price;
+                if (redis_db.KeyExists(r.contract_code))
+                    s_price = decimal.Parse(redis_db.HashGet(r.contract_code, "SettlementPrice"));
+                else
+                    MessageBox.Show("错误", string.Format("Key:{0}不存在", r.contract_code));
+                future_table.Rows.Add(r.contract_code, r.commission, r.margin_rate, r.settle_price, s_price);
             }
 
             this.dateTimePickerSettleDate.Value = DateTime.Today;

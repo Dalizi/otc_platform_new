@@ -100,7 +100,6 @@
             this.dataGridViewOptionInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewOptionInfo.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewOptionInfo.Name = "dataGridViewOptionInfo";
-            this.dataGridViewOptionInfo.ReadOnly = true;
             this.dataGridViewOptionInfo.RowTemplate.Height = 23;
             this.dataGridViewOptionInfo.Size = new System.Drawing.Size(590, 300);
             this.dataGridViewOptionInfo.TabIndex = 0;
@@ -114,7 +113,6 @@
             this.dataGridViewFutureInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewFutureInfo.Location = new System.Drawing.Point(599, 3);
             this.dataGridViewFutureInfo.Name = "dataGridViewFutureInfo";
-            this.dataGridViewFutureInfo.ReadOnly = true;
             this.dataGridViewFutureInfo.RowTemplate.Height = 23;
             this.dataGridViewFutureInfo.Size = new System.Drawing.Size(590, 300);
             this.dataGridViewFutureInfo.TabIndex = 1;
