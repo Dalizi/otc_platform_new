@@ -84,7 +84,8 @@ namespace OTC
                 "options_transactions",
                 "options_types",
                 "options_verbose_positions",
-                "business_overview"
+                "business_overview",
+                "option_position_settle_info"
             };
 
             view_names = new String[]
