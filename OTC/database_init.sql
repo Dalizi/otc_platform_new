@@ -1,6 +1,6 @@
 use otc_test;
 #武汉银鹏
-insert into business_overview value(5000000, 0, 3000000, 1);
+insert into business_overview value(5000000, 2245720.00, 3000000, 1);
 #第一笔业务
 insert into futures_account_info values (10480233);
 insert into client_info value (1, '武汉银鹏投资有限公司', 10480233, '12233');
@@ -463,19 +463,48 @@ update options_contracts set settle_price=84.3 where contract_code='OTC-ASP-0C17
 
 call settlement('2016-07-06');
 
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6300, '开仓', '卖出', '2016-07-07 09:01:00', null, null, 5, null);
+
 update futures_contracts set settle_price=5924 where contract_code='SR609';
 update futures_contracts set settle_price=6275 where contract_code='SR701';
 update futures_contracts set settle_price=1518 where contract_code='c1701';
-update options_contracts set settle_price=22.6, volatility=20.3 where contract_code='OTC-ASP-0SR701-20160930-052500';
-update options_contracts set settle_price=87.3, volatility=22.1 where contract_code='OTC-ASP-0C1701-20161130-015000';
+update options_contracts set settle_price=22.6, volatility=0.203 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=87.3, volatility=0.221 where contract_code='OTC-ASP-0C1701-20161130-015000';
 
 call settlement('2016-07-07');
 insert into futures_transactions value (0, 10680233, 'SR701', 1, 6169, '开仓', '买入', '2016-07-08 09:01:00', null, null, 5, null);
 
-update futures_contracts set settle_price=5924 where contract_code='SR609';
-update futures_contracts set settle_price=6275 where contract_code='SR701';
-update futures_contracts set settle_price=1518 where contract_code='c1701';
-update options_contracts set settle_price=22.6, volatility=20.3 where contract_code='OTC-ASP-0SR701-20160930-052500';
-update options_contracts set settle_price=87.3, volatility=22.1 where contract_code='OTC-ASP-0C1701-20161130-015000';
+update futures_contracts set settle_price=5827 where contract_code='SR609';
+update futures_contracts set settle_price=6177 where contract_code='SR701';
+update futures_contracts set settle_price=1515 where contract_code='c1701';
+update options_contracts set settle_price=24.8, volatility=0.207 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=83.3, volatility=0.221 where contract_code='OTC-ASP-0C1701-20161130-015000';
 
 call settlement('2016-07-08');
+
+insert into futures_transactions value (0, 10680233, 'SR701', 1, 6200, '平仓', '卖出', '2016-07-11 13:32:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6182, '平仓', '买入', '2016-07-11 14:43:00', null, null, 5, null);
+
+insert into futures_cashflow select 0, 10780233, 110000, 'wd', null, '2016-07-11 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10780233, 140616, 'wd', null, '2016-07-11 10:00:00', '自有资金全部出金';
+insert into client_cashflow values (null, 3, 110000, 'wd', null, '2016-07-11 15:00:00', '客户出金');
+
+update futures_contracts set settle_price=5810 where contract_code='SR609';
+update futures_contracts set settle_price=6163 where contract_code='SR701';
+update futures_contracts set settle_price=1534 where contract_code='c1701';
+update options_contracts set settle_price=24.2, volatility=0.205 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=80.6, volatility=0.221 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settlement('2016-07-11');
+
+
+insert into futures_transactions value (0, 10680233, 'SR609', 2, 5949, '平仓', '卖出', '2016-07-12 13:32:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR609', 2, 5948, '平仓', '买入', '2016-07-12 14:43:00', null, null, 5, null);
+
+update futures_contracts set settle_price=5903 where contract_code='SR609';
+update futures_contracts set settle_price=6292 where contract_code='SR701';
+update futures_contracts set settle_price=1521 where contract_code='c1701';
+update options_contracts set settle_price=22.4, volatility=0.218 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=81.6, volatility=0.222 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settlement('2016-07-12');

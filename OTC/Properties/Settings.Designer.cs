@@ -130,5 +130,17 @@ namespace OTC.Properties {
                 this["RedisPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\mystconqueror\\Documents\\对冲记录\\每日表单(自动）")]
+        public string SettleFileDir {
+            get {
+                return ((string)(this["SettleFileDir"]));
+            }
+            set {
+                this["SettleFileDir"] = value;
+            }
+        }
     }
 }

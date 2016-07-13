@@ -21,7 +21,12 @@ namespace OTC
 
         public void GenerateBusinessReport(DateTime settle_day)
         {
-            FileStream fs = new FileStream("MDAS_业务日报(金融)_中粮期货(auto).xls", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            string dirPath = Properties.Settings.Default.SettleFileDir + '\\' + settle_day.ToString("yyyy.MM.dd")+'\\';
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            FileStream fs = new FileStream(dirPath+"MDAS_业务日报(金融)_中粮期货.xls", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             HSSFWorkbook workbook = new HSSFWorkbook();
             NPOI.SS.UserModel.ISheet sheet;
             NPOI.SS.UserModel.IRow row;
@@ -285,7 +290,12 @@ namespace OTC
 
         public void GenerateOptionReport(DateTime settle_day)
         {
-            FileStream fs = new FileStream("MDAS_期权日报表(金融)_中粮期货(auto).xls", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            string dirPath = Properties.Settings.Default.SettleFileDir + '\\' + settle_day.ToString("yyyy.MM.dd")+'\\';
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            FileStream fs = new FileStream(dirPath+"MDAS_期权日报表(金融)_中粮期货.xls", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
 
@@ -446,7 +456,12 @@ namespace OTC
 
         public void GenerateDetailedReport(DateTime settle_day)
         {
-            FileStream fs = new FileStream(String.Format("产品运行数据日报（报风委会表单）-{0}.xls", settle_day.ToString("yyyyMMdd")), FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            string dirPath = Properties.Settings.Default.SettleFileDir + "\\" + settle_day.ToString("yyyy.MM.dd")+'\\';
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            FileStream fs = new FileStream(dirPath+String.Format("产品运行数据日报（报风委会表单）-{0}.xls", settle_day.ToString("yyyyMMdd")), FileMode.OpenOrCreate, FileAccess.ReadWrite);
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
 
