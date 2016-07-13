@@ -1,0 +1,510 @@
+use otc_test2;
+#武汉银鹏
+insert into business_overview value(5000000, 2245720.00, 3000000, 1);
+#第一笔业务
+insert into futures_account_info values (10480233);
+insert into client_info value (1, '武汉银鹏投资有限公司', 10480233, '12233');
+
+insert into futures_cashflow values (null, 10480233, 148000, 'dp', null, '2015-12-22 10:00:00', null);
+insert into client_cashflow values (null, 1, 40000, 'dp', null, '2015-12-22 9:00:00', '');
+call settle_and_confirm('2015-12-22');
+insert into futures_contracts values ('m1605', 'm', 'abs', 3, 0.05, 2414, 10, 0.4, false);
+insert into options_contracts values ('OTC-EUP-0M1605-20160121-023900','eu', 'p', 2390, '2016-01-21', 0, 'm1605', 0, 10, 0, 0.28,0.24, false);
+
+#12.23
+insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160121-023900', 50, 76.44, 2390, '开仓', '买入', '2015-12-23 09:00:00', null, null, null);
+
+insert into futures_transactions value (0, 10480233, 'm1605', 25, 2390, '开仓', '卖出', '2015-12-23 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2397, '平仓', '买入', '2015-12-23 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2398 where contract_code='m1605';
+update options_contracts set settle_price=70.79 where contract_code='OTC-EUP-0M1605-20160121-023900';
+insert into futures_cashflow value(0, 10480233, -1.5, 'cm', null, '2015-12-23 10:20:00', '手续费调整');
+call settle_and_confirm('2015-12-23');
+
+#12.24
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2399, '平仓', '买入', '2015-12-24 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2390, '开仓', '卖出', '2015-12-24 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2378, '开仓', '卖出', '2015-12-24 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2387 where contract_code='m1605';
+update options_contracts set settle_price=74.18 where contract_code='OTC-EUP-0M1605-20160121-023900';
+call settle_and_confirm('2015-12-24');
+
+#12.25
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2377, '开仓', '卖出', '2015-12-25 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2364, '开仓', '卖出', '2015-12-25 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2375 where contract_code='m1605';
+update options_contracts set settle_price=78.31 where contract_code='OTC-EUP-0M1605-20160121-023900';
+insert into futures_cashflow value(0, 10480233, -1.5, 'cm', null, '2015-12-25 10:20:00', '手续费调整');
+call settle_and_confirm('2015-12-25');
+
+#12.28
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2360, '开仓', '卖出', '2015-12-28 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2339, '开仓', '卖出', '2015-12-28 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2354 where contract_code='m1605';
+update options_contracts set settle_price=87.77 where contract_code='OTC-EUP-0M1605-20160121-023900';
+call settle_and_confirm('2015-12-28');
+
+#12.29
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2368, '平仓', '买入', '2015-12-29 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2370, '平仓', '买入', '2015-12-29 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2355 where contract_code='m1605';
+update options_contracts set settle_price=85.21 where contract_code='OTC-EUP-0M1605-20160121-023900';
+call settle_and_confirm('2015-12-29');
+
+#12.30
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2377, '平仓', '买入', '2015-12-30 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2366, '开仓', '卖出', '2015-12-30 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2358, '开仓', '卖出', '2015-12-30 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2363 where contract_code='m1605';
+update options_contracts set settle_price=78.65 where contract_code='OTC-EUP-0M1605-20160121-023900';
+call settle_and_confirm('2015-12-30');
+
+#12.31
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2357, '开仓', '卖出', '2015-12-31 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2365, '平仓', '买入', '2015-12-31 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2373, '平仓', '买入', '2015-12-31 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2379, '开仓', '买入', '2015-12-31 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2367 where contract_code='m1605';
+update options_contracts set settle_price=74.30 where contract_code='OTC-EUP-0M1605-20160121-023900';
+insert into futures_cashflow value(0, 10480233, -3, 'cm', null, '2015-12-31 10:20:00', '手续费调整');
+call settle_and_confirm('2015-12-31');
+
+#1.4
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2368, '平仓', '卖出', '2016-01-04 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2349, '开仓', '卖出', '2016-01-04 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2342, '开仓', '卖出', '2016-01-04 10:25:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2337, '开仓', '卖出', '2016-01-04 10:30:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2323, '开仓', '卖出', '2016-01-04 10:40:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2328, '开仓', '卖出', '2016-01-04 10:50:00', null, null, 1, null);
+update futures_contracts set settle_price=2342 where contract_code='m1605';
+update options_contracts set settle_price=86.60 where contract_code='OTC-EUP-0M1605-20160121-023900';
+call settle_and_confirm('2016-01-04');
+
+#1.5
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2340, '平仓', '买入', '2016-01-05 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 31, 2339, '平仓', '买入', '2016-01-05 10:20:00', null, null, 1, null);
+
+
+insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160121-023900', 50, 87.64, 2337, '平仓', '卖出', '2016-01-05 11:00:00', null, null, null);
+
+call settle_and_confirm('2016-01-05');
+
+#第二笔业务
+#1.6
+insert into options_contracts values ('OTC-EUP-0M1605-20160204-023320','eu', 'p', 2332, '2016-02-04', 0, 'm1605', 0, 10, 0, 0.245,0.22, false);
+
+insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160204-023320', 50, 67.63, 2332, '开仓', '买入', '2016-01-06 11:00:00', null, null, null);
+
+insert into futures_transactions value (0, 10480233, 'm1605', 25, 2332, '开仓', '卖出', '2016-01-06 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2347, '平仓', '买入', '2016-01-06 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2347, '平仓', '买入', '2016-01-06 10:25:00', null, null, 1, null);
+update futures_contracts set settle_price=2340 where contract_code='m1605';
+update options_contracts set settle_price=59.89 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -6, 'cm', null, '2016-01-06 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-06');
+
+#1.7
+insert into futures_transactions value (0, 10480233, 'm1605', 2, 2365, '平仓', '买入', '2016-01-07 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 2, 2381, '平仓', '买入', '2016-01-07 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2369 where contract_code='m1605';
+update options_contracts set settle_price=47.39 where contract_code='OTC-EUP-0M1605-20160204-023320';
+call settle_and_confirm('2016-01-07');
+
+#1.8
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2370, '开仓', '卖出', '2016-01-08 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 3, 2397, '平仓', '买入', '2016-01-08 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2403, '平仓', '买入', '2016-01-08 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2391 where contract_code='m1605';
+update options_contracts set settle_price=37.72 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -3, 'cm', null, '2016-01-08 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-08');
+
+#1.11
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2387, '开仓', '卖出', '2016-01-11 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2386, '开仓', '卖出', '2016-01-11 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2393 where contract_code='m1605';
+update options_contracts set settle_price=35.49 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -2.8, 'cm', null, '2016-01-11 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-11');
+
+#1.12
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2393, '平仓', '买入', '2016-01-12 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 2, 2373, '开仓', '卖出', '2016-01-12 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2382 where contract_code='m1605';
+update options_contracts set settle_price=37.67 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -4.2, 'cm', null, '2016-01-12 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-12');
+
+#1.13
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2392, '平仓', '买入', '2016-01-13 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2381, '平仓', '买入', '2016-01-13 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2387, '开仓', '卖出', '2016-01-13 10:30:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2410, '平仓', '买入', '2016-01-13 10:40:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2408, '平仓', '买入', '2016-01-13 10:50:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2405, '平仓', '买入', '2016-01-13 11:00:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2390, '开仓', '卖出', '2016-01-13 11:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2383, '开仓', '卖出', '2016-01-13 11:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2392 where contract_code='m1605';
+update options_contracts set settle_price=32.60 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -12.8, 'cm', null, '2016-01-13 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-13');
+
+#1.14
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2403, '平仓', '买入', '2016-01-14 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2405, '平仓', '买入', '2016-01-14 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2397 where contract_code='m1605';
+update options_contracts set settle_price=29.34 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -1.2, 'cm', null, '2016-01-14 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-14');
+
+#1.15
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2406, '平仓', '买入', '2016-01-15 10:10:00', null, null, 1, null);
+update futures_contracts set settle_price=2405 where contract_code='m1605';
+update options_contracts set settle_price=25.28 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -0.6, 'cm', null, '2016-01-15 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-15');
+
+#1.18
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2423, '平仓', '买入', '2016-01-18 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2438, '平仓', '买入', '2016-01-18 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2443, '平仓', '买入', '2016-01-18 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2453, '平仓', '买入', '2016-01-18 10:20:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2453, '平仓', '买入', '2016-01-18 10:10:00', null, null, 1, null);
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2461, '平仓', '买入', '2016-01-18 10:20:00', null, null, 1, null);
+update futures_contracts set settle_price=2433 where contract_code='m1605';
+update options_contracts set settle_price=16.72 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -3.6, 'cm', null, '2016-01-18 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-18');
+
+#1.19
+insert into futures_transactions value (0, 10480233, 'm1605', 1, 2461, '平仓', '买入', '2016-01-19 10:10:00', null, null, 1, null);
+update futures_contracts set settle_price=2461 where contract_code='m1605';
+update options_contracts set settle_price=10.29 where contract_code='OTC-EUP-0M1605-20160204-023320';
+insert into futures_cashflow value(0, 10480233, -0.6, 'cm', null, '2016-01-19 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-19');
+
+#1.20
+insert into futures_transactions value (0, 10480233, 'm1605', 7, 2450, '平仓', '买入', '2016-01-20 10:10:00', null, null, 1, null);
+
+insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160204-023320', 50, 10.05, 2332, '平仓', '卖出', '2016-01-20 11:00:00', null, null, null);
+insert into futures_cashflow value(0, 10480233, -4.2, 'cm', null, '2016-01-20 10:10:00', '手续费调整');
+call settle_and_confirm('2016-01-20');
+
+#1.21
+select balance from client_balance;
+insert into futures_cashflow select 0, 10480233, 16810.00, 'wd', null, '2016-01-21 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10480233, 119727.00, 'wd', null, '2016-01-21 10:00:01', '自有资金全部出金';
+insert into client_cashflow select 0, 1, 16810.00,'wd', null, '2016-01-21 10:00:00', '客户全部出金';
+
+call settle_and_confirm('2016-01-21');
+
+#张勇
+#第一笔业务
+insert into futures_account_info values (10182233);
+insert into client_info value (2, '张勇', 10182233, 811117);
+
+insert into futures_cashflow values (null, 10182233, 633000, 'dp', null, '2016-05-05 00:00:00', null);
+insert into client_cashflow values (null, 2, 200000, 'dp', null, '2016-05-05 00:00:00', '');
+call settle_and_confirm('2016-05-05');
+insert into futures_contracts values ('rb1610', 'rb', 'pct', 0.00016, 0.08, 1941, 10, 0.48, false);
+insert into options_contracts values ('OTC-EUC-RB1610-20160708-024066','eu', 'c', 2406.6, '2016-07-08', 0, 'rb1610', 0, 10, 0, 0.52, 0.49, false), ('OTC-EUP-RB1610-20160819-017712','eu', 'p', 1771.2, '2016-08-19', 0, 'rb1610', 0, 10, 0, 0.47, 0.46, false);
+
+#5.6
+insert into options_transactions value (0, 2, 'OTC-EUC-RB1610-20160708-024066', 60, 152.6472, 2292, '开仓', '买入', '2016-05-06 10:00:00', null, null, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2304, '开仓', '买入', '2016-05-06 10:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2302, '平仓', '卖出', '2016-05-06 10:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 27, 2306, '开仓', '买入', '2016-05-06 10:30:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2305, '开仓', '买入', '2016-05-06 10:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2334, '开仓', '买入', '2016-05-06 10:50:00', null, null, 2, null);
+update futures_contracts set settle_price=2314 where contract_code='rb1610';
+update options_contracts set settle_price=156.97 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-06');
+
+#5.9
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2348, '开仓', '买入', '2016-05-06 21:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2303, '平仓', '卖出', '2016-05-06 21:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 3, 2199, '平仓', '卖出', '2016-05-09 09:30:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2208, '平仓', '卖出', '2016-05-09 10:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2181, '平仓', '卖出', '2016-05-09 10:50:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2175, '平仓', '卖出', '2016-05-09 13:50:00', null, null, 2, null);
+update futures_contracts set settle_price=2257, margin_rate=0.11 where contract_code='rb1610';
+update options_contracts set settle_price=129.43 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-09');
+
+#5.10
+insert into futures_transactions value (0, 10182233, 'rb1610', 3, 2116, '平仓', '卖出', '2016-05-10 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2109, '开仓', '买入', '2016-05-10 09:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2098, '平仓', '卖出', '2016-05-10 09:30:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2113, '平仓', '卖出', '2016-05-10 10:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2118, '开仓', '买入', '2016-05-10 10:50:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2146, '开仓', '买入', '2016-05-10 13:50:00', null, null, 2, null);
+update futures_contracts set settle_price=2124, margin_rate=0.08 where contract_code='rb1610';
+update options_contracts set settle_price=78.91 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-10');
+
+#5.11
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2160, '开仓', '买入', '2016-05-11 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2122, '平仓', '卖出', '2016-05-11 09:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2119, '平仓', '卖出', '2016-05-11 09:30:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2146, '开仓', '买入', '2016-05-11 10:40:00', null, null, 2, null);
+update futures_contracts set settle_price=2152 where contract_code='rb1610';
+update options_contracts set settle_price=85.89 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-11');
+
+#5.12
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2149, '平仓', '卖出', '2016-05-12 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2111, '平仓', '卖出', '2016-05-12 09:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 3, 2077, '平仓', '卖出', '2016-05-12 09:30:00', null, null, 2, null);
+update futures_contracts set settle_price=2128 where contract_code='rb1610';
+update options_contracts set settle_price=76.31 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-12');
+
+#5.13
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2026, '平仓', '卖出', '2016-05-13 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2003, '平仓', '卖出', '2016-05-13 09:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2029, '开仓', '买入', '2016-05-13 09:30:00', null, null, 2, null);
+update futures_contracts set settle_price=2037 where contract_code='rb1610';
+update options_contracts set settle_price=50.09 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-13');
+
+#5.16
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2054, '开仓', '买入', '2016-05-16 09:10:00', null, null, 2, null);
+update futures_contracts set settle_price=2053 where contract_code='rb1610';
+update options_contracts set settle_price=52.20 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-16');
+
+#5.17
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2114, '开仓', '买入', '2016-05-17 09:10:00', null, null, 2, null);
+update futures_contracts set settle_price=2076 where contract_code='rb1610';
+update options_contracts set settle_price=56.13 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-17');
+
+#5.18
+insert into futures_transactions value (0, 10182233, 'rb1610', 3, 2054, '平仓', '卖出', '2016-05-18 09:10:00', null, null, 2, null);
+update futures_contracts set settle_price=2092 where contract_code='rb1610';
+update options_contracts set settle_price=58.43 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-18');
+
+#5.19
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2044, '平仓', '卖出', '2016-05-19 09:10:00', null, null, 2, null);
+update futures_contracts set settle_price=2047 where contract_code='rb1610';
+update options_contracts set settle_price=45.71 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-19');
+
+#5.20
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2063, '开仓', '买入', '2016-05-20 09:10:00', null, null, 2, null);
+update futures_contracts set settle_price=2054 where contract_code='rb1610';
+update options_contracts set settle_price=45.56 where contract_code='OTC-EUC-RB1610-20160708-024066';
+call settle_and_confirm('2016-05-20');
+
+#5.23
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1964, '平仓', '卖出', '2016-05-23 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 13, 1963, '平仓', '卖出', '2016-05-23 09:30:00', null, null, 2, null);
+
+insert into options_transactions value (0, 2, 'OTC-EUC-RB1610-20160708-024066', 60, 22.36, 1965, '平仓', '卖出', '2016-05-23 09:30:00', null, null, 1);
+insert into options_transactions value (0, 2, 'OTC-EUP-RB1610-20160819-017712', 80, 91.1184, 1968, '开仓', '买入', '2016-05-23 09:40:00', null, null, 1);
+
+insert into futures_transactions value (0, 10182233, 'rb1610', 22, 1961, '开仓', '卖出', '2016-05-23 09:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 1930, '开仓', '卖出', '2016-05-23 09:50:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1937, '开仓', '卖出', '2016-05-23 09:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1947, '平仓', '买入', '2016-05-23 10:00:00', null, null, 2, null);
+update futures_contracts set settle_price=1983 where contract_code='rb1610';
+update options_contracts set settle_price=86.70 where contract_code='OTC-EUP-RB1610-20160819-017712';
+call settle_and_confirm('2016-05-23');
+
+#5.24
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1954, '平仓', '买入', '2016-05-24 09:40:00', null, null, 2, null);
+update futures_contracts set settle_price=1941 where contract_code='rb1610';
+update options_contracts set settle_price=97.51 where contract_code='OTC-EUP-RB1610-20160819-017712';
+call settle_and_confirm('2016-05-24');
+
+#5.25
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1922, '开仓', '卖出', '2016-05-25 09:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1917, '开仓', '卖出', '2016-05-25 09:40:00', null, null, 2, null);
+update futures_contracts set settle_price=1941 where contract_code='rb1610';
+update options_contracts set settle_price=96.24 where contract_code='OTC-EUP-RB1610-20160819-017712';
+call settle_and_confirm('2016-05-25');
+
+#5.26
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 1951, '平仓', '买入', '2016-05-26 09:40:00', null, null, 2, null);
+update futures_contracts set settle_price=1940 where contract_code='rb1610';
+update options_contracts set settle_price=95.26 where contract_code='OTC-EUP-RB1610-20160819-017712';
+call settle_and_confirm('2016-05-26');
+
+#5.27
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2007, '平仓', '买入', '2016-05-27 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2041, '平仓', '买入', '2016-05-27 09:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2038, '平仓', '买入', '2016-05-27 09:30:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2027, '平仓', '买入', '2016-05-27 09:40:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2036, '平仓', '买入', '2016-05-27 09:50:00', null, null, 2, null);
+update futures_contracts set settle_price=1987 where contract_code='rb1610';
+update options_contracts set settle_price=80.69 where contract_code='OTC-EUP-RB1610-20160819-017712';
+call settle_and_confirm('2016-05-27');
+
+#5.30
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1951, '开仓', '卖出', '2016-05-30 09:10:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1959, '开仓', '卖出', '2016-05-30 09:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1996, '平仓', '买入', '2016-05-30 09:30:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 1, 1996, '平仓', '买入', '2016-05-30 09:30:01', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 4, 1996, '平仓', '买入', '2016-05-30 09:30:02', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 12, 1996, '平仓', '买入', '2016-05-30 09:30:03', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 1996, '平仓', '买入', '2016-05-30 09:30:04', null, null, 2, null);
+
+
+insert into options_transactions value (0, 2, 'OTC-EUP-RB1610-20160819-017712', 80, 73.82, 1997, '平仓', '卖出', '2016-05-23 09:40:00', null, null, 3);
+
+call settle_and_confirm('2016-05-30');
+
+#5.31
+select * from futures_account_balance;
+insert into futures_cashflow select 0, 10182233, 107988.96, 'wd', null, '2016-05-31 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10182233, 436233.39, 'wd', null, '2016-05-31 10:00:00', '自有资金全部出金';
+insert into client_cashflow select 0, 2, 107988.96,'wd', null, '2016-05-31 10:00:00', '客户全部出金';
+
+call settle_and_confirm('2016-05-31');
+
+#6.13
+
+insert into futures_account_info values (10780233);
+insert into client_info value (3, '刘惠滢', 10780233, '473692');
+insert into futures_cashflow values (null, 10780233, 110000, 'dp', null, '2016-06-13 14:00:00', '客户入金');
+insert into futures_cashflow values (null, 10780233, 140616, 'dp', null, '2016-06-13 15:00:00', '对冲资金入金');
+insert into client_cashflow values (null, 3, 110000, 'dp', null, '2016-06-13 15:00:00', '客户入金');
+call settle_and_confirm('2016-06-13');
+
+#6.15
+insert into futures_account_info values (10680233);
+insert into client_info value (4, '广西南宁儒航贸易有限公司', 10680233, '657209');
+insert into futures_cashflow values (null, 10680233, 40000, 'dp', null, '2016-06-15 14:00:00', '客户入金');
+insert into futures_cashflow values (null, 10680233, 24255, 'dp', null, '2016-06-15 15:00:00', '对冲资金入金');
+insert into client_cashflow values (null, 4, 40000, 'dp', null, '2016-06-15 15:00:00', '客户入金');
+call settle_and_confirm('2016-06-15');
+
+
+call settle_and_confirm('2016-06-30');
+
+insert into futures_account_info values (10181233);
+insert into client_info value (5, '太平洋财产保险股份有限公司', 10181233, '12233');
+insert into futures_cashflow values (null, 10181233, 222664, 'dp', null, '2016-07-01 10:00:00', null);
+insert into client_cashflow values (null, 5, 660000, 'dp', null, '2016-07-01 9:00:00', '');
+
+
+insert into futures_contracts values ('SR609', 'sr', 'abs', 4.8, 0.05, 6007, 10, 0.18, false);
+insert into futures_contracts values ('SR701', 'sr', 'abs', 4.8, 0.05, 6281, 10, 0.18, false);
+insert into options_contracts values ('OTC-ASP-0SR701-20160930-052500','as', 'p', 5250, '2016-09-30', 0, 'SR701', 0, 10, 0, 0.18,0.175, false);
+
+insert into options_transactions value (1, 5, 'OTC-ASP-0SR701-20160930-052500', 2000, 33, 6007, '开仓', '买入', '2016-07-01 09:00:00', null, null, null);
+
+insert into futures_transactions value (0, 10181233, 'SR609', 8, 5993, '开仓', '卖出', '2016-07-01 10:10:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6275, '开仓', '卖出', '2016-07-01 10:20:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 2, 6275, '开仓', '卖出', '2016-07-01 10:21:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6275, '开仓', '卖出', '2016-07-01 10:22:00', null, null, 5, null);
+update futures_contracts set settle_price=6007 where contract_code='SR609';
+update futures_contracts set settle_price=6281 where contract_code='SR701';
+update options_contracts set settle_price=21 where contract_code='OTC-ASP-0SR701-20160930-052500';
+
+insert into futures_cashflow select 0, 10680233, 40000, 'wd', null, '2016-07-01 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10680233, 24255, 'wd', null, '2016-07-01 10:00:00', '自有资金全部出金';
+insert into client_cashflow values (null, 4, 40000, 'wd', null, '2016-07-01 15:00:00', '客户出金');
+
+call settle_and_confirm('2016-07-01');
+
+insert into futures_account_info values (10580233);
+insert into client_info value (6, '中国人民财产保险股份有限公司北京分公司', 10580233, '12233');
+insert into futures_cashflow values (null, 10580233, 1659000, 'dp', null, '2016-07-04 10:00:00', null);
+insert into client_cashflow values (null, 6, 1080000, 'dp', null, '2016-07-04 9:00:00', '');
+
+insert into commodity_category value ('c', '玉米');
+
+insert into futures_contracts values ('c1701', 'c', 'abs', 1.92, 0.07, 1567, 10, 0.22, false);
+insert into options_contracts values ('OTC-ASP-0C1701-20161130-015000','as', 'p', 1500, '2016-11-30', 0, 'c1701', 0, 10, 0, 0.22,0.17, false);
+
+insert into options_transactions value (1, 6, 'OTC-ASP-0C1701-20161130-015000', 1500, 72, 1587, '开仓', '买入', '2016-07-04 09:00:00', null, null, null);
+
+insert into futures_transactions value (0, 10580233, 'c1701', 100, 1570, '开仓', '卖出', '2016-07-04 10:10:00', null, null, 6, null);
+insert into futures_transactions value (0, 10580233, 'c1701', 100, 1575, '开仓', '卖出', '2016-07-04 10:20:00', null, null, 6, null);
+insert into futures_transactions value (0, 10580233, 'c1701', 100, 1580, '开仓', '卖出', '2016-07-04 10:21:00', null, null, 6, null);
+insert into futures_transactions value (0, 10580233, 'c1701', 100, 1585, '开仓', '卖出', '2016-07-04 10:22:00', null, null, 6, null);
+insert into futures_transactions value (0, 10580233, 'c1701', 50, 1590, '开仓', '卖出', '2016-07-04 10:23:00', null, null, 6, null);
+insert into futures_transactions value (0, 10181233, 'SR609', 3, 6020, '开仓', '卖出', '2016-07-04 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6302, '开仓', '卖出', '2016-07-04 10:25:00', null, null, 5, null);
+update futures_contracts set settle_price=6097 where contract_code='SR609';
+update futures_contracts set settle_price=6387 where contract_code='SR701';
+update futures_contracts set settle_price=1577 where contract_code='c1701';
+update options_contracts set settle_price=20.5 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=68 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-04');
+
+insert into futures_cashflow values (null, 10680233, 223440, 'dp', null, '2016-07-05 10:00:00', null);
+
+insert into futures_transactions value (0, 10580233, 'c1701', 80, 1536, '开仓', '卖出', '2016-07-05 10:10:00', null, null, 6, null);
+insert into futures_transactions value (0, 10181233, 'SR609', 2, 5969, '开仓', '卖出', '2016-07-05 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 2, 6294, '开仓', '卖出', '2016-07-05 10:25:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR609', 10, 5950, '开仓', '买入', '2016-07-05 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR701', 4, 6277, '开仓', '买入', '2016-07-05 10:25:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR609', 2, 5970, '开仓', '买入', '2016-07-05 10:24:00', null, null, 5, null);
+insert into futures_transactions value (0, 10680233, 'SR701', 2, 6294, '开仓', '买入', '2016-07-05 10:25:00', null, null, 5, null);
+
+
+update futures_contracts set settle_price=6005 where contract_code='SR609';
+update futures_contracts set settle_price=6315 where contract_code='SR701';
+update futures_contracts set settle_price=1546 where contract_code='c1701';
+update options_contracts set settle_price=20.2 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=79.5 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-05');
+
+update futures_contracts set settle_price=5983 where contract_code='SR609';
+update futures_contracts set settle_price=6318 where contract_code='SR701';
+update futures_contracts set settle_price=1520 where contract_code='c1701';
+update options_contracts set settle_price=21.3 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=84.3 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-06');
+
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6300, '开仓', '卖出', '2016-07-07 09:01:00', null, null, 5, null);
+
+update futures_contracts set settle_price=5924 where contract_code='SR609';
+update futures_contracts set settle_price=6275 where contract_code='SR701';
+update futures_contracts set settle_price=1518 where contract_code='c1701';
+update options_contracts set settle_price=22.6, volatility=0.203 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=87.3, volatility=0.221 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-07');
+insert into futures_transactions value (0, 10680233, 'SR701', 1, 6169, '开仓', '买入', '2016-07-08 09:01:00', null, null, 5, null);
+
+update futures_contracts set settle_price=5827 where contract_code='SR609';
+update futures_contracts set settle_price=6177 where contract_code='SR701';
+update futures_contracts set settle_price=1515 where contract_code='c1701';
+update options_contracts set settle_price=24.8, volatility=0.207 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=83.3, volatility=0.221 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-08');
+
+insert into futures_transactions value (0, 10680233, 'SR701', 1, 6200, '平仓', '卖出', '2016-07-11 13:32:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR701', 1, 6182, '平仓', '买入', '2016-07-11 14:43:00', null, null, 5, null);
+
+insert into futures_cashflow select 0, 10780233, 110000, 'wd', null, '2016-07-11 10:00:00', '客户全部出金';
+insert into futures_cashflow select 0, 10780233, 140616, 'wd', null, '2016-07-11 10:00:00', '自有资金全部出金';
+insert into client_cashflow values (null, 3, 110000, 'wd', null, '2016-07-11 15:00:00', '客户出金');
+
+update futures_contracts set settle_price=5810 where contract_code='SR609';
+update futures_contracts set settle_price=6163 where contract_code='SR701';
+update futures_contracts set settle_price=1534 where contract_code='c1701';
+update options_contracts set settle_price=24.2, volatility=0.205 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=80.6, volatility=0.221 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-11');
+
+
+insert into futures_transactions value (0, 10680233, 'SR609', 2, 5949, '平仓', '卖出', '2016-07-12 13:32:00', null, null, 5, null);
+insert into futures_transactions value (0, 10181233, 'SR609', 2, 5948, '平仓', '买入', '2016-07-12 14:43:00', null, null, 5, null);
+
+update futures_contracts set settle_price=5903 where contract_code='SR609';
+update futures_contracts set settle_price=6292 where contract_code='SR701';
+update futures_contracts set settle_price=1521 where contract_code='c1701';
+update options_contracts set settle_price=22.4, volatility=0.218 where contract_code='OTC-ASP-0SR701-20160930-052500';
+update options_contracts set settle_price=81.6, volatility=0.222 where contract_code='OTC-ASP-0C1701-20161130-015000';
+
+call settle_and_confirm('2016-07-12');
