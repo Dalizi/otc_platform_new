@@ -502,12 +502,6 @@ namespace OTC
             form.ShowDialog();
         }
 
-        private void settlementToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormSettlement form = new FormSettlement(dataset);
-            form.ShowDialog();
-        }
-
         private void quotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormQuotes form = new FormQuotes(dataset);
@@ -518,6 +512,18 @@ namespace OTC
         {
             FromModifyGrants form = new FromModifyGrants(dataset);
             form.Show();
+        }
+
+        private void toolStripMenuItemInitialSettlement_Click(object sender, EventArgs e)
+        {
+            FormSettlement form = new FormSettlement(dataset);
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemGenerateSettleFile_Click(object sender, EventArgs e)
+        {
+            FormGenerateSettleFile form = new FormGenerateSettleFile(dataset);
+            form.ShowDialog();
         }
     }
         

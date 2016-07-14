@@ -134,6 +134,12 @@
     <Compile Include="FormAddClient.Designer.cs">
       <DependentUpon>FormAddClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGenerateSettleFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGenerateSettleFile.Designer.cs">
+      <DependentUpon>FormGenerateSettleFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogging.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,15 +272,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="SettlementReports.cs" />
     <EmbeddedResource Include="FormAddClient.resx">
       <DependentUpon>FormAddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGenerateSettleFile.resx">
+      <DependentUpon>FormGenerateSettleFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogging.resx">
       <DependentUpon>FormLogging.cs</DependentUpon>
@@ -360,6 +364,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -371,6 +380,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="folder.png" />
     <Content Include="TextFileColNameMapping.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

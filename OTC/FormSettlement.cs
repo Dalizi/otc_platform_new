@@ -62,6 +62,12 @@ namespace OTC
             }
             dataset.Commit("option_position_settle_info");
 
+            var sr = new SettlementReports(dataset);
+            var date = this.dateTimePickerSettleDate.Value;
+            sr.GenerateBusinessReport(date);
+            sr.GenerateOptionReport(date);
+            sr.GenerateDetailedReport(date);
+
             this.Close();
         }
 

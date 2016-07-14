@@ -173,8 +173,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settlementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSettlement = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemInitialSettlement = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemGenerateSettleFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSettlementConfirm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTradingParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonTradingDatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settleFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1911,6 +1914,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.transactionsToolStripMenuItem,
+            this.toolStripMenuItemSettlement,
             this.menuTradingParamsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -1922,7 +1926,6 @@
             // 
             this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.placeOrderToolStripMenuItem,
-            this.settlementToolStripMenuItem,
             this.quotesToolStripMenuItem});
             this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
             this.transactionsToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
@@ -1931,23 +1934,46 @@
             // placeOrderToolStripMenuItem
             // 
             this.placeOrderToolStripMenuItem.Name = "placeOrderToolStripMenuItem";
-            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.placeOrderToolStripMenuItem.Text = "下单";
             this.placeOrderToolStripMenuItem.Click += new System.EventHandler(this.buttonPlaceOrder_Click);
-            // 
-            // settlementToolStripMenuItem
-            // 
-            this.settlementToolStripMenuItem.Name = "settlementToolStripMenuItem";
-            this.settlementToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.settlementToolStripMenuItem.Text = "结算";
-            this.settlementToolStripMenuItem.Click += new System.EventHandler(this.settlementToolStripMenuItem_Click);
             // 
             // quotesToolStripMenuItem
             // 
             this.quotesToolStripMenuItem.Name = "quotesToolStripMenuItem";
-            this.quotesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.quotesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quotesToolStripMenuItem.Text = "普通欧式报价";
             this.quotesToolStripMenuItem.Click += new System.EventHandler(this.quotesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemSettlement
+            // 
+            this.toolStripMenuItemSettlement.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemInitialSettlement,
+            this.toolStripMenuItemGenerateSettleFile,
+            this.toolStripMenuItemSettlementConfirm});
+            this.toolStripMenuItemSettlement.Name = "toolStripMenuItemSettlement";
+            this.toolStripMenuItemSettlement.Size = new System.Drawing.Size(44, 21);
+            this.toolStripMenuItemSettlement.Text = "结算";
+            // 
+            // toolStripMenuItemInitialSettlement
+            // 
+            this.toolStripMenuItemInitialSettlement.Name = "toolStripMenuItemInitialSettlement";
+            this.toolStripMenuItemInitialSettlement.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemInitialSettlement.Text = "预结算";
+            this.toolStripMenuItemInitialSettlement.Click += new System.EventHandler(this.toolStripMenuItemInitialSettlement_Click);
+            // 
+            // toolStripMenuItemGenerateSettleFile
+            // 
+            this.toolStripMenuItemGenerateSettleFile.Name = "toolStripMenuItemGenerateSettleFile";
+            this.toolStripMenuItemGenerateSettleFile.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemGenerateSettleFile.Text = "结算表单生成";
+            this.toolStripMenuItemGenerateSettleFile.Click += new System.EventHandler(this.toolStripMenuItemGenerateSettleFile_Click);
+            // 
+            // toolStripMenuItemSettlementConfirm
+            // 
+            this.toolStripMenuItemSettlementConfirm.Name = "toolStripMenuItemSettlementConfirm";
+            this.toolStripMenuItemSettlementConfirm.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemSettlementConfirm.Text = "结算确认";
             // 
             // menuTradingParamsToolStripMenuItem
             // 
@@ -1961,14 +1987,14 @@
             // buttonTradingDatesToolStripMenuItem
             // 
             this.buttonTradingDatesToolStripMenuItem.Name = "buttonTradingDatesToolStripMenuItem";
-            this.buttonTradingDatesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buttonTradingDatesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.buttonTradingDatesToolStripMenuItem.Text = "交易日设定";
             this.buttonTradingDatesToolStripMenuItem.Click += new System.EventHandler(this.buttonTradingDatesToolStripMenuItem_Click);
             // 
             // settleFileToolStripMenuItem
             // 
             this.settleFileToolStripMenuItem.Name = "settleFileToolStripMenuItem";
-            this.settleFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settleFileToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.settleFileToolStripMenuItem.Text = "结算文件设置";
             // 
             // MainWindow
@@ -2152,7 +2178,6 @@
         private System.Windows.Forms.TabPage tabPageBusinessState;
         private System.Windows.Forms.Panel panelBusinessState;
         private System.Windows.Forms.DataGridView dataGridViewBusinessState;
-        private System.Windows.Forms.ToolStripMenuItem settlementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quotesToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Panel panel1;
@@ -2181,5 +2206,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerBusinessStart;
         private System.Windows.Forms.Button buttonModifyGrants;
         private System.Windows.Forms.ToolStripMenuItem settleFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettlement;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInitialSettlement;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGenerateSettleFile;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettlementConfirm;
     }
 }
