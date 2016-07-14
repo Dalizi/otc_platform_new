@@ -78,6 +78,7 @@ namespace OTC
             var option_info = from o in dataset.display_ds.Tables["options_contracts"].AsEnumerable()
                               join p in dataset.display_ds.Tables["options_verbose_positions"].AsEnumerable()
                               on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
+                              where p.Field<decimal>("数量") > 0
                               select new
                               {
                                   contract_code = o.Field<string>("合约代码"),
@@ -103,6 +104,7 @@ namespace OTC
             var future_info = from p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable()
                               join o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable()
                               on p.Field<string>("合约代码") equals o.Field<string>("合约代码")
+                              where p.Field<decimal>("数量") > 0
                               select new
                               {
                                   contract_code = o.Field<string>("合约代码"),
