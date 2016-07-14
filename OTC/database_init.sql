@@ -508,3 +508,4 @@ update options_contracts set settle_price=22.4, volatility=0.218 where contract_
 update options_contracts set settle_price=81.6, volatility=0.222 where contract_code='OTC-ASP-0C1701-20161130-015000';
 
 call settlement('2016-07-12');
+call settlement('2016-07-13');
