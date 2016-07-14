@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OTC.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HostName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10.2.7.210</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3306</Value>
+    </Setting>
+    <Setting Name="Database" Type="System.String" Scope="User">
+      <Value Profile="(Default)">otc_test</Value>
+    </Setting>
+    <Setting Name="isRememberPasswordChecked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RedisHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10.2.7.210</Value>
+    </Setting>
+    <Setting Name="RedisPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">6379</Value>
+    </Setting>
+    <Setting Name="RedisPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Finders6</Value>
+    </Setting>
+    <Setting Name="SettleFileDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\mystconqueror\Documents\对冲记录\每日表单(自动）</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
