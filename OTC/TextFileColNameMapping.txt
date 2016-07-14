@@ -66,3 +66,5 @@ close_volatility=平仓波动率
 validation_code=下单验证码
 daily_pnl=当日盈亏
 settle_pnl=持仓盈亏
+daily_settle_pnl=每日持仓盈亏
+daily_close_pnl=每日平仓盈亏
