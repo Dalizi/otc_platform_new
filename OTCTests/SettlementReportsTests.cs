@@ -14,11 +14,11 @@ namespace OTC.Tests
         [TestMethod()]
         public void GenerateBusinessReportTest()
         {
-            string sql_conn_str = "server = 10.2.7.210; user id = tanzehuan; password = 80027111t; database = otc_test; characterset = utf8; port = 3306";
+            string sql_conn_str = "server = localhost; user id = root; password = 80027111t; database = otc_test2; characterset = utf8; port = 3306";
             string redis_conn_str = "10.2.7.210:6379, password=Finders6";
             OTCDataSet dataset = new OTCDataSet(sql_conn_str, redis_conn_str);
             SettlementReports sr = new SettlementReports(dataset);
-            var date = new DateTime(2016, 7, 8);
+            var date = new DateTime(2016, 7, 12);
             sr.GenerateBusinessReport(date);
             sr.GenerateOptionReport(date);
             sr.GenerateDetailedReport(date);

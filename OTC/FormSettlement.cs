@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StackExchange.Redis;
 
 namespace OTC
 {
@@ -115,7 +116,10 @@ namespace OTC
             {
                 decimal s_price = r.settle_price;
                 if (redis_db.KeyExists(r.contract_code))
-                    s_price = decimal.Parse(redis_db.HashGet(r.contract_code, "SettlementPrice"));
+                {
+                    var settle_price = redis_db.HashGet(r.contract_code, "SettlementPrice");
+                    s_price = decimal.Parse(settle_price == RedisValue.Null?0:settle_price);
+                }
                 else
                     MessageBox.Show("错误", string.Format("Key:{0}不存在", r.contract_code));
                 future_table.Rows.Add(r.contract_code, r.commission, r.margin_rate, r.settle_price, s_price);
