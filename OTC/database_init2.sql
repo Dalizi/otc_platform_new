@@ -87,6 +87,8 @@ insert into futures_transactions value (0, 10480233, 'm1605', 31, 2339, '平仓'
 
 insert into options_transactions value (1, 1, 'OTC-EUP-0M1605-20160121-023900', 50, 87.64, 2337, '平仓', '卖出', '2016-01-05 11:00:00', null, null, null);
 
+call settlement('2016-01-05');
+call confirm_settlement('2016-01-05');
 call settle_and_confirm('2016-01-05');
 
 #第二笔业务
@@ -222,7 +224,7 @@ call settle_and_confirm('2016-05-06');
 
 #5.9
 insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2348, '开仓', '买入', '2016-05-06 21:10:00', null, null, 2, null);
-insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2303, '平仓', '卖出', '2016-05-06 21:20:00', null, null, 2, null);
+insert into futures_transactions value (0, 10182233, 'rb1610', 2, 2303, '平仓', '卖出', '2016-05-09 09:20:00', null, null, 2, null);
 insert into futures_transactions value (0, 10182233, 'rb1610', 3, 2199, '平仓', '卖出', '2016-05-09 09:30:00', null, null, 2, null);
 insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2208, '平仓', '卖出', '2016-05-09 10:40:00', null, null, 2, null);
 insert into futures_transactions value (0, 10182233, 'rb1610', 1, 2181, '平仓', '卖出', '2016-05-09 10:50:00', null, null, 2, null);
@@ -507,4 +509,4 @@ update futures_contracts set settle_price=1521 where contract_code='c1701';
 update options_contracts set settle_price=22.4, volatility=0.218 where contract_code='OTC-ASP-0SR701-20160930-052500';
 update options_contracts set settle_price=81.6, volatility=0.222 where contract_code='OTC-ASP-0C1701-20161130-015000';
 
-call settle_and_confirm('2016-07-12');
+call settlement('2016-07-12');

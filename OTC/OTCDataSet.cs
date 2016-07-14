@@ -379,7 +379,7 @@ namespace OTC
                     double quantity = double.Parse(row["数量"].ToString());
                     DataRow contract_row = Tables["options_contracts"].Rows.Find(contract_code);
                     String underlying = contract_row["标的代码"].ToString();
-                    double S0 = double.Parse(db.HashGet(underlying, "LastPrice"));
+                    double S0 = double.Parse(db.HashGet(underlying, "LastPrice")==RedisValue.Null?0: db.HashGet(underlying, "LastPrice"));
                     double K = double.Parse(contract_row["执行价"].ToString());
                     double sigma = double.Parse(contract_row["波动率"].ToString());
                     DateTime date = DateTime.Parse(contract_row["到期日"].ToString());
