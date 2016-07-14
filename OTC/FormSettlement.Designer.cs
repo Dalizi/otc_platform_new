@@ -62,7 +62,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1204, 402);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1072, 402);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBoxSettleInfo
@@ -71,7 +71,7 @@
             this.groupBoxSettleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSettleInfo.Location = new System.Drawing.Point(3, 33);
             this.groupBoxSettleInfo.Name = "groupBoxSettleInfo";
-            this.groupBoxSettleInfo.Size = new System.Drawing.Size(1198, 326);
+            this.groupBoxSettleInfo.Size = new System.Drawing.Size(1066, 326);
             this.groupBoxSettleInfo.TabIndex = 0;
             this.groupBoxSettleInfo.TabStop = false;
             this.groupBoxSettleInfo.Text = "结算信息一览";
@@ -79,42 +79,42 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38F));
             this.tableLayoutPanel2.Controls.Add(this.dataGridViewOptionInfo, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.dataGridViewFutureInfo, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1192, 306);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1060, 306);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // dataGridViewOptionInfo
             // 
             this.dataGridViewOptionInfo.AllowUserToAddRows = false;
             this.dataGridViewOptionInfo.AllowUserToDeleteRows = false;
-            this.dataGridViewOptionInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewOptionInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewOptionInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOptionInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewOptionInfo.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewOptionInfo.Name = "dataGridViewOptionInfo";
             this.dataGridViewOptionInfo.RowTemplate.Height = 23;
-            this.dataGridViewOptionInfo.Size = new System.Drawing.Size(590, 300);
+            this.dataGridViewOptionInfo.Size = new System.Drawing.Size(651, 300);
             this.dataGridViewOptionInfo.TabIndex = 0;
             // 
             // dataGridViewFutureInfo
             // 
             this.dataGridViewFutureInfo.AllowUserToAddRows = false;
             this.dataGridViewFutureInfo.AllowUserToDeleteRows = false;
-            this.dataGridViewFutureInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewFutureInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewFutureInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFutureInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewFutureInfo.Location = new System.Drawing.Point(599, 3);
+            this.dataGridViewFutureInfo.Location = new System.Drawing.Point(660, 3);
             this.dataGridViewFutureInfo.Name = "dataGridViewFutureInfo";
             this.dataGridViewFutureInfo.RowTemplate.Height = 23;
-            this.dataGridViewFutureInfo.Size = new System.Drawing.Size(590, 300);
+            this.dataGridViewFutureInfo.Size = new System.Drawing.Size(397, 300);
             this.dataGridViewFutureInfo.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -130,13 +130,13 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1198, 34);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1066, 34);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // buttonOK
             // 
             this.buttonOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonOK.Location = new System.Drawing.Point(1001, 3);
+            this.buttonOK.Location = new System.Drawing.Point(869, 3);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(94, 28);
             this.buttonOK.TabIndex = 0;
@@ -148,7 +148,7 @@
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCancel.Location = new System.Drawing.Point(1101, 3);
+            this.buttonCancel.Location = new System.Drawing.Point(969, 3);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(94, 28);
             this.buttonCancel.TabIndex = 1;
@@ -162,7 +162,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1198, 24);
+            this.panel1.Size = new System.Drawing.Size(1066, 24);
             this.panel1.TabIndex = 2;
             // 
             // dateTimePickerSettleDate
@@ -171,6 +171,7 @@
             this.dateTimePickerSettleDate.Name = "dateTimePickerSettleDate";
             this.dateTimePickerSettleDate.Size = new System.Drawing.Size(200, 21);
             this.dateTimePickerSettleDate.TabIndex = 1;
+            this.dateTimePickerSettleDate.ValueChanged += new System.EventHandler(this.dateTimePickerSettleDate_ValueChanged);
             // 
             // label1
             // 
@@ -187,7 +188,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(1204, 402);
+            this.ClientSize = new System.Drawing.Size(1072, 402);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;

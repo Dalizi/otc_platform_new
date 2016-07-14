@@ -18,6 +18,7 @@ namespace OTC
             InitializeComponent();
             dataset = ds;
             InitDataTable();
+            this.dateTimePickerSettleDate.Value = DateTime.Today;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -62,12 +63,6 @@ namespace OTC
             }
             dataset.Commit("option_position_settle_info");
 
-            var sr = new SettlementReports(dataset);
-            var date = this.dateTimePickerSettleDate.Value;
-            sr.GenerateBusinessReport(date);
-            sr.GenerateOptionReport(date);
-            sr.GenerateDetailedReport(date);
-
             this.Close();
         }
 
@@ -85,12 +80,19 @@ namespace OTC
             var option_info = from o in dataset.display_ds.Tables["options_contracts"].AsEnumerable()
                               join p in dataset.display_ds.Tables["options_verbose_positions"].AsEnumerable()
                               on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
-                              where p.Field<decimal>("数量") > 0
+                              //join s in dataset.Tables["option_position_settle_info"].AsEnumerable()
+                              //on p.Field<string>("合约代码") equals s.Field<string>("code")
+                              where p.Field<decimal>("数量") > 0 && p.RowState != DataRowState.Deleted //&& s.Field<DateTime>("settle_date").Date == this.dateTimePickerSettleDate.Value.Date
                               select new
                               {
                                   contract_code = o.Field<string>("合约代码"),
                                   volatility = o.Field<double>("波动率"),
                                   settle_price = o.Field<decimal>("结算价"),
+                                  //delta = s.Field<decimal>("delta"),
+                                  //gamma = s.Field<decimal>("gamma"),
+                                  //theta = s.Field<decimal>("theta"),
+                                  //vega = s.Field<decimal>("vega"),
+                                  //rho = s.Field<decimal>("rho")
                                   delta = 0,
                                   gamma = 0,
                                   theta = 0,
@@ -111,7 +113,7 @@ namespace OTC
             var future_info = from p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable()
                               join o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable()
                               on p.Field<string>("合约代码") equals o.Field<string>("合约代码")
-                              where p.Field<decimal>("数量") > 0
+                              where p.Field<decimal>("数量") > 0 && p.RowState != DataRowState.Deleted
                               select new
                               {
                                   contract_code = o.Field<string>("合约代码"),
@@ -133,12 +135,17 @@ namespace OTC
                 future_table.Rows.Add(r.contract_code, r.commission, r.margin_rate, r.settle_price, s_price);
             }
 
-            this.dateTimePickerSettleDate.Value = DateTime.Today;
+
             this.dataGridViewOptionInfo.DataSource = option_table;
             this.dataGridViewFutureInfo.DataSource = future_table;
         }
         OTCDataSet dataset;
         DataTable option_table;
         DataTable future_table;
+
+        private void dateTimePickerSettleDate_ValueChanged(object sender, EventArgs e)
+        {
+            InitDataTable();
+        }
     }
 }
