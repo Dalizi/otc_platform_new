@@ -51,22 +51,28 @@ namespace OTC
                 MessageBox.Show("路径不合法", "错误");
             var sr = new SettlementReports(dataset, this.textBox1.Text);
             var date = this.dateTimePicker1.Value.Date;
-            if (sr.GenerateBusinessReport(date) == -1)
+            try {
+                if (sr.GenerateBusinessReport(date) == -1)
+                {
+                    MessageBox.Show("结算数据缺失", "错误");
+                    return;
+                }
+                if (sr.GenerateDetailedReport(date) == -1)
+                {
+                    MessageBox.Show("结算数据缺失", "错误");
+                    return;
+                }
+                if (sr.GenerateOptionReport(date) == -1)
+                {
+                    MessageBox.Show("结算数据缺失", "错误");
+                    return;
+                }
+            }
+            catch (System.IO.IOException)
             {
-                MessageBox.Show("结算数据缺失", "错误");
+                MessageBox.Show("结算文件正在被其他程序使用，请关闭后再试。", "错误");
                 return;
             }
-            if (sr.GenerateDetailedReport(date)==-1)
-            {
-                MessageBox.Show("结算数据缺失", "错误");
-                return;
-            }
-            if (sr.GenerateOptionReport(date) == -1)
-            {
-                MessageBox.Show("结算数据缺失", "错误");
-                return;
-            }
-
             Close();          
         }
     }
