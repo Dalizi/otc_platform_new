@@ -572,7 +572,7 @@ namespace OTC
                 "年初总账户权益",
                 (last_year_settle_rec.accum_gross_pnl+ granted_table.Rows[0].Field<decimal>(0)).ToString(),
                 "总delta",
-                "0"
+                ""
                 };
                 int ncol = left_border;
                 row = sheet.CreateRow(nrow++);
@@ -678,8 +678,50 @@ namespace OTC
                     cell.SetCellValue(data);
                 }
 
-                //调整表格大小
-                sheet.SetColumnWidth(1, 9000);
+                int nrow1 = 4;
+                var future_delta = from f in dataset.Tables["future_position_settle_info"].AsEnumerable()
+                                     where f.Field<DateTime>("settle_date") == settle_day
+                                     group f by f.Field<string>("product") into g1
+                                     select new
+                                     {
+                                         key = g1.Key,
+                                         delta = g1.Sum(f => f.Field<decimal>("delta"))
+                                     };
+                var option_dleta = from o in dataset.Tables["option_position_settle_info"].AsEnumerable()
+                                   where o.Field<DateTime>("settle_date") == settle_day
+                                   group o by o.Field<string>("product") into g2
+                                   select new
+                                   {
+                                       key = g2.Key,
+                                       delta = g2.Sum(o => o.Field<decimal>("delta"))
+                                   };
+                var delta = from g1 in future_delta
+                            join g2 in option_dleta
+                            on g1.key equals g2.key
+                            select new
+                            {
+                                key = g1.key,
+                                delta = g1.delta + g2.delta
+                            };
+                foreach (var d in delta)
+                {
+                    if (nrow1 >= nrow)
+                    {
+                        nrow = nrow1;
+                        for (int nr = 1; nr < 7; nr++)
+                        {
+                            row = sheet.CreateRow(nrow1);
+                            cell = row.CreateCell(nr++);
+                            cell.CellStyle = style1;
+                        }
+                    }
+                    sheet.GetRow(nrow1).GetCell(5).SetCellValue(d.key);
+                    sheet.GetRow(nrow1).GetCell(6).SetCellValue(d.delta.ToString());
+                    nrow1++;
+                }
+
+              //调整表格大小
+              sheet.SetColumnWidth(1, 9000);
                 sheet.SetColumnWidth(2, 4296);
                 sheet.SetColumnWidth(3, 4296);
                 sheet.SetColumnWidth(4, 4296);
