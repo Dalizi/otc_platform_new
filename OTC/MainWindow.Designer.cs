@@ -1934,14 +1934,14 @@
             // placeOrderToolStripMenuItem
             // 
             this.placeOrderToolStripMenuItem.Name = "placeOrderToolStripMenuItem";
-            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.placeOrderToolStripMenuItem.Text = "下单";
             this.placeOrderToolStripMenuItem.Click += new System.EventHandler(this.buttonPlaceOrder_Click);
             // 
             // quotesToolStripMenuItem
             // 
             this.quotesToolStripMenuItem.Name = "quotesToolStripMenuItem";
-            this.quotesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quotesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.quotesToolStripMenuItem.Text = "普通欧式报价";
             this.quotesToolStripMenuItem.Click += new System.EventHandler(this.quotesToolStripMenuItem_Click);
             // 
@@ -1974,6 +1974,7 @@
             this.toolStripMenuItemSettlementConfirm.Name = "toolStripMenuItemSettlementConfirm";
             this.toolStripMenuItemSettlementConfirm.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemSettlementConfirm.Text = "结算确认";
+            this.toolStripMenuItemSettlementConfirm.Click += new System.EventHandler(this.toolStripMenuItemSettlementConfirm_Click);
             // 
             // menuTradingParamsToolStripMenuItem
             // 

@@ -48,6 +48,7 @@ namespace OTC
             query.ExecuteNonQuery();
 
             this.dataset.Update("option_position_settle_info");
+            this.dataset.Update("option_detailed_settle_view");
             foreach (var l in option_table.AsEnumerable())
             {
                 var key = l.Field<string>("合约代码");
@@ -80,24 +81,24 @@ namespace OTC
             var option_info = from o in dataset.display_ds.Tables["options_contracts"].AsEnumerable()
                               join p in dataset.display_ds.Tables["options_verbose_positions"].AsEnumerable()
                               on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
-                              //join s in dataset.Tables["option_position_settle_info"].AsEnumerable()
-                              //on p.Field<string>("合约代码") equals s.Field<string>("code")
-                              where p.Field<decimal>("数量") > 0 && p.RowState != DataRowState.Deleted //&& s.Field<DateTime>("settle_date").Date == this.dateTimePickerSettleDate.Value.Date
+                              join s in dataset.Tables["option_position_settle_info"].AsEnumerable()
+                              on p.Field<string>("合约代码") equals s.Field<string>("code")
+                              where s.Field<DateTime>("settle_date").Date == this.dateTimePickerSettleDate.Value.Date && p.Field<decimal>("数量") > 0 && p.RowState != DataRowState.Deleted
                               select new
                               {
                                   contract_code = o.Field<string>("合约代码"),
                                   volatility = o.Field<double>("波动率"),
                                   settle_price = o.Field<decimal>("结算价"),
-                                  //delta = s.Field<decimal>("delta"),
-                                  //gamma = s.Field<decimal>("gamma"),
-                                  //theta = s.Field<decimal>("theta"),
-                                  //vega = s.Field<decimal>("vega"),
-                                  //rho = s.Field<decimal>("rho")
-                                  delta = 0,
-                                  gamma = 0,
-                                  theta = 0,
-                                  vega = 0,
-                                  rho = 0
+                                  delta = s.Field<decimal>("delta"),
+                                  gamma = s.Field<decimal>("gamma"),
+                                  theta = s.Field<decimal>("theta"),
+                                  vega = s.Field<decimal>("vega"),
+                                  rho = s.Field<decimal>("rho")
+                                  //delta = 0,
+                                  //gamma = 0,
+                                  //theta = 0,
+                                  //vega = 0,
+                                  //rho = 0
                               };
             foreach (var r in option_info.Distinct())
             {
@@ -110,8 +111,8 @@ namespace OTC
             future_table.Columns.Add("保证金率", Type.GetType("System.Decimal"));
             future_table.Columns.Add("前结算价", Type.GetType("System.Decimal"));
             future_table.Columns.Add("结算价", Type.GetType("System.Decimal"));
-            var future_info = from p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable()
-                              join o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable()
+            var future_info = from p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable().ToArray()
+                              join o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable().ToArray()
                               on p.Field<string>("合约代码") equals o.Field<string>("合约代码")
                               where p.Field<decimal>("数量") > 0 && p.RowState != DataRowState.Deleted
                               select new

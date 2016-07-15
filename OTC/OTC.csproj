@@ -134,6 +134,12 @@
     <Compile Include="FormAddClient.Designer.cs">
       <DependentUpon>FormAddClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormConfirmSettlement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConfirmSettlement.Designer.cs">
+      <DependentUpon>FormConfirmSettlement.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGenerateSettleFile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +282,9 @@
     <Compile Include="SettlementReports.cs" />
     <EmbeddedResource Include="FormAddClient.resx">
       <DependentUpon>FormAddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConfirmSettlement.resx">
+      <DependentUpon>FormConfirmSettlement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGenerateSettleFile.resx">
       <DependentUpon>FormGenerateSettleFile.cs</DependentUpon>

@@ -525,6 +525,12 @@ namespace OTC
             FormGenerateSettleFile form = new FormGenerateSettleFile(dataset);
             form.ShowDialog();
         }
+
+        private void toolStripMenuItemSettlementConfirm_Click(object sender, EventArgs e)
+        {
+            FormConfirmSettlement form = new FormConfirmSettlement(dataset);
+            form.ShowDialog();
+        }
     }
         
 }
