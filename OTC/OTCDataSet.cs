@@ -85,7 +85,9 @@ namespace OTC
                 "options_types",
                 "options_verbose_positions",
                 "business_overview",
-                "option_position_settle_info"
+                "option_position_settle_info",
+                "future_position_settle_info",
+                "option_pnl_settle_view"
             };
 
             view_names = new String[]
@@ -113,8 +115,7 @@ namespace OTC
                 "option_settle_view",
                 "future_settle_view",
                 "option_detailed_settle_view",
-                "future_detailed_settle_view",
-                "option_pnl_settle_view"
+                "future_detailed_settle_view"
             };
             String selectString = "";
             foreach (String t in table_names)
@@ -533,9 +534,11 @@ namespace OTC
                     }
 
                 }
-
-
-
+            }
+            else
+            {
+                display_table.Clear();
+                adapter.Fill(display_table);
             }
 
         }
