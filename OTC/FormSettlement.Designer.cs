@@ -39,6 +39,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dateTimePickerSettleDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonGetFutureSettlePrice = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxSettleInfo.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -157,6 +158,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonGetFutureSettlePrice);
             this.panel1.Controls.Add(this.dateTimePickerSettleDate);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,6 +183,16 @@
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "结算日期：";
+            // 
+            // buttonGetFutureSettlePrice
+            // 
+            this.buttonGetFutureSettlePrice.Location = new System.Drawing.Point(960, 1);
+            this.buttonGetFutureSettlePrice.Name = "buttonGetFutureSettlePrice";
+            this.buttonGetFutureSettlePrice.Size = new System.Drawing.Size(103, 23);
+            this.buttonGetFutureSettlePrice.TabIndex = 2;
+            this.buttonGetFutureSettlePrice.Text = "获取期货结算价";
+            this.buttonGetFutureSettlePrice.UseVisualStyleBackColor = true;
+            this.buttonGetFutureSettlePrice.Click += new System.EventHandler(this.buttonGetFutureSettlePrice_Click);
             // 
             // FormSettlement
             // 
@@ -220,5 +232,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker dateTimePickerSettleDate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonGetFutureSettlePrice;
     }
 }
