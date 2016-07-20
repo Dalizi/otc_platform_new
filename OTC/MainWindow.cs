@@ -106,6 +106,7 @@ namespace OTC
 
             this.dataGridViewClientBalance.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
+            this.dataGridViewClientBalance.Columns["客户名称"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewClientBalance.Columns["期初权益"].DefaultCellStyle.Format = "N2";
             this.dataGridViewClientBalance.Columns["当前权益"].DefaultCellStyle.Format = "N2";
             this.dataGridViewClientBalance.Columns["期初余额"].DefaultCellStyle.Format = "N2";
