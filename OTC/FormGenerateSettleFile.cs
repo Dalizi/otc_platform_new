@@ -52,19 +52,14 @@ namespace OTC
             var sr = new SettlementReports(dataset, this.textBox1.Text);
             var date = this.dateTimePicker1.Value.Date;
             try {
-                if (sr.GenerateBusinessReport(date) == -1)
+                if (sr.GenerateBusinessReport(date) == -1 || sr.GenerateDetailedReport(date) == -1 || sr.GenerateOptionReport(date) == -1)
                 {
                     MessageBox.Show("结算数据缺失", "错误");
                     return;
                 }
-                if (sr.GenerateDetailedReport(date) == -1)
+                else if (sr.GenerateBusinessReport(date) == -2 || sr.GenerateDetailedReport(date) == -2 || sr.GenerateOptionReport(date) == -2)
                 {
-                    MessageBox.Show("结算数据缺失", "错误");
-                    return;
-                }
-                if (sr.GenerateOptionReport(date) == -1)
-                {
-                    MessageBox.Show("结算数据缺失", "错误");
+                    MessageBox.Show("创建目录失败：用户权限不够。", "错误");
                     return;
                 }
             }

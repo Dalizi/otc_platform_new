@@ -299,6 +299,10 @@ namespace OTC
             {
                 return -1;
             }
+            catch (System.UnauthorizedAccessException e)
+            {
+                return -2;
+            }
             return 0;
         }
 
@@ -472,6 +476,10 @@ namespace OTC
             catch (System.InvalidOperationException e)
             {
                 return -1;
+            }
+            catch (System.UnauthorizedAccessException e)
+            {
+                return -2;
             }
             return 0;
         }
@@ -1098,6 +1106,10 @@ namespace OTC
             catch (System.InvalidOperationException e)
             {
                 return -1;
+            }
+            catch (System.UnauthorizedAccessException e)
+            {
+                return -2;
             }
             return 0;
         }
