@@ -36,7 +36,9 @@ namespace OTC
             business_state_bs.DataSource = this.dataset.display_ds;
             business_state_bs.DataMember = "business_state_view";
             business_state_bs.Sort = "结算日 desc";
-            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'",this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd"));
+            this.dateTimePickerBusinessStart.Value = DateTime.Today.AddDays(-30);
+            this.dateTimePickerBusinessEnd.Value = DateTime.Today;
+            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'",this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
             this.dataGridViewBusinessState.DataSource = business_state_bs;
 
             this.dataGridViewClientBalance.DataSource = this.dataset.display_ds;
@@ -57,18 +59,41 @@ namespace OTC
             this.dataGridViewOptionsContract.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsContract.DataMember = "options_contracts_view";
 
-            this.dataGridViewClientCashflow.DataSource = this.dataset.display_ds;
-            this.dataGridViewClientCashflow.DataMember = "client_cashflow_view";
-            
+            client_cashflow_bs = new BindingSource();
+            this.dateTimePickerClientCFStart.Value = DateTime.Today;
+            this.dateTimePickerClientCFEnd.Value = DateTime.Today;
+            client_cashflow_bs.DataSource = this.dataset.display_ds;
+            client_cashflow_bs.DataMember = "client_cashflow";
+            client_cashflow_bs.Sort = "时间 desc";
+            client_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerClientCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerClientCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+            this.dataGridViewClientCashflow.DataSource = client_cashflow_bs;
 
-            this.dataGridViewFuturesAccountCashflow.DataSource = this.dataset.display_ds;
-            this.dataGridViewFuturesAccountCashflow.DataMember = "futures_cashflow_view";
+            future_cashflow_bs = new BindingSource();
+            this.dateTimePickerFutureCFStart.Value = DateTime.Today;
+            this.dateTimePickerFutureCFEnd.Value = DateTime.Today;
+            future_cashflow_bs.DataSource = this.dataset.display_ds;
+            future_cashflow_bs.DataMember = "futures_cashflow";
+            future_cashflow_bs.Sort = "时间 desc";
+            future_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerFutureCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+            this.dataGridViewFuturesAccountCashflow.DataSource = future_cashflow_bs;
 
-            this.dataGridViewOptionsTransactions.DataSource = this.dataset.display_ds;
-            this.dataGridViewOptionsTransactions.DataMember = "options_transactions_view";
+            option_trans_bs = new BindingSource();
+            this.dateTimePickerOptionTransStart.Value = DateTime.Today;
+            this.dateTimePickerOptionTransEnd.Value = DateTime.Today;
+            option_trans_bs.DataSource = this.dataset.display_ds;
+            option_trans_bs.DataMember = "options_transactions";
+            option_trans_bs.Sort = "成交时间 desc";
+            option_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerOptionTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerOptionTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+            this.dataGridViewOptionsTransactions.DataSource = this.option_trans_bs;
 
-            this.dataGridViewFuturesTransactions.DataSource = this.dataset.display_ds;
-            this.dataGridViewFuturesTransactions.DataMember = "futures_transactions_view";
+            future_trans_bs = new BindingSource();
+            this.dateTimePickerFutureTransStart.Value = DateTime.Today;
+            this.dateTimePickerFutureTransEnd.Value = DateTime.Today;
+            future_trans_bs.DataSource = this.dataset.display_ds;
+            future_trans_bs.DataMember = "futures_transactions";
+            future_trans_bs.Sort = "成交时间 desc";
+            future_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerFutureTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+            this.dataGridViewFuturesTransactions.DataSource = future_trans_bs;
 
             this.dataGridViewOptionsVerbosePositions.DataSource = this.dataset.display_ds;
             this.dataGridViewOptionsVerbosePositions.DataMember = "options_verbose_positions_view";
@@ -101,8 +126,7 @@ namespace OTC
             this.dataGridViewBusinessState.Columns["累计总盈亏"].DefaultCellStyle.Format = "N2";
             this.dataGridViewBusinessState.Columns["累计期权盈亏"].DefaultCellStyle.Format = "N2";
             this.dataGridViewBusinessState.Columns["累计期货盈亏"].DefaultCellStyle.Format = "N2";
-            this.dateTimePickerBusinessStart.Value = DateTime.Today.AddDays(-30);
-            this.dateTimePickerBusinessEnd.Value = DateTime.Today;
+
 
             this.dataGridViewClientBalance.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewClientBalance.Columns["期货账号"].DefaultCellStyle.Format = "00000000";
@@ -132,7 +156,7 @@ namespace OTC
             this.dataGridViewFuturesAccountCashflow.Columns["成交编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewFuturesAccountCashflow.Columns["发生金额"].DefaultCellStyle.Format = "N2";
 
-
+            this.dataGridViewOptionsTransactions.Columns["合约代码"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewOptionsTransactions.Columns["成交编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewOptionsTransactions.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewOptionsTransactions.Columns["平仓目标合同号"].DefaultCellStyle.Format = "00000000";
@@ -157,6 +181,7 @@ namespace OTC
             this.dataGridViewFuturesVerbosePositions.Columns["持仓价格"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesVerbosePositions.Columns["占用保证金"].DefaultCellStyle.Format = "N2";
 
+            this.dataGridViewOptionsPositionsSum.Columns["合约代码"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewOptionsPositionsSum.Columns["客户编号"].DefaultCellStyle.Format = "00000000";
             this.dataGridViewOptionsPositionsSum.Columns["平均开仓价格"].DefaultCellStyle.Format = "N2";
             this.dataGridViewOptionsPositionsSum.Columns["平均持仓价格"].DefaultCellStyle.Format = "N2";
@@ -166,6 +191,7 @@ namespace OTC
             this.dataGridViewFuturesPositionsSum.Columns["平均开仓价格"].DefaultCellStyle.Format = "N2";
             this.dataGridViewFuturesPositionsSum.Columns["平均持仓价格"].DefaultCellStyle.Format = "N2";
 
+            this.dataGridViewOptionsContract.Columns["合约代码"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewOptionsContract.Columns["手续费"].DefaultCellStyle.Format = "N2";
             this.dataGridViewOptionsContract.Columns["结算价"].DefaultCellStyle.Format = "N2";
             this.dataGridViewOptionsContract.Columns["执行价"].DefaultCellStyle.Format = "N2";
@@ -539,16 +565,60 @@ namespace OTC
 
         private void dateTimePickerBusinessStart_ValueChanged(object sender, EventArgs e)
         {
-            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'", this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd"));
+            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'", this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
         }
 
 
         private void dateTimePickerBusinessEnd_ValueChanged(object sender, EventArgs e)
         {
-            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'", this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd"));
+            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'", this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
         }
 
+        private void dateTimePickerClientCFStart_ValueChanged(object sender, EventArgs e)
+        {
+            client_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerClientCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerClientCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerClientCFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            client_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerClientCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerClientCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerFutureCFStart_ValueChanged(object sender, EventArgs e)
+        {
+            future_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerFutureCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerFutureCFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            future_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerFutureCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerOptionTransStart_ValueChanged(object sender, EventArgs e)
+        {
+            option_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerOptionTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerOptionTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerOptionTransEnd_ValueChanged(object sender, EventArgs e)
+        {
+            option_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerOptionTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerOptionTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerFutureTransStart_ValueChanged(object sender, EventArgs e)
+        {
+            future_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerFutureTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
+
+        private void dateTimePickerFutureTransEnd_ValueChanged(object sender, EventArgs e)
+        {
+            future_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerFutureTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
+        }
         BindingSource business_state_bs;
+        BindingSource future_cashflow_bs;
+        BindingSource client_cashflow_bs;
+        BindingSource future_trans_bs;
+        BindingSource option_trans_bs;
+
     }
-        
+
 }
