@@ -32,8 +32,12 @@ namespace OTC
 
         private void SetDataSource()
         {
-            this.dataGridViewBusinessState.DataSource = this.dataset.display_ds;
-            this.dataGridViewBusinessState.DataMember = "business_state_view";
+            business_state_bs = new BindingSource();
+            business_state_bs.DataSource = this.dataset.display_ds;
+            business_state_bs.DataMember = "business_state_view";
+            business_state_bs.Sort = "结算日 desc";
+            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'",this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd"));
+            this.dataGridViewBusinessState.DataSource = business_state_bs;
 
             this.dataGridViewClientBalance.DataSource = this.dataset.display_ds;
             this.dataGridViewClientBalance.DataMember = "client_balance_join";
@@ -531,6 +535,19 @@ namespace OTC
             FormConfirmSettlement form = new FormConfirmSettlement(dataset);
             form.ShowDialog();
         }
+
+        private void dateTimePickerBusinessStart_ValueChanged(object sender, EventArgs e)
+        {
+            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'", this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd"));
+        }
+
+
+        private void dateTimePickerBusinessEnd_ValueChanged(object sender, EventArgs e)
+        {
+            business_state_bs.Filter = string.Format("结算日>='{0}' AND 结算日<='{1}'", this.dateTimePickerBusinessStart.Value.ToString("yyyy/MM/dd"), this.dateTimePickerBusinessEnd.Value.ToString("yyyy/MM/dd"));
+        }
+
+        BindingSource business_state_bs;
     }
         
 }
