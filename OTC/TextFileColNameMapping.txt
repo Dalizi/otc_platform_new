@@ -70,3 +70,4 @@ daily_settle_pnl=每日持仓盈亏
 daily_close_pnl=每日平仓盈亏
 margin_change=保证金变动
 close_pnl_settle=结算平仓盈亏
+inbalance_premium=已收到期权费
