@@ -166,7 +166,35 @@ namespace OTC
 
         private void dateTimePickerSettleDate_ValueChanged(object sender, EventArgs e)
         {
-            InitDataTable();
+            bool indicator = isPrevSettlementConfirmed();
+            this.dataGridViewFutureInfo.Enabled = indicator;
+            this.dataGridViewOptionInfo.Enabled = indicator;
+            this.buttonOK.Enabled = indicator;
+            if (indicator)
+            {
+                this.labelError.Hide();
+                InitDataTable();
+            }
+            else
+            {
+                this.labelError.Show();
+            }
+        }
+
+        private bool isPrevSettlementConfirmed()
+        {
+            var indicators = from l in dataset.Tables["business_state_view"].AsEnumerable()
+                             where l.Field<DateTime>("结算日").Date < dateTimePickerSettleDate.Value.Date
+                             select new
+                             {
+                                 is_settled = l.Field<bool>("结算已确认")
+                             };
+            bool res = true;
+            foreach (var l in indicators)
+            {
+                res &= l.is_settled;
+            }
+            return res;
         }
 
         private void buttonGetFutureSettlePrice_Click(object sender, EventArgs e)

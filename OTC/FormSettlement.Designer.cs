@@ -37,9 +37,10 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonGetFutureSettlePrice = new System.Windows.Forms.Button();
             this.dateTimePickerSettleDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonGetFutureSettlePrice = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxSettleInfo.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -158,6 +159,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.labelError);
             this.panel1.Controls.Add(this.buttonGetFutureSettlePrice);
             this.panel1.Controls.Add(this.dateTimePickerSettleDate);
             this.panel1.Controls.Add(this.label1);
@@ -166,6 +168,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1066, 24);
             this.panel1.TabIndex = 2;
+            // 
+            // buttonGetFutureSettlePrice
+            // 
+            this.buttonGetFutureSettlePrice.Location = new System.Drawing.Point(960, 1);
+            this.buttonGetFutureSettlePrice.Name = "buttonGetFutureSettlePrice";
+            this.buttonGetFutureSettlePrice.Size = new System.Drawing.Size(103, 23);
+            this.buttonGetFutureSettlePrice.TabIndex = 2;
+            this.buttonGetFutureSettlePrice.Text = "获取期货结算价";
+            this.buttonGetFutureSettlePrice.UseVisualStyleBackColor = true;
+            this.buttonGetFutureSettlePrice.Click += new System.EventHandler(this.buttonGetFutureSettlePrice_Click);
             // 
             // dateTimePickerSettleDate
             // 
@@ -184,15 +196,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "结算日期：";
             // 
-            // buttonGetFutureSettlePrice
+            // labelError
             // 
-            this.buttonGetFutureSettlePrice.Location = new System.Drawing.Point(960, 1);
-            this.buttonGetFutureSettlePrice.Name = "buttonGetFutureSettlePrice";
-            this.buttonGetFutureSettlePrice.Size = new System.Drawing.Size(103, 23);
-            this.buttonGetFutureSettlePrice.TabIndex = 2;
-            this.buttonGetFutureSettlePrice.Text = "获取期货结算价";
-            this.buttonGetFutureSettlePrice.UseVisualStyleBackColor = true;
-            this.buttonGetFutureSettlePrice.Click += new System.EventHandler(this.buttonGetFutureSettlePrice_Click);
+            this.labelError.AutoSize = true;
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(287, 4);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(185, 12);
+            this.labelError.TabIndex = 3;
+            this.labelError.Text = "该日期之前存在未确认的结算数据";
             // 
             // FormSettlement
             // 
@@ -233,5 +245,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerSettleDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonGetFutureSettlePrice;
+        private System.Windows.Forms.Label labelError;
     }
 }
