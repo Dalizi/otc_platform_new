@@ -23,11 +23,23 @@ namespace OTC
         public MainWindow(OTCDataSet dataset)
         {
             InitializeComponent();
+            InitUserComponent();
             this.dataset = dataset;
             SetDataSource();
             FormatTable();
             LinkEventsHandlers();
             this.timerUpdate.Start();
+        }
+        private void InitUserComponent()
+        {
+            menu_client_balance = new ContextMenu();
+            MenuItem modify_item = new MenuItem("修改");
+            MenuItem delete_item = new MenuItem("删除");
+            menu_client_balance.MenuItems.Add(modify_item);
+            menu_client_balance.MenuItems.Add(delete_item);
+            modify_item.Click += new EventHandler(buttonModifyClient_Click);
+            delete_item.Click += new EventHandler(buttonRemoveClient_Click);
+            dataGridViewClientBalance.MouseClick += new MouseEventHandler(clientDataGridViewRightClicked);
         }
 
         private void SetDataSource()
@@ -619,12 +631,28 @@ namespace OTC
         {
             future_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerFutureTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
         }
+
+        private void clientDataGridViewRightClicked(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var dv = dataGridViewClientBalance;
+                int currentMouseOverRow = dv.HitTest(e.X, e.Y).RowIndex;
+                if (currentMouseOverRow >= 0)
+                {
+                    dv.ClearSelection();
+                    dv.Rows[currentMouseOverRow].Selected = true;
+                    dv.CurrentCell = dv.Rows[currentMouseOverRow].Cells[0];
+                }
+                menu_client_balance.Show(dataGridViewClientBalance, new Point(e.X, e.Y));
+            }
+        }
         BindingSource business_state_bs;
         BindingSource future_cashflow_bs;
         BindingSource client_cashflow_bs;
         BindingSource future_trans_bs;
         BindingSource option_trans_bs;
-
+        ContextMenu menu_client_balance;
     }
 
 }
