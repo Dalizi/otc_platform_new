@@ -258,15 +258,21 @@ namespace OTC
         private void onOptionsVerbosePositionCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView table = (DataGridView)sender;
-            FormPlaceOrder form = new FormPlaceOrder(this.dataset, "期权", table.Rows[e.RowIndex]);
-            form.ShowDialog();
+            if (e.RowIndex != -1)
+            {
+                FormPlaceOrder form = new FormPlaceOrder(this.dataset, "期权", table.Rows[e.RowIndex]);
+                form.ShowDialog();
+            }
         }
 
         private void onFuturesVerbosePositionCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView table = (DataGridView)sender;
-            FormPlaceOrder form = new FormPlaceOrder(this.dataset, "期货", table.Rows[e.RowIndex]);
-            form.ShowDialog();
+            if (e.RowIndex != -1)
+            {
+                FormPlaceOrder form = new FormPlaceOrder(this.dataset, "期货", table.Rows[e.RowIndex]);
+                form.ShowDialog();
+            }
         }
 
         private void buttonAddClient_Click(object sender, EventArgs e)
