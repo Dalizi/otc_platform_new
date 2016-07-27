@@ -75,7 +75,7 @@ namespace OTC
             this.dateTimePickerClientCFStart.Value = DateTime.Today;
             this.dateTimePickerClientCFEnd.Value = DateTime.Today;
             client_cashflow_bs.DataSource = this.dataset.display_ds;
-            client_cashflow_bs.DataMember = "client_cashflow";
+            client_cashflow_bs.DataMember = "client_cashflow_view";
             client_cashflow_bs.Sort = "时间 desc";
             client_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerClientCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerClientCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
             this.dataGridViewClientCashflow.DataSource = client_cashflow_bs;
@@ -84,7 +84,7 @@ namespace OTC
             this.dateTimePickerFutureCFStart.Value = DateTime.Today;
             this.dateTimePickerFutureCFEnd.Value = DateTime.Today;
             future_cashflow_bs.DataSource = this.dataset.display_ds;
-            future_cashflow_bs.DataMember = "futures_cashflow";
+            future_cashflow_bs.DataMember = "futures_cashflow_view";
             future_cashflow_bs.Sort = "时间 desc";
             future_cashflow_bs.Filter = string.Format("时间>='{0}' AND 时间<='{1}'", this.dateTimePickerFutureCFStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureCFEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
             this.dataGridViewFuturesAccountCashflow.DataSource = future_cashflow_bs;
@@ -93,7 +93,7 @@ namespace OTC
             this.dateTimePickerOptionTransStart.Value = DateTime.Today;
             this.dateTimePickerOptionTransEnd.Value = DateTime.Today;
             option_trans_bs.DataSource = this.dataset.display_ds;
-            option_trans_bs.DataMember = "options_transactions";
+            option_trans_bs.DataMember = "options_transactions_view";
             option_trans_bs.Sort = "成交时间 desc";
             option_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerOptionTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerOptionTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
             this.dataGridViewOptionsTransactions.DataSource = this.option_trans_bs;
@@ -102,7 +102,7 @@ namespace OTC
             this.dateTimePickerFutureTransStart.Value = DateTime.Today;
             this.dateTimePickerFutureTransEnd.Value = DateTime.Today;
             future_trans_bs.DataSource = this.dataset.display_ds;
-            future_trans_bs.DataMember = "futures_transactions";
+            future_trans_bs.DataMember = "futures_transactions_view";
             future_trans_bs.Sort = "成交时间 desc";
             future_trans_bs.Filter = string.Format("成交时间>='{0}' AND 成交时间<='{1}'", this.dateTimePickerFutureTransStart.Value.ToString("yyyy/MM/dd 00:00:00"), this.dateTimePickerFutureTransEnd.Value.ToString("yyyy/MM/dd 00:00:00"));
             this.dataGridViewFuturesTransactions.DataSource = future_trans_bs;
