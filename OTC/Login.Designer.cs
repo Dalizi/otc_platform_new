@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.labelUserName = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.loginInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.checkBoxRememberLoginInfo = new System.Windows.Forms.CheckBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonConfig = new System.Windows.Forms.Button();
-            this.checkBoxRememberLoginInfo = new System.Windows.Forms.CheckBox();
             this.loginInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,6 +92,16 @@
             this.loginInfoGroupBox.TabStop = false;
             this.loginInfoGroupBox.Text = "登录信息";
             // 
+            // checkBoxRememberLoginInfo
+            // 
+            this.checkBoxRememberLoginInfo.AutoSize = true;
+            this.checkBoxRememberLoginInfo.Location = new System.Drawing.Point(197, 78);
+            this.checkBoxRememberLoginInfo.Name = "checkBoxRememberLoginInfo";
+            this.checkBoxRememberLoginInfo.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxRememberLoginInfo.TabIndex = 3;
+            this.checkBoxRememberLoginInfo.Text = "记住登录信息";
+            this.checkBoxRememberLoginInfo.UseVisualStyleBackColor = true;
+            // 
             // buttonLogin
             // 
             this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -125,16 +136,6 @@
             this.buttonConfig.UseVisualStyleBackColor = true;
             this.buttonConfig.Click += new System.EventHandler(this.buttonConfig_Click);
             // 
-            // checkBoxRememberLoginInfo
-            // 
-            this.checkBoxRememberLoginInfo.AutoSize = true;
-            this.checkBoxRememberLoginInfo.Location = new System.Drawing.Point(197, 78);
-            this.checkBoxRememberLoginInfo.Name = "checkBoxRememberLoginInfo";
-            this.checkBoxRememberLoginInfo.Size = new System.Drawing.Size(96, 16);
-            this.checkBoxRememberLoginInfo.TabIndex = 3;
-            this.checkBoxRememberLoginInfo.Text = "记住登录信息";
-            this.checkBoxRememberLoginInfo.UseVisualStyleBackColor = true;
-            // 
             // Login
             // 
             this.AcceptButton = this.buttonLogin;
@@ -147,9 +148,11 @@
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.loginInfoGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "用户登录";
             this.loginInfoGroupBox.ResumeLayout(false);
             this.loginInfoGroupBox.PerformLayout();

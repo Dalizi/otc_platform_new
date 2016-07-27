@@ -32,8 +32,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonSelectFolder = new System.Windows.Forms.Button();
             this.buttonSetAsDefault = new System.Windows.Forms.Button();
+            this.buttonSelectFolder = new System.Windows.Forms.Button();
             this.groupBoxSendEmail = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -72,6 +72,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "保存路径";
             // 
+            // buttonSetAsDefault
+            // 
+            this.buttonSetAsDefault.Location = new System.Drawing.Point(190, 53);
+            this.buttonSetAsDefault.Name = "buttonSetAsDefault";
+            this.buttonSetAsDefault.Size = new System.Drawing.Size(98, 23);
+            this.buttonSetAsDefault.TabIndex = 3;
+            this.buttonSetAsDefault.Text = "设置为默认路径";
+            this.buttonSetAsDefault.UseVisualStyleBackColor = true;
+            this.buttonSetAsDefault.Click += new System.EventHandler(this.buttonSetAsDefault_Click);
+            // 
             // buttonSelectFolder
             // 
             this.buttonSelectFolder.Image = global::OTC.Properties.Resources.folder;
@@ -82,16 +92,6 @@
             this.buttonSelectFolder.Text = "button1";
             this.buttonSelectFolder.UseVisualStyleBackColor = true;
             this.buttonSelectFolder.Click += new System.EventHandler(this.buttonSelectFolder_Click);
-            // 
-            // buttonSetAsDefault
-            // 
-            this.buttonSetAsDefault.Location = new System.Drawing.Point(190, 53);
-            this.buttonSetAsDefault.Name = "buttonSetAsDefault";
-            this.buttonSetAsDefault.Size = new System.Drawing.Size(98, 23);
-            this.buttonSetAsDefault.TabIndex = 3;
-            this.buttonSetAsDefault.Text = "设置为默认路径";
-            this.buttonSetAsDefault.UseVisualStyleBackColor = true;
-            this.buttonSetAsDefault.Click += new System.EventHandler(this.buttonSetAsDefault_Click);
             // 
             // groupBoxSendEmail
             // 
@@ -164,6 +164,7 @@
             this.Controls.Add(this.groupBoxSendEmail);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormGenerateSettleFile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "结算文件生成";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

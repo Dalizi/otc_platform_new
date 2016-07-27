@@ -31,6 +31,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.groupBoxAddFuturesContract = new System.Windows.Forms.GroupBox();
+            this.textBoxVolatility = new System.Windows.Forms.TextBox();
+            this.labelVolatility = new System.Windows.Forms.Label();
             this.textBoxStrikePrice = new System.Windows.Forms.TextBox();
             this.dateTimePickerMaturityDate = new System.Windows.Forms.DateTimePicker();
             this.labelStrikePrice = new System.Windows.Forms.Label();
@@ -49,8 +51,6 @@
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
-            this.textBoxVolatility = new System.Windows.Forms.TextBox();
-            this.labelVolatility = new System.Windows.Forms.Label();
             this.groupBoxAddFuturesContract.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +108,26 @@
             this.groupBoxAddFuturesContract.TabIndex = 9;
             this.groupBoxAddFuturesContract.TabStop = false;
             this.groupBoxAddFuturesContract.Text = "客户信息";
+            // 
+            // textBoxVolatility
+            // 
+            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxVolatility.Location = new System.Drawing.Point(114, 300);
+            this.textBoxVolatility.Name = "textBoxVolatility";
+            this.textBoxVolatility.Size = new System.Drawing.Size(191, 21);
+            this.textBoxVolatility.TabIndex = 21;
+            this.textBoxVolatility.Text = "0.00";
+            // 
+            // labelVolatility
+            // 
+            this.labelVolatility.AutoSize = true;
+            this.labelVolatility.Location = new System.Drawing.Point(19, 303);
+            this.labelVolatility.Name = "labelVolatility";
+            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
+            this.labelVolatility.TabIndex = 22;
+            this.labelVolatility.Text = "波动率：";
             // 
             // textBoxStrikePrice
             // 
@@ -295,26 +315,6 @@
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
             // 
-            // textBoxVolatility
-            // 
-            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxVolatility.Location = new System.Drawing.Point(114, 300);
-            this.textBoxVolatility.Name = "textBoxVolatility";
-            this.textBoxVolatility.Size = new System.Drawing.Size(191, 21);
-            this.textBoxVolatility.TabIndex = 21;
-            this.textBoxVolatility.Text = "0.00";
-            // 
-            // labelVolatility
-            // 
-            this.labelVolatility.AutoSize = true;
-            this.labelVolatility.Location = new System.Drawing.Point(19, 303);
-            this.labelVolatility.Name = "labelVolatility";
-            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
-            this.labelVolatility.TabIndex = 22;
-            this.labelVolatility.Text = "波动率：";
-            // 
             // FormAddOptionsContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -327,6 +327,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddOptionsContract";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加期权合约";
             this.groupBoxAddFuturesContract.ResumeLayout(false);
             this.groupBoxAddFuturesContract.PerformLayout();

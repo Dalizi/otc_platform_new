@@ -180,6 +180,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormFuturesAccountCashflow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "期货账户出入资";
             this.groupBoxClientCashFlow.ResumeLayout(false);
             this.groupBoxClientCashFlow.PerformLayout();

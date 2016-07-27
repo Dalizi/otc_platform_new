@@ -58,6 +58,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControlMainWindow = new System.Windows.Forms.TabControl();
             this.tabPageBusinessState = new System.Windows.Forms.TabPage();
             this.panelBusinessState = new System.Windows.Forms.Panel();
@@ -2285,6 +2286,7 @@
             this.ClientSize = new System.Drawing.Size(1198, 621);
             this.Controls.Add(this.tabControlMainWindow);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
             this.Text = "场外期权管理平台";

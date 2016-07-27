@@ -109,6 +109,7 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "FromModifyGrants";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "变更占用额度";
             this.ResumeLayout(false);
             this.PerformLayout();

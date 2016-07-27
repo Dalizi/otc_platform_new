@@ -31,6 +31,10 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.groupBoxAddFuturesContract = new System.Windows.Forms.GroupBox();
+            this.textBoxPreSettle = new System.Windows.Forms.TextBox();
+            this.labelPreSettle = new System.Windows.Forms.Label();
+            this.textBoxVolatility = new System.Windows.Forms.TextBox();
+            this.labelVolatility = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButtonPctCommission = new System.Windows.Forms.RadioButton();
             this.radioButtonAbsCommission = new System.Windows.Forms.RadioButton();
@@ -45,10 +49,6 @@
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
-            this.textBoxVolatility = new System.Windows.Forms.TextBox();
-            this.labelVolatility = new System.Windows.Forms.Label();
-            this.textBoxPreSettle = new System.Windows.Forms.TextBox();
-            this.labelPreSettle = new System.Windows.Forms.Label();
             this.groupBoxAddFuturesContract.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,6 +103,46 @@
             this.groupBoxAddFuturesContract.TabIndex = 9;
             this.groupBoxAddFuturesContract.TabStop = false;
             this.groupBoxAddFuturesContract.Text = "客户信息";
+            // 
+            // textBoxPreSettle
+            // 
+            this.textBoxPreSettle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxPreSettle.Location = new System.Drawing.Point(114, 221);
+            this.textBoxPreSettle.Name = "textBoxPreSettle";
+            this.textBoxPreSettle.Size = new System.Drawing.Size(191, 21);
+            this.textBoxPreSettle.TabIndex = 15;
+            this.textBoxPreSettle.Text = "0";
+            // 
+            // labelPreSettle
+            // 
+            this.labelPreSettle.AutoSize = true;
+            this.labelPreSettle.Location = new System.Drawing.Point(19, 224);
+            this.labelPreSettle.Name = "labelPreSettle";
+            this.labelPreSettle.Size = new System.Drawing.Size(65, 12);
+            this.labelPreSettle.TabIndex = 16;
+            this.labelPreSettle.Text = "前结算价：";
+            // 
+            // textBoxVolatility
+            // 
+            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxVolatility.Location = new System.Drawing.Point(114, 193);
+            this.textBoxVolatility.Name = "textBoxVolatility";
+            this.textBoxVolatility.Size = new System.Drawing.Size(191, 21);
+            this.textBoxVolatility.TabIndex = 13;
+            this.textBoxVolatility.Text = "0.00";
+            // 
+            // labelVolatility
+            // 
+            this.labelVolatility.AutoSize = true;
+            this.labelVolatility.Location = new System.Drawing.Point(19, 196);
+            this.labelVolatility.Name = "labelVolatility";
+            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
+            this.labelVolatility.TabIndex = 14;
+            this.labelVolatility.Text = "波动率：";
             // 
             // panel1
             // 
@@ -244,46 +284,6 @@
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
             // 
-            // textBoxVolatility
-            // 
-            this.textBoxVolatility.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxVolatility.Location = new System.Drawing.Point(114, 193);
-            this.textBoxVolatility.Name = "textBoxVolatility";
-            this.textBoxVolatility.Size = new System.Drawing.Size(191, 21);
-            this.textBoxVolatility.TabIndex = 13;
-            this.textBoxVolatility.Text = "0.00";
-            // 
-            // labelVolatility
-            // 
-            this.labelVolatility.AutoSize = true;
-            this.labelVolatility.Location = new System.Drawing.Point(19, 196);
-            this.labelVolatility.Name = "labelVolatility";
-            this.labelVolatility.Size = new System.Drawing.Size(53, 12);
-            this.labelVolatility.TabIndex = 14;
-            this.labelVolatility.Text = "波动率：";
-            // 
-            // textBoxPreSettle
-            // 
-            this.textBoxPreSettle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPreSettle.Location = new System.Drawing.Point(114, 221);
-            this.textBoxPreSettle.Name = "textBoxPreSettle";
-            this.textBoxPreSettle.Size = new System.Drawing.Size(191, 21);
-            this.textBoxPreSettle.TabIndex = 15;
-            this.textBoxPreSettle.Text = "0";
-            // 
-            // labelPreSettle
-            // 
-            this.labelPreSettle.AutoSize = true;
-            this.labelPreSettle.Location = new System.Drawing.Point(19, 224);
-            this.labelPreSettle.Name = "labelPreSettle";
-            this.labelPreSettle.Size = new System.Drawing.Size(65, 12);
-            this.labelPreSettle.TabIndex = 16;
-            this.labelPreSettle.Text = "前结算价：";
-            // 
             // FormAddFuturesContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -296,6 +296,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddFuturesContract";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加期货合约";
             this.groupBoxAddFuturesContract.ResumeLayout(false);
             this.groupBoxAddFuturesContract.PerformLayout();

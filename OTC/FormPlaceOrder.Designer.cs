@@ -448,6 +448,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormPlaceOrder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "下单";
             this.groupBoxMainInfo.ResumeLayout(false);
             this.groupBoxMainInfo.PerformLayout();

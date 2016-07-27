@@ -123,6 +123,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormModifyCommodity";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "修改商品种类";
             this.groupBoxAddCommodity.ResumeLayout(false);
             this.groupBoxAddCommodity.PerformLayout();

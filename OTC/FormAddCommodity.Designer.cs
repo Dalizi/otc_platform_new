@@ -128,6 +128,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddCommodity";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加商品种类";
             this.groupBoxAddCommodity.ResumeLayout(false);
             this.groupBoxAddCommodity.PerformLayout();

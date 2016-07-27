@@ -35,10 +35,10 @@
             this.textBoxClientName = new System.Windows.Forms.TextBox();
             this.comboBoxFuturesAccount = new System.Windows.Forms.ComboBox();
             this.groupBoxAddClient = new System.Windows.Forms.GroupBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.textBoxValidationCode = new System.Windows.Forms.TextBox();
             this.labelValidationCode = new System.Windows.Forms.Label();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxAddClient.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,6 +121,25 @@
             this.groupBoxAddClient.TabStop = false;
             this.groupBoxAddClient.Text = "客户信息";
             // 
+            // textBoxValidationCode
+            // 
+            this.textBoxValidationCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxValidationCode.Location = new System.Drawing.Point(102, 113);
+            this.textBoxValidationCode.Name = "textBoxValidationCode";
+            this.textBoxValidationCode.Size = new System.Drawing.Size(156, 21);
+            this.textBoxValidationCode.TabIndex = 7;
+            // 
+            // labelValidationCode
+            // 
+            this.labelValidationCode.AutoSize = true;
+            this.labelValidationCode.Location = new System.Drawing.Point(19, 116);
+            this.labelValidationCode.Name = "labelValidationCode";
+            this.labelValidationCode.Size = new System.Drawing.Size(77, 12);
+            this.labelValidationCode.TabIndex = 6;
+            this.labelValidationCode.Text = "下单验证码：";
+            // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -144,25 +163,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // textBoxValidationCode
-            // 
-            this.textBoxValidationCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxValidationCode.Location = new System.Drawing.Point(102, 113);
-            this.textBoxValidationCode.Name = "textBoxValidationCode";
-            this.textBoxValidationCode.Size = new System.Drawing.Size(156, 21);
-            this.textBoxValidationCode.TabIndex = 7;
-            // 
-            // labelValidationCode
-            // 
-            this.labelValidationCode.AutoSize = true;
-            this.labelValidationCode.Location = new System.Drawing.Point(19, 116);
-            this.labelValidationCode.Name = "labelValidationCode";
-            this.labelValidationCode.Size = new System.Drawing.Size(77, 12);
-            this.labelValidationCode.TabIndex = 6;
-            this.labelValidationCode.Text = "下单验证码：";
-            // 
             // FormAddClient
             // 
             this.AcceptButton = this.buttonOK;
@@ -178,6 +178,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(328, 237);
             this.Name = "FormAddClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加客户";
             this.groupBoxAddClient.ResumeLayout(false);
             this.groupBoxAddClient.PerformLayout();

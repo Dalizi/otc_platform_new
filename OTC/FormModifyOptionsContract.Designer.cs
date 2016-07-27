@@ -357,6 +357,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormModifyOptionsContract";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加期权合约";
             this.groupBoxAddFuturesContract.ResumeLayout(false);
             this.groupBoxAddFuturesContract.PerformLayout();

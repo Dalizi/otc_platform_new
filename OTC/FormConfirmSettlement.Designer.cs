@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dateTimePickerConfirmSettlement = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.dateTimePickerConfirmSettlement = new System.Windows.Forms.DateTimePicker();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +44,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(259, 51);
             this.panel1.TabIndex = 0;
+            // 
+            // dateTimePickerConfirmSettlement
+            // 
+            this.dateTimePickerConfirmSettlement.Location = new System.Drawing.Point(108, 14);
+            this.dateTimePickerConfirmSettlement.Name = "dateTimePickerConfirmSettlement";
+            this.dateTimePickerConfirmSettlement.Size = new System.Drawing.Size(128, 21);
+            this.dateTimePickerConfirmSettlement.TabIndex = 1;
             // 
             // label1
             // 
@@ -63,13 +70,6 @@
             this.buttonOK.Text = "结算确认";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // dateTimePickerConfirmSettlement
-            // 
-            this.dateTimePickerConfirmSettlement.Location = new System.Drawing.Point(108, 14);
-            this.dateTimePickerConfirmSettlement.Name = "dateTimePickerConfirmSettlement";
-            this.dateTimePickerConfirmSettlement.Size = new System.Drawing.Size(128, 21);
-            this.dateTimePickerConfirmSettlement.TabIndex = 1;
             // 
             // buttonCancel
             // 
@@ -95,6 +95,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormConfirmSettlement";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "结算确认";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

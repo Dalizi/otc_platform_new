@@ -60,6 +60,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelStatus);
             this.Name = "FormLogging";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "正在登录...";
             this.ResumeLayout(false);
             this.PerformLayout();

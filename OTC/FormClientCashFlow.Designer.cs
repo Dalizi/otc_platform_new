@@ -178,6 +178,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormClientCashFlow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "客户出入资";
             this.groupBoxClientCashFlow.ResumeLayout(false);
             this.groupBoxClientCashFlow.PerformLayout();

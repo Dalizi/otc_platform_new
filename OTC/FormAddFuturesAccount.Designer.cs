@@ -100,6 +100,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddFuturesAccount";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加期货账号";
             this.groupBoxAddFutuersAccount.ResumeLayout(false);
             this.groupBoxAddFutuersAccount.PerformLayout();

@@ -128,6 +128,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddOptionsType";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加期权种类";
             this.groupBoxAddOptionsType.ResumeLayout(false);
             this.groupBoxAddOptionsType.PerformLayout();

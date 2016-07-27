@@ -41,6 +41,12 @@
             this.textBoxRate = new System.Windows.Forms.TextBox();
             this.labelRate = new System.Windows.Forms.Label();
             this.groupBoxParam = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonOOM = new System.Windows.Forms.RadioButton();
+            this.radioButtonITM = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDownPercentStrike = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxPercentStrike = new System.Windows.Forms.CheckBox();
             this.labelQuantityError = new System.Windows.Forms.Label();
             this.labelQuantity = new System.Windows.Forms.Label();
             this.textBoxQuantity = new System.Windows.Forms.TextBox();
@@ -57,6 +63,9 @@
             this.labelBuySell = new System.Windows.Forms.Label();
             this.comboBoxBuySell = new System.Windows.Forms.ComboBox();
             this.groupBoxQuotes = new System.Windows.Forms.GroupBox();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.labelTotalDelta = new System.Windows.Forms.Label();
+            this.textBoxTotalDelta = new System.Windows.Forms.TextBox();
             this.numericUpDownSpreadValue = new System.Windows.Forms.NumericUpDown();
             this.checkBoxSpreadQuote = new System.Windows.Forms.CheckBox();
             this.labelValue = new System.Windows.Forms.Label();
@@ -74,29 +83,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.labelAskVolume = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDownPercentStrike = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxPercentStrike = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelTotalDelta = new System.Windows.Forms.Label();
-            this.textBoxTotalDelta = new System.Windows.Forms.TextBox();
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButtonITM = new System.Windows.Forms.RadioButton();
-            this.radioButtonOOM = new System.Windows.Forms.RadioButton();
             this.groupBoxClientInfo = new System.Windows.Forms.GroupBox();
-            this.labelClientName = new System.Windows.Forms.Label();
-            this.comboBoxClientName = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxValidationCode = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxBalance = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxRemainBalance = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxBalance = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelClientName = new System.Windows.Forms.Label();
+            this.textBoxValidationCode = new System.Windows.Forms.TextBox();
+            this.comboBoxClientName = new System.Windows.Forms.ComboBox();
             this.groupBoxParam.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).BeginInit();
             this.groupBoxQuotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpreadValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).BeginInit();
-            this.panel1.SuspendLayout();
             this.groupBoxClientInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -246,6 +246,84 @@
             this.groupBoxParam.TabIndex = 12;
             this.groupBoxParam.TabStop = false;
             this.groupBoxParam.Text = "合约参数";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonOOM);
+            this.panel1.Controls.Add(this.radioButtonITM);
+            this.panel1.Enabled = false;
+            this.panel1.Location = new System.Drawing.Point(178, 178);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(171, 21);
+            this.panel1.TabIndex = 30;
+            // 
+            // radioButtonOOM
+            // 
+            this.radioButtonOOM.AutoSize = true;
+            this.radioButtonOOM.Location = new System.Drawing.Point(73, 5);
+            this.radioButtonOOM.Name = "radioButtonOOM";
+            this.radioButtonOOM.Size = new System.Drawing.Size(47, 16);
+            this.radioButtonOOM.TabIndex = 1;
+            this.radioButtonOOM.TabStop = true;
+            this.radioButtonOOM.Text = "虚值";
+            this.radioButtonOOM.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonITM
+            // 
+            this.radioButtonITM.AutoSize = true;
+            this.radioButtonITM.Location = new System.Drawing.Point(3, 5);
+            this.radioButtonITM.Name = "radioButtonITM";
+            this.radioButtonITM.Size = new System.Drawing.Size(47, 16);
+            this.radioButtonITM.TabIndex = 0;
+            this.radioButtonITM.TabStop = true;
+            this.radioButtonITM.Text = "实值";
+            this.radioButtonITM.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(158, 179);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(14, 14);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "%";
+            // 
+            // numericUpDownPercentStrike
+            // 
+            this.numericUpDownPercentStrike.DecimalPlaces = 1;
+            this.numericUpDownPercentStrike.Enabled = false;
+            this.numericUpDownPercentStrike.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDownPercentStrike.Location = new System.Drawing.Point(76, 178);
+            this.numericUpDownPercentStrike.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numericUpDownPercentStrike.Minimum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownPercentStrike.Name = "numericUpDownPercentStrike";
+            this.numericUpDownPercentStrike.Size = new System.Drawing.Size(77, 21);
+            this.numericUpDownPercentStrike.TabIndex = 28;
+            this.numericUpDownPercentStrike.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // checkBoxPercentStrike
+            // 
+            this.checkBoxPercentStrike.AutoSize = true;
+            this.checkBoxPercentStrike.Location = new System.Drawing.Point(76, 156);
+            this.checkBoxPercentStrike.Name = "checkBoxPercentStrike";
+            this.checkBoxPercentStrike.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxPercentStrike.TabIndex = 27;
+            this.checkBoxPercentStrike.Text = "百分比执行价";
+            this.checkBoxPercentStrike.UseVisualStyleBackColor = true;
+            this.checkBoxPercentStrike.CheckedChanged += new System.EventHandler(this.checkBoxPercentStrike_CheckedChanged);
             // 
             // labelQuantityError
             // 
@@ -421,6 +499,36 @@
             this.groupBoxQuotes.TabIndex = 13;
             this.groupBoxQuotes.TabStop = false;
             this.groupBoxQuotes.Text = "报价";
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStop.Location = new System.Drawing.Point(280, 158);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.TabIndex = 23;
+            this.buttonStop.Text = "停止计算";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            // 
+            // labelTotalDelta
+            // 
+            this.labelTotalDelta.AutoSize = true;
+            this.labelTotalDelta.Location = new System.Drawing.Point(8, 126);
+            this.labelTotalDelta.Name = "labelTotalDelta";
+            this.labelTotalDelta.Size = new System.Drawing.Size(95, 12);
+            this.labelTotalDelta.TabIndex = 21;
+            this.labelTotalDelta.Text = "总Delta（手）：";
+            // 
+            // textBoxTotalDelta
+            // 
+            this.textBoxTotalDelta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTotalDelta.Location = new System.Drawing.Point(109, 123);
+            this.textBoxTotalDelta.Name = "textBoxTotalDelta";
+            this.textBoxTotalDelta.ReadOnly = true;
+            this.textBoxTotalDelta.Size = new System.Drawing.Size(97, 21);
+            this.textBoxTotalDelta.TabIndex = 22;
             // 
             // numericUpDownSpreadValue
             // 
@@ -598,114 +706,6 @@
             this.label8.TabIndex = 20;
             this.label8.Text = "卖一量：";
             // 
-            // numericUpDownPercentStrike
-            // 
-            this.numericUpDownPercentStrike.DecimalPlaces = 1;
-            this.numericUpDownPercentStrike.Enabled = false;
-            this.numericUpDownPercentStrike.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDownPercentStrike.Location = new System.Drawing.Point(76, 178);
-            this.numericUpDownPercentStrike.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.numericUpDownPercentStrike.Minimum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownPercentStrike.Name = "numericUpDownPercentStrike";
-            this.numericUpDownPercentStrike.Size = new System.Drawing.Size(77, 21);
-            this.numericUpDownPercentStrike.TabIndex = 28;
-            this.numericUpDownPercentStrike.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // checkBoxPercentStrike
-            // 
-            this.checkBoxPercentStrike.AutoSize = true;
-            this.checkBoxPercentStrike.Location = new System.Drawing.Point(76, 156);
-            this.checkBoxPercentStrike.Name = "checkBoxPercentStrike";
-            this.checkBoxPercentStrike.Size = new System.Drawing.Size(96, 16);
-            this.checkBoxPercentStrike.TabIndex = 27;
-            this.checkBoxPercentStrike.Text = "百分比执行价";
-            this.checkBoxPercentStrike.UseVisualStyleBackColor = true;
-            this.checkBoxPercentStrike.CheckedChanged += new System.EventHandler(this.checkBoxPercentStrike_CheckedChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(158, 179);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 14);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "%";
-            // 
-            // labelTotalDelta
-            // 
-            this.labelTotalDelta.AutoSize = true;
-            this.labelTotalDelta.Location = new System.Drawing.Point(8, 126);
-            this.labelTotalDelta.Name = "labelTotalDelta";
-            this.labelTotalDelta.Size = new System.Drawing.Size(95, 12);
-            this.labelTotalDelta.TabIndex = 21;
-            this.labelTotalDelta.Text = "总Delta（手）：";
-            // 
-            // textBoxTotalDelta
-            // 
-            this.textBoxTotalDelta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxTotalDelta.Location = new System.Drawing.Point(109, 123);
-            this.textBoxTotalDelta.Name = "textBoxTotalDelta";
-            this.textBoxTotalDelta.ReadOnly = true;
-            this.textBoxTotalDelta.Size = new System.Drawing.Size(97, 21);
-            this.textBoxTotalDelta.TabIndex = 22;
-            // 
-            // buttonStop
-            // 
-            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(280, 158);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 23);
-            this.buttonStop.TabIndex = 23;
-            this.buttonStop.Text = "停止计算";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radioButtonOOM);
-            this.panel1.Controls.Add(this.radioButtonITM);
-            this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(178, 178);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(171, 21);
-            this.panel1.TabIndex = 30;
-            // 
-            // radioButtonITM
-            // 
-            this.radioButtonITM.AutoSize = true;
-            this.radioButtonITM.Location = new System.Drawing.Point(3, 5);
-            this.radioButtonITM.Name = "radioButtonITM";
-            this.radioButtonITM.Size = new System.Drawing.Size(47, 16);
-            this.radioButtonITM.TabIndex = 0;
-            this.radioButtonITM.TabStop = true;
-            this.radioButtonITM.Text = "实值";
-            this.radioButtonITM.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonOOM
-            // 
-            this.radioButtonOOM.AutoSize = true;
-            this.radioButtonOOM.Location = new System.Drawing.Point(73, 5);
-            this.radioButtonOOM.Name = "radioButtonOOM";
-            this.radioButtonOOM.Size = new System.Drawing.Size(47, 16);
-            this.radioButtonOOM.TabIndex = 1;
-            this.radioButtonOOM.TabStop = true;
-            this.radioButtonOOM.Text = "虚值";
-            this.radioButtonOOM.UseVisualStyleBackColor = true;
-            // 
             // groupBoxClientInfo
             // 
             this.groupBoxClientInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -726,40 +726,22 @@
             this.groupBoxClientInfo.TabStop = false;
             this.groupBoxClientInfo.Text = "客户信息";
             // 
-            // labelClientName
+            // label7
             // 
-            this.labelClientName.AutoSize = true;
-            this.labelClientName.Location = new System.Drawing.Point(8, 23);
-            this.labelClientName.Name = "labelClientName";
-            this.labelClientName.Size = new System.Drawing.Size(65, 12);
-            this.labelClientName.TabIndex = 31;
-            this.labelClientName.Text = "选择客户：";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 105);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "剩余金额：";
             // 
-            // comboBoxClientName
+            // textBoxRemainBalance
             // 
-            this.comboBoxClientName.FormattingEnabled = true;
-            this.comboBoxClientName.Location = new System.Drawing.Point(78, 20);
-            this.comboBoxClientName.Name = "comboBoxClientName";
-            this.comboBoxClientName.Size = new System.Drawing.Size(154, 20);
-            this.comboBoxClientName.TabIndex = 32;
-            this.comboBoxClientName.SelectedIndexChanged += new System.EventHandler(this.comboBoxClientName_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "下单验证码：";
-            // 
-            // textBoxValidationCode
-            // 
-            this.textBoxValidationCode.Location = new System.Drawing.Point(91, 46);
-            this.textBoxValidationCode.Name = "textBoxValidationCode";
-            this.textBoxValidationCode.ReadOnly = true;
-            this.textBoxValidationCode.Size = new System.Drawing.Size(141, 21);
-            this.textBoxValidationCode.TabIndex = 32;
+            this.textBoxRemainBalance.Location = new System.Drawing.Point(91, 102);
+            this.textBoxRemainBalance.Name = "textBoxRemainBalance";
+            this.textBoxRemainBalance.ReadOnly = true;
+            this.textBoxRemainBalance.Size = new System.Drawing.Size(141, 21);
+            this.textBoxRemainBalance.TabIndex = 36;
             // 
             // label5
             // 
@@ -778,22 +760,40 @@
             this.textBoxBalance.Size = new System.Drawing.Size(141, 21);
             this.textBoxBalance.TabIndex = 34;
             // 
-            // label7
+            // label3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 105);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 12);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "剩余金额：";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "下单验证码：";
             // 
-            // textBoxRemainBalance
+            // labelClientName
             // 
-            this.textBoxRemainBalance.Location = new System.Drawing.Point(91, 102);
-            this.textBoxRemainBalance.Name = "textBoxRemainBalance";
-            this.textBoxRemainBalance.ReadOnly = true;
-            this.textBoxRemainBalance.Size = new System.Drawing.Size(141, 21);
-            this.textBoxRemainBalance.TabIndex = 36;
+            this.labelClientName.AutoSize = true;
+            this.labelClientName.Location = new System.Drawing.Point(8, 23);
+            this.labelClientName.Name = "labelClientName";
+            this.labelClientName.Size = new System.Drawing.Size(65, 12);
+            this.labelClientName.TabIndex = 31;
+            this.labelClientName.Text = "选择客户：";
+            // 
+            // textBoxValidationCode
+            // 
+            this.textBoxValidationCode.Location = new System.Drawing.Point(91, 46);
+            this.textBoxValidationCode.Name = "textBoxValidationCode";
+            this.textBoxValidationCode.ReadOnly = true;
+            this.textBoxValidationCode.Size = new System.Drawing.Size(141, 21);
+            this.textBoxValidationCode.TabIndex = 32;
+            // 
+            // comboBoxClientName
+            // 
+            this.comboBoxClientName.FormattingEnabled = true;
+            this.comboBoxClientName.Location = new System.Drawing.Point(78, 20);
+            this.comboBoxClientName.Name = "comboBoxClientName";
+            this.comboBoxClientName.Size = new System.Drawing.Size(154, 20);
+            this.comboBoxClientName.TabIndex = 32;
+            this.comboBoxClientName.SelectedIndexChanged += new System.EventHandler(this.comboBoxClientName_SelectedIndexChanged);
             // 
             // FormQuotes
             // 
@@ -815,15 +815,16 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormQuotes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "普通欧式报价";
             this.groupBoxParam.ResumeLayout(false);
             this.groupBoxParam.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).EndInit();
             this.groupBoxQuotes.ResumeLayout(false);
             this.groupBoxQuotes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpreadValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBoxClientInfo.ResumeLayout(false);
             this.groupBoxClientInfo.PerformLayout();
             this.ResumeLayout(false);

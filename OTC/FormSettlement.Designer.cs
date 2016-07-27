@@ -37,10 +37,10 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelError = new System.Windows.Forms.Label();
             this.buttonGetFutureSettlePrice = new System.Windows.Forms.Button();
             this.dateTimePickerSettleDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelError = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxSettleInfo.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -169,6 +169,16 @@
             this.panel1.Size = new System.Drawing.Size(1066, 24);
             this.panel1.TabIndex = 2;
             // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(287, 4);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(185, 12);
+            this.labelError.TabIndex = 3;
+            this.labelError.Text = "该日期之前存在未确认的结算数据";
+            // 
             // buttonGetFutureSettlePrice
             // 
             this.buttonGetFutureSettlePrice.Location = new System.Drawing.Point(960, 1);
@@ -196,16 +206,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "结算日期：";
             // 
-            // labelError
-            // 
-            this.labelError.AutoSize = true;
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(287, 4);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(185, 12);
-            this.labelError.TabIndex = 3;
-            this.labelError.Text = "该日期之前存在未确认的结算数据";
-            // 
             // FormSettlement
             // 
             this.AcceptButton = this.buttonOK;
@@ -218,6 +218,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSettlement";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "结算";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBoxSettleInfo.ResumeLayout(false);
