@@ -700,7 +700,7 @@ namespace OTC
                                          key = g1.Key,
                                          delta = g1.Sum(f => f.Field<decimal>("delta"))
                                      };
-                var option_dleta = from o in dataset.Tables["option_position_settle_info"].AsEnumerable()
+                var option_delta = from o in dataset.Tables["option_position_settle_info"].AsEnumerable()
                                    where o.Field<DateTime>("settle_date") == settle_day
                                    group o by o.Field<string>("product") into g2
                                    select new
@@ -708,13 +708,14 @@ namespace OTC
                                        key = g2.Key,
                                        delta = g2.Sum(o => o.Field<decimal>("delta"))
                                    };
-                var delta = from g1 in future_delta
-                            join g2 in option_dleta
-                            on g1.key equals g2.key
+                var delta = from g1 in option_delta
+                            join g2 in future_delta
+                            on g1.key equals g2.key into tmp
+                            from tt in tmp.DefaultIfEmpty()
                             select new
                             {
                                 key = g1.key,
-                                delta = g1.delta + g2.delta
+                                delta = tt==null?g1.delta :g1.delta + tt.delta
                             };
                 foreach (var d in delta)
                 {
