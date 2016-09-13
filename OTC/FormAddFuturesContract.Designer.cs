@@ -45,10 +45,10 @@
             this.labelMarginRate = new System.Windows.Forms.Label();
             this.labelFuturesContractCode = new System.Windows.Forms.Label();
             this.comboBoxUnderlyingCode = new System.Windows.Forms.ComboBox();
-            this.textBoxFuturesContractCode = new System.Windows.Forms.TextBox();
             this.labelUnderlyingCode = new System.Windows.Forms.Label();
             this.textBoxCommission = new System.Windows.Forms.TextBox();
             this.labelCommission = new System.Windows.Forms.Label();
+            this.comboBoxFutureContractCode = new System.Windows.Forms.ComboBox();
             this.groupBoxAddFuturesContract.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +81,7 @@
             this.groupBoxAddFuturesContract.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAddFuturesContract.Controls.Add(this.comboBoxFutureContractCode);
             this.groupBoxAddFuturesContract.Controls.Add(this.textBoxPreSettle);
             this.groupBoxAddFuturesContract.Controls.Add(this.labelPreSettle);
             this.groupBoxAddFuturesContract.Controls.Add(this.textBoxVolatility);
@@ -93,7 +94,6 @@
             this.groupBoxAddFuturesContract.Controls.Add(this.labelMarginRate);
             this.groupBoxAddFuturesContract.Controls.Add(this.labelFuturesContractCode);
             this.groupBoxAddFuturesContract.Controls.Add(this.comboBoxUnderlyingCode);
-            this.groupBoxAddFuturesContract.Controls.Add(this.textBoxFuturesContractCode);
             this.groupBoxAddFuturesContract.Controls.Add(this.labelUnderlyingCode);
             this.groupBoxAddFuturesContract.Controls.Add(this.textBoxCommission);
             this.groupBoxAddFuturesContract.Controls.Add(this.labelCommission);
@@ -245,16 +245,6 @@
             this.comboBoxUnderlyingCode.Size = new System.Drawing.Size(191, 20);
             this.comboBoxUnderlyingCode.TabIndex = 1;
             // 
-            // textBoxFuturesContractCode
-            // 
-            this.textBoxFuturesContractCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFuturesContractCode.Location = new System.Drawing.Point(114, 20);
-            this.textBoxFuturesContractCode.Name = "textBoxFuturesContractCode";
-            this.textBoxFuturesContractCode.Size = new System.Drawing.Size(191, 21);
-            this.textBoxFuturesContractCode.TabIndex = 0;
-            // 
             // labelUnderlyingCode
             // 
             this.labelUnderlyingCode.AutoSize = true;
@@ -283,6 +273,16 @@
             this.labelCommission.Size = new System.Drawing.Size(65, 12);
             this.labelCommission.TabIndex = 1;
             this.labelCommission.Text = "手续费率：";
+            // 
+            // comboBoxFutureContractCode
+            // 
+            this.comboBoxFutureContractCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxFutureContractCode.Location = new System.Drawing.Point(114, 20);
+            this.comboBoxFutureContractCode.Name = "comboBoxFutureContractCode";
+            this.comboBoxFutureContractCode.Size = new System.Drawing.Size(191, 20);
+            this.comboBoxFutureContractCode.TabIndex = 17;
             // 
             // FormAddFuturesContract
             // 
@@ -313,7 +313,6 @@
         private System.Windows.Forms.GroupBox groupBoxAddFuturesContract;
         private System.Windows.Forms.Label labelFuturesContractCode;
         private System.Windows.Forms.ComboBox comboBoxUnderlyingCode;
-        private System.Windows.Forms.TextBox textBoxFuturesContractCode;
         private System.Windows.Forms.Label labelUnderlyingCode;
         private System.Windows.Forms.TextBox textBoxCommission;
         private System.Windows.Forms.Label labelCommission;
@@ -329,5 +328,6 @@
         private System.Windows.Forms.Label labelVolatility;
         private System.Windows.Forms.TextBox textBoxPreSettle;
         private System.Windows.Forms.Label labelPreSettle;
+        private System.Windows.Forms.ComboBox comboBoxFutureContractCode;
     }
 }

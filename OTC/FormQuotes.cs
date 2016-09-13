@@ -18,6 +18,13 @@ namespace OTC
             dataset = ds;
             linkEvents();
             InitilizeUserComponent();
+            var redis_db = ds.CreateRedisConnection();
+            foreach (var code in redis_db.SetMembers("FutureContracts"))
+            {
+                comboBoxUnderlying.Items.Add(code.ToString());
+            }
+            comboBoxUnderlying.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxUnderlying.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
         private void InitilizeUserComponent()
@@ -60,7 +67,7 @@ namespace OTC
 
         private void linkEvents()
         {
-            this.buttonCalculate.Click += new EventHandler(this.textBoxUnderlying_TextChanged);
+            this.buttonCalculate.Click += new EventHandler(this.comboBoxUnderlying_SelectedIndexChanged);
             this.buttonCalculate.Click += new EventHandler(comboBoxOptionType_SelectedIndexChanged);
             this.buttonCalculate.Click += new EventHandler(comboBoxBuySell_SelectedIndexChanged);
             this.buttonCalculate.Click += new EventHandler(dateTimePickerMaturityDate_ValueChanged);
@@ -136,29 +143,6 @@ namespace OTC
 
         }
 
-
-
-        private void textBoxUnderlying_TextChanged(object sender, EventArgs e)
-        {
-            if (!redis_conn.KeyExists(textBoxUnderlying.Text))
-            {
-                this.labelUnderlyingError.Text = "标的代码不存在";
-                underlying_valid = false;
-            }
-            else
-            {
-                underlying_code = textBoxUnderlying.Text;
-                this.labelUnderlyingError.Text = "";
-                underlying_valid = true;
-                var contract_row = dataset.Tables["futures_contracts"].Rows.Find(textBoxUnderlying.Text);
-                if (contract_row != null)
-                {
-                    textBoxVolatility.Text = contract_row["波动率"].ToString();
-                    volatility = double.Parse(textBoxVolatility.Text);
-                    volatility_valid = true;
-                }
-            }
-        }
 
         private void dateTimePickerMaturityDate_ValueChanged(object sender, EventArgs e)
         {
@@ -343,6 +327,28 @@ namespace OTC
             textBoxBalance.Text = row_info["当前余额"].ToString();
             if(textBoxValue.Text!="")
                 textBoxRemainBalance.Text = (decimal.Parse(textBoxBalance.Text) - decimal.Parse(textBoxValue.Text)).ToString();
+        }
+
+        private void comboBoxUnderlying_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!redis_conn.KeyExists(comboBoxUnderlying.Text))
+            {
+                this.labelUnderlyingError.Text = "标的代码不存在";
+                underlying_valid = false;
+            }
+            else
+            {
+                underlying_code = comboBoxUnderlying.Text;
+                this.labelUnderlyingError.Text = "";
+                underlying_valid = true;
+                var contract_row = dataset.Tables["futures_contracts"].Rows.Find(comboBoxUnderlying.Text);
+                if (contract_row != null)
+                {
+                    textBoxVolatility.Text = contract_row["波动率"].ToString();
+                    volatility = double.Parse(textBoxVolatility.Text);
+                    volatility_valid = true;
+                }
+            }
         }
 
         bool strike_valid, maturity_valid, rate_valid=true, volatility_valid, underlying_valid, yield_valid=true, buysell_valid, callput_valid, quantity_valid;

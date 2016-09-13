@@ -26,6 +26,13 @@ namespace OTC
             {
                 this.comboBoxUnderlyingCode.SelectedIndex = 0;
             }
+            var redis_db = ds.CreateRedisConnection();
+            foreach(var code in redis_db.SetMembers("FutureContracts"))
+            {
+                comboBoxFutureContractCode.Items.Add(code.ToString());
+            }
+            comboBoxFutureContractCode.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxFutureContractCode.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -34,7 +41,7 @@ namespace OTC
             decimal margin = 0;
             decimal multiplier = 0;
             decimal volatility = 0;
-            if (String.IsNullOrEmpty(this.textBoxFuturesContractCode.Text))
+            if (String.IsNullOrEmpty(this.comboBoxFutureContractCode.Text))
             {
                 MessageBox.Show("期货合约代码不能为空。", "错误");
             }
@@ -61,13 +68,12 @@ namespace OTC
             else
             {
                 DatabaseManager dm = new DatabaseManager();
-                var conn = dm.GetRedisConnection();
-                var db = conn.GetDatabase();
-                if (db.KeyExists(this.textBoxFuturesContractCode.Text))
+                var db = dataset.CreateRedisConnection();
+                if (db.KeyExists(this.comboBoxFutureContractCode.Text))
                 {
-                    double pre_settle = double.Parse(db.HashGet(this.textBoxFuturesContractCode.Text, "PreSettlementPrice").ToString());
+                    double pre_settle = double.Parse(db.HashGet(this.comboBoxFutureContractCode.Text, "PreSettlementPrice").ToString());
                     string commission_mode = this.radioButtonAbsCommission.Checked ? "abs" : "pct";
-                    table.Rows.Add(this.textBoxFuturesContractCode.Text, this.comboBoxUnderlyingCode.Text.Split('-')[1], commission_mode, commision, margin, pre_settle, multiplier, volatility, false);
+                    table.Rows.Add(this.comboBoxFutureContractCode.Text, this.comboBoxUnderlyingCode.Text.Split('-')[1], commission_mode, commision, margin, pre_settle, multiplier, volatility, false);
                     this.dataset.Commit("futures_contracts");
                     this.dataset.Update("futures_contracts");
                     this.dataset.Update("futures_contracts_view");

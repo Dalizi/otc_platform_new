@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.labelUnderlying = new System.Windows.Forms.Label();
-            this.textBoxUnderlying = new System.Windows.Forms.TextBox();
             this.labelOptionType = new System.Windows.Forms.Label();
             this.comboBoxOptionType = new System.Windows.Forms.ComboBox();
             this.textBoxStrike = new System.Windows.Forms.TextBox();
@@ -92,6 +91,7 @@
             this.labelClientName = new System.Windows.Forms.Label();
             this.textBoxValidationCode = new System.Windows.Forms.TextBox();
             this.comboBoxClientName = new System.Windows.Forms.ComboBox();
+            this.comboBoxUnderlying = new System.Windows.Forms.ComboBox();
             this.groupBoxParam.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentStrike)).BeginInit();
@@ -108,14 +108,6 @@
             this.labelUnderlying.Size = new System.Drawing.Size(41, 12);
             this.labelUnderlying.TabIndex = 0;
             this.labelUnderlying.Text = "标的：";
-            // 
-            // textBoxUnderlying
-            // 
-            this.textBoxUnderlying.Location = new System.Drawing.Point(76, 14);
-            this.textBoxUnderlying.Name = "textBoxUnderlying";
-            this.textBoxUnderlying.Size = new System.Drawing.Size(100, 21);
-            this.textBoxUnderlying.TabIndex = 1;
-            this.textBoxUnderlying.Validated += new System.EventHandler(this.textBoxUnderlying_TextChanged);
             // 
             // labelOptionType
             // 
@@ -209,6 +201,7 @@
             // 
             this.groupBoxParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxParam.Controls.Add(this.comboBoxUnderlying);
             this.groupBoxParam.Controls.Add(this.panel1);
             this.groupBoxParam.Controls.Add(this.label2);
             this.groupBoxParam.Controls.Add(this.numericUpDownPercentStrike);
@@ -230,7 +223,6 @@
             this.groupBoxParam.Controls.Add(this.comboBoxBuySell);
             this.groupBoxParam.Controls.Add(this.labelUnderlying);
             this.groupBoxParam.Controls.Add(this.textBoxRate);
-            this.groupBoxParam.Controls.Add(this.textBoxUnderlying);
             this.groupBoxParam.Controls.Add(this.labelRate);
             this.groupBoxParam.Controls.Add(this.labelOptionType);
             this.groupBoxParam.Controls.Add(this.textBoxVolatility);
@@ -795,6 +787,15 @@
             this.comboBoxClientName.TabIndex = 32;
             this.comboBoxClientName.SelectedIndexChanged += new System.EventHandler(this.comboBoxClientName_SelectedIndexChanged);
             // 
+            // comboBoxUnderlying
+            // 
+            this.comboBoxUnderlying.FormattingEnabled = true;
+            this.comboBoxUnderlying.Location = new System.Drawing.Point(76, 11);
+            this.comboBoxUnderlying.Name = "comboBoxUnderlying";
+            this.comboBoxUnderlying.Size = new System.Drawing.Size(100, 20);
+            this.comboBoxUnderlying.TabIndex = 31;
+            this.comboBoxUnderlying.SelectedIndexChanged += new System.EventHandler(this.comboBoxUnderlying_SelectedIndexChanged);
+            // 
             // FormQuotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -835,7 +836,6 @@
         #endregion
 
         private System.Windows.Forms.Label labelUnderlying;
-        private System.Windows.Forms.TextBox textBoxUnderlying;
         private System.Windows.Forms.Label labelOptionType;
         private System.Windows.Forms.ComboBox comboBoxOptionType;
         private System.Windows.Forms.TextBox textBoxStrike;
@@ -898,5 +898,6 @@
         private System.Windows.Forms.Label labelClientName;
         private System.Windows.Forms.TextBox textBoxValidationCode;
         private System.Windows.Forms.ComboBox comboBoxClientName;
+        private System.Windows.Forms.ComboBox comboBoxUnderlying;
     }
 }
