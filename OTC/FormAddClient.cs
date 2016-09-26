@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+版权所有：中粮期货有限公司
+作者：谭泽寰
+功能：Windows Form窗口，用来添加客户信息
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,9 +27,11 @@ namespace OTC
 
         private void InitializeInfo()
         {
+            //读取当前的最大客户ID，并在其上加1，以生成新的客户ID
             int maxID = 0;
             int.TryParse(table.Compute("max(客户编号)", "").ToString(), out maxID);
             this.textBoxClientId.Text = (maxID + 1).ToString("00000000");
+
             DataTable futuresAccountInfoTable = this.dataset.Tables["futures_account_info"];
             foreach (DataRow dr in futuresAccountInfoTable.Rows)
             {

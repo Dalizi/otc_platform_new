@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+版权所有：中粮期货有限公司
+作者：谭泽寰
+功能：Windows Form窗口，用来添加商品种类信息
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
