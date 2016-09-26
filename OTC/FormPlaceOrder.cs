@@ -570,8 +570,8 @@ namespace OTC
             this.comboBoxLongShort.Enabled = false;
             this.comboBoxContractCode.Text = row.Cells["合约代码"].Value.ToString();
             this.comboBoxContractCode.Enabled = false;
-            this.comboBoxTargetClientID.Text = row.Cells["成交编号"].Value.ToString().PadLeft(8, '0');
-            this.comboBoxTargetClientID.Enabled = false;
+            //this.comboBoxTargetClientID.Text = row.Cells["成交编号"].Value.ToString().PadLeft(8, '0');
+            this.comboBoxTargetClientID.Enabled = true;
         }
 
         private void SetAsOptionsCloseOrderForm(DataGridViewRow row)

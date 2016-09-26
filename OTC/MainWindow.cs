@@ -263,11 +263,11 @@ namespace OTC
 
         private void LinkEventsHandlers()
         {
-            this.dataGridViewOptionsVerbosePositions.CellDoubleClick += new DataGridViewCellEventHandler(onOptionsVerbosePositionCellDoubleClick);
-            this.dataGridViewFuturesVerbosePositions.CellDoubleClick += new DataGridViewCellEventHandler(onFuturesVerbosePositionCellDoubleClick);
+            this.dataGridViewOptionsPositionsSum.CellDoubleClick += new DataGridViewCellEventHandler(onOptionsPositionCellDoubleClick);
+            this.dataGridViewFuturesPositionsSum.CellDoubleClick += new DataGridViewCellEventHandler(onFuturesPositionCellDoubleClick);
         }
 
-        private void onOptionsVerbosePositionCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void onOptionsPositionCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView table = (DataGridView)sender;
             if (e.RowIndex != -1)
@@ -277,7 +277,7 @@ namespace OTC
             }
         }
 
-        private void onFuturesVerbosePositionCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void onFuturesPositionCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView table = (DataGridView)sender;
             if (e.RowIndex != -1)
