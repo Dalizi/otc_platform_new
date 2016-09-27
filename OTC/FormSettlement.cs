@@ -104,6 +104,7 @@ namespace OTC
             var contract_greeks = from s in dataset.display_ds.Tables["option_position_settle_info"].AsEnumerable()
                                   where s.Field<DateTime>("settle_date").Date == this.dateTimePickerSettleDate.Value.Date
                                   select s;
+            dataset.display_ds.Tables["options_verbose_positions"].AcceptChanges();
             var option_info = from o in dataset.display_ds.Tables["options_contracts"].AsEnumerable()
                               join p in dataset.display_ds.Tables["options_verbose_positions"].AsEnumerable()
                               on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
@@ -136,6 +137,7 @@ namespace OTC
             var contract_settle_price = from s in dataset.display_ds.Tables["future_position_settle_info"].AsEnumerable()
                                         where s.Field<DateTime>("settle_date").Date == this.dateTimePickerSettleDate.Value.Date
                                         select s;
+            dataset.display_ds.Tables["futures_verbose_positions"].AcceptChanges();
             var future_info = from o in dataset.display_ds.Tables["futures_contracts"].AsEnumerable().ToArray()
                               join p in dataset.display_ds.Tables["futures_verbose_positions"].AsEnumerable().ToArray()
                               on o.Field<string>("合约代码") equals p.Field<string>("合约代码")
